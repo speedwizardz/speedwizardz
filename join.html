@@ -88,24 +88,15 @@
       text-decoration: underline;
     }
 
-    .terms-container {
-      margin-top: 15px;
+    /* Νέο: στυλ για όρους και προϋποθέσεις */
+    .terms {
+      margin-top: 20px;
       color: #f44336; /* κόκκινο */
       font-size: 0.9em;
       line-height: 1.4em;
-    }
-
-    .terms-container input[type="checkbox"] {
-      margin-right: 8px;
-      transform: scale(1.2);
-      vertical-align: middle;
-      cursor: pointer;
-    }
-
-    .terms-text {
-      display: inline;
-      vertical-align: middle;
-      cursor: pointer;
+      background: rgba(0,0,0,0.4);
+      padding: 10px;
+      border-radius: 6px;
     }
   </style>
 </head>
@@ -130,4 +121,36 @@
       Αν πιστεύεις ότι είσαι φτιαγμένος για κάτι περισσότερο από απλός θεατής, <strong>συμπλήρωσε τη φόρμα και μπες στο παιχνίδι</strong>.
     </div>
 
-    <form action="https://formspree.io/f/meokzkvv" method="POS
+    <form action="https://formspree.io/f/meokzkvv" method="POST">
+      <label for="name">Όνομά σου</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="_replyto" required />
+
+      <label for="instagram">Το Instagram σου</label>
+      <input type="text" id="instagram" name="instagram" placeholder="@to_insta_sou" required />
+
+      <label for="car">Τι αμάξι έχεις;</label>
+      <input type="text" id="car" name="car" required />
+
+      <label for="message">Κάτι που θες να μας πεις;</label>
+      <textarea id="message" name="message" rows="4"></textarea>
+
+      <button type="submit">Γίνε Μέλος</button>
+    </form>
+
+    <!-- Όροι και Προϋποθέσεις με κόκκινα γράμματα -->
+    <div class="terms">
+      <strong>Όροι & Προϋποθέσεις:</strong><br>
+      Με την υποβολή της φόρμας δηλώνεις ότι αποδέχεσαι τους κανόνες της ομάδας Speed Wizardz και συμφωνείς να σεβαστείς την κοινότητα, τις εκδηλώσεις και τα μέλη της.<br>
+      Απαγορεύεται η οποιαδήποτε μορφή φασαρίας, βίας ή παραβίασης των κανόνων στα meetups.<br>
+      Η ομάδα δεν ευθύνεται για οποιαδήποτε ζημιά ή ατύχημα προκύψει εκτός των οργανωμένων εκδηλώσεων.<br>
+      Διατηρούμε το δικαίωμα να απορρίψουμε αιτήσεις με μη κατάλληλο προφίλ ή συμπεριφορά.<br>
+      Για περισσότερες πληροφορίες, επικοινώνησε μαζί μας.
+    </div>
+
+    <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+  </div>
+</body>
+</html>
