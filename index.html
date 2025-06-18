@@ -16,7 +16,7 @@
       margin: 0;
       padding: 0;
       text-shadow: 1px 1px 2px black;
-      text-align: center; /* Κεντράρισμα όλου του κειμένου */
+      text-align: center;
     }
     header {
       background: rgba(0, 0, 0, 0.7);
@@ -43,12 +43,12 @@
     section {
       padding: 20px;
       max-width: 900px;
-      margin: 0 auto 30px auto; /* κεντράρισμα και κάτω περιθώριο */
+      margin: 0 auto 30px auto;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
       color: #eee;
       text-shadow: 1px 1px 2px black;
-      text-align: center; /* Κεντράρισμα κειμένου εντός section */
+      text-align: center;
     }
     .meetup,
     .gallery {
@@ -99,7 +99,7 @@
       transition: max-height 0.5s ease, padding 0.5s ease;
       z-index: 1000;
       backdrop-filter: blur(6px);
-      text-align: left; /* Για καλύτερη ανάγνωση μέσα στο panel */
+      text-align: left;
       max-width: 900px;
       margin: 0 auto;
       left: 50%;
@@ -158,10 +158,10 @@
       text-shadow: 1px 1px 2px black;
     }
 
-    /* FAQ accordion styles */
+    /* FAQ accordion styles with animation */
     .faq-item {
       margin-bottom: 15px;
-      text-align: left; /* Για καλύτερη ανάγνωση στις ερωτήσεις */
+      text-align: left;
       max-width: 900px;
       margin-left: auto;
       margin-right: auto;
@@ -177,16 +177,35 @@
       cursor: pointer;
       text-shadow: 1px 1px 2px black;
       text-align: left;
+      transition: color 0.3s ease;
     }
     .faq-question:focus {
       outline: 2px solid #0ff;
       outline-offset: 2px;
     }
     .faq-answer {
-      padding-left: 10px;
       color: #eee;
-      opacity: 0.9;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
       font-size: 0.95em;
+      transition: opacity 0.3s ease, max-height 0.4s ease;
+      padding-left: 10px;
+    }
+    .faq-answer.show {
+      opacity: 0.9;
+      max-height: 500px; /* αρκετό ύψος για την απάντηση */
+      margin-bottom: 10px;
+    }
+
+    /* Αντίστροφη μέτρηση */
+    #countdown {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #0ff;
+      text-shadow: 1px 1px 4px black;
+      margin-bottom: 15px;
+      letter-spacing: 1.2px;
     }
   </style>
 </head>
@@ -205,6 +224,7 @@
 
   <section id="meetups" class="meetup">
     <h2>📅 Επόμενο Meet</h2>
+    <div id="countdown" aria-live="polite" aria-atomic="true" role="timer">Φόρτωση αντίστροφης μέτρησης...</div>
     <p><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
     <p><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
     <p><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
@@ -301,50 +321,27 @@
   </section>
 
   <script>
-    // Όροι συμμετοχής
-    const openBtn = document.getElementById('openTermsBtn');
-    const termsPanel = document.getElementById('termsPanel');
-    const closeBtn = termsPanel.querySelector('.closeTermsBtn');
+    // Αντίστροφη μέτρηση
+    const countdownEl = document.getElementById('countdown');
+    // Στόχος: 5 Ιουλίου 2025, 20:30 τοπική ώρα
+    const targetDate = new Date('2025-07-05T20:30:00');
 
-    openBtn.addEventListener('click', () => {
-      termsPanel.hidden = false;
-      setTimeout(() => {
-        termsPanel.classList.add('show');
-      }, 10);
-      openBtn.classList.add('active');
-      termsPanel.focus();
-      document.body.style.overflow = 'hidden';
-    });
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
 
-    closeBtn.addEventListener('click', () => {
-      termsPanel.classList.remove('show');
-      openBtn.classList.remove('active');
-      document.body.style.overflow = '';
-      setTimeout(() => {
-        termsPanel.hidden = true;
-      }, 500);
-      openBtn.focus();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !termsPanel.hidden) {
-        closeBtn.click();
+      if (diff <= 0) {
+        countdownEl.textContent = "Το meetup ξεκίνησε ή έχει ήδη γίνει!";
+        clearInterval(countdownInterval);
+        return;
       }
-    });
 
-    // FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(button => {
-      button.addEventListener('click', () => {
-        const expanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', !expanded);
-        const answer = document.getElementById(button.getAttribute('aria-controls'));
-        if (!expanded) {
-          answer.hidden = false;
-        } else {
-          answer.hidden = true;
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
+    }
+
+    const countdownInterval = setInterval(update
