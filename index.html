@@ -16,6 +16,7 @@
       margin: 0;
       padding: 0;
       text-shadow: 1px 1px 2px black;
+      text-align: center; /* Κεντράρισμα όλου του κειμένου */
     }
     header {
       background: rgba(0, 0, 0, 0.7);
@@ -26,15 +27,7 @@
       margin: 0;
       font-size: 2em;
     }
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.1em;
-      font-style: italic;
-      color: #ccc;
-      text-shadow: 1px 1px 2px black;
-    }
     nav {
-      text-align: center;
       margin: 20px 0;
     }
     nav a {
@@ -43,20 +36,19 @@
       text-decoration: none;
       font-weight: bold;
       text-shadow: 1px 1px 2px black;
-      font-size: 1.1em;
     }
-    nav a:hover, nav a:focus {
+    nav a:hover {
       text-decoration: underline;
-      outline: none;
     }
     section {
       padding: 20px;
       max-width: 900px;
-      margin: auto 10px 30px;
+      margin: 0 auto 30px auto; /* κεντράρισμα και κάτω περιθώριο */
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
       color: #eee;
       text-shadow: 1px 1px 2px black;
+      text-align: center; /* Κεντράρισμα κειμένου εντός section */
     }
     .meetup,
     .gallery {
@@ -71,16 +63,14 @@
       max-width: 100%;
       border-radius: 10px;
       margin-top: 10px;
-      box-shadow: 0 0 10px #0ff;
     }
     a {
       color: #0af;
       text-decoration: none;
       text-shadow: 1px 1px 2px black;
     }
-    a:hover, a:focus {
+    a:hover {
       text-decoration: underline;
-      outline: none;
     }
     footer {
       text-align: center;
@@ -98,7 +88,7 @@
       left: 0;
       right: 0;
       max-height: 0;
-      overflow-y: auto;
+      overflow: auto;
       background: rgba(0,0,0,0.85);
       color: #eee;
       padding: 0 20px;
@@ -109,6 +99,11 @@
       transition: max-height 0.5s ease, padding 0.5s ease;
       z-index: 1000;
       backdrop-filter: blur(6px);
+      text-align: left; /* Για καλύτερη ανάγνωση μέσα στο panel */
+      max-width: 900px;
+      margin: 0 auto;
+      left: 50%;
+      transform: translateX(-50%);
     }
     #termsPanel.show {
       max-height: 70vh;
@@ -118,11 +113,6 @@
       color: #0ff;
       margin-top: 0;
       text-shadow: 1px 1px 3px #00ffffcc;
-    }
-    #termsPanel h3 {
-      margin-top: 1.2em;
-      color: #0ff;
-      text-shadow: 1px 1px 2px #0ff;
     }
     #termsPanel p, #termsPanel ul {
       line-height: 1.5;
@@ -145,9 +135,8 @@
       box-shadow: 0 0 10px #0ffaa;
       transition: background-color 0.3s ease;
     }
-    #termsPanel button.closeTermsBtn:hover, #termsPanel button.closeTermsBtn:focus {
+    #termsPanel button.closeTermsBtn:hover {
       background: #0cc;
-      outline: none;
     }
 
     /* Κουμπί Όροι Συμμετοχής στο footer */
@@ -164,19 +153,21 @@
       transition: color 0.3s ease;
       margin-left: 10px;
     }
-    #openTermsBtn.active, #openTermsBtn:hover, #openTermsBtn:focus {
+    #openTermsBtn.active {
       color: #eee;
       text-shadow: 1px 1px 2px black;
-      outline: none;
     }
 
     /* FAQ accordion styles */
     .faq-item {
       margin-bottom: 15px;
+      text-align: left; /* Για καλύτερη ανάγνωση στις ερωτήσεις */
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .faq-question {
       width: 100%;
-      text-align: left;
       background: none;
       border: none;
       color: #0ff;
@@ -185,21 +176,17 @@
       padding: 10px 0;
       cursor: pointer;
       text-shadow: 1px 1px 2px black;
-      transition: color 0.3s ease;
+      text-align: left;
     }
-    .faq-question:hover, .faq-question:focus {
-      color: #0cc;
-      outline: none;
-    }
-    .faq-question[aria-expanded="true"] {
-      color: #0cc;
+    .faq-question:focus {
+      outline: 2px solid #0ff;
+      outline-offset: 2px;
     }
     .faq-answer {
       padding-left: 10px;
       color: #eee;
       opacity: 0.9;
       font-size: 0.95em;
-      margin-top: 5px;
     }
   </style>
 </head>
@@ -216,92 +203,63 @@
     <a href="join.html">Γίνε Μέλος</a>
   </nav>
 
-  <main>
-    <section id="meetups" class="meetup" tabindex="-1">
-      <h2>📅 Επόμενο Meet</h2>
-      <p><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
-      <p><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
-      <p><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
-    </section>
+  <section id="meetups" class="meetup">
+    <h2>📅 Επόμενο Meet</h2>
+    <p><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
+    <p><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
+    <p><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
+  </section>
 
-    <section id="gallery" class="gallery" tabindex="-1">
-      <h2>📸 Φωτογραφίες</h2>
-      <img src="1.png" alt="Speed Wizardz Meet Poster" />
-      <p>Δες περισσότερες φωτογραφίες στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener noreferrer">Instagram μας</a></p>
-    </section>
+  <section id="gallery" class="gallery">
+    <h2>📸 Φωτογραφίες</h2>
+    <img src="1.png" alt="Speed Wizardz Meet Poster" />
+    <p>Δες περισσότερες φωτογραφίες στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener noreferrer">Instagram μας</a></p>
+  </section>
 
-    <section id="about" tabindex="-1">
-      <h2>🔮 Σχετικά με Εμάς</h2>
-      <p>Η Speed Wizardz είναι μια κοινότητα παθιασμένων οδηγών και φίλων του αυτοκινήτου, που δημιουργήθηκε με σκοπό να ενώσει ανθρώπους που αγαπούν τα meetups, το καθαρό αμάξι και την καλή παρέα. Από το πρώτο μας meetup τον Ιανουάριο, συνεχίζουμε να μεγαλώνουμε και να μοιραζόμαστε στιγμές μοναδικές στον δρόμο και εκτός.</p>
-    </section>
+  <section id="about">
+    <h2>🔮 Σχετικά με Εμάς</h2>
+    <p>Η Speed Wizardz είναι μια κοινότητα παθιασμένων οδηγών και φίλων του αυτοκινήτου, που δημιουργήθηκε με σκοπό να ενώσει ανθρώπους που αγαπούν τα meetups, το καθαρό αμάξι και την καλή παρέα. Από το πρώτο μας meetup τον Ιανουάριο, συνεχίζουμε να μεγαλώνουμε και να μοιραζόμαστε στιγμές μοναδικές στον δρόμο και εκτός.</p>
+  </section>
 
-    <section id="faq" tabindex="-1">
-      <h2>❓ Συχνές Ερωτήσεις (FAQ)</h2>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1-btn">Πρέπει να έχω δυνατό αμάξι;</button>
-        <div id="faq1" class="faq-answer" role="region" aria-labelledby="faq1-btn" hidden>
-          Όχι απαραίτητα. Και με πατίνι να έρθεις η παρέα μετράει!
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn">Δεχόσαστε συνεργασίες;</button>
-        <div id="faq2" class="faq-answer" role="region" aria-labelledby="faq2-btn" hidden>
-          Ναι! Επικοινωνήστε μαζί μας στο Instagram @speed_wizardz.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn">Ποιος μπορεί να έρθει σε meetup;</button>
-        <div id="faq3" class="faq-answer" role="region" aria-labelledby="faq3-btn" hidden>
-          Όλοι είναι ευπρόσδεκτοι! Είτε έχεις αμάξι είτε όχι, έλα όπως είσαι!
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4-btn">Προσφέρω υπηρεσία με χρέωση. Τι κάνω;</button>
-        <div id="faq4" class="faq-answer" role="region" aria-labelledby="faq4-btn" hidden>
-          Επικοινώνησε πρώτα μαζί μας για έγκριση, ειδικά αν εμπλέκονται χρήματα.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq5" id="faq5-btn">Μπορώ να στείλω φωτογραφίες ή βίντεο για να τα ανεβάσετε;</button>
-        <div id="faq5" class="faq-answer" role="region" aria-labelledby="faq5-btn" hidden>
-          Εννοείται! Θα χαρούμε πολύ να τα δούμε και να τα μοιραστούμε!
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq6" id="faq6-btn">Μπορώ να σας κάνω tag ή repost;</button>
-        <div id="faq6" class="faq-answer" role="region" aria-labelledby="faq6-btn" hidden>
-          Φυσικά! Μην ξεχάσεις μόνο να μας κάνεις κι ένα follow 😉
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq7" id="faq7-btn">Πότε γίνονται τα meetups;</button>
-        <div id="faq7" class="faq-answer" role="region" aria-labelledby="faq7-btn" hidden>
-          Συνήθως κάθε μήνα, Σάββατο βράδυ. Οι ημερομηνίες ανακοινώνονται πάντα εδώ και στα social media μας.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq8" id="faq8-btn">Μπορώ να φέρω φίλους που δεν είναι μέλη;</button>
-        <div id="faq8" class="faq-answer" role="region" aria-labelledby="faq8-btn" hidden>
-          Φυσικά! Θέλουμε πάντα να γνωρίζουμε νέους ανθρώπους με πάθος για τα αυτοκίνητα και το καλό vibe.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <button class="faq-question" aria-expanded="false" aria-controls="faq9" id="faq9-btn">Τι γίνεται αν υπάρξει φασαρία ή παραβατική συμπεριφορά;</button>
-        <div id="faq9" class="faq-answer" role="region" aria-labelledby="faq9-btn" hidden>
-          Η ομάδα δεν ανέχεται φασαρίες. Τα μέλη που δεν τηρούν τους όρους συμμετοχής αποκλείονται αμέσως.
-        </div>
-      </div>
-    </section>
-  </main>
+  <section id="faq">
+    <h2>❓ Συχνές Ερωτήσεις (FAQ)</h2>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1-btn">Πρέπει να έχω δυνατό αμάξι;</button>
+      <div id="faq1" role="region" aria-labelledby="faq1-btn" hidden class="faq-answer">Όχι απαραίτητα. Και με πατίνι να έρθεις η παρέα μετράει!</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn">Δεχόσαστε συνεργασίες;</button>
+      <div id="faq2" role="region" aria-labelledby="faq2-btn" hidden class="faq-answer">Ναι! Επικοινωνήστε μαζί μας στο Instagram @speed_wizardz.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn">Ποιος μπορεί να έρθει σε meetup;</button>
+      <div id="faq3" role="region" aria-labelledby="faq3-btn" hidden class="faq-answer">Όλοι είναι ευπρόσδεκτοι! Είτε έχεις αμάξι είτε όχι, έλα όπως είσαι!</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4-btn">Προσφέρω υπηρεσία με χρέωση. Τι κάνω;</button>
+      <div id="faq4" role="region" aria-labelledby="faq4-btn" hidden class="faq-answer">Επικοινώνησε πρώτα μαζί μας για έγκριση, ειδικά αν εμπλέκονται χρήματα.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq5" id="faq5-btn">Μπορώ να στείλω φωτογραφίες ή βίντεο για να τα ανεβάσετε;</button>
+      <div id="faq5" role="region" aria-labelledby="faq5-btn" hidden class="faq-answer">Εννοείται! Θα χαρούμε πολύ να τα δούμε και να τα μοιραστούμε!</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq6" id="faq6-btn">Μπορώ να σας κάνω tag ή repost;</button>
+      <div id="faq6" role="region" aria-labelledby="faq6-btn" hidden class="faq-answer">Φυσικά! Μην ξεχάσεις μόνο να μας κάνεις κι ένα follow 😉</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq7" id="faq7-btn">Πότε γίνονται τα meetups;</button>
+      <div id="faq7" role="region" aria-labelledby="faq7-btn" hidden class="faq-answer">Συνήθως κάθε μήνα, Σάββατο βράδυ. Οι ημερομηνίες ανακοινώνονται πάντα εδώ και στα social media μας.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq8" id="faq8-btn">Μπορώ να φέρω φίλους που δεν είναι μέλη;</button>
+      <div id="faq8" role="region" aria-labelledby="faq8-btn" hidden class="faq-answer">Φυσικά! Θέλουμε πάντα να γνωρίζουμε νέους ανθρώπους με πάθος για τα αυτοκίνητα και το καλό vibe.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question" aria-expanded="false" aria-controls="faq9" id="faq9-btn">Τι γίνεται αν υπάρξει φασαρία ή παραβατική συμπεριφορά;</button>
+      <div id="faq9" role="region" aria-labelledby="faq9-btn" hidden class="faq-answer">Η ομάδα δεν ανέχεται φασαρίες. Τα μέλη που δεν τηρούν τους όρους συμμετοχής αποκλείονται αμέσως.</div>
+    </div>
+  </section>
 
   <footer>
     <p>
@@ -343,7 +301,7 @@
   </section>
 
   <script>
-    // Όροι συμμετοχής panel
+    // Όροι συμμετοχής
     const openBtn = document.getElementById('openTermsBtn');
     const termsPanel = document.getElementById('termsPanel');
     const closeBtn = termsPanel.querySelector('.closeTermsBtn');
@@ -379,4 +337,14 @@
       button.addEventListener('click', () => {
         const expanded = button.getAttribute('aria-expanded') === 'true';
         button.setAttribute('aria-expanded', !expanded);
-        const answer
+        const answer = document.getElementById(button.getAttribute('aria-controls'));
+        if (!expanded) {
+          answer.hidden = false;
+        } else {
+          answer.hidden = true;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
