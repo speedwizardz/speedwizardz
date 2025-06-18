@@ -68,6 +68,7 @@
       color: #000;
       border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
@@ -85,6 +86,26 @@
 
     .back-link:hover {
       text-decoration: underline;
+    }
+
+    .terms-container {
+      margin-top: 15px;
+      color: #f44336; /* κόκκινο */
+      font-size: 0.9em;
+      line-height: 1.4em;
+    }
+
+    .terms-container input[type="checkbox"] {
+      margin-right: 8px;
+      transform: scale(1.2);
+      vertical-align: middle;
+      cursor: pointer;
+    }
+
+    .terms-text {
+      display: inline;
+      vertical-align: middle;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -109,26 +130,4 @@
       Αν πιστεύεις ότι είσαι φτιαγμένος για κάτι περισσότερο από απλός θεατής, <strong>συμπλήρωσε τη φόρμα και μπες στο παιχνίδι</strong>.
     </div>
 
-    <form action="https://formspree.io/f/meokzkvv" method="POST">
-      <label for="name">Όνομά σου</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="_replyto" required />
-
-      <label for="instagram">Το Instagram σου</label>
-      <input type="text" id="instagram" name="instagram" placeholder="@to_insta_sou" required />
-
-      <label for="car">Τι αμάξι έχεις;</label>
-      <input type="text" id="car" name="car" required />
-
-      <label for="message">Κάτι που θες να μας πεις;</label>
-      <textarea id="message" name="message" rows="4"></textarea>
-
-      <button type="submit">Γίνε Μέλος</button>
-    </form>
-
-    <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
-  </div>
-</body>
-</html>
+    <form action="https://formspree.io/f/meokzkvv" method="POS
