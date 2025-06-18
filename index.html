@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Speed Wizardz | Αρχική</title>
   <style>
+    /* Όλοι οι προηγούμενοι στυλιστικοί κανόνες εδώ (αντίγραψε από πριν) */
     body {
       background-image: url("2.png");
       font-family: Arial, sans-serif;
@@ -77,8 +78,7 @@
       color: #ccc;
       text-shadow: 1px 1px 2px black;
     }
-
-    /* Όροι Συμμετοχής panel */
+    /* Όροι panel και κουμπιά εδώ (όπως στο προηγούμενο μήνυμα) */
     #termsPanel {
       position: fixed;
       bottom: 0;
@@ -130,8 +130,6 @@
     #termsPanel button.closeTermsBtn:hover {
       background: #0cc;
     }
-
-    /* Κουμπί Όροι Συμμετοχής στο footer */
     #openTermsBtn {
       background: none;
       border: none;
@@ -149,6 +147,17 @@
       color: #eee;
       text-shadow: 1px 1px 2px black;
     }
+    /* Κρυφό iframe για μουσική */
+    #ytPlayer {
+      position: fixed;
+      width: 0;
+      height: 0;
+      border: 0;
+      opacity: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
@@ -162,7 +171,6 @@
     <a href="#meetups">Meetups</a>
     <a href="#gallery">Φωτογραφίες</a>
     <a href="join.html">Γίνε Μέλος</a>
-    <!-- Αφαιρώ το όροι συμμετοχής από εδώ -->
   </nav>
 
   <section id="meetups" class="meetup">
@@ -191,33 +199,35 @@
   <section id="termsPanel" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1" hidden>
     <button class="closeTermsBtn" aria-label="Κλείσιμο όρων">✖ Κλείσιμο</button>
     <h2 id="termsTitle">Όροι Συμμετοχής στην Κλειστή Ομάδα Speed Wizardz</h2>
-
     <p>Πριν γίνεις μέλος, διάβασε προσεκτικά και αποδέξου τους παρακάτω όρους για την ασφαλή και αρμονική λειτουργία της ομάδας:</p>
-
     <h3>1. Σεβασμός και Συνεργασία</h3>
     <p>Όλα τα μέλη οφείλουν να φέρονται με σεβασμό προς τα υπόλοιπα μέλη και να διατηρούν θετική διάθεση κατά τις συναντήσεις και στις online συνομιλίες.</p>
-
     <h3>2. Συμμόρφωση με τον Κ.Ο.Κ.</h3>
     <p>Κατά τη διάρκεια των meet-ups ή εκδηλώσεων, η οδήγηση πρέπει να γίνεται αυστηρά σύμφωνα με τον νέο Κώδικα Οδικής Κυκλοφορίας και τους νόμους. Απαγορεύονται επικίνδυνοι ελιγμοί όπως το drift σε δημόσιους δρόμους.</p>
-
     <h3>3. Απόρρητο και Προσωπικά Δεδομένα</h3>
     <p>Δεν επιτρέπεται η κοινοποίηση προσωπικών στοιχείων άλλων μελών χωρίς τη ρητή τους συγκατάθεση.</p>
-
     <h3>4. Αποφυγή Φασαρίας και Καταστροφών</h3>
     <p>Κατά τις συναντήσεις, δεν επιτρέπονται φασαρίες, βανδαλισμοί ή οποιαδήποτε συμπεριφορά που μπορεί να βλάψει την ομάδα ή τους χώρους όπου πραγματοποιούνται τα meet-ups.</p>
-
     <h3>5. Υποχρεώσεις Μέλους</h3>
     <ul>
       <li>Συμμετοχή στις δραστηριότητες της ομάδας με υπευθυνότητα.</li>
       <li>Τήρηση των κανόνων και οδηγιών που ορίζει η διοίκηση της ομάδας.</li>
       <li>Ενημέρωση για τυχόν απουσίες ή προβλήματα που αφορούν την ομάδα.</li>
     </ul>
-
     <h3>6. Κυρώσεις</h3>
     <p>Μέλη που παραβαίνουν τους παραπάνω όρους ενδέχεται να αποκλειστούν από την ομάδα χωρίς προειδοποίηση.</p>
-
     <p>Με την εγγραφή σου στην κλειστή ομάδα Speed Wizardz αποδέχεσαι πλήρως τους παραπάνω όρους.</p>
   </section>
+
+  <!-- Κρυφό YouTube player για μουσική -->
+  <iframe
+    id="ytPlayer"
+    src="https://www.youtube.com/embed/rR8zdmJBjiA?autoplay=1&mute=1&loop=1&playlist=rR8zdmJBjiA&controls=0&modestbranding=1&rel=0&showinfo=0"
+    frameborder="0"
+    allow="autoplay"
+    allowfullscreen
+    title="Speed Wizardz Music Player"
+  ></iframe>
 
   <script>
     const openBtn = document.getElementById('openTermsBtn');
@@ -244,7 +254,6 @@
       openBtn.focus();
     });
 
-    // Προαιρετικά: κλείσιμο panel με Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !termsPanel.hidden) {
         closeBtn.click();
