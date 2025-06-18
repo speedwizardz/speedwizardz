@@ -15,29 +15,33 @@
       color: #eee;
       margin: 0;
       padding: 0;
+      text-shadow: 1px 1px 2px black;
     }
+
     header {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
       text-align: center;
     }
+
     header h1 {
       margin: 0;
       font-size: 2em;
     }
+
     nav {
       text-align: center;
       margin: 20px 0;
     }
+
     nav a {
       color: #0ff;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
+      text-shadow: 1px 1px 2px black;
     }
-    nav a:hover {
-      text-decoration: underline;
-    }
+
     section {
       padding: 20px;
       max-width: 900px;
@@ -45,46 +49,85 @@
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
     }
+
     h2 {
       color: #0ff;
       margin-top: 0;
+      text-shadow: 1px 1px 3px black;
     }
+
     a {
       color: #0af;
       text-decoration: none;
+      text-shadow: 1px 1px 2px black;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
+    .kok-box {
+      display: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
       background: rgba(0, 0, 0, 0.7);
       font-size: 0.9em;
       color: #ccc;
+      text-shadow: 1px 1px 2px black;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Speed Wizardz</h1>
-    <p>Νέα Ομάδας Speed Wizardz</p>
+    <p>Νέα της ομάδας • Ανακοινώσεις • Χρήσιμες Πληροφορίες</p>
   </header>
 
   <nav>
     <a href="index.html">Αρχική</a>
-    <a href="news.html">Νέα</a>
     <a href="join.html">Γίνε Μέλος</a>
   </nav>
 
   <section>
     <h2>🆕 Νέα Ομάδας</h2>
+
     <p><strong>17/06:</strong> Μπήκαν νέες ιδέες για τα stickers. Σύντομα στο επόμενο meet!</p>
-    <p><strong>17/06:</strong> Νέος Κ.Ο.Κ. – <a href="https://eleftherostypos-gr.webpkgcache.com/doc/-/s/eleftherostypos.gr/autotypos-by-quattroruote/neos-kok-afto-to-prostimo-egine-30-fores-akrivotero-xekina-apo-1-200-evro" target="_blank">Δες τι αλλάζει εδώ</a></p>
+
+    <p><strong>17/06:</strong> Νέος Κ.Ο.Κ. – 
+      <a href="#" onclick="toggleKOK(); return false;">Δες τι αλλάζει εδώ</a>
+    </p>
+
+    <div id="kok-summary" class="kok-box">
+      🚨 Από 2025, κάποια πρόστιμα αυξάνονται έως και <strong>30 φορές περισσότερο</strong>.
+      <ul>
+        <li>📌 Παράνομη στάθμευση σε ράμπα ΑμεΑ → <strong>1.200€</strong></li>
+        <li>📌 Επικίνδυνοι ελιγμοί ή drift σε δημόσιο δρόμο → <strong>Αφαίρεση διπλώματος & άδειας</strong></li>
+        <li>📌 Οδήγηση χωρίς κράνος → <strong>800€</strong></li>
+      </ul>
+      
+    </div>
   </section>
 
   <footer>
     <p>© 2025 Speed Wizardz | Επικοινωνία στο Instagram @speed_wizardz</p>
   </footer>
+
+  <script>
+    function toggleKOK() {
+      const box = document.getElementById("kok-summary");
+      box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none";
+    }
+  </script>
 </body>
 </html>
