@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Speed Wizardz | Νέα</title>
+  <title>Νέα | Speed Wizardz</title>
   <style>
     body {
       background-image: url("2.png");
@@ -16,134 +16,108 @@
       margin: 0;
       padding: 0;
       text-shadow: 1px 1px 2px black;
+      text-align: center;
     }
 
     header {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
-      text-align: center;
     }
 
     header h1 {
       margin: 0;
       font-size: 2em;
-    }
-
-    nav {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    nav a {
       color: #0ff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px black;
     }
 
-    section {
+    .news-container {
+      max-width: 800px;
+      margin: 30px auto;
       padding: 20px;
-      max-width: 900px;
-      margin: auto;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
     }
 
-    h2 {
-      color: #0ff;
-      margin-top: 0;
-      text-shadow: 1px 1px 3px black;
+    .news-item {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 20px;
     }
 
-    a {
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-title {
+      color: #0ff;
+      font-size: 1.4em;
+      margin-bottom: 5px;
+    }
+
+    .news-date {
+      color: #aaa;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+    }
+
+    .news-text {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #ddd;
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-top: 20px;
       color: #0af;
       text-decoration: none;
-      text-shadow: 1px 1px 2px black;
+      font-weight: bold;
     }
 
-    a:hover {
+    a.back-link:hover {
       text-decoration: underline;
-    }
-
-    .kok-box {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 0 10px;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-
-    .kok-box.open {
-      max-height: 700px;
-      opacity: 1;
-      padding: 10px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.7);
-      font-size: 0.9em;
-      color: #ccc;
-      text-shadow: 1px 1px 2px black;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Speed Wizardz</h1>
-    <p>Νέα της ομάδας • Ανακοινώσεις • Χρήσιμες Πληροφορίες</p>
+    <h1>🗞 Νέα & Ανακοινώσεις</h1>
+    <p>Ό,τι νεότερο γύρω από την ομάδα Speed Wizardz</p>
   </header>
 
-  <nav>
-    <a href="index.html">Αρχική</a>
-    <a href="join.html">Γίνε Μέλος</a>
-  </nav>
-
-  <section>
-    <h2>🆕 Νέα Ομάδας</h2>
-
-    <p><strong>17/06:</strong> Μπήκαν νέες ιδέες για τα stickers. Σύντομα στο επόμενο meet!</p>
-
-    <p><strong>17/06:</strong> Νέος Κ.Ο.Κ. – 
-      <a href="#" onclick="toggleKOK(); return false;">Δες τι αλλάζει εδώ</a>
-    </p>
-
-    <div id="kok-summary" class="kok-box">
-      🚨 Από 2025, κάποια πρόστιμα αυξάνονται έως και <strong>30 φορές περισσότερο</strong>.
-      <ul>
-        <li>📌 Παράνομη στάθμευση σε ράμπα ΑμεΑ → <strong>1.200€</strong></li>
-        <li>📌 Επικίνδυνοι ελιγμοί ή drift σε δημόσιο δρόμο → <strong>Αφαίρεση διπλώματος & άδειας</strong></li>
-        <li>📌 Οδήγηση χωρίς κράνος → <strong>800€</strong></li>
-      </ul>
-      <p>Επιπλέον αλλαγές στον νέο Κ.Ο.Κ. περιλαμβάνουν:</p>
-      <ul>
-        <li>Αυστηρότεροι έλεγχοι για χρήση κινητού κατά την οδήγηση.</li>
-        <li>Νέα όρια ταχύτητας σε κατοικημένες περιοχές.</li>
-        <li>Υποχρεωτική χρήση φώτων ημέρας σε όλους τους δρόμους.</li>
-        <li>Ποινές για μη τήρηση αποστάσεων ασφαλείας.</li>
-      </ul>
-      <p>Η ενημέρωση αυτή είναι σημαντική για όλους τους οδηγούς ώστε να αποφευχθούν σοβαρές κυρώσεις.</p>
+  <div class="news-container">
+    <div class="news-item">
+      <div class="news-title">📣 Meet στις 5 Ιουλίου</div>
+      <div class="news-date">Ανακοινώθηκε στις 13 Ιουνίου 2025</div>
+      <div class="news-text">
+        Το επόμενο μεγάλο μας meet είναι γεγονός! Παρασκευή 5 Ιουλίου, με αναχώρηση από το Μαρκόπουλο και τελικό προορισμό έκπληξη. Δείτε το countdown στην αρχική!
+      </div>
     </div>
-  </section>
 
-  <footer>
-    <p>© 2025 Speed Wizardz | Επικοινωνία στο Instagram @speed_wizardz</p>
-  </footer>
+    <div class="news-item">
+      <div class="news-title">🆕 Νέα Σελίδα Εγγραφής</div>
+      <div class="news-date">Ανακοινώθηκε στις 16 Ιουνίου 2025</div>
+      <div class="news-text">
+        Η φόρμα για να γίνεις μέλος της ομάδας είναι πλέον διαθέσιμη! Αν πιστεύεις ότι έχεις αυτό που χρειάζεται, δες τη σελίδα "Γίνε Μέλος".
+      </div>
+    </div>
 
-  <script>
-    function toggleKOK() {
-      const box = document.getElementById("kok-summary");
-      box.classList.toggle("open");
-    }
-  </script>
+    <div class="news-item">
+      <div class="news-title">📜 Νέες Ρυθμίσεις στον Κ.Ο.Κ. – Τι αλλάζει</div>
+      <div class="news-date">Ανακοινώθηκε στις 18 Ιουνίου 2025</div>
+      <div class="news-text">
+        Ο ανανεωμένος Κώδικας Οδικής Κυκλοφορίας ισχύει από τον Μάιο του 2025 και φέρνει σημαντικές αλλαγές για οδηγούς και αναβάτες:<br><br>
+        ✅ <strong>Αυστηρότερα πρόστιμα</strong> για χρήση κινητού στο τιμόνι – έως 600€ και αφαίρεση διπλώματος.<br>
+        ✅ <strong>Κράνος ΥΠΟΧΡΕΩΤΙΚΟ</strong> σε όλους τους αναβάτες, ακόμα και συνεπιβάτες.<br>
+        ✅ <strong>Μέγιστη ταχύτητα</strong> στις πόλεις μειώνεται σε 40km/h για κατοικημένες περιοχές.<br>
+        ✅ <strong>Μηδενική ανοχή</strong> σε θορυβώδεις εξατμίσεις και "κόφτες" σε κατοικημένες ώρες (22:00–07:00).<br><br>
+        ⚠️ Οδηγούμε υπεύθυνα για να συνεχίσουμε να απολαμβάνουμε τα meetups χωρίς παρεμβάσεις από αρχές.<br>
+        🛑 Οι παραβάτες εντοπίζονται πλέον με <strong>κάμερες και αυτόματες ειδοποιήσεις</strong> σε πολλές περιοχές.<br><br>
+        ✊ Στηρίζουμε τη σωστή οδήγηση και την κουλτούρα. Όχι την καγκουριά. Μείνετε σοβαροί, μείνετε δυνατοί.
+      </div>
+    </div>
+
+    <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+  </div>
 </body>
 </html>
