@@ -194,7 +194,7 @@
     }
     .faq-answer.show {
       opacity: 0.9;
-      max-height: 500px; /* αρκετό ύψος για την απάντηση */
+      max-height: 500px;
       margin-bottom: 10px;
     }
 
@@ -323,7 +323,6 @@
   <script>
     // Αντίστροφη μέτρηση
     const countdownEl = document.getElementById('countdown');
-    // Στόχος: 5 Ιουλίου 2025, 20:30 τοπική ώρα
     const targetDate = new Date('2025-07-05T20:30:00');
 
     function updateCountdown() {
@@ -344,4 +343,9 @@
       countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
     }
 
-    const countdownInterval = setInterval(update
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('
