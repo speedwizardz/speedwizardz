@@ -81,123 +81,6 @@
       text-shadow: 1px 1px 2px black;
     }
 
-    /* Όροι Συμμετοχής panel */
-    #termsPanel {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      max-height: 0;
-      overflow: auto;
-      background: rgba(0,0,0,0.85);
-      color: #eee;
-      padding: 0 20px;
-      font-size: 0.9em;
-      box-shadow: 0 -5px 15px #0ff;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      transition: max-height 0.5s ease, padding 0.5s ease;
-      z-index: 1000;
-      backdrop-filter: blur(6px);
-      text-align: left;
-      max-width: 900px;
-      margin: 0 auto;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    #termsPanel.show {
-      max-height: 70vh;
-      padding: 20px;
-    }
-    #termsPanel h2 {
-      color: #0ff;
-      margin-top: 0;
-      text-shadow: 1px 1px 3px #00ffffcc;
-    }
-    #termsPanel p, #termsPanel ul {
-      line-height: 1.5;
-      font-size: 1em;
-      opacity: 0.9;
-    }
-    #termsPanel ul {
-      padding-left: 20px;
-    }
-    #termsPanel button.closeTermsBtn {
-      background: #0ff;
-      border: none;
-      color: #000;
-      font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      float: right;
-      margin-bottom: 10px;
-      box-shadow: 0 0 10px #0ffaa;
-      transition: background-color 0.3s ease;
-    }
-    #termsPanel button.closeTermsBtn:hover {
-      background: #0cc;
-    }
-
-    /* Κουμπί Όροι Συμμετοχής στο footer */
-    #openTermsBtn {
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      font-weight: bold;
-      color: #aaa;
-      font-family: Arial, sans-serif;
-      font-size: 1em;
-      text-shadow: none;
-      transition: color 0.3s ease;
-      margin-left: 10px;
-    }
-    #openTermsBtn.active {
-      color: #eee;
-      text-shadow: 1px 1px 2px black;
-    }
-
-    /* FAQ accordion styles with animation */
-    .faq-item {
-      margin-bottom: 15px;
-      text-align: left;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .faq-question {
-      width: 100%;
-      background: none;
-      border: none;
-      color: #0ff;
-      font-weight: bold;
-      font-size: 1em;
-      padding: 10px 0;
-      cursor: pointer;
-      text-shadow: 1px 1px 2px black;
-      text-align: left;
-      transition: color 0.3s ease;
-    }
-    .faq-question:focus {
-      outline: 2px solid #0ff;
-      outline-offset: 2px;
-    }
-    .faq-answer {
-      color: #eee;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      font-size: 0.95em;
-      transition: opacity 0.3s ease, max-height 0.4s ease;
-      padding-left: 10px;
-    }
-    .faq-answer.show {
-      opacity: 0.9;
-      max-height: 500px;
-      margin-bottom: 10px;
-    }
-
     /* Αντίστροφη μέτρηση */
     #countdown {
       font-size: 1.4em;
@@ -236,89 +119,12 @@
     <p>Δες περισσότερες φωτογραφίες στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener noreferrer">Instagram μας</a></p>
   </section>
 
-  <section id="about">
-    <h2>🔮 Σχετικά με Εμάς</h2>
-    <p>Η Speed Wizardz είναι μια κοινότητα παθιασμένων οδηγών και φίλων του αυτοκινήτου, που δημιουργήθηκε με σκοπό να ενώσει ανθρώπους που αγαπούν τα meetups, το καθαρό αμάξι και την καλή παρέα. Από το πρώτο μας meetup τον Ιανουάριο, συνεχίζουμε να μεγαλώνουμε και να μοιραζόμαστε στιγμές μοναδικές στον δρόμο και εκτός.</p>
-  </section>
-
-  <section id="faq">
-    <h2>❓ Συχνές Ερωτήσεις (FAQ)</h2>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq1" id="faq1-btn">Πρέπει να έχω δυνατό αμάξι;</button>
-      <div id="faq1" role="region" aria-labelledby="faq1-btn" hidden class="faq-answer">Όχι απαραίτητα. Και με πατίνι να έρθεις η παρέα μετράει!</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq2" id="faq2-btn">Δεχόσαστε συνεργασίες;</button>
-      <div id="faq2" role="region" aria-labelledby="faq2-btn" hidden class="faq-answer">Ναι! Επικοινωνήστε μαζί μας στο Instagram @speed_wizardz.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq3" id="faq3-btn">Ποιος μπορεί να έρθει σε meetup;</button>
-      <div id="faq3" role="region" aria-labelledby="faq3-btn" hidden class="faq-answer">Όλοι είναι ευπρόσδεκτοι! Είτε έχεις αμάξι είτε όχι, έλα όπως είσαι!</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq4" id="faq4-btn">Προσφέρω υπηρεσία με χρέωση. Τι κάνω;</button>
-      <div id="faq4" role="region" aria-labelledby="faq4-btn" hidden class="faq-answer">Επικοινώνησε πρώτα μαζί μας για έγκριση, ειδικά αν εμπλέκονται χρήματα.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq5" id="faq5-btn">Μπορώ να στείλω φωτογραφίες ή βίντεο για να τα ανεβάσετε;</button>
-      <div id="faq5" role="region" aria-labelledby="faq5-btn" hidden class="faq-answer">Εννοείται! Θα χαρούμε πολύ να τα δούμε και να τα μοιραστούμε!</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq6" id="faq6-btn">Μπορώ να σας κάνω tag ή repost;</button>
-      <div id="faq6" role="region" aria-labelledby="faq6-btn" hidden class="faq-answer">Φυσικά! Μην ξεχάσεις μόνο να μας κάνεις κι ένα follow 😉</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq7" id="faq7-btn">Πότε γίνονται τα meetups;</button>
-      <div id="faq7" role="region" aria-labelledby="faq7-btn" hidden class="faq-answer">Συνήθως κάθε μήνα, Σάββατο βράδυ. Οι ημερομηνίες ανακοινώνονται πάντα εδώ και στα social media μας.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq8" id="faq8-btn">Μπορώ να φέρω φίλους που δεν είναι μέλη;</button>
-      <div id="faq8" role="region" aria-labelledby="faq8-btn" hidden class="faq-answer">Φυσικά! Θέλουμε πάντα να γνωρίζουμε νέους ανθρώπους με πάθος για τα αυτοκίνητα και το καλό vibe.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question" aria-expanded="false" aria-controls="faq9" id="faq9-btn">Τι γίνεται αν υπάρξει φασαρία ή παραβατική συμπεριφορά;</button>
-      <div id="faq9" role="region" aria-labelledby="faq9-btn" hidden class="faq-answer">Η ομάδα δεν ανέχεται φασαρίες. Τα μέλη που δεν τηρούν τους όρους συμμετοχής αποκλείονται αμέσως.</div>
-    </div>
-  </section>
-
   <footer>
     <p>
       © 2025 Speed Wizardz | Επικοινωνία στο 
       <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener noreferrer" style="color:#0af;">Instagram @speed_wizardz</a>
-      <button id="openTermsBtn" aria-haspopup="dialog" aria-controls="termsPanel" title="Όροι Συμμετοχής">
-        Όροι Συμμετοχής
-      </button>
     </p>
   </footer>
-
-  <section id="termsPanel" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1" hidden>
-    <button class="closeTermsBtn" aria-label="Κλείσιμο όρων">✖ Κλείσιμο</button>
-    <h2 id="termsTitle">Όροι Συμμετοχής στην Κλειστή Ομάδα Speed Wizardz</h2>
-
-    <p>Πριν γίνεις μέλος, διάβασε προσεκτικά τους παρακάτω όρους για την ασφαλή και αρμονική λειτουργία της ομάδας:</p>
-
-    <h3>1. Σεβασμός και Συνεργασία</h3>
-    <p>Όλα τα μέλη οφείλουν να φέρονται με σεβασμό προς τα υπόλοιπα μέλη και να διατηρούν θετική διάθεση κατά τις συναντήσεις και στις online συνομιλίες.</p>
-
-    <h3>2. Συμμόρφωση με τον Κ.Ο.Κ.</h3>
-    <p>Κατά τη διάρκεια των meet-ups ή εκδηλώσεων, η οδήγηση πρέπει να γίνεται αυστηρά σύμφωνα με τον νέο Κώδικα Οδικής Κυκλοφορίας και τους νόμους. Απαγορεύονται επικίνδυνοι ελιγμοί όπως το drift σε δημόσιους δρόμους.</p>
-
-    <h3>3. Απόρρητο και Προσωπικά Δεδομένα</h3>
-    <p>Δεν επιτρέπεται η κοινοποίηση προσωπικών στοιχείων άλλων μελών χωρίς τη ρητή τους συγκατάθεση.</p>
-
-    <h3>4. Αποφυγή Φασαρίας και Καταστροφών</h3>
-    <p>Κατά τις συναντήσεις, δεν επιτρέπονται φασαρίες, βανδαλισμοί ή οποιαδήποτε συμπεριφορά που μπορεί να βλάψει την ομάδα ή τους χώρους όπου πραγματοποιούνται τα meet-ups.</p>
-
-    <h3>5. Υποχρεώσεις Μέλους</h3>
-    <ul>
-      <li>Συμμετοχή στις δραστηριότητες της ομάδας με υπευθυνότητα.</li>
-      <li>Τήρηση των κανόνων και οδηγιών που ορίζει η διοίκηση της ομάδας.</li>
-      <li>Ενημέρωση για τυχόν απουσίες ή προβλήματα που αφορούν την ομάδα.</li>
-    </ul>
-
-    <h3>6. Κυρώσεις</h3>
-    <p>Μέλη που παραβαίνουν τους παραπάνω όρους ενδέχεται να αποκλειστούν από την ομάδα χωρίς προειδοποίηση.</p>
-  </section>
 
   <script>
     // Αντίστροφη μέτρηση
@@ -345,7 +151,6 @@
 
     const countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // FAQ accordion
-    document.querySelectorAll('.faq-question').forEach(button => {
-      button.addEventListener('
+  </script>
+</body>
+</html>
