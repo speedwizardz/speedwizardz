@@ -30,14 +30,21 @@
       text-align: center;
       margin: 20px 0;
     }
-    nav a {
+    nav a, nav button {
       color: #0ff;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
       text-shadow: 1px 1px 2px black;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 1em;
+      padding: 0;
+      vertical-align: middle;
     }
-    nav a:hover {
+    nav a:hover, nav button:hover {
       text-decoration: underline;
     }
     section {
@@ -77,6 +84,57 @@
       color: #ccc;
       text-shadow: 1px 1px 2px black;
     }
+
+    /* Terms Panel */
+    #termsPanel {
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      width: 90%;
+      max-width: 700px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, 0.85);
+      color: #eee;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0ff;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 1000;
+    }
+    #termsPanel.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    #closeTermsBtn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.8em;
+      color: #0ff;
+      cursor: pointer;
+      text-shadow: 1px 1px 3px black;
+    }
+    #termsPanel h1 {
+      color: #0ff;
+      text-align: center;
+      margin-top: 0;
+      text-shadow: 1px 1px 4px #00ffffbb;
+    }
+    #termsPanel h2 {
+      color: #0af;
+      text-shadow: 1px 1px 3px #0088ffbb;
+      margin-top: 1.2em;
+    }
+    #termsPanel ul {
+      padding-left: 20px;
+    }
   </style>
 </head>
 <body>
@@ -90,7 +148,7 @@
     <a href="#meetups">Meetups</a>
     <a href="#gallery">Φωτογραφίες</a>
     <a href="join.html">Γίνε Μέλος</a>
-    <a href="terms.html" target="_blank" rel="noopener noreferrer">Όροι Συμμετοχής</a>
+    <button id="openTermsBtn" aria-haspopup="dialog" aria-controls="termsPanel">Όροι Συμμετοχής</button>
   </nav>
 
   <section id="meetups" class="meetup">
@@ -109,5 +167,62 @@
   <footer>
     <p>© 2025 Speed Wizardz | Επικοινωνία στο Instagram @speed_wizardz</p>
   </footer>
+
+  <!-- Terms of Participation Panel -->
+  <div id="termsPanel" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
+    <button id="closeTermsBtn" aria-label="Κλείσιμο Όρων">&times;</button>
+    <h1 id="termsTitle">Όροι Συμμετοχής στην Κοινότητα Speed Wizardz</h1>
+
+    <p><strong>Καλώς ήρθες στην κοινότητα των Speed Wizardz!</strong><br />
+    Πριν συμμετάσχεις στα meetups και τις δραστηριότητες μας, παρακαλούμε διάβασε προσεκτικά τους παρακάτω όρους συμμετοχής.</p>
+
+    <h2>1. Σεβασμός και Συνεργασία</h2>
+    <p>Όλα τα μέλη οφείλουν να φέρονται με σεβασμό προς τα υπόλοιπα μέλη και να διατηρούν θετική διάθεση κατά τις συναντήσεις και στις online συνομιλίες.</p>
+
+    <h2>2. Συμμόρφωση με τον Κ.Ο.Κ.</h2>
+    <p>Κατά τη διάρκεια των meet-ups ή εκδηλώσεων, η οδήγηση πρέπει να γίνεται αυστηρά σύμφωνα με τον νέο Κώδικα Οδικής Κυκλοφορίας και τους νόμους. Απαγορεύονται επικίνδυνοι ελιγμοί όπως το drift σε δημόσιους δρόμους.</p>
+
+    <h2>3. Απόρρητο και Προσωπικά Δεδομένα</h2>
+    <p>Δεν επιτρέπεται η κοινοποίηση προσωπικών στοιχείων άλλων μελών χωρίς τη ρητή τους συγκατάθεση.</p>
+
+    <h2>4. Αποφυγή Φασαρίας και Καταστροφών</h2>
+    <p>Κατά τις συναντήσεις, δεν επιτρέπονται φασαρίες, βανδαλισμοί ή οποιαδήποτε συμπεριφορά που μπορεί να βλάψει την ομάδα ή τους χώρους όπου πραγματοποιούνται τα meet-ups.</p>
+
+    <h2>5. Υποχρεώσεις Μέλους</h2>
+    <ul>
+      <li>Συμμετοχή στις δραστηριότητες της ομάδας με υπευθυνότητα.</li>
+      <li>Τήρηση των κανόνων και οδηγιών που ορίζει η διοίκηση της ομάδας.</li>
+      <li>Ενημέρωση για τυχόν απουσίες ή προβλήματα που αφορούν την ομάδα.</li>
+    </ul>
+
+    <h2>6. Κυρώσεις</h2>
+    <p>Μέλη που παραβαίνουν τους παραπάνω όρους ενδέχεται να αποκλειστούν από την ομάδα χωρίς προειδοποίηση.</p>
+
+    <p>Με την εγγραφή σου στην κλειστή ομάδα Speed Wizardz αποδέχεσαι πλήρως τους παραπάνω όρους.</p>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('openTermsBtn');
+    const closeBtn = document.getElementById('closeTermsBtn');
+    const termsPanel = document.getElementById('termsPanel');
+
+    openBtn.addEventListener('click', () => {
+      termsPanel.classList.add('show');
+      termsPanel.focus();
+      document.body.style.overflow = 'hidden'; // Αποφυγή scroll background
+    });
+
+    closeBtn.addEventListener('click', () => {
+      termsPanel.classList.remove('show');
+      document.body.style.overflow = ''; // Επαναφορά scroll
+      openBtn.focus();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape" && termsPanel.classList.contains('show')) {
+        closeBtn.click();
+      }
+    });
+  </script>
 </body>
 </html>
