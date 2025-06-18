@@ -1,85 +1,80 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Εγγραφή Μέλους - Speed Wizardz</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Γίνε Μέλος | Speed Wizardz</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #111;
+      font-family: Arial, sans-serif;
+      background: #111 url("2.png") no-repeat center center fixed;
+      background-size: cover;
       color: #eee;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      padding: 20px;
     }
-    .form-container {
-      background-color: #1a1a1a;
+
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.7);
       padding: 30px;
       border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 0 20px #00ffff33;
     }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: #00ffff;
-    }
+
     label {
       display: block;
-      margin-top: 15px;
-      color: #ccc;
+      margin-bottom: 15px;
     }
+
     input, textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      background-color: #222;
-      border: 1px solid #444;
       border-radius: 5px;
-      color: #eee;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background-color: #00ffff;
       border: none;
-      color: #111;
-      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #0ff;
+      color: #000;
+      border: none;
       border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
     }
+
     button:hover {
-      background-color: #00cccc;
+      background: #0cc;
+    }
+
+    .info {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #ccc;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Γίνε Μέλος στους Speed Wizardz</h2>
-    <form action="https://formspree.io/f/meokzkvv" method="POST">
-      <label for="name">Όνομα / Nickname</label>
-      <input type="text" id="name" name="name" required>
+  <form action="https://formspree.io/f/meokzkvv" method="POST">
+    <h2 style="text-align:center;">Γίνε Μέλος στους Speed Wizardz</h2>
 
-      <label for="instagram">Instagram (προαιρετικό)</label>
-      <input type="text" id="instagram" name="instagram">
+    <label>
+      Το email σου:
+      <input type="email" name="email" required>
+    </label>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
+    <label>
+      Το μήνυμά σου:
+      <textarea name="message" rows="4" placeholder="Π.χ. Από που είσαι, τι αμάξι έχεις κλπ."></textarea>
+    </label>
 
-      <label for="vehicle">Αμάξι ή Μηχανή (μάρκα / μοντέλο)</label>
-      <input type="text" id="vehicle" name="vehicle" required>
+    <button type="submit">Αποστολή</button>
 
-      <label>
-        <input type="checkbox" name="help_team" value="Ναι"> Θέλω να βοηθήσω στην ομάδα
-      </label>
-
-      <button type="submit">Εγγραφή</button>
-    </form>
-  </div>
+    <p class="info">
+      Αν έχεις ήδη εγγραφεί και θέλεις να διαγραφείς από τη λίστα, στείλε μας DM στο Instagram
+    </p>
+  </form>
 </body>
 </html>
