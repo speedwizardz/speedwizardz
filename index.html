@@ -46,10 +46,11 @@
       margin: auto;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
+      margin-bottom: 30px;
     }
     .meetup,
     .gallery {
-      margin-bottom: 30px;
+      /* Already have margin-bottom from section */
     }
     h2 {
       color: #0ff;
@@ -78,14 +79,25 @@
       text-shadow: 1px 1px 2px black;
     }
 
+    /* Countdown style */
+    #countdown {
+      font-size: 1.3em;
+      color: #0ff;
+      font-weight: bold;
+      margin-top: 10px;
+      text-shadow: 1px 1px 4px #00ffffcc;
+    }
+
     /* Όροι Συμμετοχής panel */
     #termsPanel {
       position: fixed;
       bottom: 0;
-      left: 0;
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 700px;
       max-height: 0;
-      overflow: auto;
+      overflow-y: auto;
       background: rgba(0,0,0,0.85);
       color: #eee;
       padding: 0 20px;
@@ -94,8 +106,9 @@
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       transition: max-height 0.5s ease, padding 0.5s ease;
-      z-index: 1000;
+      z-index: 1100;
       backdrop-filter: blur(6px);
+      outline: none;
     }
     #termsPanel.show {
       max-height: 70vh;
@@ -126,6 +139,7 @@
       margin-bottom: 10px;
       box-shadow: 0 0 10px #0ffaa;
       transition: background-color 0.3s ease;
+      font-size: 1em;
     }
     #termsPanel button.closeTermsBtn:hover {
       background: #0cc;
@@ -138,16 +152,32 @@
       padding: 0;
       cursor: pointer;
       font-weight: bold;
-      color: #aaa;
+      color: #888;
       font-family: Arial, sans-serif;
       font-size: 1em;
       text-shadow: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, text-decoration 0.3s ease;
       margin-left: 10px;
     }
+    #openTermsBtn:hover {
+      color: #0ff;
+      text-decoration: underline;
+    }
     #openTermsBtn.active {
-      color: #eee;
-      text-shadow: 1px 1px 2px black;
+      color: #0ff;
+      text-shadow: 1px 1px 3px black;
+    }
+
+    /* Backdrop για panel */
+    #termsBackdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1050;
+    }
+    #termsPanel.show ~ #termsBackdrop {
+      display: block;
     }
   </style>
 </head>
@@ -162,7 +192,6 @@
     <a href="#meetups">Meetups</a>
     <a href="#gallery">Φωτογραφίες</a>
     <a href="join.html">Γίνε Μέλος</a>
-    <!-- Αφαιρώ το όροι συμμετοχής από εδώ -->
   </nav>
 
   <section id="meetups" class="meetup">
@@ -170,6 +199,9 @@
     <p><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
     <p><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
     <p><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
+    <div id="countdown" aria-live="polite" aria-atomic="true" role="timer" title="Αντίστροφη μέτρηση για το meetup">
+      Φόρτωση αντίστροφης μέτρησης...
+    </div>
   </section>
 
   <section id="gallery" class="gallery">
@@ -188,11 +220,12 @@
     </p>
   </footer>
 
+  <!-- Panel Όρων και backdrop -->
   <section id="termsPanel" role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1" hidden>
     <button class="closeTermsBtn" aria-label="Κλείσιμο όρων">✖ Κλείσιμο</button>
     <h2 id="termsTitle">Όροι Συμμετοχής στην Κλειστή Ομάδα Speed Wizardz</h2>
 
-    <p>Πριν γίνεις μέλος, διάβασε προσεκτικά και αποδέξου τους παρακάτω όρους για την ασφαλή και αρμονική λειτουργία της ομάδας:</p>
+    <p>Πριν γίνεις μέλος, διάβασε προσεκτικά τους παρακάτω όρους για την ασφαλή και αρμονική λειτουργία της ομάδας:</p>
 
     <h3>1. Σεβασμός και Συνεργασία</h3>
     <p>Όλα τα μέλη οφείλουν να φέρονται με σεβασμό προς τα υπόλοιπα μέλη και να διατηρούν θετική διάθεση κατά τις συναντήσεις και στις online συνομιλίες.</p>
@@ -215,16 +248,41 @@
 
     <h3>6. Κυρώσεις</h3>
     <p>Μέλη που παραβαίνουν τους παραπάνω όρους ενδέχεται να αποκλειστούν από την ομάδα χωρίς προειδοποίηση.</p>
-
-    <p>Με την εγγραφή σου στην κλειστή ομάδα Speed Wizardz αποδέχεσαι πλήρως τους παραπάνω όρους.</p>
   </section>
+  <div id="termsBackdrop"></div>
 
   <script>
+    // Countdown για meetup 5 Ιουλίου 2025, 20:30
+    function updateCountdown() {
+      const countdownEl = document.getElementById('countdown');
+      const meetupDate = new Date('2025-07-05T20:30:00+03:00'); // ώρα Αθήνας GMT+3
+      const now = new Date();
+
+      const diff = meetupDate - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = "Το meetup έχει ξεκινήσει ή έχει ολοκληρωθεί!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.textContent = `Αντίστροφη μέτρηση: ${days} ημέρες, ${hours.toString().padStart(2,'0')} ώρες, ${minutes.toString().padStart(2,'0')} λεπτά, ${seconds.toString().padStart(2,'0')} δευτερόλεπτα`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Όροι - άνοιγμα / κλείσιμο panel
     const openBtn = document.getElementById('openTermsBtn');
     const termsPanel = document.getElementById('termsPanel');
     const closeBtn = termsPanel.querySelector('.closeTermsBtn');
+    const backdrop = document.getElementById('termsBackdrop');
 
-    openBtn.addEventListener('click', () => {
+    function openTerms() {
       termsPanel.hidden = false;
       setTimeout(() => {
         termsPanel.classList.add('show');
@@ -232,9 +290,9 @@
       openBtn.classList.add('active');
       termsPanel.focus();
       document.body.style.overflow = 'hidden';
-    });
+    }
 
-    closeBtn.addEventListener('click', () => {
+    function closeTerms() {
       termsPanel.classList.remove('show');
       openBtn.classList.remove('active');
       document.body.style.overflow = '';
@@ -242,12 +300,16 @@
         termsPanel.hidden = true;
       }, 500);
       openBtn.focus();
-    });
+    }
 
-    // Προαιρετικά: κλείσιμο panel με Escape
+    openBtn.addEventListener('click', openTerms);
+    closeBtn.addEventListener('click', closeTerms);
+    backdrop.addEventListener('click', closeTerms);
+
+    // Κλείσιμο με Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !termsPanel.hidden) {
-        closeBtn.click();
+        closeTerms();
       }
     });
   </script>
