@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ | Speed Wizardz</title>
+  <style>
+    body {
+      background-image: url("2.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      text-align: center;
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #555;
+      padding: 10px 0;
+    }
+
+    .question {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1em;
+      position: relative;
+    }
+
+    .question::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      font-size: 1.2em;
+    }
+
+    .question.active::after {
+      content: "-";
+    }
+
+    .answer {
+      max-height: 0;
+      overflow: hidden;
+      color: yellow;
+      transition: max-height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+      padding-left: 10px;
+    }
+
+    .answer.open {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 10px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: #0af;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Συχνές Ερωτήσεις</h1>
+    <p>Ό,τι χρειάζεται να ξέρεις για τους Speed Wizardz</p>
+  </header>
+
+  <div class="container">
+
+    <div class="faq-item">
+      <div class="question">Πρέπει να έχω κάποιο συγκεκριμένο αυτοκίνητο;</div>
+      <div class="answer">Όχι, αλλά εκτιμάμε τα βελτιωμένα ή ξεχωριστά οχήματα. Αρκεί να έχεις πάθος για την αυτοκίνηση!</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Πόσο κοστίζει να γίνω μέλος;</div>
+      <div class="answer">Η ένταξη στην ομάδα είναι δωρεάν.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Είναι νόμιμα τα meetups;</div>
+      <div class="answer">Ναι! Όσο τηρούνται οι κανόνες – σεβασμός στον χώρο, χωρίς φασαρία ή επικίνδυνη οδήγηση.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Πώς θα παραλάβω αυτοκόλλητα;</div>
+      <div class="answer">Τα διανέμουμε στα meetups.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="question">Πού μπορώ να ενημερώνομαι για τα επόμενα events;</div>
+      <div class="answer">Στο Instagram και στην αρχική του site με την αντίστροφη μέτρηση!</div>
+    </div>
+
+    <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+  </div>
+
+  <script>
+    document.querySelectorAll('.question').forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        const isOpen = answer.classList.contains('open');
+        document.querySelectorAll('.answer').forEach(a => a.classList.remove('open'));
+        document.querySelectorAll('.question').forEach(qq => qq.classList.remove('active'));
+        if (!isOpen) {
+          answer.classList.add('open');
+          q.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
