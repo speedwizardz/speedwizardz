@@ -66,12 +66,23 @@
       text-decoration: underline;
     }
 
+    /* Κουτί Κ.Ο.Κ. αρχικά κρυφό με animation */
     .kok-box {
-      display: none;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
       background: rgba(255, 255, 255, 0.1);
-      padding: 10px;
+      padding: 0 10px;
       border-radius: 8px;
       margin-top: 10px;
+    }
+
+    /* Όταν είναι ανοιχτό */
+    .kok-box.open {
+      max-height: 500px; /* αρκετό για το περιεχόμενο */
+      opacity: 1;
+      padding: 10px;
     }
 
     ul {
@@ -115,7 +126,6 @@
         <li>📌 Επικίνδυνοι ελιγμοί ή drift σε δημόσιο δρόμο → <strong>Αφαίρεση διπλώματος & άδειας</strong></li>
         <li>📌 Οδήγηση χωρίς κράνος → <strong>800€</strong></li>
       </ul>
-      
     </div>
   </section>
 
@@ -126,7 +136,7 @@
   <script>
     function toggleKOK() {
       const box = document.getElementById("kok-summary");
-      box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none";
+      box.classList.toggle("open");
     }
   </script>
 </body>
