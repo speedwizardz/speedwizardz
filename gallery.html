@@ -29,10 +29,10 @@
     }
 
     .gallery-section {
-      max-width: 1000px;
-      margin: 30px auto;
       background: rgba(0, 0, 0, 0.6);
+      margin: 30px auto;
       padding: 20px;
+      max-width: 900px;
       border-radius: 10px;
     }
 
@@ -43,20 +43,24 @@
 
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 15px;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     .gallery-grid img {
       width: 100%;
-      border-radius: 10px;
-      cursor: pointer;
+      border-radius: 8px;
       transition: transform 0.3s ease;
     }
 
     .gallery-grid img:hover {
       transform: scale(1.05);
+    }
+
+    video {
+      border-radius: 10px;
+      margin-top: 15px;
     }
 
     .back-link {
@@ -75,10 +79,10 @@
 <body>
   <header>
     <h1>📸 Gallery</h1>
-    <p>Φωτογραφίες οργανωμένες ανά meetup</p>
+    <p>Φωτογραφίες & βίντεο από τα τελευταία meetups μας!</p>
   </header>
 
-  <!-- Meetup: 10 Μαΐου 2025 -->
+  <!-- Meetup 1 -->
   <div class="gallery-section">
     <h2>Meetup • 10 Μαΐου 2025</h2>
     <div class="gallery-grid">
@@ -93,7 +97,21 @@
     </div>
   </div>
 
-  <!-- Περισσότερα meetups μπορείς να τα βάλεις εδώ ως νέα .gallery-section -->
+  <!-- Meetup 2 -->
+  <div class="gallery-section">
+    <h2>Meetup • Ιούνιος 2025</h2>
+    <div class="gallery-grid">
+      <a href="IMG_4232.jpeg" target="_blank"><img src="IMG_4232.jpeg" alt="Meetup 6/2025"></a>
+      <a href="IMG_4235.jpeg" target="_blank"><img src="IMG_4235.jpeg" alt="Meetup 6/2025"></a>
+      <a href="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" target="_blank"><img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup 6/2025"></a>
+    </div>
+
+    <h3 style="margin-top:30px; color:#0ff;">🎥 Video από το meetup</h3>
+    <video width="90%" controls>
+      <source src="4d343b726b304b66864a8e9b8e707d15.mp4" type="video/mp4">
+      Το βίντεο δεν υποστηρίζεται από τον browser σας.
+    </video>
+  </div>
 
   <a href="index.html" class="back-link">⬅ Επιστροφή</a>
 </body>
