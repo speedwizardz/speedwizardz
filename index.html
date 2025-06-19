@@ -186,4 +186,25 @@
       } else if (now >= meetupStart && now < meetupEnd) {
         // Το meetup γίνεται τώρα (+5 ώρες)
         countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
-        meetInfo.classList.remove('hidde
+        meetInfo.classList.add('hidden'); // Κρύβουμε τις πληροφορίες και το χάρτη
+        stayTuned.classList.add('hidden');
+
+      } else if (now >= meetupEnd && now < meetupCompleteEnd) {
+        // Meetup ολοκληρώθηκε (+5 μέρες)
+        countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
+        meetInfo.classList.add('hidden');
+        stayTuned.classList.add('hidden');
+
+      } else {
+        // Μετά τις 5 μέρες: μείνετε συντονισμένοι
+        countdownEl.textContent = '';
+        meetInfo.classList.add('hidden');
+        stayTuned.classList.remove('hidden');
+      }
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
