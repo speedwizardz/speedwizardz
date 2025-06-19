@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
@@ -39,11 +39,20 @@
 
     .slide {
       display: none;
+      animation: fade 1s ease-in-out;
     }
 
     .slide img {
       width: 100%;
-      border-radius: 10px;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .caption {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      color: #0ff;
+      font-weight: bold;
+      border-radius: 0 0 10px 10px;
     }
 
     .back-link {
@@ -57,6 +66,11 @@
     .back-link:hover {
       text-decoration: underline;
     }
+
+    @keyframes fade {
+      from { opacity: 0.4 }
+      to { opacity: 1 }
+    }
   </style>
 </head>
 <body>
@@ -66,11 +80,26 @@
   </header>
 
   <div class="slideshow-container">
-    <div class="slide"><img src="meet1.png" alt="Meetup 10/5" /></div>
-    <div class="slide"><img src="meet2.jpeg" alt="Meetup 10/5" /></div>
-    <div class="slide"><img src="meet3.jpeg" alt="Meetup 10/5 " /></div
-    <div class="slide"><img src="meet4.jpeg" alt="Meetup 10/5 " /></div
-    <div class="slide"><img src="meet5.jpeg" alt="Meetup 10/5 " /></div>                                                              
+    <div class="slide">
+      <img src="meet1.png" alt="Meetup 10/5">
+      <div class="caption">Meetup 10 Μαΐου 2025</div>
+    </div>
+    <div class="slide">
+      <img src="meet2.jpeg" alt="Meetup 10/5">
+      <div class="caption">Meetup 10 Μαΐου 2025</div>
+    </div>
+    <div class="slide">
+      <img src="meet3.jpeg" alt="Meetup 10/5">
+      <div class="caption">Meetup 10 Μαΐου 2025</div>
+    </div>
+    <div class="slide">
+      <img src="meet4.jpeg" alt="Meetup 10/5">
+      <div class="caption">Meetup 10 Μαΐου 2025</div>
+    </div>
+    <div class="slide">
+      <img src="meet5.jpeg" alt="Meetup 10/5">
+      <div class="caption">Meetup 10 Μαΐου 2025</div>
+    </div>
   </div>
 
   <a href="index.html" class="back-link">⬅ Επιστροφή</a>
@@ -86,7 +115,7 @@
       slideIndex++;
       if (slideIndex > slides.length) { slideIndex = 1 }
       slides[slideIndex - 1].style.display = "block";
-      setTimeout(showSlides, 3000);
+      setTimeout(showSlides, 4000); // κάθε 4 δευτερόλεπτα
     }
 
     showSlides();
