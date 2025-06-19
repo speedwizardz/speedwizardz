@@ -26,7 +26,6 @@
       color: #0ff;
     }
 
-    /* Tabs container */
     .tabs {
       display: flex;
       justify-content: center;
@@ -35,7 +34,6 @@
       flex-wrap: wrap;
     }
 
-    /* Each tab button */
     .tab-btn {
       background: rgba(0,0,0,0.6);
       border: none;
@@ -55,7 +53,6 @@
       cursor: default;
     }
 
-    /* Content container */
     .tab-content {
       max-width: 900px;
       margin: 0 auto 30px auto;
@@ -63,26 +60,23 @@
       border-radius: 10px;
       overflow: hidden;
       position: relative;
-      height: 500px; /* Σταθερό ύψος για slide */
+      height: 500px;
     }
 
-    /* Inner slider container */
     .slides {
       display: flex;
-      width: 200%; /* 2 tabs, μπορείς να μεγαλώσεις αν έχεις παραπάνω */
+      width: 200%;
       transition: transform 0.5s ease-in-out;
       height: 100%;
     }
 
-    /* Κάθε tab panel */
     .slide {
-      width: 50%; /* ανάλογα με τον αριθμό των tabs */
+      width: 50%;
       padding: 20px;
       box-sizing: border-box;
       overflow-y: auto;
     }
 
-    /* Grid για φωτογραφίες */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
@@ -99,7 +93,6 @@
       transform: scale(1.05);
     }
 
-    /* Responsive */
     @media (max-width: 600px) {
       .slide {
         width: 100%;
@@ -108,7 +101,6 @@
         width: 100%;
       }
     }
-
   </style>
 </head>
 <body>
@@ -119,27 +111,27 @@
 
   <div class="tabs">
     <button class="tab-btn active" data-index="0">Μάιος 2025</button>
-    <button class="tab-btn" data-index="1">Ιούνιος 2025</button>
+    <button class="tab-btn" data-index="1">Ιανουάριος 2025</button>
   </div>
 
   <div class="tab-content">
     <div class="slides">
-      <!-- Μάιος 2025 -->
+      <!-- Μάιος 2025: μόνο φωτογραφίες -->
       <div class="slide">
         <div class="gallery-grid">
           <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
           <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
           <img src="meet3.jpeg" alt="Meetup Μάιος 2025 - Φωτο 3" />
-          <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4"></video>
+          <img src="meet4.jpeg" alt="Meetup Μάιος 2025 - Φωτο 4" />
         </div>
       </div>
 
-      <!-- 25 Ιανουαρίου 2025 -->
+      <!-- Ιανουάριος 2025: φωτογραφίες + βίντεο -->
       <div class="slide">
         <div class="gallery-grid">
-          <img src="IMG_4232.jpeg" alt="Meetup Ιούνιος 2025 - Φωτο 1" />
-          <img src="IMG_4235.jpeg" alt="Meetup Ιούνιος 2025 - Φωτο 2" />
-          <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιούνιος 2025 - Φωτο 3" />
+          <img src="IMG_4232.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 1" />
+          <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
+          <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 3" />
           <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4"></video>
         </div>
       </div>
@@ -155,16 +147,9 @@
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        // Αν είναι ήδη ενεργό το tab, μην κάνεις τίποτα
         if(tab.classList.contains('active')) return;
-
-        // Αφαίρεσε active από όλα
         tabs.forEach(t => t.classList.remove('active'));
-
-        // Πρόσθεσε active στο επιλεγμένο
         tab.classList.add('active');
-
-        // Μετακίνησε το slider
         const index = parseInt(tab.dataset.index);
         const translateX = -(100 / slideCount) * index;
         slides.style.transform = `translateX(${translateX}%)`;
