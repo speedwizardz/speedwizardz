@@ -26,55 +26,44 @@
       color: #0ff;
     }
 
-    .tabs {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      background: rgba(0,0,0,0.6);
-      border: none;
-      color: #0ff;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 6px;
-      transition: background 0.3s;
-    }
-    .tab-btn:hover {
-      background: rgba(0, 255, 255, 0.3);
-    }
-    .tab-btn.active {
-      background: #0ff;
-      color: #000;
-      cursor: default;
-    }
-
-    .tab-content {
+    .accordion {
       max-width: 900px;
-      margin: 0 auto 30px auto;
+      margin: 20px auto;
       background: rgba(0,0,0,0.6);
       border-radius: 10px;
       overflow: hidden;
-      position: relative;
-      height: 500px;
+      text-align: left;
     }
 
-    .slides {
+    .accordion-item {
+      border-bottom: 1px solid #444;
+    }
+
+    .accordion-header {
+      background: rgba(0,0,0,0.7);
+      padding: 15px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #0ff;
+      user-select: none;
       display: flex;
-      width: 200%;
-      transition: transform 0.5s ease-in-out;
-      height: 100%;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .slide {
-      width: 50%;
+    .accordion-header:hover {
+      background: rgba(0,255,255,0.3);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      padding: 0 20px;
+    }
+
+    .accordion-content.open {
       padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
     }
 
     .gallery-grid {
@@ -85,20 +74,25 @@
     .gallery-grid img, .gallery-grid video {
       width: 100%;
       border-radius: 10px;
-      cursor: pointer;
       box-shadow: 0 0 8px #0ff;
+      cursor: pointer;
       transition: transform 0.3s;
     }
     .gallery-grid img:hover, .gallery-grid video:hover {
       transform: scale(1.05);
     }
 
+    .accordion-arrow {
+      transition: transform 0.3s ease;
+      font-size: 1.2em;
+    }
+    .accordion-arrow.open {
+      transform: rotate(90deg);
+    }
+
     @media (max-width: 600px) {
-      .slide {
-        width: 100%;
-      }
-      .slides {
-        width: 100%;
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
       }
     }
   </style>
@@ -106,18 +100,17 @@
 <body>
   <header>
     <h1>📸 Gallery</h1>
-    <p>Επέλεξε τον μήνα για να δεις τα meetups</p>
+    <p>Πάτησε τον μήνα για να δεις τα meetups</p>
   </header>
 
-  <div class="tabs">
-    <button class="tab-btn active" data-index="0">Μάιος 2025</button>
-    <button class="tab-btn" data-index="1">Ιανουάριος 2025</button>
-  </div>
+  <div class="accordion">
 
-  <div class="tab-content">
-    <div class="slides">
-      <!-- Μάιος 2025: μόνο φωτογραφίες -->
-      <div class="slide">
+    <div class="accordion-item">
+      <div class="accordion-header">
+        Μάιος 2025
+        <span class="accordion-arrow">&#9654;</span>
+      </div>
+      <div class="accordion-content">
         <div class="gallery-grid">
           <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
           <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
@@ -125,9 +118,14 @@
           <img src="meet4.jpeg" alt="Meetup Μάιος 2025 - Φωτο 4" />
         </div>
       </div>
+    </div>
 
-      <!-- Ιανουάριος 2025: φωτογραφίες + βίντεο -->
-      <div class="slide">
+    <div class="accordion-item">
+      <div class="accordion-header">
+        Ιανουάριος 2025
+        <span class="accordion-arrow">&#9654;</span>
+      </div>
+      <div class="accordion-content">
         <div class="gallery-grid">
           <img src="IMG_4232.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 1" />
           <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
@@ -136,25 +134,43 @@
         </div>
       </div>
     </div>
+
   </div>
 
   <a href="index.html" class="back-link" style="color:#0af; font-weight:bold; display:block; max-width:900px; margin: 10px auto;">⬅ Επιστροφή</a>
 
   <script>
-    const tabs = document.querySelectorAll('.tab-btn');
-    const slides = document.querySelector('.slides');
-    const slideCount = tabs.length;
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        if(tab.classList.contains('active')) return;
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const index = parseInt(tab.dataset.index);
-        const translateX = -(100 / slideCount) * index;
-        slides.style.transform = `translateX(${translateX}%)`;
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const openItem = document.querySelector('.accordion-content.open');
+        const arrowOpen = document.querySelector('.accordion-arrow.open');
+        const content = header.nextElementSibling;
+        const arrow = header.querySelector('.accordion-arrow');
+
+        if(openItem && openItem !== content){
+          openItem.style.maxHeight = null;
+          openItem.classList.remove('open');
+        }
+        if(arrowOpen && arrowOpen !== arrow){
+          arrowOpen.classList.remove('open');
+        }
+
+        if(content.classList.contains('open')){
+          content.style.maxHeight = null;
+          content.classList.remove('open');
+          arrow.classList.remove('open');
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.classList.add('open');
+          arrow.classList.add('open');
+        }
       });
     });
+
+    // Ανάπτυξε αυτόματα το πρώτο item (προαιρετικό)
+    //accordionHeaders[0].click();
   </script>
 </body>
 </html>
