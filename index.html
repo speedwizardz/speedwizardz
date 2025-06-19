@@ -133,7 +133,7 @@
 
     <div id="meet-info">
       <p class="info-line"><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
-      <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
+      <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
       <p class="info-line">
         <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/@37.8814357,23.9237461,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14a1910ffe83d19b:0x27ac47ea5539eb1f!8m2!3d37.8814315!4d23.926321!16s%2Fg%2F11f15gzpck?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link-button" rel="noopener noreferrer">
           📍 Δες την τοποθεσία στο Google Maps
@@ -164,30 +164,26 @@
     const meetInfo = document.getElementById('meet-info');
     const stayTuned = document.getElementById('stay-tuned');
 
-    const targetDate = new Date('2025-07-05T20:30:00');
+    const meetupStart = new Date('2025-07-05T20:30:00');
+    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000); // +5 ώρες
+    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000); // +5 μέρες
 
     function updateCountdown() {
       const now = new Date();
-      const diff = targetDate - now;
 
-      if (diff <= 0) {
-        countdownEl.textContent = "Το meetup ολοκληρώθηκε!";
-        meetInfo.classList.add("hidden");
-        stayTuned.classList.remove("hidden");
-        clearInterval(interval);
-        return;
-      }
+      if (now < meetupStart) {
+        // Πριν το meetup: αντίστροφη μέτρηση
+        const diff = meetupStart - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+        countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
+        meetInfo.classList.remove('hidden');
+        stayTuned.classList.add('hidden');
 
-      countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
-    }
-
-    const interval = setInterval(updateCountdown, 1000);
-    updateCountdown();
-  </script>
-</body>
-</html>
+      } else if (now >= meetupStart && now < meetupEnd) {
+        // Το meetup γίνεται τώρα (+5 ώρες)
+        countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
+        meetInfo.classList.remove('hidde
