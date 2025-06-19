@@ -15,80 +15,84 @@
       color: #eee;
       margin: 0;
       padding: 0;
-      text-shadow: 1px 1px 2px black;
       text-align: center;
+      text-shadow: 1px 1px 2px black;
     }
+
     header {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
-      text-align: center;
     }
+
     header h1 {
       margin: 0;
       font-size: 2em;
     }
+
     nav {
       margin: 20px 0;
     }
+
     nav a {
       color: #0ff;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
-      text-shadow: 1px 1px 2px black;
     }
+
     nav a:hover {
       text-decoration: underline;
     }
+
     section {
       padding: 20px;
       max-width: 900px;
       margin: 0 auto 30px auto;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
-      color: #eee;
-      text-shadow: 1px 1px 2px black;
-      text-align: center;
     }
-    .meetup,
-    .gallery {
-      margin-bottom: 30px;
-    }
+
     h2 {
       color: #0ff;
       margin-top: 0;
-      text-shadow: 1px 1px 3px black;
     }
+
+    .info-line {
+      margin: 10px 0;
+    }
+
+    #countdown {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #0ff;
+      margin-bottom: 15px;
+    }
+
     img {
       max-width: 100%;
       border-radius: 10px;
       margin-top: 10px;
     }
-    a {
-      color: #0af;
-      text-decoration: none;
-      text-shadow: 1px 1px 2px black;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+
     footer {
       text-align: center;
       padding: 20px;
       background: rgba(0, 0, 0, 0.7);
       font-size: 0.9em;
       color: #ccc;
-      text-shadow: 1px 1px 2px black;
     }
 
-    /* Αντίστροφη μέτρηση */
-    #countdown {
-      font-size: 1.4em;
-      font-weight: bold;
-      color: #0ff;
-      text-shadow: 1px 1px 4px black;
-      margin-bottom: 15px;
-      letter-spacing: 1.2px;
+    a {
+      color: #0af;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
@@ -106,30 +110,38 @@
     <a href="faq.html">Συχνές Ερωτήσεις</a>
   </nav>
 
-  <section id="meetups" class="meetup">
+  <section id="meetups">
     <h2>📅 Επόμενο Meet</h2>
-    <div id="countdown" aria-live="polite" aria-atomic="true" role="timer">Φόρτωση αντίστροφης μέτρησης...</div>
-    <p><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
-    <p><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
-    <p><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
+    <div id="countdown">Φόρτωση αντίστροφης μέτρησης...</div>
+
+    <div id="meet-info">
+      <p class="info-line"><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
+      <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
+      <p class="info-line"><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
+    </div>
+
+    <div id="stay-tuned" class="hidden">
+      <p>🧭 <strong>Μείνετε συντονισμένοι για το επόμενο meet!</strong></p>
+    </div>
   </section>
 
-  <section id="gallery" class="gallery">
-    <h2>📸 banner </h2>
-    <img src="1.png" alt="Speed Wizardz Meet Poster" />
-    <p>Δες περισσότερα στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener noreferrer">Instagram μας</a></p>
+  <section id="gallery">
+    <h2>📸 banner</h2>
+    <img src="1.png" alt="Speed Wizardz Meet Poster">
+    <p>Δες περισσότερα στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram μας</a></p>
   </section>
 
   <footer>
-    <p>
-      © 2025 Speed Wizardz | Επικοινωνία στο 
-      <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener noreferrer" style="color:#0af;">Instagram @speed_wizardz</a>
+    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
+      <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
     </p>
   </footer>
 
   <script>
-    // Αντίστροφη μέτρηση
     const countdownEl = document.getElementById('countdown');
+    const meetInfo = document.getElementById('meet-info');
+    const stayTuned = document.getElementById('stay-tuned');
+
     const targetDate = new Date('2025-07-05T20:30:00');
 
     function updateCountdown() {
@@ -137,8 +149,10 @@
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        countdownEl.textContent = "Το meetup ξεκίνησε ή έχει ήδη γίνει!";
-        clearInterval(countdownInterval);
+        countdownEl.textContent = "Το meetup ολοκληρώθηκε!";
+        meetInfo.classList.add("hidden");
+        stayTuned.classList.remove("hidden");
+        clearInterval(interval);
         return;
       }
 
@@ -150,7 +164,7 @@
       countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
     }
 
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    const interval = setInterval(updateCountdown, 1000);
     updateCountdown();
   </script>
 </body>
