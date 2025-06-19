@@ -28,31 +28,35 @@
       color: #0ff;
     }
 
-    .slideshow-container {
-      position: relative;
-      max-width: 800px;
+    .gallery-section {
+      max-width: 1000px;
       margin: 30px auto;
-      border-radius: 10px;
-      overflow: hidden;
       background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
     }
 
-    .slide {
-      display: none;
-      animation: fade 1s ease-in-out;
-    }
-
-    .slide img {
-      width: 100%;
-      border-radius: 10px 10px 0 0;
-    }
-
-    .caption {
-      background: rgba(0, 0, 0, 0.5);
-      padding: 10px;
+    .gallery-section h2 {
       color: #0ff;
-      font-weight: bold;
-      border-radius: 0 0 10px 10px;
+      margin-bottom: 10px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
     }
 
     .back-link {
@@ -66,71 +70,31 @@
     .back-link:hover {
       text-decoration: underline;
     }
-
-    @keyframes fade {
-      from { opacity: 0.4 }
-      to { opacity: 1 }
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>📸 Gallery</h1>
-    <p>Slideshow από τα τελευταία meetups μας!</p>
+    <p>Φωτογραφίες οργανωμένες ανά meetup</p>
   </header>
 
-  <div class="slideshow-container">
-    <div class="slide">
-      <img src="meet1.png" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
-    </div>
-    <div class="slide">
-      <img src="meet2.jpeg" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
-    </div>
-    <div class="slide">
-      <img src="meet3.jpeg" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
-    </div>
-    <div class="slide">
-      <img src="meet4.jpeg" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
-    </div>
-    <div class="slide">
-      <img src="meet5.jpeg" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
-    </div>
-    <div class="slide">
-      <img src="IMG_5028.jpeg" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
-    </div>
-    <div class="slide">
-      <img src="IMG_5078.jpeg" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
-    </div>
-    <div class="slide">
-      <img src="IMG_5085.jpeg" alt="Meetup 10/5">
-      <div class="caption">Meetup 10 Μαΐου 2025</div>
+  <!-- Meetup: 10 Μαΐου 2025 -->
+  <div class="gallery-section">
+    <h2>Meetup • 10 Μαΐου 2025</h2>
+    <div class="gallery-grid">
+      <a href="meet1.png" target="_blank"><img src="meet1.png" alt="Meetup 10/5"></a>
+      <a href="meet2.jpeg" target="_blank"><img src="meet2.jpeg" alt="Meetup 10/5"></a>
+      <a href="meet3.jpeg" target="_blank"><img src="meet3.jpeg" alt="Meetup 10/5"></a>
+      <a href="meet4.jpeg" target="_blank"><img src="meet4.jpeg" alt="Meetup 10/5"></a>
+      <a href="meet5.jpeg" target="_blank"><img src="meet5.jpeg" alt="Meetup 10/5"></a>
+      <a href="IMG_5028.jpeg" target="_blank"><img src="IMG_5028.jpeg" alt="Meetup 10/5"></a>
+      <a href="IMG_5078.jpeg" target="_blank"><img src="IMG_5078.jpeg" alt="Meetup 10/5"></a>
+      <a href="IMG_5085.jpeg" target="_blank"><img src="IMG_5085.jpeg" alt="Meetup 10/5"></a>
     </div>
   </div>
 
+  <!-- Περισσότερα meetups μπορείς να τα βάλεις εδώ ως νέα .gallery-section -->
+
   <a href="index.html" class="back-link">⬅ Επιστροφή</a>
-
-  <script>
-    let slideIndex = 0;
-    const slides = document.getElementsByClassName("slide");
-
-    function showSlides() {
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      slideIndex++;
-      if (slideIndex > slides.length) { slideIndex = 1 }
-      slides[slideIndex - 1].style.display = "block";
-      setTimeout(showSlides, 4000); // κάθε 4 δευτερόλεπτα
-    }
-
-    showSlides();
-  </script>
 </body>
 </html>
