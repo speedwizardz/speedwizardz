@@ -95,13 +95,21 @@
       display: none;
     }
 
-    /* Στυλ για τον χάρτη */
-    #map-container {
-      width: 100%;
-      height: 400px;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 20px;
+    /* Στυλ για το κουμπί του χάρτη */
+    .map-link-button {
+      display: inline-block;
+      margin-top: 15px;
+      background: #0ff;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .map-link-button:hover {
+      background: #0cc;
     }
   </style>
 </head>
@@ -126,6 +134,11 @@
     <div id="meet-info">
       <p class="info-line"><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
       <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρισης 21:30</p>
+      <p class="info-line">
+        <a href="https://www.google.com/maps/place/Apollonion+Markopoulo/@37.85053,24.03192,17z" target="_blank" class="map-link-button" rel="noopener noreferrer">
+          📍 Δες την τοποθεσία στο Google Maps
+        </a>
+      </p>
       <p class="info-line"><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
     </div>
 
@@ -138,19 +151,6 @@
     <h2>📸 banner</h2>
     <img src="1.png" alt="Speed Wizardz Meet Poster">
     <p>Δες περισσότερα στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram μας</a></p>
-
-    <!-- Εδώ προσθέσαμε τον χάρτη -->
-    <div id="map-container">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31744.592902710224!2d24.03191647715848!3d37.85053042024403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1a0a7a5d59a37%3A0x17a1e8a499db591c!2sApollonion%20Markopoulo!5e0!3m2!1sel!2sgr!4v1697686782168!5m2!1sel!2sgr"
-        width="100%"
-        height="100%"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
   </section>
 
   <footer>
