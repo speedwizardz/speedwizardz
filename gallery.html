@@ -16,103 +16,160 @@
       text-align: center;
       text-shadow: 1px 1px 2px black;
     }
-
     header {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.7);
       padding: 20px;
     }
-
     header h1 {
       margin: 0;
       font-size: 2em;
       color: #0ff;
     }
 
-    .gallery-section {
-      background: rgba(0, 0, 0, 0.6);
-      margin: 30px auto;
-      padding: 20px;
-      max-width: 900px;
-      border-radius: 10px;
+    /* Tabs container */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .gallery-section h2 {
+    /* Each tab button */
+    .tab-btn {
+      background: rgba(0,0,0,0.6);
+      border: none;
       color: #0ff;
-      margin-bottom: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    .tab-btn:hover {
+      background: rgba(0, 255, 255, 0.3);
+    }
+    .tab-btn.active {
+      background: #0ff;
+      color: #000;
+      cursor: default;
     }
 
+    /* Content container */
+    .tab-content {
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: rgba(0,0,0,0.6);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      height: 500px; /* Σταθερό ύψος για slide */
+    }
+
+    /* Inner slider container */
+    .slides {
+      display: flex;
+      width: 200%; /* 2 tabs, μπορείς να μεγαλώσεις αν έχεις παραπάνω */
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+    }
+
+    /* Κάθε tab panel */
+    .slide {
+      width: 50%; /* ανάλογα με τον αριθμό των tabs */
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    /* Grid για φωτογραφίες */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 10px;
     }
-
-    .gallery-grid img {
+    .gallery-grid img, .gallery-grid video {
       width: 100%;
-      border-radius: 8px;
-      transition: transform 0.3s ease;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #0ff;
+      transition: transform 0.3s;
     }
-
-    .gallery-grid img:hover {
+    .gallery-grid img:hover, .gallery-grid video:hover {
       transform: scale(1.05);
     }
 
-    video {
-      border-radius: 10px;
-      margin-top: 15px;
+    /* Responsive */
+    @media (max-width: 600px) {
+      .slide {
+        width: 100%;
+      }
+      .slides {
+        width: 100%;
+      }
     }
 
-    .back-link {
-      display: inline-block;
-      margin: 20px;
-      color: #0af;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
   <header>
     <h1>📸 Gallery</h1>
-    <p>Φωτογραφίες & βίντεο από τα τελευταία meetups μας!</p>
+    <p>Επέλεξε τον μήνα για να δεις τα meetups</p>
   </header>
 
-  <!-- Meetup 1 -->
-  <div class="gallery-section">
-    <h2>Meetup • 10 Μαΐου 2025</h2>
-    <div class="gallery-grid">
-      <a href="meet1.png" target="_blank"><img src="meet1.png" alt="Meetup 10/5"></a>
-      <a href="meet2.jpeg" target="_blank"><img src="meet2.jpeg" alt="Meetup 10/5"></a>
-      <a href="meet3.jpeg" target="_blank"><img src="meet3.jpeg" alt="Meetup 10/5"></a>
-      <a href="meet4.jpeg" target="_blank"><img src="meet4.jpeg" alt="Meetup 10/5"></a>
-      <a href="meet5.jpeg" target="_blank"><img src="meet5.jpeg" alt="Meetup 10/5"></a>
-      <a href="IMG_5028.jpeg" target="_blank"><img src="IMG_5028.jpeg" alt="Meetup 10/5"></a>
-      <a href="IMG_5078.jpeg" target="_blank"><img src="IMG_5078.jpeg" alt="Meetup 10/5"></a>
-      <a href="IMG_5085.jpeg" target="_blank"><img src="IMG_5085.jpeg" alt="Meetup 10/5"></a>
+  <div class="tabs">
+    <button class="tab-btn active" data-index="0">Μάιος 2025</button>
+    <button class="tab-btn" data-index="1">Ιούνιος 2025</button>
+  </div>
+
+  <div class="tab-content">
+    <div class="slides">
+      <!-- Μάιος 2025 -->
+      <div class="slide">
+        <div class="gallery-grid">
+          <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
+          <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
+          <img src="meet3.jpeg" alt="Meetup Μάιος 2025 - Φωτο 3" />
+          <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4"></video>
+        </div>
+      </div>
+
+      <!-- 25 Ιανουαρίου 2025 -->
+      <div class="slide">
+        <div class="gallery-grid">
+          <img src="IMG_4232.jpeg" alt="Meetup Ιούνιος 2025 - Φωτο 1" />
+          <img src="IMG_4235.jpeg" alt="Meetup Ιούνιος 2025 - Φωτο 2" />
+          <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιούνιος 2025 - Φωτο 3" />
+          <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4"></video>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Meetup 2 -->
-  <div class="gallery-section">
-    <h2>Meetup • 25 Ιανουαρίου 2025</h2>
-    <div class="gallery-grid">
-      <a href="IMG_4232.jpeg" target="_blank"><img src="IMG_4232.jpeg" alt="Meetup 6/2025"></a>
-      <a href="IMG_4235.jpeg" target="_blank"><img src="IMG_4235.jpeg" alt="Meetup 6/2025"></a>
-      <a href="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" target="_blank"><img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup 6/2025"></a>
-    </div>
+  <a href="index.html" class="back-link" style="color:#0af; font-weight:bold; display:block; max-width:900px; margin: 10px auto;">⬅ Επιστροφή</a>
 
-    <h3 style="margin-top:30px; color:#0ff;">🎥 Video από το meetup</h3>
-    <video width="90%" controls>
-      <source src="4d343b726b304b66864a8e9b8e707d15.mp4" type="video/mp4">
-      Το βίντεο δεν υποστηρίζεται από τον browser σας.
-    </video>
-  </div>
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const slides = document.querySelector('.slides');
+    const slideCount = tabs.length;
 
-  <a href="index.html" class="back-link">⬅ Επιστροφή</a>
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Αν είναι ήδη ενεργό το tab, μην κάνεις τίποτα
+        if(tab.classList.contains('active')) return;
+
+        // Αφαίρεσε active από όλα
+        tabs.forEach(t => t.classList.remove('active'));
+
+        // Πρόσθεσε active στο επιλεγμένο
+        tab.classList.add('active');
+
+        // Μετακίνησε το slider
+        const index = parseInt(tab.dataset.index);
+        const translateX = -(100 / slideCount) * index;
+        slides.style.transform = `translateX(${translateX}%)`;
+      });
+    });
+  </script>
 </body>
 </html>
