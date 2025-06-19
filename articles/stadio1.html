@@ -10,10 +10,12 @@
       max-width: 900px;
       margin: 30px auto;
       padding: 20px;
-      background-color: #111;
+      background-color: #121212; /* Σκούρο φόντο */
       color: #eee;
       line-height: 1.6;
       border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.7);
+      position: relative;
     }
     h1, h2 {
       color: #0ff;
@@ -27,9 +29,30 @@
     strong {
       color: #0af;
     }
+    /* Κουμπί επιστροφής */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #0ff;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 5px #0ff;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    .back-button:hover {
+      background-color: #0cc;
+    }
   </style>
 </head>
 <body>
+
+  <a href="index.html" class="back-button">← Επιστροφή</a>
+
   <h1>Στάδια Βελτίωσης Αυτοκινήτου</h1>
 
   <p>
