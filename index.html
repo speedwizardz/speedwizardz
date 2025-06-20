@@ -5,52 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Speed Wizardz | Αρχική</title>
   <style>
-    /* === PRELOADER === */
+    /* Preloader */
     #preloader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: black;
-      z-index: 9999;
+      background-color: #000;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      z-index: 9999;
     }
 
-    .glitch-logo {
-      width: 180px;
-      animation: glitch 1s infinite;
+    .preloader-logo {
+      width: 150px;
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease-in-out;
     }
 
-    .spinner {
-      margin-top: 20px;
-      width: 40px;
-      height: 40px;
-      border: 4px solid #0ff;
-      border-top: 4px solid transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .progress-bar {
+      width: 80%;
+      height: 10px;
+      background-color: #222;
+      border-radius: 5px;
+      overflow: hidden;
     }
 
-    @keyframes glitch {
-      0% { transform: translate(0); filter: hue-rotate(0deg); }
-      20% { transform: translate(-2px, 2px); filter: hue-rotate(30deg); }
-      40% { transform: translate(2px, -2px); filter: hue-rotate(60deg); }
-      60% { transform: translate(-1px, 1px); filter: hue-rotate(90deg); }
-      80% { transform: translate(1px, -1px); filter: hue-rotate(120deg); }
-      100% { transform: translate(0); filter: hue-rotate(0deg); }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0;
+      background-color: #0ff;
+      animation: loadBar 2.5s linear forwards;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes loadBar {
+      to {
+        width: 100%;
+      }
     }
 
-    /* === MAIN SITE === */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Απλό fade για να εμφανιστεί το περιεχόμενο μετά */
     body {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+
+    /* Υπόλοιπο site */
+    body.loaded {
       background-image: url("2.png");
       font-family: Arial, sans-serif;
       background-size: cover;
@@ -161,84 +180,80 @@
 
   <!-- Preloader -->
   <div id="preloader">
-    <div class="preloader-content">
-      <img src="1.png" alt="Speed Wizardz Logo" class="glitch-logo" />
-      <div class="spinner"></div>
+    <img src="wizard.png" alt="Speed Wizardz Logo" class="preloader-logo" />
+    <div class="progress-bar">
+      <div class="progress-bar-fill"></div>
     </div>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div id="main-content" style="display: none;">
-    <header>
-      <h1>Speed Wizardz</h1>
-      <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
-    </header>
+  <!-- Περιεχόμενο Σελίδας -->
+  <header>
+    <h1>Speed Wizardz</h1>
+    <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
+  </header>
 
-    <nav>
-      <a href="news.html">Νέα</a>
-      <a href="#meetups">Meetups</a>
-      <a href="gallery.html">Φωτογραφίες</a>
-      <a href="join.html">Γίνε Μέλος</a>
-      <a href="faq.html">Συχνές Ερωτήσεις</a>
-      <a href="articles.html">Άρθρα</a>
-    </nav>
+  <nav>
+    <a href="news.html">Νέα</a>
+    <a href="#meetups">Meetups</a>
+    <a href="gallery.html">Φωτογραφίες</a>
+    <a href="join.html">Γίνε Μέλος</a>
+    <a href="faq.html">Συχνές Ερωτήσεις</a>
+    <a href="articles.html">Άρθρα</a>
+  </nav>
 
-    <section id="meetups">
-      <h2>📅 Επόμενο Meet</h2>
-      <div id="countdown">Φόρτωση αντίστροφης μέτρησης...</div>
+  <section id="meetups">
+    <h2>📅 Επόμενο Meet</h2>
+    <div id="countdown">Φόρτωση αντίστροφης μέτρησης...</div>
 
-      <div id="meet-info">
-        <p class="info-line"><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
-        <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
-        <p class="info-line">
-          <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/@37.8814357,23.9237461,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14a1910ffe83d19b:0x27ac47ea5539eb1f!8m2!3d37.8814315!4d23.926321!16s%2Fg%2F11f15gzpck?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link-button" rel="noopener noreferrer">
-            📍 Δες την τοποθεσία στο Google Maps
-          </a>
-        </p>
-        <p class="info-line"><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
-      </div>
-
-      <div id="stay-tuned" class="hidden">
-        <p>🧭 <strong>Μείνετε συντονισμένοι για το επόμενο meet!</strong></p>
-      </div>
-    </section>
-
-    <section id="gallery">
-      <h2>📸 banner</h2>
-      <img src="1.png" alt="Speed Wizardz Meet Poster">
-      <p>Δες περισσότερα στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram μας</a></p>
-    </section>
-
-    <footer>
-      <p>© 2025 Speed Wizardz | Επικοινωνία στο 
-        <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
+    <div id="meet-info">
+      <p class="info-line"><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
+      <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
+      <p class="info-line">
+        <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch" target="_blank" class="map-link-button">
+          📍 Δες την τοποθεσία στο Google Maps
+        </a>
       </p>
-    </footer>
-  </div>
+      <p class="info-line"><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
+    </div>
 
-  <!-- JavaScript -->
+    <div id="stay-tuned" class="hidden">
+      <p>🧭 <strong>Μείνετε συντονισμένοι για το επόμενο meet!</strong></p>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <h2>📸 banner</h2>
+    <img src="1.png" alt="Speed Wizardz Meet Poster">
+    <p>Δες περισσότερα στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram μας</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
+      <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
+    </p>
+  </footer>
+
   <script>
-    // Preloader εμφανίζεται για 4 δευτερόλεπτα
-    window.addEventListener("load", function () {
-      setTimeout(function () {
-        const preloader = document.getElementById("preloader");
-        const mainContent = document.getElementById("main-content");
-        preloader.style.opacity = "0";
-        preloader.style.transition = "opacity 0.5s ease";
+    // Preloader εξαφάνιση
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        preloader.style.transition = 'opacity 0.5s ease';
+        document.body.classList.add('loaded');
         setTimeout(() => {
-          preloader.style.display = "none";
-          mainContent.style.display = "block";
+          preloader.style.display = 'none';
         }, 500);
-      }, 4000);
+      }, 2500); // 2.5 δευτερόλεπτα
     });
 
-    // Countdown λειτουργία
+    // Αντίστροφη μέτρηση
     const countdownEl = document.getElementById('countdown');
     const meetInfo = document.getElementById('meet-info');
     const stayTuned = document.getElementById('stay-tuned');
 
     const meetupStart = new Date('2025-07-05T20:30:00');
-    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000); 
+    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000);
     const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000);
 
     function updateCountdown() {
@@ -250,13 +265,12 @@
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
-
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
         meetInfo.classList.remove('hidden');
         stayTuned.classList.add('hidden');
 
       } else if (now >= meetupStart && now < meetupEnd) {
-        countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
+        countdownEl.textContent = 'Το meetup γίνεται τώρα!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
 
