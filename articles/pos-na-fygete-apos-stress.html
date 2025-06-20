@@ -6,15 +6,14 @@
   <title>Οδηγίες για Ασφαλή Οδήγηση και Διαχείριση Άγχους | Speed Wizardz</title>
   <style>
     body {
-      background-image: url("2.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
       font-family: Arial, sans-serif;
       max-width: 900px;
       margin: 30px auto;
       padding: 20px;
+      background-image: url("../2.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       color: #eee;
       line-height: 1.6;
       border-radius: 10px;
@@ -23,34 +22,41 @@
       background-color: rgba(0, 0, 0, 0.7);
       text-shadow: 1px 1px 2px black;
     }
+
     h1, h2 {
       color: #0ff;
-      margin-top: 0;
+      margin-top: 1.5em;
     }
+
     p {
-      margin-bottom: 1em;
+      margin-bottom: 1.2em;
     }
+
     ul {
       margin-bottom: 1em;
       padding-left: 1.2em;
     }
+
     li {
       margin-bottom: 0.5em;
     }
+
     strong {
       color: #0af;
     }
-    a {
-      color: #0af;
-      text-decoration: none;
-      font-weight: bold;
+
+    blockquote {
+      margin: 1em 0;
+      padding: 1em 1.5em;
+      background-color: rgba(0,255,255,0.1);
+      border-left: 5px solid #0ff;
+      font-style: italic;
+      color: #ccf;
     }
-    a:hover {
-      text-decoration: underline;
-    }
-    .back-button {
-      display: inline-block;
-      margin-bottom: 20px;
+
+    .back-button, .back-to-articles {
+      position: fixed;
+      left: 20px;
       background-color: #0ff;
       color: #000;
       padding: 10px 15px;
@@ -59,23 +65,30 @@
       text-decoration: none;
       box-shadow: 0 0 5px #0ff;
       transition: background-color 0.3s ease;
+      z-index: 1000;
     }
-    .back-button:hover {
+
+    .back-button {
+      top: 20px;
+    }
+
+    .back-to-articles {
+      top: 70px;
+    }
+
+    .back-button:hover,
+    .back-to-articles:hover {
       background-color: #0cc;
     }
   </style>
 </head>
 <body>
 
-  <!-- Κουμπί επιστροφής στην αρχική -->
   <a href="../index.html" class="back-button">← Επιστροφή στην Αρχική</a>
+  <a href="../articles.html" class="back-to-articles">← Επιστροφή στα Άρθρα</a>
 
   <h1>Οδηγίες για Ασφαλή Οδήγηση και Διαχείριση Άγχους</h1>
 
-  <!-- Κουμπί επιστροφής στα άρθρα -->
-  <a href="../articles.html" class="back-button">← Επιστροφή στα Άρθρα</a>
-
-  <h2>Εισαγωγή</h2>
   <p>
     Η οδήγηση είναι μια δραστηριότητα που απαιτεί συγκέντρωση και ψυχραιμία. Το άγχος και η πίεση μπορούν να επηρεάσουν αρνητικά την απόδοσή μας στο δρόμο, αυξάνοντας τον κίνδυνο ατυχημάτων. Παρακάτω θα βρεις βασικές συμβουλές για να οδηγείς με ασφάλεια και να διαχειρίζεσαι το άγχος.
   </p>
