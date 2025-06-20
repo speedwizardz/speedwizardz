@@ -17,42 +17,6 @@
       padding: 0;
       text-align: center;
       text-shadow: 1px 1px 2px black;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-
-    /* Preloader */
-    #preloader {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-    }
-
-    #preloader-bar {
-      width: 200px;
-      height: 8px;
-      background: #111;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-top: 15px;
-      box-shadow: 0 0 10px #0ff;
-    }
-
-    #preloader-fill {
-      width: 0%;
-      height: 100%;
-      background: #0ff;
-      animation: fillBar 2.5s forwards;
-    }
-
-    @keyframes fillBar {
-      0% { width: 0%; }
-      100% { width: 100%; }
     }
 
     header {
@@ -131,6 +95,7 @@
       display: none;
     }
 
+    /* Στυλ για το κουμπί του χάρτη */
     .map-link-button {
       display: inline-block;
       margin-top: 15px;
@@ -149,14 +114,6 @@
   </style>
 </head>
 <body>
-  <!-- Προφόρτωση -->
-  <div id="preloader">
-    <h2 style="color:#0ff; font-family:Arial;">Speed Wizardz</h2>
-    <div id="preloader-bar">
-      <div id="preloader-fill"></div>
-    </div>
-  </div>
-
   <header>
     <h1>Speed Wizardz</h1>
     <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
@@ -209,33 +166,38 @@
     const stayTuned = document.getElementById('stay-tuned');
 
     const meetupStart = new Date('2025-07-05T20:30:00');
-    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000);
-    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000);
+    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000); // +5 ώρες
+    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000); // +5 μέρες
 
     function updateCountdown() {
       const now = new Date();
 
       if (now < meetupStart) {
+        // Πριν το meetup: αντίστροφη μέτρηση
         const diff = meetupStart - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
+
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
         meetInfo.classList.remove('hidden');
         stayTuned.classList.add('hidden');
 
       } else if (now >= meetupStart && now < meetupEnd) {
+        // Το meetup γίνεται τώρα (+5 ώρες)
         countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
-        meetInfo.classList.add('hidden');
+        meetInfo.classList.add('hidden'); // Κρύβουμε τις πληροφορίες και το χάρτη
         stayTuned.classList.add('hidden');
 
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
+        // Meetup ολοκληρώθηκε (+5 μέρες)
         countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
 
       } else {
+        // Μετά τις 5 μέρες: μείνετε συντονισμένοι
         countdownEl.textContent = '';
         meetInfo.classList.add('hidden');
         stayTuned.classList.remove('hidden');
@@ -243,18 +205,7 @@
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // Fade-in σελίδας μετά από 2.5s
-    setTimeout(() => {
-      document.body.style.opacity = '1';
-      const preloader = document.getElementById('preloader');
-      if (preloader) {
-        preloader.style.transition = 'opacity 0.5s ease';
-        preloader.style.opacity = '0';
-        setTimeout(() => preloader.remove(), 500);
-      }
-    }, 2500);
+    const interval = setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
