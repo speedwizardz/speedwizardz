@@ -87,86 +87,6 @@
     .back-link:hover {
       text-decoration: underline;
     }
-
-    /* Chatbot styling */
-    #chatbot-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #0ff;
-      color: #000;
-      padding: 10px 15px;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px #0ff;
-      z-index: 9999;
-    }
-
-    #wizard-chat {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 300px;
-      background: rgba(0,0,0,0.85);
-      border-radius: 10px;
-      color: #eee;
-      font-family: Arial, sans-serif;
-      display: none;
-      flex-direction: column;
-      box-shadow: 0 0 10px #0ff;
-      z-index: 10000;
-    }
-
-    #chat-header {
-      background: #0ff;
-      color: #000;
-      padding: 10px;
-      font-weight: bold;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    #chat-body {
-      padding: 10px;
-      height: 200px;
-      overflow-y: auto;
-      background: #111;
-    }
-
-    #chat-body div {
-      margin: 5px 0;
-    }
-
-    .user-msg {
-      text-align: right;
-      color: #0ff;
-    }
-
-    .wizard-msg {
-      text-align: left;
-      color: #ccc;
-      font-style: italic;
-    }
-
-    #chat-input {
-      border: none;
-      border-top: 1px solid #444;
-      padding: 10px;
-      background: #222;
-      color: #eee;
-      outline: none;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-    }
-
-    #close-chat {
-      cursor: pointer;
-      font-weight: normal;
-    }
   </style>
 </head>
 <body>
@@ -177,78 +97,50 @@
   </header>
 
   <div class="container">
-    <!-- ερωτήσεις εδώ -->
-    <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+    <!-- FAQ περιεχόμενο εδώ ... (παραμένει όπως το είχες) -->
   </div>
 
-  <!-- Wizard Chatbot -->
-  <div id="chatbot-toggle">💬 Ρώτα τον Μάγο</div>
-  <div id="wizard-chat">
-    <div id="chat-header">🧙 Wizard Assistant <span id="close-chat">✖</span></div>
-    <div id="chat-body"></div>
-    <input type="text" id="chat-input" placeholder="Γράψε κάτι..." />
+  <!-- Βοηθός Wizard -->
+  <div id="wizard-chat-toggle" style="position: fixed; bottom: 20px; right: 20px; background: #0ff; color: #000; border-radius: 50%; width: 60px; height: 60px; font-size: 30px; text-align: center; line-height: 60px; cursor: pointer; box-shadow: 0 0 10px #0ff; background-image: url('wizard-icon.png'); background-size: cover; background-position: center;"></div>
+
+  <div id="wizard-chat-box" style="display: none; position: fixed; bottom: 90px; right: 20px; width: 320px; max-height: 400px; background: rgba(0,0,0,0.9); border-radius: 10px; padding: 15px; color: #fff; box-shadow: 0 0 15px #0ff; z-index: 1000;">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+      <img src="wizard-icon.png" alt="Wizard Icon" style="width: 40px; height: 40px; border-radius: 50%;">
+      <strong style="color: #0ff;">Wizard Assistant</strong>
+    </div>
+    <div id="wizard-chat-log" style="height: 200px; overflow-y: auto; font-size: 0.9em; margin-bottom: 10px;"></div>
+    <input id="wizard-chat-input" type="text" placeholder="Γράψε εδώ..." style="width: 100%; padding: 8px; border-radius: 5px; border: none;">
   </div>
 
   <script>
-    document.querySelectorAll('.question').forEach(q => {
-      q.addEventListener('click', () => {
-        const answer = q.nextElementSibling;
-        const isOpen = answer.classList.contains('open');
-        document.querySelectorAll('.answer').forEach(a => a.classList.remove('open'));
-        document.querySelectorAll('.question').forEach(qq => qq.classList.remove('active'));
-        if (!isOpen) {
-          answer.classList.add('open');
-          q.classList.add('active');
-        }
-      });
+    const toggleBtn = document.getElementById("wizard-chat-toggle");
+    const chatBox = document.getElementById("wizard-chat-box");
+    const chatLog = document.getElementById("wizard-chat-log");
+    const input = document.getElementById("wizard-chat-input");
+
+    toggleBtn.addEventListener("click", () => {
+      chatBox.style.display = (chatBox.style.display === "none") ? "block" : "none";
     });
 
-    const toggle = document.getElementById("chatbot-toggle");
-    const chatBox = document.getElementById("wizard-chat");
-    const closeBtn = document.getElementById("close-chat");
-    const chatBody = document.getElementById("chat-body");
-    const chatInput = document.getElementById("chat-input");
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && input.value.trim()) {
+        const userText = input.value;
+        chatLog.innerHTML += `<div><strong>Εσύ:</strong> ${userText}</div>`;
+        input.value = "";
 
-    toggle.onclick = () => {
-      chatBox.style.display = "flex";
-      toggle.style.display = "none";
-    };
+        let reply = "Δεν σε κατάλαβα, δοκίμασε κάτι άλλο!";
+        const lower = userText.toLowerCase();
+        if (lower.includes("αυτοκόλλητα")) reply = "🎨 Τα αυτοκόλλητα διανέμονται στα meetups!";
+        else if (lower.includes("επόμενο")) reply = "📅 Το επόμενο meet είναι στην αρχική σελίδα μας με αντίστροφη μέτρηση!";
+        else if (lower.includes("μέλος")) reply = "🔑 Μπορείς να γίνεις μέλος από τη σελίδα «Γίνε Μέλος»!";
+        else if (lower.includes("instagram")) reply = "📸 Μπες στο προφίλ μας στο Instagram: @speed_wizardz";
 
-    closeBtn.onclick = () => {
-      chatBox.style.display = "none";
-      toggle.style.display = "block";
-    };
-
-    chatInput.addEventListener("keypress", function (e) {
-      if (e.key === "Enter" && this.value.trim() !== "") {
-        const msg = this.value.trim();
-        addMessage("user", msg);
-        respondToMessage(msg.toLowerCase());
-        this.value = "";
+        setTimeout(() => {
+          chatLog.innerHTML += `<div><strong>Wizard:</strong> ${reply}</div>`;
+          chatLog.scrollTop = chatLog.scrollHeight;
+        }, 500);
       }
     });
-
-    function addMessage(sender, text) {
-      const msgDiv = document.createElement("div");
-      msgDiv.className = sender === "user" ? "user-msg" : "wizard-msg";
-      msgDiv.textContent = text;
-      chatBody.appendChild(msgDiv);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }
-
-    function respondToMessage(msg) {
-      if (msg.includes("μέλος")) {
-        addMessage("wizard", "Για να γίνεις μέλος, δες τη σελίδα 'Γίνε Μέλος' στο μενού!");
-      } else if (msg.includes("meet") || msg.includes("συνάντηση")) {
-        addMessage("wizard", "Τα επόμενα meet ανακοινώνονται στο Instagram και στην αρχική σελίδα μας.");
-      } else if (msg.includes("gallery") || msg.includes("φωτο")) {
-        addMessage("wizard", "Ρίξε μια ματιά στη σελίδα 'Φωτογραφίες' για να δεις τα προηγούμενα meet!");
-      } else if (msg.includes("γεια") || msg.includes("καλη")) {
-        addMessage("wizard", "Χαιρετώ, ταξιδιώτη της ασφάλτου. Τι μπορώ να κάνω για σένα;");
-      } else {
-        addMessage("wizard", "Ο άνεμος δεν έφερε καλή ερώτηση... δοκίμασε κάτι άλλο.");
-      }
-    }
   </script>
 </body>
 </html>
