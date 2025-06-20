@@ -8,16 +8,15 @@
     /* Preloader */
     #preloader {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background-color: #000;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      transition: opacity 0.5s ease;
     }
 
     .preloader-logo {
@@ -28,6 +27,7 @@
 
     .progress-bar {
       width: 80%;
+      max-width: 400px;
       height: 10px;
       background-color: #222;
       border-radius: 5px;
@@ -58,34 +58,34 @@
       }
     }
 
-    /* Απλό fade για να εμφανιστεί το περιεχόμενο μετά */
+    /* Όταν το site φορτώσει, κάνουμε fade in */
     body {
       opacity: 0;
       transition: opacity 0.5s ease;
-    }
-
-    body.loaded {
-      opacity: 1;
-    }
-
-    /* Υπόλοιπο site */
-    body.loaded {
-      background-image: url("2.png");
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
+      color: #eee;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
-      color: #eee;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      text-shadow: 1px 1px 2px black;
+      background-color: #000; /* fallback */
+    }
+
+    body.loaded {
+      opacity: 1;
+      background-image: url("2.png");
     }
 
     header {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
+      max-width: 900px;
+      margin: 20px auto 0 auto;
+      border-radius: 10px;
     }
 
     header h1 {
@@ -94,7 +94,8 @@
     }
 
     nav {
-      margin: 20px 0;
+      max-width: 900px;
+      margin: 20px auto;
     }
 
     nav a {
@@ -144,6 +145,9 @@
       background: rgba(0, 0, 0, 0.7);
       font-size: 0.9em;
       color: #ccc;
+      max-width: 900px;
+      margin: 0 auto 20px auto;
+      border-radius: 10px;
     }
 
     a {
@@ -234,20 +238,19 @@
   </footer>
 
   <script>
-    // Preloader εξαφάνιση
+    // Preloader εξαφάνιση και fade-in του body
     window.addEventListener('load', () => {
       setTimeout(() => {
         const preloader = document.getElementById('preloader');
         preloader.style.opacity = '0';
-        preloader.style.transition = 'opacity 0.5s ease';
         document.body.classList.add('loaded');
         setTimeout(() => {
           preloader.style.display = 'none';
         }, 500);
-      }, 2500); // 2.5 δευτερόλεπτα
+      }, 2500);
     });
 
-    // Αντίστροφη μέτρηση
+    // Αντίστροφη μέτρηση για το meetup
     const countdownEl = document.getElementById('countdown');
     const meetInfo = document.getElementById('meet-info');
     const stayTuned = document.getElementById('stay-tuned');
@@ -268,17 +271,14 @@
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
         meetInfo.classList.remove('hidden');
         stayTuned.classList.add('hidden');
-
       } else if (now >= meetupStart && now < meetupEnd) {
         countdownEl.textContent = 'Το meetup γίνεται τώρα!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
-
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
         countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
-
       } else {
         countdownEl.textContent = '';
         meetInfo.classList.add('hidden');
