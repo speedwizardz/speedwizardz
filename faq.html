@@ -48,13 +48,28 @@
     align-items: center;
   }
 
-  .bot-header img {
-    width: 90px;
+  .bot-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin-bottom: 12px;
+  }
+  .bot-header .emoji {
+    font-size: 4.5rem;
+    line-height: 1;
   }
   .bot-header h2 {
     margin: 0;
     font-weight: bold;
+    font-size: 2.2rem;
+    user-select: none;
+  }
+  .bot-header small {
+    font-weight: normal;
+    font-size: 0.75rem;
+    color: #0ff;
+    font-style: italic;
+    margin-left: 6px;
   }
 
   .bot-instructions {
@@ -97,6 +112,7 @@
     overflow-y: auto;
     user-select: text;
     box-shadow: inset 0 0 10px #0ff88;
+    white-space: pre-wrap;
   }
 
   .back-link {
@@ -137,8 +153,8 @@
 
 <main role="main" aria-label="Wizard chatbot interaction">
   <div class="bot-header">
-    <img src="wizard_icon.png" alt="Μάγος Speed Wizardz" />
-    <h2>Wizard Bot</h2>
+    <span class="emoji" aria-hidden="true">🧙‍♂️</span>
+    <h2>Wizard Bot <small>(demo)</small></h2>
   </div>
 
   <p class="bot-instructions">
@@ -269,47 +285,54 @@
     questionSelect.appendChild(option);
   });
 
-  // Συνάρτηση για πιο "ανθρώπινη" απάντηση
-  function formatAnswer(lines) {
-    // Τυχαία σειρά ή μικρό delay, εδώ απλά ενώνω με παραγράφους
-    return lines.map(line => `<p>${line}</p>`).join("");
+  // Συναρτηση για animation γραφής (typing effect)
+  async function typeWriter(text, element, delay = 30) {
+    element.innerHTML = "";
+    for (let i = 0; i < text.length; i++) {
+      element.innerHTML += text.charAt(i);
+      await new Promise(r => setTimeout(r, delay));
+    }
   }
 
-  // Εμφάνιση απάντησης όταν επιλέγεις από το select
-  questionSelect.addEventListener("change", () => {
+  // Εμφάνιση απάντησης με typing effect
+  async function showAnswer(lines) {
+    const fullText = lines.map(line => line + "\n\n").join("");
+    await typeWriter(fullText, botAnswer);
+    botAnswer.focus(); // για προσβασιμότητα
+  }
+
+  // Event change select
+  questionSelect.addEventListener("change", async () => {
     const idx = questionSelect.value;
     if (idx === "") {
-      botAnswer.innerHTML = "Ο μάγος είναι έτοιμος να σου απαντήσει!";
+      botAnswer.textContent = "Ο μάγος είναι έτοιμος να σου απαντήσει!";
       return;
     }
     const answerLines = faqs[idx].answer;
-    botAnswer.innerHTML = formatAnswer(answerLines);
+    await showAnswer(answerLines);
   });
 
   // Αναζήτηση λέξης-κλειδί
-  searchInput.addEventListener("input", () => {
+  searchInput.addEventListener("input", async () => {
     const query = searchInput.value.trim().toLowerCase();
     if (query.length === 0) {
-      botAnswer.innerHTML = "Ο μάγος είναι έτοιμος να σου απαντήσει!";
+      botAnswer.textContent = "Ο μάγος είναι έτοιμος να σου απαντήσει!";
       questionSelect.value = "";
       return;
     }
-    // Ψάχνουμε μέσα στα ερωτήματα και απαντήσεις
     const found = faqs.find(faq =>
       faq.question.toLowerCase().includes(query) ||
       faq.answer.some(line => line.toLowerCase().includes(query))
     );
-
     if (found) {
       const idx = faqs.indexOf(found);
       questionSelect.value = idx;
-      botAnswer.innerHTML = formatAnswer(found.answer);
+      await showAnswer(found.answer);
     } else {
-      botAnswer.innerHTML = `<p>Συγγνώμη, δεν βρήκα κάτι για την αναζήτησή σου. Μπορείς να δοκιμάσεις άλλη λέξη-κλειδί ή να επιλέξεις από τη λίστα.</p>`;
+      await typeWriter("Συγγνώμη, δεν βρήκα κάτι για την αναζήτησή σου. Μπορείς να δοκιμάσεις άλλη λέξη-κλειδί ή να επιλέξεις από τη λίστα.", botAnswer);
       questionSelect.value = "";
     }
   });
-
 </script>
 
 </body>
