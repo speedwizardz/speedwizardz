@@ -17,20 +17,40 @@
       padding: 0;
       text-align: center;
       text-shadow: 1px 1px 2px black;
+      opacity: 0;
+      transition: opacity 0.6s ease;
     }
 
-    #loading-bar {
+    /* Preloader */
+    #preloader {
       position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      width: 0%;
-      background: #0ff;
-      z-index: 9999;
-      animation: loadingAnim 2.5s linear forwards;
+      inset: 0;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
     }
 
-    @keyframes loadingAnim {
+    #preloader-bar {
+      width: 200px;
+      height: 8px;
+      background: #111;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 15px;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    #preloader-fill {
+      width: 0%;
+      height: 100%;
+      background: #0ff;
+      animation: fillBar 2.5s forwards;
+    }
+
+    @keyframes fillBar {
       0% { width: 0%; }
       100% { width: 100%; }
     }
@@ -129,7 +149,13 @@
   </style>
 </head>
 <body>
-  <div id="loading-bar"></div>
+  <!-- Προφόρτωση -->
+  <div id="preloader">
+    <h2 style="color:#0ff; font-family:Arial;">Speed Wizardz</h2>
+    <div id="preloader-bar">
+      <div id="preloader-fill"></div>
+    </div>
+  </div>
 
   <header>
     <h1>Speed Wizardz</h1>
@@ -195,18 +221,20 @@
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
-
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
         meetInfo.classList.remove('hidden');
         stayTuned.classList.add('hidden');
+
       } else if (now >= meetupStart && now < meetupEnd) {
         countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
+
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
         countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
+
       } else {
         countdownEl.textContent = '';
         meetInfo.classList.add('hidden');
@@ -215,15 +243,16 @@
     }
 
     updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000);
 
-    // Αφαίρεση loading bar μετά από 2.5s
+    // Fade-in σελίδας μετά από 2.5s
     setTimeout(() => {
-      const bar = document.getElementById('loading-bar');
-      if (bar) {
-        bar.style.transition = 'opacity 0.5s ease';
-        bar.style.opacity = '0';
-        setTimeout(() => bar.remove(), 500);
+      document.body.style.opacity = '1';
+      const preloader = document.getElementById('preloader');
+      if (preloader) {
+        preloader.style.transition = 'opacity 0.5s ease';
+        preloader.style.opacity = '0';
+        setTimeout(() => preloader.remove(), 500);
       }
     }, 2500);
   </script>
