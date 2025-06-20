@@ -131,6 +131,36 @@
       color: #0cc;
     }
 
+    /* Navigation arrows */
+    #lightboxPrev, #lightboxNext {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      border-radius: 50%;
+      color: #0ff;
+      font-size: 2.5em;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
+      box-shadow: 0 0 8px #0ff;
+      z-index: 10001;
+    }
+    #lightboxPrev:hover, #lightboxNext:hover {
+      background: rgba(0,255,255,0.9);
+      color: #000;
+    }
+    #lightboxPrev {
+      left: 20px;
+    }
+    #lightboxNext {
+      right: 20px;
+    }
+
     @media (max-width: 600px) {
       .gallery-grid {
         grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
@@ -181,9 +211,11 @@
   <a href="index.html" class="back-link" style="color:#0af; font-weight:bold; display:block; max-width:900px; margin: 10px auto;">⬅ Επιστροφή</a>
 
   <!-- Lightbox overlay -->
-  <div id="lightboxOverlay">
-    <span id="lightboxClose">&#10005;</span>
+  <div id="lightboxOverlay" tabindex="0" aria-modal="true" role="dialog" aria-label="Μεγαλύτερη εικόνα gallery">
+    <span id="lightboxClose" title="Κλείσιμο">&#10005;</span>
+    <span id="lightboxPrev" title="Προηγούμενη">&#8249;</span>
     <img src="" alt="Μεγαλύτερη εικόνα" />
+    <span id="lightboxNext" title="Επόμενη">&#8250;</span>
   </div>
 
   <script>
@@ -215,35 +247,74 @@
       });
     });
 
-    // Lightbox functionality
+    // Lightbox elements
     const lightboxOverlay = document.getElementById('lightboxOverlay');
     const lightboxImg = lightboxOverlay.querySelector('img');
     const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
 
-    document.querySelectorAll('.gallery-grid img').forEach(img => {
+    // Όλες οι εικόνες gallery σε array
+    const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
+    let currentIndex = 0;
+
+    // Άνοιγμα lightbox και εμφάνιση εικόνας
+    galleryImages.forEach((img, i) => {
       img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightboxOverlay.classList.add('show');
+        currentIndex = i;
+        showImage(currentIndex);
       });
     });
 
-    lightboxClose.addEventListener('click', () => {
+    function showImage(index) {
+      const img = galleryImages[index];
+      if (!img) return;
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxOverlay.classList.add('show');
+      document.body.style.overflow = 'hidden'; // απενεργοποίηση scroll
+      lightboxOverlay.focus(); // για να δουλέψει το πληκτρολόγιο
+    }
+
+    function hideLightbox() {
       lightboxOverlay.classList.remove('show');
-      // Καθαρισμός src για να απελευθερωθεί η μνήμη
-      setTimeout(() => lightboxImg.src = '', 400);
+      document.body.style.overflow = ''; // ενεργοποίηση scroll
+      setTimeout(() => lightboxImg.src = '', 400); // Καθαρισμός για να απελευθερωθεί μνήμη
+    }
+
+    // Κλείσιμο
+    lightboxClose.addEventListener('click', hideLightbox);
+
+    // Πλοήγηση επόμενη
+    lightboxNext.addEventListener('click', () => {
+      currentIndex++;
+      if (currentIndex >= galleryImages.length) currentIndex = 0;
+      showImage(currentIndex);
     });
 
-    // Κλείσιμο lightbox αν κάνεις κλικ έξω από την εικόνα
+    // Πλοήγηση προηγούμενη
+    lightboxPrev.addEventListener('click', () => {
+      currentIndex--;
+      if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+      showImage(currentIndex);
+    });
+
+    // Κλείσιμο με κλικ έξω από εικόνα
     lightboxOverlay.addEventListener('click', (e) => {
-      if(e.target === lightboxOverlay) {
-        lightboxClose.click();
+      if (e.target === lightboxOverlay) {
+        hideLightbox();
       }
     });
 
-    // ΠΡΟΑΙΡΕΤΙΚΟ: κλείσιμο με Esc
-    document.addEventListener('keydown', (e) => {
-      if(e.key === "Escape" && lightboxOverlay.classList.contains('show')){
-        lightboxClose.click();
+    // Πληκτρολόγιο: Esc, αριστερό και δεξί βελάκι
+    lightboxOverlay.addEventListener('keydown', (e) => {
+      if (!lightboxOverlay.classList.contains('show')) return;
+      if (e.key === "Escape") {
+        hideLightbox();
+      } else if (e.key === "ArrowLeft") {
+        lightboxPrev.click();
+      } else if (e.key === "ArrowRight") {
+        lightboxNext.click();
       }
     });
   </script>
