@@ -1,229 +1,369 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FAQ | Speed Wizardz</title>
-  <style>
-    body {
-      background-image: url("2.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      font-family: Arial, sans-serif;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      text-shadow: 1px 1px 2px black;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FAQ & Wizard Bot | Speed Wizardz</title>
+<style>
+  body {
+    background-image: url("2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    margin: 0; padding: 0;
+    text-shadow: 1px 1px 2px black;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
 
-    header {
-      background-color: rgba(0, 0, 0, 0.8);
-      text-align: center;
-      padding: 20px;
-    }
+  header {
+    background-color: rgba(0,0,0,0.85);
+    padding: 20px;
+    text-align: center;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 2.2em;
+  }
+  header p {
+    margin-top: 6px;
+    font-size: 1.1em;
+    font-style: italic;
+  }
 
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-    }
+  main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 30px auto;
+    background-color: rgba(0,0,0,0.75);
+    border-radius: 12px;
+    padding: 20px 30px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-    .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-      background-color: rgba(0, 0, 0, 0.7);
-      border-radius: 10px;
-    }
+  /* FAQ Accordion */
 
-    .faq-item {
-      border-bottom: 1px solid #555;
-      padding: 10px 0;
-    }
+  .faq-container {
+    flex: 1 1 400px;
+    max-width: 450px;
+    color: #0ff;
+  }
 
-    .question {
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1.1em;
-      position: relative;
-    }
+  .faq-item {
+    border-bottom: 1px solid #444;
+    padding: 12px 0;
+  }
 
-    .question::after {
-      content: "+";
-      position: absolute;
-      right: 0;
-      font-size: 1.2em;
-    }
+  .faq-question {
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px;
+    user-select: none;
+  }
+  .faq-question::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    font-size: 1.4em;
+    top: 2px;
+    transition: transform 0.3s ease;
+  }
+  .faq-question.active::after {
+    content: "-";
+    transform: rotate(180deg);
+  }
 
-    .question.active::after {
-      content: "-";
-    }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    padding-left: 10px;
+    margin-top: 5px;
+    color: #0ff;
+  }
+  .faq-answer.open {
+    opacity: 1;
+    max-height: 400px;
+  }
 
-    .answer {
-      max-height: 0;
-      overflow: hidden;
-      color: #0ff;
-      transition: max-height 0.4s ease, opacity 0.4s ease;
-      opacity: 0;
-      padding-left: 10px;
-    }
+  /* Wizard Bot */
 
-    .answer.open {
-      max-height: 300px;
-      opacity: 1;
-      margin-top: 10px;
-    }
+  .bot-container {
+    flex: 1 1 380px;
+    max-width: 400px;
+    background: rgba(0,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    color: #0ff;
+    box-shadow: 0 0 25px #0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 30px;
-      color: #0af;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  .bot-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .bot-header img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  .bot-header h2 {
+    margin: 0;
+  }
 
-    .back-link:hover {
-      text-decoration: underline;
-    }
+  .bot-instructions {
+    font-style: italic;
+    font-size: 0.9em;
+    margin: 12px 0 18px;
+    text-align: center;
+  }
 
-    /* Wizard Chatbot */
-    #wizard-chatbot {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background: url('wizard.png') center/contain no-repeat;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 10000;
-      box-shadow: 0 0 10px #0ff;
-    }
+  select, input[type="search"] {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 25px;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 1em;
+    background: rgba(0,255,255,0.2);
+    color: #000;
+    font-weight: bold;
+  }
+  select:focus, input[type="search"]:focus {
+    outline: none;
+    box-shadow: 0 0 8px #0ff;
+  }
 
-    #chat-window {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 300px;
-      background: rgba(0,0,0,0.9);
-      border-radius: 12px;
-      box-shadow: 0 0 10px #0ff;
-      display: none;
+  .bot-answer {
+    background: rgba(0,255,255,0.15);
+    border-radius: 12px;
+    padding: 15px 20px;
+    min-height: 120px;
+    color: #0ff;
+    font-size: 1.1em;
+    line-height: 1.4;
+    overflow-y: auto;
+    width: 100%;
+    user-select: text;
+  }
+
+  /* Back to home link */
+  .back-link {
+    display: block;
+    text-align: center;
+    margin: 30px auto 10px;
+    color: #0af;
+    font-weight: bold;
+    text-decoration: none;
+    max-width: 900px;
+  }
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Footer */
+
+  footer {
+    background: rgba(0,0,0,0.85);
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9em;
+    color: #ccc;
+  }
+  footer a {
+    color: #0af;
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+
+  @media (max-width: 900px) {
+    main {
       flex-direction: column;
-      overflow: hidden;
-      z-index: 10000;
+      margin: 20px 15px;
     }
-
-    #chat-messages {
-      max-height: 250px;
-      overflow-y: auto;
-      padding: 10px;
-      color: #0ff;
-      font-size: 0.9em;
+    .faq-container, .bot-container {
+      max-width: 100%;
+      flex: none;
     }
-
-    #chat-input {
-      border: none;
-      padding: 10px;
-      font-size: 0.9em;
-      background: #111;
-      color: #fff;
-      width: calc(100% - 20px);
-    }
-
-    #chat-input:focus {
-      outline: none;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Συχνές Ερωτήσεις</h1>
-    <p>Ό,τι χρειάζεται να ξέρεις για τους Speed Wizardz</p>
-  </header>
 
-  <div class="container" id="faq-container">
-    <!-- Οι ερωτήσεις θα μπουν εδώ με JavaScript για εύκολη σύνδεση με τον μάγο -->
-  </div>
+<header>
+  <h1>Speed Wizardz FAQ & Wizard Bot</h1>
+  <p>Πάρε γρήγορες απαντήσεις από τον μάγο ή περιηγήσου στο FAQ</p>
+</header>
 
-  <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+<main>
 
-  <div id="wizard-chatbot" title="Ρώτα τον μάγο!"></div>
-
-  <div id="chat-window">
-    <div id="chat-messages">
-      <p><strong>🧙‍♂️ Μάγος:</strong> Ρώτα με κάτι για την ομάδα μας!</p>
+  <!-- FAQ Accordion -->
+  <section class="faq-container" aria-label="FAQ Section">
+    <h2>Συχνές Ερωτήσεις</h2>
+    <div id="faqList">
+      <!-- Ερωτήσεις θα γεμίσουν από JS -->
     </div>
-    <input type="text" id="chat-input" placeholder="Πληκτρολόγησε εδώ..." />
-  </div>
+  </section>
 
-  <script>
-    const faqs = [
-      { q: "Πρέπει να έχω κάποιο συγκεκριμένο αυτοκίνητο;", a: "Όχι, αλλά εκτιμάμε τα βελτιωμένα ή ξεχωριστά οχήματα. Αρκεί να έχεις πάθος για την αυτοκίνηση!" },
-      { q: "Πόσο κοστίζει να γίνω μέλος;", a: "Η ένταξη στην ομάδα είναι δωρεάν." },
-      { q: "Είναι νόμιμα τα meetups;", a: "Ναι! Όσο τηρούνται οι κανόνες – σεβασμός στον χώρο, χωρίς φασαρία ή επικίνδυνη οδήγηση." },
-      { q: "Πώς θα παραλάβω αυτοκόλλητα;", a: "Τα διανέμουμε στα meetups." },
-      { q: "Πού μπορώ να ενημερώνομαι για τα επόμενα events;", a: "Στο Instagram και στην αρχική σελίδα του site με την αντίστροφη μέτρηση!" },
-      { q: "Επιτρέπονται οι μηχανές στα meetups;", a: "Ναι, φυσικά! Όλα τα οχήματα είναι ευπρόσδεκτα, αρκεί να τηρούν τον Κ.Ο.Κ." },
-      { q: "Πώς διοργανώνετε τα meetups και πού γίνονται;", a: "Τα meetups γίνονται στην Αττική, σε σημεία που ανακοινώνονται online. Τηρούμε πάντα τον Κ.Ο.Κ." },
-      { q: "Τι πρέπει να προσέχω όταν έρχομαι σε ένα meetup;", a: "Να είσαι κόσμιος, με καθαρό όχημα και να σέβεσαι τον χώρο και τους άλλους." },
-      { q: "Μπορώ να φέρω φίλους;", a: "Φυσικά! Αρκεί να τηρούνται οι κανόνες." }
-    ];
+  <!-- Wizard Bot -->
+  <section class="bot-container" aria-label="Wizard Bot">
+    <div class="bot-header">
+      <img src="wizard_icon.png" alt="Wizard Mascot" />
+      <h2>Wizard Bot</h2>
+    </div>
 
-    const faqContainer = document.getElementById('faq-container');
-    faqs.forEach(f => {
-      const item = document.createElement('div');
-      item.className = 'faq-item';
+    <p class="bot-instructions">
+      Επίλεξε μια ερώτηση ή γράψε λέξη-κλειδί για αναζήτηση:
+    </p>
 
-      const question = document.createElement('div');
-      question.className = 'question';
-      question.textContent = f.q;
+    <select id="questionSelect" aria-label="Επιλογή ερώτησης">
+      <option value="">-- Επίλεξε ερώτηση --</option>
+    </select>
 
-      const answer = document.createElement('div');
-      answer.className = 'answer';
-      answer.textContent = f.a;
+    <input type="search" id="searchInput" placeholder="Αναζήτηση ερώτησης..." aria-label="Αναζήτηση ερώτησης" />
 
-      question.addEventListener('click', () => {
-        const open = answer.classList.contains('open');
-        document.querySelectorAll('.answer').forEach(a => a.classList.remove('open'));
-        document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-        if (!open) {
-          answer.classList.add('open');
-          question.classList.add('active');
-        }
+    <div class="bot-answer" id="botAnswer" tabindex="0">
+      Εδώ θα εμφανιστεί η απάντηση.
+    </div>
+  </section>
+
+</main>
+
+<a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+
+<footer>
+  <p>© 2025 Speed Wizardz | Επικοινωνία στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener">@speed_wizardz</a></p>
+</footer>
+
+<script>
+  // FAQ δεδομένα με όλες τις ερωτήσεις & απαντήσεις
+  const faqs = [
+    { question: "Ποιος είσαι;", answer: "Είμαι ο μάγος των Speed Wizardz, ο ψηφιακός βοηθός σου που απαντά σε συχνές ερωτήσεις και βοηθά να μαθαίνεις τα πάντα για την ομάδα μας. Είμαι εδώ για να κάνω την εμπειρία σου πιο μαγική και εύκολη!" },
+    { question: "Πρέπει να έχω κάποιο συγκεκριμένο αυτοκίνητο;", answer: "Όχι, αλλά εκτιμάμε τα βελτιωμένα ή ξεχωριστά οχήματα. Αρκεί να έχεις πάθος για την αυτοκίνηση!" },
+    { question: "Πόσο κοστίζει να γίνω μέλος;", answer: "Η ένταξη στην ομάδα είναι δωρεάν." },
+    { question: "Είναι νόμιμα τα meetups;", answer: "Ναι! Όσο τηρούνται οι κανόνες – σεβασμός στον χώρο, χωρίς φασαρία ή επικίνδυνη οδήγηση." },
+    { question: "Πώς θα παραλάβω αυτοκόλλητα;", answer: "Τα διανέμουμε στα meetups." },
+    { question: "Πού μπορώ να ενημερώνομαι για τα επόμενα events;", answer: "Στο Instagram και στην αρχική σελίδα του site με την αντίστροφη μέτρηση!" },
+    { question: "Επιτρέπονται οι μηχανές στα meetups;", answer: "Ναι, φυσικά! Όλα τα οχήματα είναι ευπρόσδεκτα, αρκεί να τηρούν τον Κ.Ο.Κ. και οι αναβάτες να φορούν κράνος." },
+    { question: "Πώς διοργανώνετε τα meetups και πού γίνονται;", answer: "Τα meetups οργανώνονται με σεβασμό στους νόμους και χωρίς φασαρίες. Γίνονται σε ασφαλείς χώρους στάθμευσης ή ανοιχτούς δρόμους στην Αττική, πάντα με ενημέρωση μέσω των social media μας." },
+    { question: "Τι πρέπει να προσέχω όταν έρχομαι σε ένα meetup;", answer: "Να φέρεις καθαρό και ασφαλές αυτοκίνητο, να ακολουθείς τον Κώδικα Οδικής Κυκλοφορίας (Κ.Ο.Κ.), και να έχεις πάντα καλή διάθεση. Η ομάδα δεν υποστηρίζει φασαρίες ή επικίνδυνη οδήγηση." },
+    { question: "Μπορώ να φέρω φίλους ή άλλα άτομα στα meetups;", answer: "Φυσικά! Τα meetups είναι ανοιχτά για όλους που σέβονται τους κανόνες της ομάδας." },
+    { question: "Τι κάνετε για να εξασφαλίσετε την ασφάλεια στα meetups;", answer: "Έχουμε κανόνες αυστηρού σεβασμού στον Κ.Ο.Κ., επιτηρούμε την ομαλή ροή και αποτρέπουμε επικίνδυνες συμπεριφορές. Οποιαδήποτε παραβίαση μπορεί να οδηγήσει σε αποκλεισμό από την ομάδα." },
+    { question: "Πώς μπορώ να επικοινωνήσω μαζί σας για προτάσεις ή ερωτήσεις;", answer: "Μπορείς να μας βρεις στο Instagram @speed_wizardz ή μέσω της φόρμας επικοινωνίας στην ιστοσελίδα μας." }
+  ];
+
+  // Φορτώνουμε FAQ accordion
+  const faqList = document.getElementById("faqList");
+  faqs.forEach((item, i) => {
+    const faqItem = document.createElement("div");
+    faqItem.className = "faq-item";
+
+    const question = document.createElement("div");
+    question.className = "faq-question";
+    question.textContent = item.question;
+    question.setAttribute("tabindex", 0);
+    question.setAttribute("role", "button");
+    question.setAttribute("aria-expanded", "false");
+    question.setAttribute("aria-controls", `answer${i}`);
+
+    const answer = document.createElement("div");
+    answer.className = "faq-answer";
+    answer.id = `answer${i}`;
+    answer.textContent = item.answer;
+
+    faqItem.appendChild(question);
+    faqItem.appendChild(answer);
+    faqList.appendChild(faqItem);
+
+    // click + keyboard toggle for accessibility
+    function toggleFAQ() {
+      const isOpen = answer.classList.contains("open");
+      document.querySelectorAll(".faq-answer").forEach(a => {
+        a.classList.remove("open");
+        a.previousElementSibling.classList.remove("active");
+        a.previousElementSibling.setAttribute("aria-expanded", "false");
       });
-
-      item.appendChild(question);
-      item.appendChild(answer);
-      faqContainer.appendChild(item);
-    });
-
-    // Wizard Chatbot
-    const wizard = document.getElementById('wizard-chatbot');
-    const chatWindow = document.getElementById('chat-window');
-    const chatMessages = document.getElementById('chat-messages');
-    const chatInput = document.getElementById('chat-input');
-
-    wizard.addEventListener('click', () => {
-      chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    });
-
-    chatInput.addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') {
-        const userInput = chatInput.value.trim();
-        if (!userInput) return;
-        chatMessages.innerHTML += `<p><strong>Εσύ:</strong> ${userInput}</p>`;
-
-        const response = faqs.find(f => userInput.toLowerCase().includes(f.q.toLowerCase().split(' ')[0]))?.a || 'Δεν είμαι σίγουρος! Δοκίμασε να δεις τη λίστα με τις συχνές ερωτήσεις ή γράψε πιο απλά.';
-
-        chatMessages.innerHTML += `<p><strong>🧙‍♂️ Μάγος:</strong> ${response}</p>`;
-        chatInput.value = '';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+      if (!isOpen) {
+        answer.classList.add("open");
+        question.classList.add("active");
+        question.setAttribute("aria-expanded", "true");
+      }
+    }
+    question.addEventListener("click", toggleFAQ);
+    question.addEventListener("keydown", e => {
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        toggleFAQ();
       }
     });
-  </script>
+  });
+
+  // Φορτώνουμε επιλογές στο select του bot
+  const questionSelect = document.getElementById("questionSelect");
+  faqs.forEach((item, i) => {
+    const option = document.createElement("option");
+    option.value = i;
+    option.textContent = item.question;
+    questionSelect.appendChild(option);
+  });
+
+  const botAnswer = document.getElementById("botAnswer");
+  const searchInput = document.getElementById("searchInput");
+
+  // Όταν επιλέγω από το select
+  questionSelect.addEventListener("change", () => {
+    const idx = questionSelect.value;
+    if (idx === "") {
+      botAnswer.textContent = "Εδώ θα εμφανιστεί η απάντηση.";
+      return;
+    }
+    botAnswer.textContent = faqs[idx].answer;
+  });
+
+  // Αναζήτηση με λέξη κλειδί
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+
+    if(query.length === 0){
+      botAnswer.textContent = "Εδώ θα εμφανιστεί η απάντηση.";
+      return;
+    }
+
+    // Βρίσκουμε ερώτηση/απάντηση που περιέχει το query
+    const found = faqs.find(faq =>
+      faq.question.toLowerCase().includes(query) ||
+      faq.answer.toLowerCase().includes(query)
+    );
+
+    if(found){
+      botAnswer.textContent = found.answer;
+      // Αν υπάρχει στο select, το επιλέγουμε
+      const foundIndex = faqs.indexOf(found);
+      questionSelect.value = foundIndex;
+    } else {
+      botAnswer.textContent = "Λυπάμαι, δεν βρέθηκε απάντηση για αυτή την αναζήτηση.";
+      questionSelect.value = "";
+    }
+  });
+
+</script>
+
 </body>
 </html>
