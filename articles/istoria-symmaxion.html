@@ -33,9 +33,37 @@
     strong {
       color: #0af;
     }
+    /* Κουμπιά επιστροφής */
+    .back-button, .back-to-articles {
+      position: fixed;
+      left: 20px;
+      background-color: #0ff;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 5px #0ff;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    .back-button {
+      top: 20px;
+    }
+    .back-to-articles {
+      top: 70px;
+    }
+    .back-button:hover,
+    .back-to-articles:hover {
+      background-color: #0cc;
+    }
   </style>
 </head>
 <body>
+
+  <a href="../index.html" class="back-button">← Επιστροφή στην Αρχική</a>
+  <a href="../articles.html" class="back-to-articles">← Επιστροφή στα Άρθρα</a>
+
   <h1>Η Ιστορία των Speed Wizardz</h1>
   <p>
     Οι <strong>Speed Wizardz</strong> είναι μια ομάδα αυτοκινητιστών που δημιουργήθηκε με σκοπό να ενώσει ανθρώπους με πάθος για την αυτοκίνηση, σε ένα περιβάλλον σεβασμού και ασφάλειας.
@@ -53,5 +81,6 @@
   <p>
     Στόχος μας είναι να χτίσουμε μια κοινότητα που θα προωθεί την σωστή οδήγηση και την αγάπη για τα αυτοκίνητα, χωρίς συμβιβασμούς στην ασφάλεια και τον σεβασμό.
   </p>
+  
 </body>
 </html>
