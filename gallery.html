@@ -71,14 +71,14 @@
       grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
       gap: 10px;
     }
-    .gallery-grid img, .gallery-grid video {
+    .gallery-grid a img {
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 0 8px #0ff;
       cursor: pointer;
       transition: transform 0.3s;
     }
-    .gallery-grid img:hover, .gallery-grid video:hover {
+    .gallery-grid a img:hover {
       transform: scale(1.05);
     }
 
@@ -112,10 +112,18 @@
       </div>
       <div class="accordion-content">
         <div class="gallery-grid">
-          <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
-          <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
-          <img src="meet3.jpeg" alt="Meetup Μάιος 2025 - Φωτο 3" />
-          <img src="meet4.jpeg" alt="Meetup Μάιος 2025 - Φωτο 4" />
+          <a href="meet1.png" target="_blank" download>
+            <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
+          </a>
+          <a href="meet2.jpeg" target="_blank" download>
+            <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
+          </a>
+          <a href="meet3.jpeg" target="_blank" download>
+            <img src="meet3.jpeg" alt="Meetup Μάιος 2025 - Φωτο 3" />
+          </a>
+          <a href="meet4.jpeg" target="_blank" download>
+            <img src="meet4.jpeg" alt="Meetup Μάιος 2025 - Φωτο 4" />
+          </a>
         </div>
       </div>
     </div>
@@ -127,10 +135,16 @@
       </div>
       <div class="accordion-content">
         <div class="gallery-grid">
-          <img src="IMG_4232.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 1" />
-          <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
-          <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 3" />
-          <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4"></video>
+          <a href="IMG_4232.jpeg" target="_blank" download>
+            <img src="IMG_4232.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 1" />
+          </a>
+          <a href="IMG_4235.jpeg" target="_blank" download>
+            <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
+          </a>
+          <a href="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" target="_blank" download>
+            <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 3" />
+          </a>
+          <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4" style="width:100%; border-radius:10px; box-shadow: 0 0 8px #0ff;"></video>
         </div>
       </div>
     </div>
