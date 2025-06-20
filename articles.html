@@ -21,20 +21,24 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
       position: relative;
       text-shadow: 1px 1px 2px black;
-      background-color: rgba(0, 0, 0, 0.6); /* για να κάνει λίγο πιο διάφανο το background πίσω από το image */
+      background-color: rgba(0, 0, 0, 0.6);
       background-blend-mode: multiply;
     }
+
     h1, h2 {
       color: #0ff;
     }
+
     a {
       color: #0ff;
       text-decoration: none;
       font-weight: bold;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
     .back-button {
       position: fixed;
       top: 20px;
@@ -49,14 +53,36 @@
       transition: background-color 0.3s ease;
       z-index: 1000;
     }
+
     .back-button:hover {
       background-color: #0cc;
     }
+
     section {
       margin-bottom: 30px;
       background: rgba(0, 0, 0, 0.6);
       padding: 15px 20px;
       border-radius: 10px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeSlideIn 1s ease-out forwards;
+    }
+
+    section:nth-of-type(2) {
+      animation-delay: 0.2s;
+    }
+    section:nth-of-type(3) {
+      animation-delay: 0.4s;
+    }
+    section:nth-of-type(4) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
