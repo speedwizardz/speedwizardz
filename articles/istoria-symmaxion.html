@@ -30,6 +30,7 @@
     p {
       margin-bottom: 1em;
     }
+    /* Κουμπιά επιστροφής */
     .back-button {
       position: fixed;
       top: 20px;
@@ -47,11 +48,29 @@
     .back-button:hover {
       background-color: #0cc;
     }
+    .home-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #0ff;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 5px #0ff;
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+    }
+    .home-button:hover {
+      background-color: #0cc;
+    }
   </style>
 </head>
 <body>
 
   <a href="articles.html" class="back-button">← Επιστροφή στα Άρθρα</a>
+  <a href="index.html" class="home-button">🏠 Επιστροφή στην Αρχική</a>
 
   <h1>Η Ιστορία των Speed Wizardz</h1>
 
