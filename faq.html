@@ -87,6 +87,86 @@
     .back-link:hover {
       text-decoration: underline;
     }
+
+    /* Chatbot styling */
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0ff;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #0ff;
+      z-index: 9999;
+    }
+
+    #wizard-chat {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      width: 300px;
+      background: rgba(0,0,0,0.85);
+      border-radius: 10px;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 0 10px #0ff;
+      z-index: 10000;
+    }
+
+    #chat-header {
+      background: #0ff;
+      color: #000;
+      padding: 10px;
+      font-weight: bold;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #chat-body {
+      padding: 10px;
+      height: 200px;
+      overflow-y: auto;
+      background: #111;
+    }
+
+    #chat-body div {
+      margin: 5px 0;
+    }
+
+    .user-msg {
+      text-align: right;
+      color: #0ff;
+    }
+
+    .wizard-msg {
+      text-align: left;
+      color: #ccc;
+      font-style: italic;
+    }
+
+    #chat-input {
+      border: none;
+      border-top: 1px solid #444;
+      padding: 10px;
+      background: #222;
+      color: #eee;
+      outline: none;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    #close-chat {
+      cursor: pointer;
+      font-weight: normal;
+    }
   </style>
 </head>
 <body>
@@ -97,75 +177,16 @@
   </header>
 
   <div class="container">
-
-    <div class="faq-item">
-      <div class="question">Πρέπει να έχω κάποιο συγκεκριμένο αυτοκίνητο;</div>
-      <div class="answer">Όχι, αλλά εκτιμάμε τα βελτιωμένα ή ξεχωριστά οχήματα. Αρκεί να έχεις πάθος για την αυτοκίνηση!</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Πόσο κοστίζει να γίνω μέλος;</div>
-      <div class="answer">Η ένταξη στην ομάδα είναι δωρεάν.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Είναι νόμιμα τα meetups;</div>
-      <div class="answer">Ναι! Όσο τηρούνται οι κανόνες – σεβασμός στον χώρο, χωρίς φασαρία ή επικίνδυνη οδήγηση.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Πώς θα παραλάβω αυτοκόλλητα;</div>
-      <div class="answer">Τα διανέμουμε στα meetups.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Πού μπορώ να ενημερώνομαι για τα επόμενα events;</div>
-      <div class="answer">Στο Instagram και στην αρχική σελίδα του site με την αντίστροφη μέτρηση!</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Επιτρέπονται οι μηχανές στα meetups;</div>
-      <div class="answer">Ναι, φυσικά! Όλα τα οχήματα είναι ευπρόσδεκτα, αρκεί να τηρούν τον Κ.Ο.Κ. και οι αναβάτες να φορούν κράνος.</div>
-    </div>
-
-    <!-- Επιπλέον ερωτήσεις -->
-
-    <div class="faq-item">
-      <div class="question">Πώς διοργανώνετε τα meetups και πού γίνονται;</div>
-      <div class="answer">
-        Τα meetups οργανώνονται με σεβασμό στους νόμους και χωρίς φασαρίες. Γίνονται σε ασφαλείς χώρους στάθμευσης ή ανοιχτούς δρόμους στην Αττική, πάντα με ενημέρωση μέσω των social media μας.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Τι πρέπει να προσέχω όταν έρχομαι σε ένα meetup;</div>
-      <div class="answer">
-        Να φέρεις καθαρό και ασφαλές αυτοκίνητο, να ακολουθείς τον Κώδικα Οδικής Κυκλοφορίας (<strong>Κ.Ο.Κ.</strong>), και να έχεις πάντα καλή διάθεση. <strong>Η ομάδα δεν υποστηρίζει φασαρίες ή επικίνδυνη οδήγηση.</strong>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Μπορώ να φέρω φίλους ή άλλα άτομα στα meetups;</div>
-      <div class="answer">
-        Φυσικά! Τα meetups είναι ανοιχτά για όλους που σέβονται τους κανόνες της ομάδας.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Τι κάνετε για να εξασφαλίσετε την ασφάλεια στα meetups;</div>
-      <div class="answer">
-        Έχουμε κανόνες αυστηρού σεβασμού στον Κ.Ο.Κ., επιτηρούμε την ομαλή ροή και αποτρέπουμε επικίνδυνες συμπεριφορές. Οποιαδήποτε παραβίαση μπορεί να οδηγήσει σε αποκλεισμό από την ομάδα.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Πώς μπορώ να επικοινωνήσω μαζί σας για προτάσεις ή ερωτήσεις;</div>
-      <div class="answer">
-        Μπορείς να μας βρεις στο Instagram <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener">@speed_wizardz</a> ή μέσω της φόρμας επικοινωνίας στην ιστοσελίδα μας.
-      </div>
-    </div>
-
+    <!-- ερωτήσεις εδώ -->
     <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+  </div>
+
+  <!-- Wizard Chatbot -->
+  <div id="chatbot-toggle">💬 Ρώτα τον Μάγο</div>
+  <div id="wizard-chat">
+    <div id="chat-header">🧙 Wizard Assistant <span id="close-chat">✖</span></div>
+    <div id="chat-body"></div>
+    <input type="text" id="chat-input" placeholder="Γράψε κάτι..." />
   </div>
 
   <script>
@@ -181,6 +202,53 @@
         }
       });
     });
+
+    const toggle = document.getElementById("chatbot-toggle");
+    const chatBox = document.getElementById("wizard-chat");
+    const closeBtn = document.getElementById("close-chat");
+    const chatBody = document.getElementById("chat-body");
+    const chatInput = document.getElementById("chat-input");
+
+    toggle.onclick = () => {
+      chatBox.style.display = "flex";
+      toggle.style.display = "none";
+    };
+
+    closeBtn.onclick = () => {
+      chatBox.style.display = "none";
+      toggle.style.display = "block";
+    };
+
+    chatInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter" && this.value.trim() !== "") {
+        const msg = this.value.trim();
+        addMessage("user", msg);
+        respondToMessage(msg.toLowerCase());
+        this.value = "";
+      }
+    });
+
+    function addMessage(sender, text) {
+      const msgDiv = document.createElement("div");
+      msgDiv.className = sender === "user" ? "user-msg" : "wizard-msg";
+      msgDiv.textContent = text;
+      chatBody.appendChild(msgDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function respondToMessage(msg) {
+      if (msg.includes("μέλος")) {
+        addMessage("wizard", "Για να γίνεις μέλος, δες τη σελίδα 'Γίνε Μέλος' στο μενού!");
+      } else if (msg.includes("meet") || msg.includes("συνάντηση")) {
+        addMessage("wizard", "Τα επόμενα meet ανακοινώνονται στο Instagram και στην αρχική σελίδα μας.");
+      } else if (msg.includes("gallery") || msg.includes("φωτο")) {
+        addMessage("wizard", "Ρίξε μια ματιά στη σελίδα 'Φωτογραφίες' για να δεις τα προηγούμενα meet!");
+      } else if (msg.includes("γεια") || msg.includes("καλη")) {
+        addMessage("wizard", "Χαιρετώ, ταξιδιώτη της ασφάλτου. Τι μπορώ να κάνω για σένα;");
+      } else {
+        addMessage("wizard", "Ο άνεμος δεν έφερε καλή ερώτηση... δοκίμασε κάτι άλλο.");
+      }
+    }
   </script>
 </body>
 </html>
