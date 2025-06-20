@@ -10,7 +10,7 @@
       max-width: 900px;
       margin: 30px auto;
       padding: 20px;
-      background-image: url("2.png");
+      background-image: url("../2.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -18,22 +18,22 @@
       line-height: 1.6;
       border-radius: 10px;
       box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      position: relative;
       background-blend-mode: multiply;
-      background-color: rgba(0,0,0,0.7);
+      background-color: rgba(0, 0, 0, 0.7);
       text-shadow: 1px 1px 2px black;
     }
-    h1, h2, h3 {
+
+    h1, h2 {
       color: #0ff;
-      margin-top: 1.2em;
     }
+
     p {
       margin-bottom: 1em;
     }
+
     /* Κουμπιά επιστροφής */
-    .back-button {
+    .back-button, .back-to-articles {
       position: fixed;
-      top: 20px;
       left: 20px;
       background-color: #0ff;
       color: #000;
@@ -45,32 +45,25 @@
       transition: background-color 0.3s ease;
       z-index: 1000;
     }
-    .back-button:hover {
-      background-color: #0cc;
-    }
-    .home-button {
-      position: fixed;
+
+    .back-button {
       top: 20px;
-      right: 20px;
-      background-color: #0ff;
-      color: #000;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 0 5px #0ff;
-      transition: background-color 0.3s ease;
-      z-index: 1000;
     }
-    .home-button:hover {
+
+    .back-to-articles {
+      top: 70px;
+    }
+
+    .back-button:hover,
+    .back-to-articles:hover {
       background-color: #0cc;
     }
   </style>
 </head>
 <body>
 
-  <a href="articles.html" class="back-button">← Επιστροφή στα Άρθρα</a>
-  <a href="index.html" class="home-button">🏠 Επιστροφή στην Αρχική</a>
+  <a href="../index.html" class="back-button">← Επιστροφή στην Αρχική</a>
+  <a href="../articles.html" class="back-to-articles">← Επιστροφή στα Άρθρα</a>
 
   <h1>Η Ιστορία των Speed Wizardz</h1>
 
@@ -82,7 +75,7 @@
     Το όνομα <strong>Speed Wizardz</strong> προέρχεται από το TikTok του Δημήτρη, που χρησιμοποιούσε το ψευδώνυμο "your favorite Speed Wizard". Το λογότυπο του μάγου συμβολίζει την ταχύτητα, ενώ τα χρώματα μπλε και μοβ δίνουν μια ιδιαίτερη, σχεδόν retro αισθητική.
   </p>
 
-  <h2>Δυσκολίες και Επανεκκίνηση</h2>
+  <h2>Δυσκολίες</h2>
   <p>
     Στην αρχή υπήρξαν δυσκολίες, καθώς ο Δημήτρης μπήκε στρατό και ανέθεσε την ομάδα σε άλλα παιδιά, που όμως οργάνωναν πολύ συχνά meetups, με αποτέλεσμα να χάσει η ομάδα τη σοβαρότητά της και να γίνει spam ομάδα.
   </p>
