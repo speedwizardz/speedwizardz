@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
@@ -7,28 +7,24 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-image: url("../2.png");
+      background: url('2.png') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
       color: #eee;
       max-width: 600px;
       margin: 30px auto;
       padding: 20px;
       border-radius: 10px;
-      background: rgba(0,0,0,0.85);
-      text-align: center;
-      box-shadow: 0 0 20px rgba(0,255,255,0.6);
+      background-color: rgba(0,0,0,0.7);
+      background-blend-mode: darken;
     }
     h1, h2 {
       color: #0ff;
+      text-align: center;
     }
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
-      text-align: left;
     }
     input {
       width: 100%;
@@ -37,20 +33,19 @@
       border-radius: 5px;
       border: none;
       font-size: 1em;
-      box-sizing: border-box;
     }
     button {
       margin-top: 20px;
-      padding: 12px 25px;
+      padding: 10px 20px;
       background: #0ff;
       color: #000;
       font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
+      width: 100%;
       font-size: 1.1em;
       transition: background-color 0.3s ease;
-      width: 100%;
     }
     button:hover {
       background: #0cc;
@@ -60,100 +55,111 @@
       background: #222;
       padding: 15px;
       border-radius: 8px;
-      font-size: 1.2em;
+      font-size: 1.1em;
       line-height: 1.4;
+      color: #0ff;
+      text-align: center;
     }
-    .note {
-      font-size: 0.9em;
-      color: #aaa;
-      margin-top: 10px;
+    .back-button {
+      background: transparent;
+      border: 2px solid #0ff;
+      color: #0ff;
+      width: auto;
+      padding: 8px 20px;
+      font-weight: bold;
+      margin-top: 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .back-button:hover {
+      background: #0ff;
+      color: #000;
     }
   </style>
 </head>
 <body>
   <h1>Υπολογιστής Τελών Κυκλοφορίας</h1>
 
-  <form id="taxForm" onsubmit="return false;">
-    <label for="year">Έτος Κατασκευής:</label>
-    <input type="number" id="year" name="year" min="1900" max="2025" placeholder="π.χ. 2010" required />
+  <form id="calcForm" onsubmit="return false;">
+    <label for="kubika">Κυβικά (cm³):</label>
+    <input type="number" id="kubika" min="50" max="6000" required placeholder="π.χ. 1600" />
 
-    <label for="cc">Κυβικά (cm³):</label>
-    <input type="number" id="cc" name="cc" min="50" max="10000" placeholder="π.χ. 1600" required />
+    <label for="etos">Έτος Κατασκευής:</label>
+    <input type="number" id="etos" min="1900" max="2025" required placeholder="π.χ. 2010" />
 
-    <button type="submit" onclick="calculateTax()">Υπολόγισε τα Τέλη</button>
+    <button onclick="calculate()">Υπολόγισε</button>
   </form>
 
-  <div id="result" class="result" style="display:none;"></div>
+  <div id="results" class="result" style="display:none;"></div>
+
+  <a href="index.html" class="back-button">⬅️ Επιστροφή στην Αρχική</a>
 
   <script>
-    function calculateTax() {
-      const year = Number(document.getElementById('year').value);
-      const cc = Number(document.getElementById('cc').value);
+    function calculate() {
+      const kubika = Number(document.getElementById('kubika').value);
+      const etos = Number(document.getElementById('etos').value);
+      const currentYear = new Date().getFullYear();
 
-      if (!year || !cc) {
-        alert('Παρακαλώ συμπλήρωσε σωστά το έτος και τα κυβικά.');
+      if (!kubika || !etos) {
+        alert('Παρακαλώ συμπλήρωσε σωστά όλα τα πεδία!');
         return;
       }
 
-      let cost = 0;
-
-      // Υπολογισμός με βάση τα στοιχεία που δώσαμε
-
-      if (year <= 2000) {
-        // Πίνακας πριν το 2000
-        if (cc <= 300) cost = 22;
-        else if (cc <= 785) cost = 55;
-        else if (cc <= 1071) cost = 120;
-        else if (cc <= 1357) cost = 135;
-        else if (cc <= 1548) cost = 225;
-        else if (cc <= 1738) cost = 250;
-        else if (cc <= 1928) cost = 280;
-        else if (cc <= 2357) cost = 615;
-        else if (cc <= 3000) cost = 820;
-        else if (cc <= 4000) cost = 1025;
-        else cost = 1230;
-
-      } else if (year >= 2001 && year <= 2005) {
-        // Πίνακας 2001-2005
-        if (cc <= 300) cost = 22;
-        else if (cc <= 785) cost = 55;
-        else if (cc <= 1071) cost = 120;
-        else if (cc <= 1357) cost = 135;
-        else if (cc <= 1548) cost = 240;
-        else if (cc <= 1738) cost = 265;
-        else if (cc <= 1928) cost = 300;
-        else if (cc <= 2357) cost = 630;
-        else if (cc <= 3000) cost = 840;
-        else if (cc <= 4000) cost = 1050;
-        else cost = 1260;
-
-      } else if (year >= 2006 && year <= 2010) {
-        // Πίνακας 2006-31/10/2010
-        if (cc <= 300) cost = 22;
-        else if (cc <= 785) cost = 55;
-        else if (cc <= 1071) cost = 120;
-        else if (cc <= 1357) cost = 135;
-        else if (cc <= 1548) cost = 255;
-        else if (cc <= 1738) cost = 280;
-        else if (cc <= 1928) cost = 320;
-        else if (cc <= 2357) cost = 690;
-        else if (cc <= 3000) cost = 920;
-        else if (cc <= 4000) cost = 1150;
-        else cost = 1380;
-
-      } else if (year > 2010) {
-        cost = 'Ο υπολογισμός γίνεται με βάση τις εκπομπές CO₂. Παρακαλώ χρησιμοποιήστε διαφορετικό υπολογιστή.';
-      } else {
-        cost = 'Μη έγκυρο έτος κατασκευής.';
+      if (etos > currentYear) {
+        alert('Το έτος κατασκευής δεν μπορεί να είναι στο μέλλον.');
+        return;
       }
 
-      const resultDiv = document.getElementById('result');
-      if (typeof cost === 'number') {
-        resultDiv.innerHTML = `<p>Τα τέλη κυκλοφορίας για το όχημά σας είναι: <strong>${cost} €</strong></p>`;
+      let telh = 0;
+
+      if (etos <= 2000) {
+        if (kubika <= 300) telh = 22;
+        else if (kubika <= 785) telh = 55;
+        else if (kubika <= 1071) telh = 120;
+        else if (kubika <= 1357) telh = 135;
+        else if (kubika <= 1548) telh = 225;
+        else if (kubika <= 1738) telh = 250;
+        else if (kubika <= 1928) telh = 280;
+        else if (kubika <= 2357) telh = 615;
+        else if (kubika <= 3000) telh = 820;
+        else if (kubika <= 4000) telh = 1025;
+        else telh = 1230;
+      } else if (etos <= 2005) {
+        if (kubika <= 300) telh = 22;
+        else if (kubika <= 785) telh = 55;
+        else if (kubika <= 1071) telh = 120;
+        else if (kubika <= 1357) telh = 135;
+        else if (kubika <= 1548) telh = 240;
+        else if (kubika <= 1738) telh = 265;
+        else if (kubika <= 1928) telh = 300;
+        else if (kubika <= 2357) telh = 630;
+        else if (kubika <= 3000) telh = 840;
+        else if (kubika <= 4000) telh = 1050;
+        else telh = 1260;
+      } else if (etos <= 2010) {
+        if (kubika <= 300) telh = 22;
+        else if (kubika <= 785) telh = 55;
+        else if (kubika <= 1071) telh = 120;
+        else if (kubika <= 1357) telh = 135;
+        else if (kubika <= 1548) telh = 255;
+        else if (kubika <= 1738) telh = 280;
+        else if (kubika <= 1928) telh = 320;
+        else if (kubika <= 2357) telh = 690;
+        else if (kubika <= 3000) telh = 920;
+        else if (kubika <= 4000) telh = 1150;
+        else telh = 1380;
       } else {
-        resultDiv.innerHTML = `<p>${cost}</p>`;
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('results').innerHTML = `<p>Ο υπολογισμός γίνεται με βάση τις εκπομπές CO₂. Παρακαλώ χρησιμοποιήστε διαφορετικό υπολογιστή.</p>`;
+        return;
       }
-      resultDiv.style.display = 'block';
+
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('results').innerHTML = `<h2>Τέλη Κυκλοφορίας:</h2><p><strong>${telh} €</strong></p>`;
     }
   </script>
 </body>
