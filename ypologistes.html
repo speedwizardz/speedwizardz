@@ -7,21 +7,29 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: rgba(0,0,0,0.85);
+      background-image: url("2.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: #eee;
       max-width: 600px;
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 10px;
+      margin: 40px auto;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
     }
     h1, h2 {
       color: #0ff;
       text-align: center;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 2px black;
     }
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
+      text-shadow: 1px 1px 1px black;
     }
     input, select {
       width: 100%;
@@ -30,10 +38,12 @@
       border-radius: 5px;
       border: none;
       font-size: 1em;
+      background-color: rgba(0,0,0,0.6);
+      color: #eee;
     }
     button {
-      margin-top: 20px;
-      padding: 10px 20px;
+      margin-top: 25px;
+      padding: 12px 20px;
       background: #0ff;
       color: #000;
       font-weight: bold;
@@ -48,12 +58,33 @@
       background: #0cc;
     }
     .result {
-      margin-top: 25px;
-      background: #222;
-      padding: 15px;
+      margin-top: 30px;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
       border-radius: 8px;
       font-size: 1.1em;
       line-height: 1.4;
+      white-space: pre-line;
+      text-shadow: 1px 1px 1px black;
+    }
+    .back-btn {
+      display: block;
+      margin: 30px auto 0 auto;
+      width: 150px;
+      padding: 10px 0;
+      background: #0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #0cc;
     }
   </style>
 </head>
@@ -93,6 +124,8 @@
 
   <div id="results" class="result" style="display:none;"></div>
 
+  <a href="../index.html" class="back-btn">⬅ Επιστροφή</a>
+
   <script>
     function calculate() {
       const kubika = Number(document.getElementById('kubika').value);
@@ -107,7 +140,6 @@
         return;
       }
 
-      // Υπολογισμός τελών κυκλοφορίας (πολύ απλοποιημένος)
       let baseTelh = 0;
 
       if(kubika <= 1000) baseTelh = 90;
@@ -117,14 +149,12 @@
       else if(kubika <= 2500) baseTelh = 265;
       else baseTelh = 395;
 
-      // Προσαρμογή για πετρέλαιο ή diesel (μειωμένα τέλη πχ 60%)
       if(kinisi === 'petrelaio' || kinisi === 'diesel') {
         baseTelh *= 0.6;
       } else if(kinisi === 'hybrid') {
         baseTelh *= 0.7;
       }
 
-      // Έκπτωση για παλαιά αυτοκίνητα (άνω 10 ετών, 50% έκπτωση)
       const currentYear = new Date().getFullYear();
       if(currentYear - etos > 10) {
         baseTelh *= 0.5;
@@ -132,18 +162,16 @@
 
       baseTelh = Math.round(baseTelh);
 
-      // Υπολογισμός κατανάλωσης και κόστους καυσίμου
       const litraSynolika = (kilometra * katansi) / 100;
       const kostos = litraSynolika * timiLitrou;
 
       const resultsDiv = document.getElementById('results');
       resultsDiv.style.display = 'block';
 
-      resultsDiv.innerHTML = `
-        <h2>Αποτελέσματα</h2>
-        <p><strong>Τέλη Κυκλοφορίας:</strong> ${baseTelh} €</p>
-        <p><strong>Κατανάλωση Καυσίμου:</strong> ${litraSynolika.toFixed(2)} λίτρα</p>
-        <p><strong>Κόστος Καυσίμου:</strong> ${kostos.toFixed(2)} €</p>
+      resultsDiv.textContent = `
+Τέλη Κυκλοφορίας: ${baseTelh} €
+Κατανάλωση Καυσίμου: ${litraSynolika.toFixed(2)} λίτρα
+Κόστος Καυσίμου: ${kostos.toFixed(2)} €
       `;
     }
   </script>
