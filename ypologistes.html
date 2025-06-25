@@ -1,185 +1,165 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Speed Wizardz | Τέλη Κυκλοφορίας 2025</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-image: url('2.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #222;
-    margin: 0;
-    padding: 20px;
-    min-height: 100vh;
-  }
-  h1, h2, h3 {
-    color: #0047ab;
-  }
-  a.button, button {
-    background-color: #0047ab;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    margin: 15px 0;
-    display: inline-block;
-    text-decoration: none;
-    text-align: center;
-  }
-  a.button:hover, button:hover {
-    background-color: #00337a;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-    background-color: rgba(255, 255, 255, 0.9); /* ημιδιάφανο λευκό φόντο */
-    color: #0047ab;
-  }
-  th, td {
-    border: 1px solid #0047ab;
-    padding: 8px 12px;
-    text-align: center;
-  }
-  th {
-    background-color: #e0e7ff;
-    color: #0047ab;
-  }
-  #co2Info {
-    display: none;
-    background-color: #dbe9ff;
-    color: #0047ab;
-    border: 2px solid #0047ab;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-    max-width: 700px;
-  }
-  #co2Info button {
-    margin-top: 10px;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Speed Wizardz | Τέλη Κυκλοφορίας</title>
+  <style>
+    body {
+      background-image: url("2.png");
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    h1, h2, h3 {
+      color: #00f;
+    }
+
+    .button {
+      background-color: #0047ab;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      margin: 15px 0;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: #00337a;
+    }
+
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-collapse: collapse;
+      color: #0047ab;
+    }
+
+    th, td {
+      border: 1px solid #0047ab;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #cce0ff;
+    }
+
+    #co2Info {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #0047ab;
+      border: 2px solid #0047ab;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: 20px auto;
+      transition: all 0.4s ease;
+    }
+
+    .section-container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Κουμπί Επιστροφή πάνω -->
-<a href="index.html" class="button">⬅️ Επιστροφή</a>
+  <!-- ΕΠΙΣΤΡΟΦΗ -->
+  <a href="index.html" class="button">⬅️ Επιστροφή</a>
 
-<h1>Τέλη Κυκλοφορίας 2026</h1>
+  <div class="section-container">
+    <h1>Τέλη Κυκλοφορίας 2025</h1>
 
-<p><strong>Ημερομηνία Πληρωμής:</strong> Η προθεσμία πληρωμής των τελών είναι <strong>31 Δεκεμβρίου 2025</strong>. Μετά την ημερομηνία αυτή επιβάλλονται πρόστιμα.</p>
+    <p><strong>Ημερομηνία Πληρωμής:</strong> Έως 31 Δεκεμβρίου 2024</p>
 
-<h2>Πώς Υπολογίζονται τα Τέλη</h2>
-<ul>
-  <li><strong>Οχήματα έως 31/10/2010:</strong> Βάσει κυβισμού (cc)</li>
-  <li><strong>Οχήματα μετά 1/11/2010:</strong> Βάσει εκπομπών CO₂ (g/km)</li>
-  <li><strong>Μετά 1/1/2021:</strong> Νέα κλιμάκωση CO₂</li>
-</ul>
+    <h2>Πώς Υπολογίζονται</h2>
+    <ul style="text-align:left; max-width:600px; margin:auto; color:#ccc;">
+      <li>Οχήματα έως 31/10/2010 → βάσει κυβισμού</li>
+      <li>Οχήματα από 1/11/2010 → βάσει εκπομπών CO₂</li>
+      <li>Οχήματα από 1/1/2021 → νέα κλίμακα CO₂</li>
+    </ul>
 
-<h2>Πίνακας Τελών Κυβισμού (έως 31/10/2010)</h2>
-<table>
-  <thead>
-    <tr><th>Κυβισμός (cc)</th><th>Τέλη (€)</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>0–300</td><td>22</td></tr>
-    <tr><td>301–785</td><td>55</td></tr>
-    <tr><td>786–1.071</td><td>120</td></tr>
-    <tr><td>1.072–1.357</td><td>135</td></tr>
-    <tr><td>1.358–1.548</td><td>255</td></tr>
-    <tr><td>1.549–1.738</td><td>280</td></tr>
-    <tr><td>1.739–1.928</td><td>320</td></tr>
-    <tr><td>1.929–2.357</td><td>690</td></tr>
-    <tr><td>2.358–3.000</td><td>920</td></tr>
-    <tr><td>3.001–4.000</td><td>1.150</td></tr>
-    <tr><td>4.001+</td><td>1.380</td></tr>
-  </tbody>
-</table>
+    <h2>Πίνακας Κυβισμού</h2>
+    <table>
+      <thead>
+        <tr><th>Κυβικά</th><th>Τέλη (€)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0–300</td><td>22</td></tr>
+        <tr><td>301–785</td><td>55</td></tr>
+        <tr><td>786–1.071</td><td>120</td></tr>
+        <tr><td>1.072–1.357</td><td>135</td></tr>
+        <tr><td>1.358–1.548</td><td>255</td></tr>
+        <tr><td>1.549–1.738</td><td>280</td></tr>
+        <tr><td>1.739–1.928</td><td>320</td></tr>
+        <tr><td>1.929–2.357</td><td>690</td></tr>
+        <tr><td>2.358–3.000</td><td>920</td></tr>
+        <tr><td>3.001–4.000</td><td>1.150</td></tr>
+        <tr><td>4.001+</td><td>1.380</td></tr>
+      </tbody>
+    </table>
 
-<h2>Πίνακας Τελών Εκπομπών CO₂ (μετά 2021)</h2>
-<table>
-  <thead>
-    <tr><th>Εκπομπές CO₂ (g/km)</th><th>Τέλη (€/g)</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>0–122</td><td>0</td></tr>
-    <tr><td>123–139</td><td>0,64</td></tr>
-    <tr><td>140–166</td><td>0,70</td></tr>
-    <tr><td>167–208</td><td>0,85</td></tr>
-    <tr><td>209–224</td><td>1,87</td></tr>
-    <tr><td>225–240</td><td>2,20</td></tr>
-    <tr><td>241–260</td><td>2,50</td></tr>
-    <tr><td>261–280</td><td>2,70</td></tr>
-    <tr><td>281+</td><td>2,85</td></tr>
-  </tbody>
-</table>
+    <h2>Πίνακας Εκπομπών CO₂</h2>
+    <table>
+      <thead>
+        <tr><th>g/km CO₂</th><th>€/g</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>0–122</td><td>0</td></tr>
+        <tr><td>123–139</td><td>0,64</td></tr>
+        <tr><td>140–166</td><td>0,70</td></tr>
+        <tr><td>167–208</td><td>0,85</td></tr>
+        <tr><td>209–224</td><td>1,87</td></tr>
+        <tr><td>225–240</td><td>2,20</td></tr>
+        <tr><td>241–260</td><td>2,50</td></tr>
+        <tr><td>261–280</td><td>2,70</td></tr>
+        <tr><td>281+</td><td>2,85</td></tr>
+      </tbody>
+    </table>
 
-<button id="toggleBtn">Πώς βρίσκω τις εκπομπές CO₂;</button>
+    <button class="button" onclick="toggleCo2()">Πώς βρίσκω τις εκπομπές CO₂;</button>
 
-<div id="co2Info">
-  <h3>Πώς βρίσκω τις εκπομπές CO₂ του οχήματός μου;</h3>
-  <p>
-    Οι εκπομπές CO₂ (σε γραμμάρια ανά χιλιόμετρο) αναγράφονται στην άδεια κυκλοφορίας του οχήματος, στη σελίδα των τεχνικών χαρακτηριστικών. Εναλλακτικά, μπορείς να:
-  </p>
-  <ul>
-    <li>Ελέγξεις το επίσημο βιβλίο του αυτοκινήτου.</li>
-    <li>Ψάξεις στο διαδίκτυο με βάση τον τύπο και το μοντέλο του οχήματος.</li>
-    <li>Χρησιμοποιήσεις ιστοσελίδες ή εφαρμογές που παρέχουν δεδομένα εκπομπών CO₂ για συγκεκριμένα μοντέλα.</li>
-  </ul>
-  <p>
-    Αν δεν βρίσκεις το ακριβές νούμερο, επικοινώνησε με την αντιπροσωπεία του αυτοκινήτου ή έναν εξουσιοδοτημένο μηχανικό.
-  </p>
-</div>
+    <div id="co2Info">
+      <h3>Πού βρίσκω τις εκπομπές CO₂;</h3>
+      <p>✔️ Στην άδεια κυκλοφορίας (τεχνικά χαρακτηριστικά)</p>
+      <p>✔️ Στο βιβλίο του οχήματος ή online με μοντέλο και έτος</p>
+      <p>✔️ Από την αντιπροσωπεία ή εξουσιοδοτημένο μηχανικό</p>
+    </div>
+  </div>
 
-<a href="index.html" class="button">⬅️ Επιστροφή</a>
-
-<script>
-  const btn = document.getElementById('toggleBtn');
-  const info = document.getElementById('co2Info');
-
-  btn.addEventListener('click', () => {
-    if (info.style.display === 'block') {
-      // Slide fade out
-      info.style.opacity = 1;
-      let opacity = 1;
-      const fadeOut = setInterval(() => {
-        opacity -= 0.05;
-        if (opacity <= 0) {
-          clearInterval(fadeOut);
-          info.style.display = 'none';
-        } else {
-          info.style.opacity = opacity;
-          info.style.maxHeight = opacity * 500 + 'px';
-        }
-      }, 15);
-    } else {
-      // Slide fade in
-      info.style.display = 'block';
-      info.style.maxHeight = '0px';
-      info.style.opacity = 0;
-      let opacity = 0;
-      const fadeIn = setInterval(() => {
-        opacity += 0.05;
-        if (opacity >= 1) {
-          clearInterval(fadeIn);
-          info.style.opacity = 1;
-          info.style.maxHeight = '500px';
-        } else {
-          info.style.opacity = opacity;
-          info.style.maxHeight = opacity * 500 + 'px';
-        }
-      }, 15);
+  <script>
+    function toggleCo2() {
+      const el = document.getElementById("co2Info");
+      if (el.style.display === "block") {
+        el.style.display = "none";
+      } else {
+        el.style.display = "block";
+      }
     }
-  });
-</script>
+  </script>
 
 </body>
 </html>
