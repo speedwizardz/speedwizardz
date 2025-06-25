@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
@@ -7,13 +7,12 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #111;
+      background: rgba(0,0,0,0.85);
       color: #eee;
       max-width: 600px;
       margin: 30px auto;
       padding: 20px;
       border-radius: 10px;
-      background: rgba(0,0,0,0.85);
     }
     h1, h2 {
       color: #0ff;
@@ -55,12 +54,6 @@
       border-radius: 8px;
       font-size: 1.1em;
       line-height: 1.4;
-    }
-    .note {
-      font-size: 0.9em;
-      color: #aaa;
-      margin-top: 10px;
-      text-align: center;
     }
   </style>
 </head>
@@ -115,7 +108,6 @@
       }
 
       // Υπολογισμός τελών κυκλοφορίας (πολύ απλοποιημένος)
-      // Π.χ. βάσει κυβικών και ηλικίας (με εκπτώσεις μετά από 10 χρόνια)
       let baseTelh = 0;
 
       if(kubika <= 1000) baseTelh = 90;
@@ -125,7 +117,7 @@
       else if(kubika <= 2500) baseTelh = 265;
       else baseTelh = 395;
 
-      // Προσαρμογή για πετρέλαιο (μειωμένα τέλη πχ 60%)
+      // Προσαρμογή για πετρέλαιο ή diesel (μειωμένα τέλη πχ 60%)
       if(kinisi === 'petrelaio' || kinisi === 'diesel') {
         baseTelh *= 0.6;
       } else if(kinisi === 'hybrid') {
