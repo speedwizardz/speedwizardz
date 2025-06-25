@@ -95,7 +95,6 @@
       display: none;
     }
 
-    /* Στυλ για το κουμπί του χάρτη */
     .map-link-button {
       display: inline-block;
       margin-top: 15px;
@@ -143,6 +142,14 @@
       <p class="info-line"><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
     </div>
 
+    <!-- ΝΕΟ: Υπολογιστές -->
+    <div class="tools-section" style="margin-top: 30px;">
+      <h3 style="color: #0ff;">🧮 Θες να μάθεις τι τέλη θα πληρώσεις ή πόσο καίει το αμάξι σου;</h3>
+      <a href="ypologistes/index.html" class="map-link-button">
+        ➤ Πήγαινε στους Υπολογιστές
+      </a>
+    </div>
+
     <div id="stay-tuned" class="hidden">
       <p>🧭 <strong>Μείνετε συντονισμένοι για το επόμενο meet!</strong></p>
     </div>
@@ -166,14 +173,13 @@
     const stayTuned = document.getElementById('stay-tuned');
 
     const meetupStart = new Date('2025-07-05T20:30:00');
-    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000); // +5 ώρες
-    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000); // +5 μέρες
+    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000);
+    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000);
 
     function updateCountdown() {
       const now = new Date();
 
       if (now < meetupStart) {
-        // Πριν το meetup: αντίστροφη μέτρηση
         const diff = meetupStart - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -185,19 +191,16 @@
         stayTuned.classList.add('hidden');
 
       } else if (now >= meetupStart && now < meetupEnd) {
-        // Το meetup γίνεται τώρα (+5 ώρες)
         countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
-        meetInfo.classList.add('hidden'); // Κρύβουμε τις πληροφορίες και το χάρτη
+        meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
 
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
-        // Meetup ολοκληρώθηκε (+5 μέρες)
         countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
 
       } else {
-        // Μετά τις 5 μέρες: μείνετε συντονισμένοι
         countdownEl.textContent = '';
         meetInfo.classList.add('hidden');
         stayTuned.classList.remove('hidden');
