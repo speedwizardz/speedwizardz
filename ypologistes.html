@@ -7,160 +7,190 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: url('2.png') no-repeat center center fixed;
+      background-image: url("2.png");
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       color: #eee;
-      max-width: 600px;
-      margin: 30px auto;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: rgba(0,0,0,0.7);
-      background-blend-mode: darken;
+      margin: 0;
+      padding: 30px 15px;
+      min-height: 100vh;
+      text-align: center;
+      background-attachment: fixed;
+      text-shadow: 1px 1px 2px black;
     }
     h1, h2 {
       color: #0ff;
-      text-align: center;
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 3px #000;
+    }
+    form {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px #0af;
+      border: 2px solid #0af;
     }
     label {
       display: block;
-      margin-top: 15px;
+      margin: 15px 0 5px;
       font-weight: bold;
+      text-align: left;
     }
-    input {
+    input[type=number] {
       width: 100%;
       padding: 8px;
-      margin-top: 5px;
-      border-radius: 5px;
-      border: none;
+      border-radius: 6px;
+      border: 1.5px solid #0af;
       font-size: 1em;
+      box-sizing: border-box;
+      color: #000;
     }
     button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #0ff;
-      color: #000;
+      margin-top: 25px;
+      padding: 12px;
+      width: 100%;
+      font-size: 1.1em;
       font-weight: bold;
+      color: #000;
+      background-color: #0af;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      width: 100%;
-      font-size: 1.1em;
       transition: background-color 0.3s ease;
     }
     button:hover {
-      background: #0cc;
+      background-color: #08c;
+      color: #fff;
     }
     .result {
-      margin-top: 25px;
-      background: #222;
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 1.1em;
-      line-height: 1.4;
+      margin-top: 30px;
+      background: rgba(0,0,0,0.85);
+      padding: 15px 20px;
+      border-radius: 10px;
+      font-size: 1.3em;
       color: #0ff;
-      text-align: center;
+      border: 2px solid #0af;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 12px #0af;
+      white-space: pre-line;
     }
-    .back-button {
-      background: transparent;
-      border: 2px solid #0ff;
-      color: #0ff;
-      width: auto;
-      padding: 8px 20px;
-      font-weight: bold;
-      margin-top: 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
+    .back-btn {
       display: inline-block;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .back-button:hover {
-      background: #0ff;
+      margin-top: 30px;
+      padding: 10px 25px;
+      background-color: #0af;
       color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 6px #08c;
+      transition: background-color 0.3s ease;
+    }
+    .back-btn:hover {
+      background-color: #08c;
+      color: #fff;
     }
   </style>
 </head>
 <body>
+
   <h1>Υπολογιστής Τελών Κυκλοφορίας</h1>
-
   <form id="calcForm" onsubmit="return false;">
+    <label for="etos">Έτος Κατασκευής Οχήματος:</label>
+    <input type="number" id="etos" name="etos" min="1900" max="2025" placeholder="π.χ. 2015" required />
+
     <label for="kubika">Κυβικά (cm³):</label>
-    <input type="number" id="kubika" min="50" max="6000" required placeholder="π.χ. 1600" />
+    <input type="number" id="kubika" name="kubika" min="50" max="10000" placeholder="π.χ. 1600" required />
 
-    <label for="etos">Έτος Κατασκευής:</label>
-    <input type="number" id="etos" min="1900" max="2025" required placeholder="π.χ. 2010" />
-
-    <button onclick="calculate()">Υπολόγισε</button>
+    <button onclick="calculate()">Υπολόγισε Τέλη Κυκλοφορίας</button>
   </form>
 
-  <div id="results" class="result" style="display:none;"></div>
+  <div id="result" class="result" style="display:none;"></div>
 
-  <a href="index.html" class="back-button">⬅️ Επιστροφή στην Αρχική</a>
+  <a href="index.html" class="back-btn">⬅ Επιστροφή στην Αρχική</a>
 
   <script>
     function calculate() {
-      const kubika = Number(document.getElementById('kubika').value);
       const etos = Number(document.getElementById('etos').value);
-      const currentYear = new Date().getFullYear();
+      const kubika = Number(document.getElementById('kubika').value);
 
-      if (!kubika || !etos) {
-        alert('Παρακαλώ συμπλήρωσε σωστά όλα τα πεδία!');
+      if (!etos || !kubika) {
+        alert("Παρακαλώ συμπλήρωσε σωστά όλα τα πεδία!");
         return;
       }
 
-      if (etos > currentYear) {
-        alert('Το έτος κατασκευής δεν μπορεί να είναι στο μέλλον.');
-        return;
-      }
-
-      let telh = 0;
-
+      let telh = null;
       if (etos <= 2000) {
-        if (kubika <= 300) telh = 22;
-        else if (kubika <= 785) telh = 55;
-        else if (kubika <= 1071) telh = 120;
-        else if (kubika <= 1357) telh = 135;
-        else if (kubika <= 1548) telh = 225;
-        else if (kubika <= 1738) telh = 250;
-        else if (kubika <= 1928) telh = 280;
-        else if (kubika <= 2357) telh = 615;
-        else if (kubika <= 3000) telh = 820;
-        else if (kubika <= 4000) telh = 1025;
-        else telh = 1230;
-      } else if (etos <= 2005) {
-        if (kubika <= 300) telh = 22;
-        else if (kubika <= 785) telh = 55;
-        else if (kubika <= 1071) telh = 120;
-        else if (kubika <= 1357) telh = 135;
-        else if (kubika <= 1548) telh = 240;
-        else if (kubika <= 1738) telh = 265;
-        else if (kubika <= 1928) telh = 300;
-        else if (kubika <= 2357) telh = 630;
-        else if (kubika <= 3000) telh = 840;
-        else if (kubika <= 4000) telh = 1050;
-        else telh = 1260;
-      } else if (etos <= 2010) {
-        if (kubika <= 300) telh = 22;
-        else if (kubika <= 785) telh = 55;
-        else if (kubika <= 1071) telh = 120;
-        else if (kubika <= 1357) telh = 135;
-        else if (kubika <= 1548) telh = 255;
-        else if (kubika <= 1738) telh = 280;
-        else if (kubika <= 1928) telh = 320;
-        else if (kubika <= 2357) telh = 690;
-        else if (kubika <= 3000) telh = 920;
-        else if (kubika <= 4000) telh = 1150;
-        else telh = 1380;
+        // Πίνακας έως 31.12.2000
+        telh = getTeliKubika(kubika, [
+          [0, 300, 22],
+          [301, 785, 55],
+          [786, 1071, 120],
+          [1072, 1357, 135],
+          [1358, 1548, 225],
+          [1549, 1738, 250],
+          [1739, 1928, 280],
+          [1929, 2357, 615],
+          [2358, 3000, 820],
+          [3001, 4000, 1025],
+          [4001, Infinity, 1230],
+        ]);
+      } else if (etos >= 2001 && etos <= 2005) {
+        // Πίνακας 2001-2005
+        telh = getTeliKubika(kubika, [
+          [0, 300, 22],
+          [301, 785, 55],
+          [786, 1071, 120],
+          [1072, 1357, 135],
+          [1358, 1548, 240],
+          [1549, 1738, 265],
+          [1739, 1928, 300],
+          [1929, 2357, 630],
+          [2358, 3000, 840],
+          [3001, 4000, 1050],
+          [4001, Infinity, 1260],
+        ]);
+      } else if (etos >= 2006 && etos <= 2010) {
+        // Πίνακας 2006-31.10.2010
+        telh = getTeliKubika(kubika, [
+          [0, 300, 22],
+          [301, 785, 55],
+          [786, 1071, 120],
+          [1072, 1357, 135],
+          [1358, 1548, 255],
+          [1549, 1738, 280],
+          [1739, 1928, 320],
+          [1929, 2357, 690],
+          [2358, 3000, 920],
+          [3001, 4000, 1150],
+          [4001, Infinity, 1380],
+        ]);
       } else {
-        document.getElementById('results').style.display = 'block';
-        document.getElementById('results').innerHTML = `<p>Ο υπολογισμός γίνεται με βάση τις εκπομπές CO₂. Παρακαλώ χρησιμοποιήστε διαφορετικό υπολογιστή.</p>`;
+        document.getElementById('result').style.display = "block";
+        document.getElementById('result').textContent = 
+          "Για οχήματα μετά το 31/10/2010 τα τέλη υπολογίζονται με βάση τις εκπομπές CO₂.\n" +
+          "Παρακαλώ χρησιμοποιήστε διαφορετικό υπολογιστή.";
         return;
       }
 
-      document.getElementById('results').style.display = 'block';
-      document.getElementById('results').innerHTML = `<h2>Τέλη Κυκλοφορίας:</h2><p><strong>${telh} €</strong></p>`;
+      document.getElementById('result').style.display = "block";
+      document.getElementById('result').textContent = `Τα τέλη κυκλοφορίας για το όχημα σας είναι:\n\n${telh} ευρώ`;
+    }
+
+    function getTeliKubika(kubika, ranges) {
+      for (const [min, max, cost] of ranges) {
+        if (kubika >= min && kubika <= max) {
+          return cost;
+        }
+      }
+      return "Δεν βρέθηκαν τέλη για τα δεδομένα που δώσατε.";
     }
   </script>
+
 </body>
 </html>
