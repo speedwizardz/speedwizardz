@@ -23,57 +23,60 @@
     }
 
     h1, h2, h3 {
-      color: #00f;
+      color: #0ff;
     }
 
     .button {
-      background-color: #0047ab;
-      color: white;
-      border: none;
+      background-color: transparent;
+      color: #0ff;
+      border: 2px solid #0ff;
       padding: 10px 18px;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
       font-size: 16px;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
       margin: 15px 0;
       display: inline-block;
       text-decoration: none;
     }
 
     .button:hover {
-      background-color: #00337a;
+      background-color: #0cc;
+      color: #000;
     }
 
     table {
       width: 100%;
       max-width: 800px;
       margin: 20px auto;
-      background-color: rgba(255, 255, 255, 0.9);
+      background-color: rgba(0, 0, 0, 0.6);
       border-collapse: collapse;
-      color: #0047ab;
+      color: #0ff;
+      text-shadow: 1px 1px 2px black;
     }
 
     th, td {
-      border: 1px solid #0047ab;
+      border: 1px solid #0ff;
       padding: 10px;
       text-align: center;
     }
 
     th {
-      background-color: #cce0ff;
+      background-color: rgba(0, 255, 255, 0.2);
     }
 
     #co2Info {
       display: none;
-      background-color: rgba(255, 255, 255, 0.9);
-      color: #0047ab;
-      border: 2px solid #0047ab;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #0ff;
+      border: 2px solid #0ff;
       padding: 15px;
       border-radius: 10px;
       max-width: 800px;
       margin: 20px auto;
       transition: all 0.4s ease;
+      text-shadow: 1px 1px 2px black;
     }
 
     .section-container {
@@ -83,11 +86,21 @@
       max-width: 900px;
       margin: 0 auto;
     }
+
+    ul {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #eee;
+    }
+
+    p {
+      margin: 10px 0;
+    }
   </style>
 </head>
 <body>
 
-  <!-- ΕΠΙΣΤΡΟΦΗ -->
   <a href="index.html" class="button">⬅️ Επιστροφή</a>
 
   <div class="section-container">
@@ -96,7 +109,7 @@
     <p><strong>Ημερομηνία Πληρωμής:</strong> Έως 31 Δεκεμβρίου 2024</p>
 
     <h2>Πώς Υπολογίζονται</h2>
-    <ul style="text-align:left; max-width:600px; margin:auto; color:#ccc;">
+    <ul>
       <li>Οχήματα έως 31/10/2010 → βάσει κυβισμού</li>
       <li>Οχήματα από 1/11/2010 → βάσει εκπομπών CO₂</li>
       <li>Οχήματα από 1/1/2021 → νέα κλίμακα CO₂</li>
@@ -153,11 +166,7 @@
   <script>
     function toggleCo2() {
       const el = document.getElementById("co2Info");
-      if (el.style.display === "block") {
-        el.style.display = "none";
-      } else {
-        el.style.display = "block";
-      }
+      el.style.display = (el.style.display === "block") ? "none" : "block";
     }
   </script>
 
