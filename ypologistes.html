@@ -1,50 +1,56 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Υπολογιστής Τελών Κυκλοφορίας 2025</title>
+  <title>Υπολογιστής Τελών Κυκλοφορίας | Speed Wizardz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #111 url('2.png') no-repeat center center fixed;
+      background-image: url("../2.png");
       background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: #eee;
       max-width: 600px;
-      margin: 40px auto;
+      margin: 30px auto;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 0 15px #0ff;
+      background: rgba(0,0,0,0.85);
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,255,255,0.6);
     }
     h1, h2 {
       color: #0ff;
-      text-align: center;
     }
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
+      text-align: left;
     }
-    input, select {
+    input {
       width: 100%;
       padding: 8px;
       margin-top: 5px;
       border-radius: 5px;
       border: none;
       font-size: 1em;
+      box-sizing: border-box;
     }
     button {
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 12px 25px;
       background: #0ff;
       color: #000;
       font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      width: 100%;
       font-size: 1.1em;
       transition: background-color 0.3s ease;
+      width: 100%;
     }
     button:hover {
       background: #0cc;
@@ -54,108 +60,101 @@
       background: #222;
       padding: 15px;
       border-radius: 8px;
-      font-size: 1.1em;
+      font-size: 1.2em;
       line-height: 1.4;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
+  <h1>Υπολογιστής Τελών Κυκλοφορίας</h1>
 
-  <h1>Υπολογιστής Τελών Κυκλοφορίας 2025</h1>
+  <form id="taxForm" onsubmit="return false;">
+    <label for="year">Έτος Κατασκευής:</label>
+    <input type="number" id="year" name="year" min="1900" max="2025" placeholder="π.χ. 2010" required />
 
-  <label for="taxDate">Ημερομηνία Ταξινόμησης:</label>
-  <input type="date" id="taxDate" required />
+    <label for="cc">Κυβικά (cm³):</label>
+    <input type="number" id="cc" name="cc" min="50" max="10000" placeholder="π.χ. 1600" required />
 
-  <label for="kubika">Κυβικά (cc):</label>
-  <input type="number" id="kubika" min="50" max="6000" placeholder="π.χ. 1600" required />
-
-  <button onclick="calculateTax()">Υπολόγισε Τέλη</button>
+    <button type="submit" onclick="calculateTax()">Υπολόγισε τα Τέλη</button>
+  </form>
 
   <div id="result" class="result" style="display:none;"></div>
 
-<script>
-  function calculateTax() {
-    const taxDateInput = document.getElementById('taxDate').value;
-    const kubika = Number(document.getElementById('kubika').value);
-    const resultDiv = document.getElementById('result');
+  <script>
+    function calculateTax() {
+      const year = Number(document.getElementById('year').value);
+      const cc = Number(document.getElementById('cc').value);
 
-    if(!taxDateInput || !kubika) {
-      alert('Παρακαλώ συμπλήρωσε όλα τα πεδία σωστά!');
-      return;
-    }
-
-    const taxDate = new Date(taxDateInput);
-
-    // Πίνακες τελών ανά χρονική περίοδο
-    // [όριο άνω κυβικών, κόστος (€)]
-    const feesBefore2000 = [
-      [300, 22],
-      [785, 55],
-      [1071, 120],
-      [1357, 135],
-      [1548, 225],
-      [1738, 250],
-      [1928, 280],
-      [2357, 615],
-      [3000, 820],
-      [4000, 1025],
-      [Infinity, 1230]
-    ];
-
-    const fees2001to2005 = [
-      [300, 22],
-      [785, 55],
-      [1071, 120],
-      [1357, 135],
-      [1548, 240],
-      [1738, 265],
-      [1928, 300],
-      [2357, 630],
-      [3000, 840],
-      [4000, 1050],
-      [Infinity, 1260]
-    ];
-
-    const fees2006to2010 = [
-      [300, 22],
-      [785, 55],
-      [1071, 120],
-      [1357, 135],
-      [1548, 255],
-      [1738, 280],
-      [1928, 320],
-      [2357, 690],
-      [3000, 920],
-      [4000, 1150],
-      [Infinity, 1380]
-    ];
-
-    let feesTable;
-
-    if(taxDate < new Date('2000-01-01')) {
-      feesTable = feesBefore2000;
-    } else if (taxDate >= new Date('2000-01-01') && taxDate <= new Date('2005-12-31')) {
-      feesTable = fees2001to2005;
-    } else if (taxDate >= new Date('2006-01-01') && taxDate <= new Date('2010-10-31')) {
-      feesTable = fees2006to2010;
-    } else {
-      resultDiv.style.display = 'block';
-      resultDiv.innerHTML = '<strong>Για οχήματα ταξινομημένα μετά την 31/10/2010 ο υπολογιστής αυτός δεν ισχύει.</strong>';
-      return;
-    }
-
-    let tax = 0;
-    for(let i = 0; i < feesTable.length; i++) {
-      if(kubika <= feesTable[i][0]) {
-        tax = feesTable[i][1];
-        break;
+      if (!year || !cc) {
+        alert('Παρακαλώ συμπλήρωσε σωστά το έτος και τα κυβικά.');
+        return;
       }
+
+      let cost = 0;
+
+      // Υπολογισμός με βάση τα στοιχεία που δώσαμε
+
+      if (year <= 2000) {
+        // Πίνακας πριν το 2000
+        if (cc <= 300) cost = 22;
+        else if (cc <= 785) cost = 55;
+        else if (cc <= 1071) cost = 120;
+        else if (cc <= 1357) cost = 135;
+        else if (cc <= 1548) cost = 225;
+        else if (cc <= 1738) cost = 250;
+        else if (cc <= 1928) cost = 280;
+        else if (cc <= 2357) cost = 615;
+        else if (cc <= 3000) cost = 820;
+        else if (cc <= 4000) cost = 1025;
+        else cost = 1230;
+
+      } else if (year >= 2001 && year <= 2005) {
+        // Πίνακας 2001-2005
+        if (cc <= 300) cost = 22;
+        else if (cc <= 785) cost = 55;
+        else if (cc <= 1071) cost = 120;
+        else if (cc <= 1357) cost = 135;
+        else if (cc <= 1548) cost = 240;
+        else if (cc <= 1738) cost = 265;
+        else if (cc <= 1928) cost = 300;
+        else if (cc <= 2357) cost = 630;
+        else if (cc <= 3000) cost = 840;
+        else if (cc <= 4000) cost = 1050;
+        else cost = 1260;
+
+      } else if (year >= 2006 && year <= 2010) {
+        // Πίνακας 2006-31/10/2010
+        if (cc <= 300) cost = 22;
+        else if (cc <= 785) cost = 55;
+        else if (cc <= 1071) cost = 120;
+        else if (cc <= 1357) cost = 135;
+        else if (cc <= 1548) cost = 255;
+        else if (cc <= 1738) cost = 280;
+        else if (cc <= 1928) cost = 320;
+        else if (cc <= 2357) cost = 690;
+        else if (cc <= 3000) cost = 920;
+        else if (cc <= 4000) cost = 1150;
+        else cost = 1380;
+
+      } else if (year > 2010) {
+        cost = 'Ο υπολογισμός γίνεται με βάση τις εκπομπές CO₂. Παρακαλώ χρησιμοποιήστε διαφορετικό υπολογιστή.';
+      } else {
+        cost = 'Μη έγκυρο έτος κατασκευής.';
+      }
+
+      const resultDiv = document.getElementById('result');
+      if (typeof cost === 'number') {
+        resultDiv.innerHTML = `<p>Τα τέλη κυκλοφορίας για το όχημά σας είναι: <strong>${cost} €</strong></p>`;
+      } else {
+        resultDiv.innerHTML = `<p>${cost}</p>`;
+      }
+      resultDiv.style.display = 'block';
     }
-
-    resultDiv.style.display = 'block';
-    resultDiv.innerHTML = `<strong>Τα τέλη κυκλοφορίας είναι:</strong> ${tax} €`;
-  }
-</script>
-
+  </script>
 </body>
 </html>
