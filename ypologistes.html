@@ -3,33 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Υπολογιστές | Speed Wizardz</title>
+  <title>Υπολογιστής Τελών Κυκλοφορίας 2025</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-image: url("2.png");
+      background: #111 url('2.png') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
       color: #eee;
       max-width: 600px;
       margin: 40px auto;
-      padding: 20px 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #0ff;
     }
     h1, h2 {
       color: #0ff;
       text-align: center;
-      margin-bottom: 15px;
-      text-shadow: 1px 1px 2px black;
     }
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
-      text-shadow: 1px 1px 1px black;
     }
     input, select {
       width: 100%;
@@ -38,12 +32,10 @@
       border-radius: 5px;
       border: none;
       font-size: 1em;
-      background-color: rgba(0,0,0,0.6);
-      color: #eee;
     }
     button {
-      margin-top: 25px;
-      padding: 12px 20px;
+      margin-top: 20px;
+      padding: 10px 20px;
       background: #0ff;
       color: #000;
       font-weight: bold;
@@ -58,122 +50,112 @@
       background: #0cc;
     }
     .result {
-      margin-top: 30px;
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
+      margin-top: 25px;
+      background: #222;
+      padding: 15px;
       border-radius: 8px;
       font-size: 1.1em;
       line-height: 1.4;
-      white-space: pre-line;
-      text-shadow: 1px 1px 1px black;
-    }
-    .back-btn {
-      display: block;
-      margin: 30px auto 0 auto;
-      width: 150px;
-      padding: 10px 0;
-      background: #0ff;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      font-size: 1em;
-      transition: background-color 0.3s ease;
-    }
-    .back-btn:hover {
-      background: #0cc;
     }
   </style>
 </head>
 <body>
-  <h1>Υπολογιστές για Οδηγούς</h1>
 
-  <form id="calcForm">
+  <h1>Υπολογιστής Τελών Κυκλοφορίας 2025</h1>
 
-    <h2>Υπολογιστής Τελών Κυκλοφορίας</h2>
-    <label for="kubika">Κυβικά (cm³):</label>
-    <input type="number" id="kubika" min="50" max="5000" required placeholder="π.χ. 1200">
+  <label for="taxDate">Ημερομηνία Ταξινόμησης:</label>
+  <input type="date" id="taxDate" required />
 
-    <label for="kinisi">Τύπος Κίνησης:</label>
-    <select id="kinisi" required>
-      <option value="">Επίλεξε</option>
-      <option value="petrelaio">Πετρέλαιο</option>
-      <option value="bensini">Βενζίνη</option>
-      <option value="hybrid">Υβριδικό</option>
-      <option value="diesel">Diesel</option>
-    </select>
+  <label for="kubika">Κυβικά (cc):</label>
+  <input type="number" id="kubika" min="50" max="6000" placeholder="π.χ. 1600" required />
 
-    <label for="etos">Έτος Κατασκευής:</label>
-    <input type="number" id="etos" min="1990" max="2025" required placeholder="π.χ. 2015">
+  <button onclick="calculateTax()">Υπολόγισε Τέλη</button>
 
-    <h2>Υπολογιστής Κατανάλωσης & Κόστους Καυσίμου</h2>
-    <label for="kilometra">Χιλιόμετρα που θα διανύσεις:</label>
-    <input type="number" id="kilometra" min="0" required placeholder="π.χ. 100">
+  <div id="result" class="result" style="display:none;"></div>
 
-    <label for="katansi">Κατανάλωση λίτρα/100χλμ:</label>
-    <input type="number" id="katansi" min="0" step="0.1" required placeholder="π.χ. 7.5">
+<script>
+  function calculateTax() {
+    const taxDateInput = document.getElementById('taxDate').value;
+    const kubika = Number(document.getElementById('kubika').value);
+    const resultDiv = document.getElementById('result');
 
-    <label for="timiLitrou">Τιμή λίτρου καυσίμου (€):</label>
-    <input type="number" id="timiLitrou" min="0" step="0.01" required placeholder="π.χ. 1.85">
-
-    <button type="button" onclick="calculate()">Υπολόγισε</button>
-  </form>
-
-  <div id="results" class="result" style="display:none;"></div>
-
-  <a href="../index.html" class="back-btn">⬅ Επιστροφή</a>
-
-  <script>
-    function calculate() {
-      const kubika = Number(document.getElementById('kubika').value);
-      const kinisi = document.getElementById('kinisi').value;
-      const etos = Number(document.getElementById('etos').value);
-      const kilometra = Number(document.getElementById('kilometra').value);
-      const katansi = Number(document.getElementById('katansi').value);
-      const timiLitrou = Number(document.getElementById('timiLitrou').value);
-
-      if(!kubika || !kinisi || !etos || !kilometra || !katansi || !timiLitrou) {
-        alert('Παρακαλώ συμπλήρωσε όλα τα πεδία σωστά!');
-        return;
-      }
-
-      let baseTelh = 0;
-
-      if(kubika <= 1000) baseTelh = 90;
-      else if(kubika <= 1300) baseTelh = 125;
-      else if(kubika <= 1600) baseTelh = 165;
-      else if(kubika <= 2000) baseTelh = 220;
-      else if(kubika <= 2500) baseTelh = 265;
-      else baseTelh = 395;
-
-      if(kinisi === 'petrelaio' || kinisi === 'diesel') {
-        baseTelh *= 0.6;
-      } else if(kinisi === 'hybrid') {
-        baseTelh *= 0.7;
-      }
-
-      const currentYear = new Date().getFullYear();
-      if(currentYear - etos > 10) {
-        baseTelh *= 0.5;
-      }
-
-      baseTelh = Math.round(baseTelh);
-
-      const litraSynolika = (kilometra * katansi) / 100;
-      const kostos = litraSynolika * timiLitrou;
-
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.style.display = 'block';
-
-      resultsDiv.textContent = `
-Τέλη Κυκλοφορίας: ${baseTelh} €
-Κατανάλωση Καυσίμου: ${litraSynolika.toFixed(2)} λίτρα
-Κόστος Καυσίμου: ${kostos.toFixed(2)} €
-      `;
+    if(!taxDateInput || !kubika) {
+      alert('Παρακαλώ συμπλήρωσε όλα τα πεδία σωστά!');
+      return;
     }
-  </script>
+
+    const taxDate = new Date(taxDateInput);
+
+    // Πίνακες τελών ανά χρονική περίοδο
+    // [όριο άνω κυβικών, κόστος (€)]
+    const feesBefore2000 = [
+      [300, 22],
+      [785, 55],
+      [1071, 120],
+      [1357, 135],
+      [1548, 225],
+      [1738, 250],
+      [1928, 280],
+      [2357, 615],
+      [3000, 820],
+      [4000, 1025],
+      [Infinity, 1230]
+    ];
+
+    const fees2001to2005 = [
+      [300, 22],
+      [785, 55],
+      [1071, 120],
+      [1357, 135],
+      [1548, 240],
+      [1738, 265],
+      [1928, 300],
+      [2357, 630],
+      [3000, 840],
+      [4000, 1050],
+      [Infinity, 1260]
+    ];
+
+    const fees2006to2010 = [
+      [300, 22],
+      [785, 55],
+      [1071, 120],
+      [1357, 135],
+      [1548, 255],
+      [1738, 280],
+      [1928, 320],
+      [2357, 690],
+      [3000, 920],
+      [4000, 1150],
+      [Infinity, 1380]
+    ];
+
+    let feesTable;
+
+    if(taxDate < new Date('2000-01-01')) {
+      feesTable = feesBefore2000;
+    } else if (taxDate >= new Date('2000-01-01') && taxDate <= new Date('2005-12-31')) {
+      feesTable = fees2001to2005;
+    } else if (taxDate >= new Date('2006-01-01') && taxDate <= new Date('2010-10-31')) {
+      feesTable = fees2006to2010;
+    } else {
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = '<strong>Για οχήματα ταξινομημένα μετά την 31/10/2010 ο υπολογιστής αυτός δεν ισχύει.</strong>';
+      return;
+    }
+
+    let tax = 0;
+    for(let i = 0; i < feesTable.length; i++) {
+      if(kubika <= feesTable[i][0]) {
+        tax = feesTable[i][1];
+        break;
+      }
+    }
+
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `<strong>Τα τέλη κυκλοφορίας είναι:</strong> ${tax} €`;
+  }
+</script>
+
 </body>
 </html>
