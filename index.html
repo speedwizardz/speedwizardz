@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
@@ -95,34 +95,43 @@
       display: none;
     }
 
-    /* Στυλ για το κουμπί του χάρτη */
-    .map-link-button {
+    /* Στυλ για το κουμπί του χάρτη και υπολογιστών */
+    .btn-link {
       display: inline-block;
       margin-top: 15px;
-      background: #0ff;
-      color: #000;
+      background: transparent;
+      color: #0ff;
       padding: 10px 20px;
       border-radius: 8px;
       font-weight: bold;
       text-decoration: none;
+      border: 2px solid #0ff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-link:hover {
+      background: #0cc;
+      color: #000;
+    }
+
+    /* Κουμπί Download */
+    .download-btn {
+      display: inline-block;
+      margin-top: 10px;
+      background: #0ff;
+      color: #000;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
-    .map-link-button:hover {
+    .download-btn:hover {
       background: #0cc;
-    }
-
-    /* Νέο στυλ για την τοποθεσία */
-    .location-highlight {
-      font-weight: bold;
-      color: #0ff;
-      border: 2px solid #0ff;
-      border-radius: 8px;
-      padding: 10px;
-      display: inline-block;
-      max-width: fit-content;
-      margin: 10px auto;
-      text-shadow: 1px 1px 2px black;
     }
   </style>
 </head>
@@ -139,7 +148,6 @@
     <a href="join.html">Γίνε Μέλος</a>
     <a href="faq.html">Συχνές Ερωτήσεις</a>
     <a href="articles.html">Άρθρα</a>
-    <a href="ypologistes/index.html" target="_blank" rel="noopener noreferrer">Υπολογιστές</a>
   </nav>
 
   <section id="meetups">
@@ -148,9 +156,9 @@
 
     <div id="meet-info">
       <p class="info-line"><strong>Πότε:</strong> Παρασκευή 5 Ιουλίου – Ώρα 20:30</p>
-      <p class="info-line location-highlight"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
+      <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
       <p class="info-line">
-        <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/@37.8814357,23.9237461,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14a1910ffe83d19b:0x27ac47ea5539eb1f!8m2!3d37.8814315!4d23.926321!16s%2Fg%2F11f15gzpck?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link-button" rel="noopener noreferrer">
+        <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/@37.8814357,23.9237461,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14a1910ffe83d19b:0x27ac47ea5539eb1f!8m2!3d37.8814315!4d23.926321!16s%2Fg%2F11f15gzpck?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-link">
           📍 Δες την τοποθεσία στο Google Maps
         </a>
       </p>
@@ -163,9 +171,16 @@
   </section>
 
   <section id="gallery">
-    <h2>📸 banner</h2>
+    <h2>📸 Banner</h2>
     <img src="1.png" alt="Speed Wizardz Meet Poster">
-    <p>Δες περισσότερα στο <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram μας</a></p>
+    <br>
+    <a href="1.png" download="speed_wizardz_banner.png" class="download-btn">⬇ Κατέβασε το banner</a>
+
+    <section id="calculators" style="margin-top: 25px;">
+      <a href="ypologistes.html" target="_blank" rel="noopener noreferrer" class="btn-link">
+        ▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ!
+      </a>
+    </section>
   </section>
 
   <footer>
@@ -219,7 +234,7 @@
     }
 
     updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
