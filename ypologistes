@@ -1,1 +1,159 @@
+!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Υπολογιστές | Speed Wizardz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.85);
+    }
+    h1, h2 {
+      color: #0ff;
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.1em;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #0cc;
+    }
+    .result {
+      margin-top: 25px;
+      background: #222;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      line-height: 1.4;
+    }
+    .note {
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Υπολογιστές για Οδηγούς</h1>
 
+  <form id="calcForm">
+
+    <h2>Υπολογιστής Τελών Κυκλοφορίας</h2>
+    <label for="kubika">Κυβικά (cm³):</label>
+    <input type="number" id="kubika" min="50" max="5000" required placeholder="π.χ. 1200">
+
+    <label for="kinisi">Τύπος Κίνησης:</label>
+    <select id="kinisi" required>
+      <option value="">Επίλεξε</option>
+      <option value="petrelaio">Πετρέλαιο</option>
+      <option value="bensini">Βενζίνη</option>
+      <option value="hybrid">Υβριδικό</option>
+      <option value="diesel">Diesel</option>
+    </select>
+
+    <label for="etos">Έτος Κατασκευής:</label>
+    <input type="number" id="etos" min="1990" max="2025" required placeholder="π.χ. 2015">
+
+    <h2>Υπολογιστής Κατανάλωσης & Κόστους Καυσίμου</h2>
+    <label for="kilometra">Χιλιόμετρα που θα διανύσεις:</label>
+    <input type="number" id="kilometra" min="0" required placeholder="π.χ. 100">
+
+    <label for="katansi">Κατανάλωση λίτρα/100χλμ:</label>
+    <input type="number" id="katansi" min="0" step="0.1" required placeholder="π.χ. 7.5">
+
+    <label for="timiLitrou">Τιμή λίτρου καυσίμου (€):</label>
+    <input type="number" id="timiLitrou" min="0" step="0.01" required placeholder="π.χ. 1.85">
+
+    <button type="button" onclick="calculate()">Υπολόγισε</button>
+  </form>
+
+  <div id="results" class="result" style="display:none;"></div>
+
+  <script>
+    function calculate() {
+      const kubika = Number(document.getElementById('kubika').value);
+      const kinisi = document.getElementById('kinisi').value;
+      const etos = Number(document.getElementById('etos').value);
+      const kilometra = Number(document.getElementById('kilometra').value);
+      const katansi = Number(document.getElementById('katansi').value);
+      const timiLitrou = Number(document.getElementById('timiLitrou').value);
+
+      if(!kubika || !kinisi || !etos || !kilometra || !katansi || !timiLitrou) {
+        alert('Παρακαλώ συμπλήρωσε όλα τα πεδία σωστά!');
+        return;
+      }
+
+      // Υπολογισμός τελών κυκλοφορίας (πολύ απλοποιημένος)
+      // Π.χ. βάσει κυβικών και ηλικίας (με εκπτώσεις μετά από 10 χρόνια)
+      let baseTelh = 0;
+
+      if(kubika <= 1000) baseTelh = 90;
+      else if(kubika <= 1300) baseTelh = 125;
+      else if(kubika <= 1600) baseTelh = 165;
+      else if(kubika <= 2000) baseTelh = 220;
+      else if(kubika <= 2500) baseTelh = 265;
+      else baseTelh = 395;
+
+      // Προσαρμογή για πετρέλαιο (μειωμένα τέλη πχ 60%)
+      if(kinisi === 'petrelaio' || kinisi === 'diesel') {
+        baseTelh *= 0.6;
+      } else if(kinisi === 'hybrid') {
+        baseTelh *= 0.7;
+      }
+
+      // Έκπτωση για παλαιά αυτοκίνητα (άνω 10 ετών, 50% έκπτωση)
+      const currentYear = new Date().getFullYear();
+      if(currentYear - etos > 10) {
+        baseTelh *= 0.5;
+      }
+
+      baseTelh = Math.round(baseTelh);
+
+      // Υπολογισμός κατανάλωσης και κόστους καυσίμου
+      const litraSynolika = (kilometra * katansi) / 100;
+      const kostos = litraSynolika * timiLitrou;
+
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.style.display = 'block';
+
+      resultsDiv.innerHTML = `
+        <h2>Αποτελέσματα</h2>
+        <p><strong>Τέλη Κυκλοφορίας:</strong> ${baseTelh} €</p>
+        <p><strong>Κατανάλωση Καυσίμου:</strong> ${litraSynolika.toFixed(2)} λίτρα</p>
+        <p><strong>Κόστος Καυσίμου:</strong> ${kostos.toFixed(2)} €</p>
+      `;
+    }
+  </script>
+</body>
+</html>
