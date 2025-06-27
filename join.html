@@ -98,7 +98,6 @@
       border-radius: 6px;
     }
 
-    /* ΝΕΑ ΣΤΥΛ ΓΙΑ ΚΑΡΤΕΛΕΣ ΜΕΛΩΝ */
     .members-btn {
       background-color: #0ff;
       color: #000;
@@ -118,13 +117,18 @@
       background-color: #0cc;
     }
 
-    .members-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+    /* SLIDER STYLES */
+    .members-slider-container {
+      overflow: hidden;
+      position: relative;
+      max-width: 100%;
       margin: 20px auto;
-      max-width: 1100px;
+    }
+
+    .members-slider {
+      display: flex;
+      transition: transform 0.3s ease;
+      will-change: transform;
     }
 
     .member-card {
@@ -132,7 +136,8 @@
       border: 2px solid #0ff;
       border-radius: 12px;
       padding: 20px;
-      width: 260px;
+      min-width: 80%;
+      margin: 0 10px;
       color: #eee;
       text-align: center;
       box-shadow: 0 0 10px #0ff4;
@@ -148,6 +153,33 @@
       color: #0ff;
       font-size: 1.3em;
       margin-bottom: 10px;
+    }
+
+    .slider-nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .slider-nav button {
+      background-color: #0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 10px 16px;
+      margin: 0 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .slider-nav button:hover {
+      background-color: #0cc;
+    }
+
+    @media (min-width: 768px) {
+      .member-card {
+        min-width: 40%;
+      }
     }
   </style>
 </head>
@@ -194,26 +226,32 @@
     <button onclick="showMembers()" class="members-btn">Μέλη</button>
 
     <div id="members-section" style="display:none;">
-      <div class="members-grid">
-        <div class="member-card">
-          <img src="members/dimitris.jpg" alt="Dimitris" class="member-photo">
-          <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
-          <p><strong>Όχημα:</strong> Opel Astra </p>
-          <p><strong>Τελική Ταχύτητα:</strong> 260 km/h</p>
-          <p><strong>Skill:</strong> high speed racing</p>
-          <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐⭐⭐☆</p>
-          <p><strong>Bounty:</strong> €5.000</p>
-        </div>
+      <div class="members-slider-container">
+        <div class="members-slider" id="slider">
+          <div class="member-card">
+            <img src="members/dimitris.jpg" alt="Dimitris" class="member-photo">
+            <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
+            <p><strong>Όχημα:</strong> Opel Astra </p>
+            <p><strong>Τελική Ταχύτητα:</strong> 260 km/h</p>
+            <p><strong>Skill:</strong> high speed racing</p>
+            <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐⭐⭐☆</p>
+            <p><strong>Bounty:</strong> €5.000</p>
+          </div>
 
-        <div class="member-card">
-          <img src="members/kollitos.jpg" alt="Kollitos" class="member-photo">
-          <h3 class="member-name">THE WIZARD</h3>
-          <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
-          <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
-          <p><strong>Skill:</strong> Στροφές</p>
-          <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐</p>
-          <p><strong>Bounty:</strong> €8.700</p>
+          <div class="member-card">
+            <img src="members/kollitos.jpg" alt="Kollitos" class="member-photo">
+            <h3 class="member-name">THE WIZARD</h3>
+            <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
+            <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
+            <p><strong>Skill:</strong> Στροφές</p>
+            <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐</p>
+            <p><strong>Bounty:</strong> €8.700</p>
+          </div>
         </div>
+      </div>
+      <div class="slider-nav">
+        <button onclick="prevSlide()">⬅</button>
+        <button onclick="nextSlide()">➡</button>
       </div>
     </div>
 
@@ -234,6 +272,44 @@
       const section = document.getElementById("members-section");
       section.style.display = section.style.display === "none" ? "block" : "none";
     }
+
+    const slider = document.getElementById("slider");
+    let startX = 0;
+    let currentIndex = 0;
+
+    function updateSlide() {
+      const slideWidth = slider.querySelector(".member-card").offsetWidth + 20;
+      slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    function nextSlide() {
+      if (currentIndex < slider.children.length - 1) {
+        currentIndex++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlide();
+      }
+    }
+
+    slider.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        diff > 0 ? nextSlide() : prevSlide();
+      }
+    });
+
+    window.addEventListener("resize", updateSlide);
   </script>
 </body>
 </html>
