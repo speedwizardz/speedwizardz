@@ -229,7 +229,7 @@
       <div class="members-slider-container">
         <div class="members-slider" id="slider">
           <div class="member-card">
-            <img src="members/ALFRENTO.jpg" alt="Alfrento" class="member-photo">
+            <img src="members/ALFRENTO.jpg" alt="Alfrento" class="member-photo" />
             <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
             <p><strong>Όχημα:</strong> Opel Astra </p>
             <p><strong>Τελική Ταχύτητα:</strong> 260 km/h</p>
@@ -239,7 +239,7 @@
           </div>
 
           <div class="member-card">
-            <img src="members/POLO.jpg" alt="Dimitris" class="member-photo">
+            <img src="members/POLO.jpg" alt="Dimitris" class="member-photo" />
             <h3 class="member-name">THE WIZARD</h3>
             <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
             <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
@@ -256,11 +256,11 @@
     </div>
 
     <div class="terms">
-      <strong>Όροι & Προϋποθέσεις:</strong><br>
-      Με την υποβολή της φόρμας δηλώνεις ότι αποδέχεσαι τους κανόνες της ομάδας Speed Wizardz και συμφωνείς να σεβαστείς την κοινότητα, τις εκδηλώσεις και τα μέλη της.<br>
-      Απαγορεύεται η οποιαδήποτε μορφή φασαρίας, βίας ή παραβίασης των κανόνων στα meetups.<br>
-      Η ομάδα δεν ευθύνεται για οποιαδήποτε ζημιά ή ατύχημα προκύψει εκτός ή εντός των οργανωμένων εκδηλώσεων — ο καθένας είναι υπεύθυνος για το αμάξι του και τις πράξεις του.<br>
-      Διατηρούμε το δικαίωμα να απορρίψουμε αιτήσεις με μη κατάλληλο προφίλ ή συμπεριφορά.<br>
+      <strong>Όροι & Προϋποθέσεις:</strong><br />
+      Με την υποβολή της φόρμας δηλώνεις ότι αποδέχεσαι τους κανόνες της ομάδας Speed Wizardz και συμφωνείς να σεβαστείς την κοινότητα, τις εκδηλώσεις και τα μέλη της.<br />
+      Απαγορεύεται η οποιαδήποτε μορφή φασαρίας, βίας ή παραβίασης των κανόνων στα meetups.<br />
+      Η ομάδα δεν ευθύνεται για οποιαδήποτε ζημιά ή ατύχημα προκύψει εκτός ή εντός των οργανωμένων εκδηλώσεων — ο καθένας είναι υπεύθυνος για το αμάξι του και τις πράξεις του.<br />
+      Διατηρούμε το δικαίωμα να απορρίψουμε αιτήσεις με μη κατάλληλο προφίλ ή συμπεριφορά.<br />
       Για περισσότερες πληροφορίες, επικοινώνησε μαζί μας.
     </div>
 
@@ -270,7 +270,13 @@
   <script>
     function showMembers() {
       const section = document.getElementById("members-section");
-      section.style.display = section.style.display === "none" ? "block" : "none";
+      if (section.style.display === "none") {
+        section.style.display = "block";
+        currentIndex = 0;
+        updateSlide();
+      } else {
+        section.style.display = "none";
+      }
     }
 
     const slider = document.getElementById("slider");
@@ -278,7 +284,11 @@
     let currentIndex = 0;
 
     function updateSlide() {
-      const slideWidth = slider.querySelector(".member-card").offsetWidth + 20;
+      const card = slider.querySelector(".member-card");
+      const style = window.getComputedStyle(card);
+      const marginRight = parseInt(style.marginRight);
+      const marginLeft = parseInt(style.marginLeft);
+      const slideWidth = card.offsetWidth + marginLeft + marginRight;
       slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     }
 
