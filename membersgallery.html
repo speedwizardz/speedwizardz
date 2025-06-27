@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Μέλη | Speed Wizardz</title>
+  <style>
+    body {
+      background-image: url("2.png");
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .member-card {
+      background: rgba(0, 0, 0, 0.65);
+      border: 2px solid #0ff;
+      border-radius: 12px;
+      padding: 20px;
+      width: 260px;
+      color: #eee;
+      text-align: center;
+      box-shadow: 0 0 10px #0ff4;
+    }
+
+    .member-photo {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .member-name {
+      color: #0ff;
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 40px;
+      color: #0af;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Μέλη Speed Wizardz</h1>
+    <p>Η gallery με όλα τα μέλη της ομάδας μας.</p>
+  </header>
+
+  <div class="gallery">
+    <div class="member-card">
+      <img src="members/ALFRENTO.jpg" alt="Alfrento" class="member-photo" />
+      <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
+      <p><strong>Όχημα:</strong> Opel Astra</p>
+      <p><strong>Τελική Ταχύτητα:</strong> 260 km/h</p>
+      <p><strong>Skill:</strong> high speed racing</p>
+      <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐⭐⭐</p>
+      <p><strong>Bounty:</strong> €5.000</p>
+    </div>
+
+    <div class="member-card">
+      <img src="members/POLO.jpg" alt="The Wizard" class="member-photo" />
+      <h3 class="member-name">THE WIZARD</h3>
+      <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
+      <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
+      <p><strong>Skill:</strong> Στροφές</p>
+      <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐</p>
+      <p><strong>Bounty:</strong> €8.700</p>
+    </div>
+
+    <!-- Πρόσθεσε κι άλλα μέλη όπως χρειάζεται -->
+  </div>
+
+  <a href="join.html" class="back-link">⬅ Επιστροφή στην εγγραφή</a>
+</body>
+</html>
+
