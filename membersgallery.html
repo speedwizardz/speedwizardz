@@ -14,7 +14,7 @@
       background-attachment: fixed;
       color: #eee;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       text-shadow: 1px 1px 2px black;
     }
 
@@ -22,21 +22,18 @@
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
       text-align: center;
-      margin-bottom: 30px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2em;
+    .carousel-container {
+      overflow: hidden;
+      position: relative;
+      max-width: 100%;
+      margin: 20px auto;
     }
 
-    .gallery {
+    .carousel-track {
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      max-width: 1100px;
-      margin: 0 auto;
+      transition: transform 0.4s ease;
     }
 
     .member-card {
@@ -44,10 +41,11 @@
       border: 2px solid #0ff;
       border-radius: 12px;
       padding: 20px;
-      width: 260px;
-      color: #eee;
-      text-align: center;
+      min-width: 80%;
+      max-width: 90%;
+      margin: 0 10px;
       box-shadow: 0 0 10px #0ff4;
+      text-align: center;
     }
 
     .member-photo {
@@ -62,10 +60,31 @@
       margin-bottom: 10px;
     }
 
+    .carousel-nav {
+      text-align: center;
+      margin: 15px;
+    }
+
+    .carousel-nav button {
+      background-color: #0ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 10px 16px;
+      margin: 0 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-nav button:hover {
+      background-color: #0cc;
+    }
+
     .back-link {
       display: block;
       text-align: center;
-      margin-top: 40px;
+      margin-top: 20px;
       color: #0af;
       text-decoration: none;
       font-weight: bold;
@@ -73,6 +92,12 @@
 
     .back-link:hover {
       text-decoration: underline;
+    }
+
+    @media (min-width: 768px) {
+      .member-card {
+        min-width: 40%;
+      }
     }
   </style>
 </head>
@@ -82,36 +107,76 @@
     <p>Η gallery με όλα τα μέλη της ομάδας μας.</p>
   </header>
 
-  <div class="gallery">
-    <div class="member-card">
-      <img src="alfrento.png" alt="Alfrento" class="member-photo" />
-      <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
-      <p><strong>Όχημα:</strong> Opel Astra</p>
-      <p><strong>Τελική Ταχύτητα:</strong> 260 km/h</p>
-      <p><strong>Skill:</strong> high speed racing</p>
-      <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐⭐</p>
-      <p><strong>Bounty:</strong> €15.300</p>
-    </div>
+  <div class="carousel-container">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="member-card">
+        <img src="alfrento.png" alt="Alfrento" class="member-photo">
+        <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
+        <p><strong>Όχημα:</strong> Opel Astra</p>
+        <p><strong>Τελική Ταχύτητα:</strong> 260 km/h</p>
+        <p><strong>Skill:</strong> high speed racing</p>
+        <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐⭐⭐</p>
+        <p><strong>Bounty:</strong> €5.000</p>
+      </div>
 
-    <div class="member-card">
-      <img src="IMG_4669.jpeg" alt="The Wizard" class="member-photo" />
-      <h3 class="member-name">THE WIZARD</h3>
-      <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
-      <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
-      <p><strong>Skill:</strong> Στροφές</p>
-      <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐</p>
-      <p><strong>Bounty:</strong> €8.700</p>
-    </div>
+      <div class="member-card">
+        <img src="polo.png" alt="The Wizard" class="member-photo">
+        <h3 class="member-name">THE WIZARD</h3>
+        <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
+        <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
+        <p><strong>Skill:</strong> Στροφές</p>
+        <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐</p>
+        <p><strong>Bounty:</strong> €8.700</p>
+      </div>
 
-    <!-- Πρόσθεσε κι άλλα μέλη όπως χρειάζεται -->
+      <div class="member-card" style="border: 2px dashed #0ff; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center;">
+        <h3 class="member-name">🚗 ΤΟ ΑΜΑΞΙ ΣΟΥ 🚗</h3>
+        <p style="font-size: 1.1em;">Θες να δεις το δικό σου αμάξι εδώ;</p>
+        <p style="color: #0ff; font-weight: bold;">Τι περιμένεις; Γίνε μέλος!</p>
+        <a href="join.html" style="margin-top: 10px; background: #0ff; color: #000; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">Γίνε Wizard ➜</a>
+      </div>
+    </div>
   </div>
-  <div class="member-card" style="display: flex; align-items: center; justify-content: center; flex-direction: column; background: rgba(0,0,0,0.4); border: 2px dashed #0ff;">
-  <h3 class="member-name">🚗 ΤΟ ΑΜΑΞΙ ΣΟΥ 🚗</h3>
-  <p style="font-size: 1.1em;">Θες να δεις το δικό σου αμάξι εδώ;</p>
-  <p style="color: #0ff; font-weight: bold;">Τι περιμένεις; Γίνε μέλος!</p>
-  <a href="join.html" style="margin-top: 10px; background: #0ff; color: #000; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">Γίνε Wizard ➜</a>
-</div>
 
-  <a href="join.html" class="back-link">⬅ Επιστροφή στην εγγραφή</a>
+  <div class="carousel-nav">
+    <button onclick="prevCard()">⬅</button>
+    <button onclick="nextCard()">➡</button>
+  </div>
+
+  <a class="back-link" href="join.html">⬅ Επιστροφή στην εγγραφή</a>
+
+  <script>
+    const track = document.getElementById('carouselTrack');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      const card = track.querySelector('.member-card');
+      const cardWidth = card.offsetWidth + 20;
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+
+    function nextCard() {
+      if (currentIndex < track.children.length - 1) {
+        currentIndex++;
+        updateCarousel();
+      }
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateCarousel();
+      }
+    }
+
+    let startX = 0;
+    track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    track.addEventListener('touchend', e => {
+      let diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? nextCard() : prevCard();
+    });
+
+    window.addEventListener('resize', updateCarousel);
+  </script>
 </body>
 </html>
