@@ -14,7 +14,7 @@
       background-attachment: fixed;
       color: #eee;
       margin: 0;
-      padding: 0;
+      padding: 20px;
       text-shadow: 1px 1px 2px black;
     }
 
@@ -22,18 +22,24 @@
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
       text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
     }
 
     .carousel-container {
+      max-width: 800px;
+      margin: 0 auto;
       overflow: hidden;
       position: relative;
-      max-width: 100%;
-      margin: 20px auto;
     }
 
     .carousel-track {
       display: flex;
-      transition: transform 0.4s ease;
+      transition: transform 0.4s ease-in-out;
     }
 
     .member-card {
@@ -41,11 +47,15 @@
       border: 2px solid #0ff;
       border-radius: 12px;
       padding: 20px;
-      min-width: 80%;
-      max-width: 90%;
+      width: 90%;
+      min-width: 90%;
+      max-width: 300px;
+      box-sizing: border-box;
       margin: 0 10px;
-      box-shadow: 0 0 10px #0ff4;
+      color: #eee;
       text-align: center;
+      box-shadow: 0 0 10px #0ff4;
+      flex-shrink: 0;
     }
 
     .member-photo {
@@ -60,12 +70,12 @@
       margin-bottom: 10px;
     }
 
-    .carousel-nav {
+    .carousel-buttons {
       text-align: center;
-      margin: 15px;
+      margin-top: 20px;
     }
 
-    .carousel-nav button {
+    .carousel-buttons button {
       background-color: #0ff;
       color: #000;
       font-weight: bold;
@@ -77,14 +87,14 @@
       transition: background-color 0.3s ease;
     }
 
-    .carousel-nav button:hover {
+    .carousel-buttons button:hover {
       background-color: #0cc;
     }
 
     .back-link {
       display: block;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 40px;
       color: #0af;
       text-decoration: none;
       font-weight: bold;
@@ -96,7 +106,8 @@
 
     @media (min-width: 768px) {
       .member-card {
-        min-width: 40%;
+        width: 45%;
+        min-width: 45%;
       }
     }
   </style>
@@ -109,18 +120,19 @@
 
   <div class="carousel-container">
     <div class="carousel-track" id="carouselTrack">
+
       <div class="member-card">
         <img src="alfrento.png" alt="Alfrento" class="member-photo">
         <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
         <p><strong>Όχημα:</strong> Opel Astra</p>
-        <p><strong>Τελική Ταχύτητα:</strong> 260 km/h</p>
+        <p><strong>Τελική Ταχύτητα:</strong> 270 km/h</p>
         <p><strong>Skill:</strong> high speed racing</p>
         <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐⭐⭐</p>
         <p><strong>Bounty:</strong> €5.000</p>
       </div>
 
       <div class="member-card">
-        <img src="polo.png" alt="The Wizard" class="member-photo">
+        <img src="IMG_4669.jpeg" alt="Polo" class="member-photo">
         <h3 class="member-name">THE WIZARD</h3>
         <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
         <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
@@ -129,54 +141,47 @@
         <p><strong>Bounty:</strong> €8.700</p>
       </div>
 
-      <div class="member-card" style="border: 2px dashed #0ff; background: rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center;">
+      <div class="member-card" style="border: 2px dashed #0ff;">
         <h3 class="member-name">🚗 ΤΟ ΑΜΑΞΙ ΣΟΥ 🚗</h3>
-        <p style="font-size: 1.1em;">Θες να δεις το δικό σου αμάξι εδώ;</p>
-        <p style="color: #0ff; font-weight: bold;">Τι περιμένεις; Γίνε μέλος!</p>
-        <a href="join.html" style="margin-top: 10px; background: #0ff; color: #000; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">Γίνε Wizard ➜</a>
+        <p>Θες να δεις το δικό σου αμάξι εδώ;</p>
+        <p style="color: #0ff;"><strong>Τι περιμένεις; 'Ελα στην ομάδα!</strong></p>
+        <a href="join.html" style="background: #0ff; color: #000; padding: 10px 20px; border-radius: 6px; text-decoration: none;">Γίνε Μέλος ➜</a>
       </div>
+
+    </div>
+
+    <div class="carousel-buttons">
+      <button onclick="prevSlide()">⬅</button>
+      <button onclick="nextSlide()">➡</button>
     </div>
   </div>
 
-  <div class="carousel-nav">
-    <button onclick="prevCard()">⬅</button>
-    <button onclick="nextCard()">➡</button>
-  </div>
-
-  <a class="back-link" href="join.html">⬅ Επιστροφή στην εγγραφή</a>
+  <a href="join.html" class="back-link">⬅ Επιστροφή στην εγγραφή</a>
 
   <script>
-    const track = document.getElementById('carouselTrack');
-    let currentIndex = 0;
+    const track = document.getElementById("carouselTrack");
+    let index = 0;
 
-    function updateCarousel() {
-      const card = track.querySelector('.member-card');
-      const cardWidth = card.offsetWidth + 20;
-      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    function updateSlide() {
+      const cardWidth = track.children[0].offsetWidth + 20;
+      track.style.transform = `translateX(-${index * cardWidth}px)`;
     }
 
-    function nextCard() {
-      if (currentIndex < track.children.length - 1) {
-        currentIndex++;
-        updateCarousel();
+    function nextSlide() {
+      if (index < track.children.length - 1) {
+        index++;
+        updateSlide();
       }
     }
 
-    function prevCard() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateCarousel();
+    function prevSlide() {
+      if (index > 0) {
+        index--;
+        updateSlide();
       }
     }
 
-    let startX = 0;
-    track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    track.addEventListener('touchend', e => {
-      let diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) diff > 0 ? nextCard() : prevCard();
-    });
-
-    window.addEventListener('resize', updateCarousel);
+    window.addEventListener("resize", updateSlide);
   </script>
 </body>
 </html>
