@@ -15,8 +15,8 @@
       color: #eee;
       margin: 0;
       padding: 0;
-      text-shadow: 1px 1px 2px black;
       text-align: center;
+      text-shadow: 1px 1px 2px black;
     }
 
     header {
@@ -31,53 +31,52 @@
       color: #0ff;
     }
 
-    /* Hamburger button */
+    /* ΝΕΟ: Hamburger menu */
     .menu-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 9999;
-      width: 30px;
-      height: 25px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      font-size: 2em;
+      color: #0ff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
       cursor: pointer;
-    }
-
-    .menu-toggle span {
-      height: 4px;
-      background: #0ff;
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    .menu {
-      position: fixed;
-      top: 70px;
-      right: 20px;
-      background: rgba(0, 0, 0, 0.9);
       border-radius: 8px;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 999;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(0, 255, 255, 0.3);
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.7);
       padding: 15px;
+      border-radius: 10px;
       display: none;
       flex-direction: column;
-      text-align: right;
-      animation: fadeIn 0.3s ease-in-out;
+      align-items: center;
+      gap: 10px;
+      position: fixed;
+      top: 65px;
+      right: 15px;
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
     }
 
-    .menu a {
+    nav.show {
+      display: flex;
+    }
+
+    nav a {
       color: #0ff;
-      margin: 10px 0;
       text-decoration: none;
       font-weight: bold;
     }
 
-    .menu a:hover {
+    nav a:hover {
       text-decoration: underline;
-    }
-
-    .menu.show {
-      display: flex;
     }
 
     @keyframes fadeIn {
@@ -132,36 +131,27 @@
     a.back-link:hover {
       text-decoration: underline;
     }
-
-    @media (min-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🗞 Νέα & Ανακοινώσεις</h1>
-    <p>Τα τελευταία νέα γύρω από την ομάδα Speed Wizardz</p>
-  </header>
 
-  <!-- Hamburger button -->
-  <div class="menu-toggle" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <!-- Κουμπί Hamburger -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <!-- Hidden menu -->
-  <div class="menu" id="navMenu">
+  <!-- Μενού -->
+  <nav id="menu">
     <a href="index.html">Αρχική</a>
     <a href="news.html">Νέα</a>
     <a href="join.html">Γίνε Μέλος</a>
     <a href="gallery.html">Φωτογραφίες</a>
     <a href="faq.html">Συχνές Ερωτήσεις</a>
     <a href="articles.html">Άρθρα</a>
-  </div>
+  </nav>
+
+  <header>
+    <h1>🗞 Νέα & Ανακοινώσεις</h1>
+    <p>Τα τελευταία νέα γύρω από την ομάδα Speed Wizardz</p>
+  </header>
 
   <div class="news-container">
     <div class="news-item">
@@ -201,8 +191,7 @@
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("navMenu");
-      menu.classList.toggle("show");
+      document.getElementById('menu').classList.toggle('show');
     }
   </script>
 </body>
