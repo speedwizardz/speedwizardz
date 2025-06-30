@@ -14,48 +14,61 @@
       background-attachment: fixed;
       color: #eee;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       text-shadow: 1px 1px 2px black;
     }
 
     /* Hamburger Menu Styles */
-    .navbar {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 9999;
-    }
-
-    .hamburger {
+    .menu-toggle {
       font-size: 2em;
-      cursor: pointer;
       color: #0ff;
-      user-select: none;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 999;
+      transition: background-color 0.3s ease;
     }
 
-    .nav-links {
-      list-style: none;
-      padding: 10px;
-      background-color: rgba(0, 0, 0, 0.85);
-      border: 1px solid #0ff;
-      border-radius: 8px;
-      position: absolute;
-      top: 50px;
-      left: 0;
+    .menu-toggle:hover {
+      background: rgba(0, 255, 255, 0.3);
+    }
+
+    nav#menu {
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px;
+      border-radius: 10px;
       display: none;
       flex-direction: column;
+      align-items: flex-end;
       gap: 10px;
-      box-shadow: 0 0 10px #0ff;
+      position: fixed;
+      top: 70px;
+      right: 15px;
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
     }
 
-    .nav-links li a {
-      text-decoration: none;
+    nav#menu.show {
+      display: flex;
+    }
+
+    nav#menu a {
       color: #0ff;
+      text-decoration: none;
       font-weight: bold;
     }
 
-    .nav-links li a:hover {
-      color: #0cc;
+    nav#menu a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     header {
@@ -154,16 +167,16 @@
 </head>
 <body>
 
-  <!-- Hamburger Menu -->
-  <nav class="navbar">
-    <div class="hamburger" onclick="toggleMenu()">☰</div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Αρχική</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="join.html">Γίνε Μέλος</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a href="members.html">Μέλη</a></li>
-    </ul>
+  <!-- ☰ Hamburger Menu -->
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="menu">
+    <a href="index.html">Αρχική</a>
+    <a href="news.html">Νέα</a>
+    <a href="gallery.html">Φωτογραφίες</a>
+    <a href="faq.html">Συχνές Ερωτήσεις</a>
+    <a href="articles.html">Άρθρα</a>
+    <a href="membersgallery.html">Δες τα Μέλη</a>
   </nav>
 
   <header>
@@ -220,7 +233,7 @@
   </div>
 
   <p style="max-width: 800px; margin: 20px auto; color: #ccc; font-size: 0.9em; text-align: center; font-style: italic;">
-    <strong>Σημείωση:</strong> Οι τελικές ταχύτητες που αναφέρονται είναι ενδεικτικές και βασίζονται στις προδιαγραφές του κατασκευαστή. Στην πράξη, οι πραγματικές τελικές ταχύτητες μπορεί να διαφέρουν ανάλογα με το όχημα, τις τροποποιήσεις και τις συνθήκες οδήγησης.
+    <strong>Σημείωση:</strong> Οι τελικές ταχύτητες που αναφέρονται είναι ενδεικτικές και βασίζονται στις προδιαγραφές του κατασκευαστή.
   </p>
 
   <a href="join.html" class="back-link">⬅ Επιστροφή στην εγγραφή</a>
@@ -251,8 +264,8 @@
     window.addEventListener("resize", updateSlide);
 
     function toggleMenu() {
-      const nav = document.getElementById('navLinks');
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("show");
     }
   </script>
 
