@@ -18,6 +18,66 @@
       text-shadow: 1px 1px 2px black;
     }
 
+    /* Navbar */
+    nav {
+      background-color: rgba(0,0,0,0.85);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: #0ff;
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: rgba(0,0,0,0.9);
+        flex-direction: column;
+        width: 200px;
+        transform: translateX(100%);
+        transition: transform 0.4s ease;
+        z-index: 1000;
+      }
+
+      .nav-links.active {
+        transform: translateX(0%);
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
     header {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
@@ -113,6 +173,23 @@
   </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav>
+    <div style="color: #0ff; font-weight: bold;">☰ Speed Wizardz</div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Αρχική</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="events.html">Meetups</a>
+      <a href="join.html">Εγγραφή</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </nav>
+
   <header>
     <h1>Μέλη Speed Wizardz</h1>
     <p>Η gallery με όλα τα μέλη της ομάδας μας.</p>
@@ -141,12 +218,12 @@
         <p><strong>Bounty:</strong> €8.700</p>
       </div>
 
-         <div class="member-card">
+      <div class="member-card">
         <img src="alex.jpeg" alt="Alex" class="member-photo">
-        <h3 class="member-name"> A-LexRacer</h3>
+        <h3 class="member-name">A-LexRacer</h3>
         <p><strong>Όχημα:</strong> Opel Astra</p>
         <p><strong>Τελική Ταχύτητα:</strong> 250 km/h</p>
-        <p><strong>Skill:</strong> tik toks </p>
+        <p><strong>Skill:</strong> tik toks</p>
         <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐</p>
         <p><strong>Bounty:</strong> €15.300</p>
       </div>
@@ -196,6 +273,11 @@
     }
 
     window.addEventListener("resize", updateSlide);
+
+    // Hamburger toggle
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("active");
+    }
   </script>
 </body>
 </html>
