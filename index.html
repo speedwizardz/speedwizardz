@@ -244,6 +244,13 @@
       document.getElementById('menu').classList.toggle('show');
     }
 
+    // Κλείνουμε το μενού όταν πατιέται κάποιο link μέσα στο nav
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('show');
+      });
+    });
+
     const countdownEl = document.getElementById('countdown');
     const meetInfo = document.getElementById('meet-info');
     const stayTuned = document.getElementById('stay-tuned');
