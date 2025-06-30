@@ -6,15 +6,31 @@
   <title>Speed Wizardz | Όροι Συμμετοχής</title>
   <style>
     body {
-      background-color: #111;
-      color: #eee;
+      background-image: url("2.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
+      color: #eee;
+      margin: 0;
       padding: 20px;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .content {
+      background: rgba(0,0,0,0.8);
+      max-width: 900px;
       border-radius: 10px;
-      background: rgba(0, 0, 0, 0.8);
+      padding: 30px 30px 40px 30px;
       box-shadow: 0 0 15px #0ff;
+      text-align: left;
+      flex-grow: 1;
+      width: 100%;
     }
     h1 {
       color: #0ff;
@@ -43,50 +59,151 @@
     }
     footer {
       text-align: center;
-      margin-top: 50px;
+      margin-top: 40px;
       font-size: 0.9em;
       color: #666;
+      width: 100%;
+      max-width: 900px;
+    }
+    /* Hamburger menu styles */
+    .menu-toggle {
+      font-size: 2em;
+      color: #0ff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 999;
+      transition: background-color 0.3s ease;
+    }
+    .menu-toggle:hover {
+      background: rgba(0, 255, 255, 0.3);
+    }
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      position: fixed;
+      top: 65px;
+      right: 15px;
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
+      max-width: 220px;
+      text-align: center;
+    }
+    nav.show {
+      display: flex;
+    }
+    nav a {
+      color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: block;
+      padding: 6px 0;
+      border-bottom: 1px solid #0ff44;
+      width: 100%;
+    }
+    nav a:last-child {
+      border-bottom: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      background-color: rgba(0,255,255,0.1);
+      border-radius: 6px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Επιστροφή κουμπί */
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      background: transparent;
+      color: #0ff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 2px solid #0ff;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #0cc;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <h1>Όροι Συμμετοχής στην Κοινότητα Speed Wizardz</h1>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <p><strong>Καλώς ήρθες στην κοινότητα των Speed Wizardz!</strong><br />
-  Πριν συμμετάσχεις στα meetups και τις δραστηριότητες μας, παρακαλούμε διάβασε προσεκτικά τους παρακάτω όρους συμμετοχής.</p>
+  <nav id="menu">
+    <a href="index.html">Αρχική</a>
+    <a href="news.html">Νέα</a>
+    <a href="index.html#meetups">Meetups</a>
+    <a href="gallery.html">Φωτογραφίες</a>
+    <a href="join.html">Γίνε Μέλος</a>
+    <a href="faq.html">Συχνές Ερωτήσεις</a>
+    <a href="articles.html">Άρθρα</a>
+    <a href="terms.html" style="color:#ff4444; font-weight:bold;" aria-current="page">📜 Κανόνες Ομάδας</a>
+  </nav>
 
-  <h2>1. Σεβασμός και Συνεργασία</h2>
-  <p>Όλα τα μέλη οφείλουν να φέρονται με σεβασμό προς τα υπόλοιπα μέλη και να διατηρούν θετική διάθεση κατά τις συναντήσεις και στις online συνομιλίες.</p>
+  <div class="content" role="main" aria-label="Όροι Συμμετοχής στην Κοινότητα Speed Wizardz">
+    <h1>Όροι Συμμετοχής στην Κοινότητα Speed Wizardz</h1>
 
-  <h2>2. Συμμόρφωση με τον Κ.Ο.Κ.</h2>
-  <p>Κατά τη διάρκεια των meet-ups ή εκδηλώσεων, η οδήγηση πρέπει να γίνεται αυστηρά σύμφωνα με τον νέο Κώδικα Οδικής Κυκλοφορίας και τους νόμους. Απαγορεύονται επικίνδυνοι ελιγμοί όπως το drift σε δημόσιους δρόμους.</p>
+    <p><strong>Καλώς ήρθες στην κοινότητα των Speed Wizardz!</strong><br />
+    Πριν συμμετάσχεις στα meetups και τις δραστηριότητες μας, παρακαλούμε διάβασε προσεκτικά τους παρακάτω όρους συμμετοχής.</p>
 
-  <h2>3. Ασφάλεια Προσωπικού και Οχημάτων</h2>
-  <p>Τα μέλη είναι υπεύθυνα για την προσωπική τους ασφάλεια και την ασφάλεια των οχημάτων τους. Συνιστούμε τη χρήση κράνους για δίκυκλα, ζώνες ασφαλείας, και τήρηση όλων των μέτρων προστασίας.</p>
+    <h2>1. Σεβασμός και Συνεργασία</h2>
+    <p>Όλα τα μέλη οφείλουν να φέρονται με σεβασμό προς τα υπόλοιπα μέλη και να διατηρούν θετική διάθεση κατά τις συναντήσεις και στις online συνομιλίες.</p>
 
-  <h2>4. Αποφυγή Φασαρίας και Καταστροφών</h2>
-  <p>Κατά τις συναντήσεις, δεν επιτρέπονται φασαρίες, βανδαλισμοί ή οποιαδήποτε συμπεριφορά που μπορεί να βλάψει την ομάδα ή τους χώρους όπου πραγματοποιούνται τα meet-ups.</p>
+    <h2>2. Συμμόρφωση με τον Κ.Ο.Κ.</h2>
+    <p>Κατά τη διάρκεια των meet-ups ή εκδηλώσεων, η οδήγηση πρέπει να γίνεται αυστηρά σύμφωνα με τον νέο Κώδικα Οδικής Κυκλοφορίας και τους νόμους. Απαγορεύονται επικίνδυνοι ελιγμοί όπως το drift σε δημόσιους δρόμους.</p>
 
-  <h2>5. Χρήση Προσωπικών Δεδομένων</h2>
-  <p>Η ομάδα συλλέγει και διαχειρίζεται προσωπικά δεδομένα μόνο για λόγους οργάνωσης και επικοινωνίας. Δεν διανέμουμε τα δεδομένα σε τρίτους και τηρούμε αυστηρά την προστασία τους σύμφωνα με τη νομοθεσία GDPR.</p>
+    <h2>3. Ασφάλεια Προσωπικού και Οχημάτων</h2>
+    <p>Τα μέλη είναι υπεύθυνα για την προσωπική τους ασφάλεια και την ασφάλεια των οχημάτων τους. Συνιστούμε τη χρήση κράνους για δίκυκλα, ζώνες ασφαλείας, και τήρηση όλων των μέτρων προστασίας.</p>
 
-  <h2>6. Προώθηση της Καλής Φήμης της Ομάδας</h2>
-  <p>Τα μέλη οφείλουν να προάγουν θετική εικόνα της ομάδας στα μέσα κοινωνικής δικτύωσης και στην καθημερινή τους συμπεριφορά, αποφεύγοντας αρνητικές δηλώσεις ή ενέργειες που πλήττουν την κοινότητα.</p>
+    <h2>4. Αποφυγή Φασαρίας και Καταστροφών</h2>
+    <p>Κατά τις συναντήσεις, δεν επιτρέπονται φασαρίες, βανδαλισμοί ή οποιαδήποτε συμπεριφορά που μπορεί να βλάψει την ομάδα ή τους χώρους όπου πραγματοποιούνται τα meet-ups.</p>
 
-  <h2>7. Υποχρεώσεις Μέλους</h2>
-  <ul>
-    <li>Συμμετοχή στις δραστηριότητες της ομάδας με υπευθυνότητα.</li>
-    <li>Τήρηση των κανόνων και οδηγιών που ορίζει η διοίκηση της ομάδας.</li>
-    <li>Ενημέρωση για τυχόν απουσίες ή προβλήματα που αφορούν την ομάδα.</li>
-  </ul>
+    <h2>5. Χρήση Προσωπικών Δεδομένων</h2>
+    <p>Η ομάδα συλλέγει και διαχειρίζεται προσωπικά δεδομένα μόνο για λόγους οργάνωσης και επικοινωνίας. Δεν διανέμουμε τα δεδομένα σε τρίτους και τηρούμε αυστηρά την προστασία τους σύμφωνα με τη νομοθεσία GDPR.</p>
 
-  <h2>8. Κυρώσεις</h2>
-  <p>Μέλη που παραβαίνουν τους παραπάνω όρους ενδέχεται να αποκλειστούν από την ομάδα χωρίς προειδοποίηση.</p>
+    <h2>6. Προώθηση της Καλής Φήμης της Ομάδας</h2>
+    <p>Τα μέλη οφείλουν να προάγουν θετική εικόνα της ομάδας στα μέσα κοινωνικής δικτύωσης και στην καθημερινή τους συμπεριφορά, αποφεύγοντας αρνητικές δηλώσεις ή ενέργειες που πλήττουν την κοινότητα.</p>
 
-  <p>Με την εγγραφή σου στην κλειστή ομάδα Speed Wizardz αποδέχεσαι πλήρως τους παραπάνω όρους.</p>
+    <h2>7. Υποχρεώσεις Μέλους</h2>
+    <ul>
+      <li>Συμμετοχή στις δραστηριότητες της ομάδας με υπευθυνότητα.</li>
+      <li>Τήρηση των κανόνων και οδηγιών που ορίζει η διοίκηση της ομάδας.</li>
+      <li>Ενημέρωση για τυχόν απουσίες ή προβλήματα που αφορούν την ομάδα.</li>
+    </ul>
+
+    <h2>8. Κυρώσεις</h2>
+    <p>Μέλη που παραβαίνουν τους παραπάνω όρους ενδέχεται να αποκλειστούν από την ομάδα χωρίς προειδοποίηση.</p>
+
+    <p>Με την εγγραφή σου στην κλειστή ομάδα Speed Wizardz αποδέχεσαι πλήρως τους παραπάνω όρους.</p>
+
+    <a href="index.html" class="back-btn" aria-label="Επιστροφή στην αρχική σελίδα">← Επιστροφή στην Αρχική</a>
+  </div>
 
   <footer>
-    <p>© 2025 Speed Wizardz | Επικοινωνία: <a href="https://instagram.com/speed_wizardz" target="_blank">@speed_wizardz</a></p>
+    <p>© 2025 Speed Wizardz | Επικοινωνία: <a href="https://instagram.com/speed_wizardz" target="_blank" rel="noopener noreferrer">@speed_wizardz</a></p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
