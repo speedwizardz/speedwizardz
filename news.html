@@ -22,6 +22,7 @@
     header {
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
+      position: relative;
     }
 
     header h1 {
@@ -30,9 +31,63 @@
       color: #0ff;
     }
 
+    /* Hamburger button */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      width: 30px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 4px;
+      background: #0ff;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .menu {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 8px;
+      padding: 15px;
+      display: none;
+      flex-direction: column;
+      text-align: right;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .menu a {
+      color: #0ff;
+      margin: 10px 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .menu a:hover {
+      text-decoration: underline;
+    }
+
+    .menu.show {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .news-container {
       max-width: 800px;
-      margin: 30px auto;
+      margin: 90px auto 30px auto;
       padding: 20px;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 10px;
@@ -77,6 +132,12 @@
     a.back-link:hover {
       text-decoration: underline;
     }
+
+    @media (min-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
@@ -85,8 +146,24 @@
     <p>Τα τελευταία νέα γύρω από την ομάδα Speed Wizardz</p>
   </header>
 
-  <div class="news-container">
+  <!-- Hamburger button -->
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
+  <!-- Hidden menu -->
+  <div class="menu" id="navMenu">
+    <a href="index.html">Αρχική</a>
+    <a href="news.html">Νέα</a>
+    <a href="join.html">Γίνε Μέλος</a>
+    <a href="gallery.html">Φωτογραφίες</a>
+    <a href="faq.html">Συχνές Ερωτήσεις</a>
+    <a href="articles.html">Άρθρα</a>
+  </div>
+
+  <div class="news-container">
     <div class="news-item">
       <div class="news-title">📜 Υπενθύμιση Κ.Ο.Κ.</div>
       <div class="news-date">Ανακοινώθηκε στις 18 Ιουνίου 2025</div>
@@ -120,7 +197,13 @@
     </div>
 
     <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
-
   </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("navMenu");
+      menu.classList.toggle("show");
+    }
+  </script>
 </body>
 </html>
