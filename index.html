@@ -29,41 +29,51 @@
       font-size: 2em;
     }
 
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      position: fixed;
+      top: 65px;
+      right: 15px;
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
+    }
+
+    nav.show {
+      display: flex;
+    }
+
+    nav a {
+      color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
     .menu-toggle {
       font-size: 2em;
       color: #0ff;
       background: rgba(0, 0, 0, 0.6);
       padding: 10px 15px;
       cursor: pointer;
-      display: none;
       border-radius: 8px;
-      margin: 10px auto;
-      width: fit-content;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 999;
+      transition: background-color 0.3s ease;
     }
 
-    nav {
-      margin: 20px 0;
-      transition: max-height 0.5s ease, opacity 0.5s ease;
-      overflow: hidden;
-      max-height: 0;
-      opacity: 0;
-    }
-
-    nav.show {
-      max-height: 500px;
-      opacity: 1;
-    }
-
-    nav a {
-      color: #0ff;
-      margin: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-block;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
+    .menu-toggle:hover {
+      background: rgba(0, 255, 255, 0.3);
     }
 
     section {
@@ -154,27 +164,16 @@
       background: #0cc;
     }
 
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      nav a {
-        display: block;
-        margin: 10px 0;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Speed Wizardz</h1>
-    <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
-  </header>
-
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <nav id="main-menu">
+  <nav id="menu">
     <a href="news.html">Νέα</a>
     <a href="#meetups">Meetups</a>
     <a href="gallery.html">Φωτογραφίες</a>
@@ -182,6 +181,11 @@
     <a href="faq.html">Συχνές Ερωτήσεις</a>
     <a href="articles.html">Άρθρα</a>
   </nav>
+
+  <header>
+    <h1>Speed Wizardz</h1>
+    <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
+  </header>
 
   <section id="meetups">
     <h2>📅 Επόμενο Meet</h2>
@@ -191,7 +195,7 @@
       <p class="info-line"><strong>Πότε:</strong> Παρασκευή 12 Ιουλίου – Ώρα 20:30</p>
       <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
       <p class="info-line">
-        <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/@37.8814357,23.9237461,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14a1910ffe83d19b:0x27ac47ea5539eb1f!8m2!3d37.8814315!4d23.926321!16s%2Fg%2F11f15gzpck?entry=ttu" target="_blank" rel="noopener noreferrer" class="btn-link">
+        <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/" target="_blank" rel="noopener noreferrer" class="btn-link">
           📍 Δες την τοποθεσία στο Google Maps
         </a>
       </p>
@@ -224,8 +228,7 @@
 
   <script>
     function toggleMenu() {
-      const menu = document.getElementById("main-menu");
-      menu.classList.toggle("show");
+      document.getElementById('menu').classList.toggle('show');
     }
 
     const countdownEl = document.getElementById('countdown');
@@ -245,17 +248,21 @@
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
+
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
         meetInfo.classList.remove('hidden');
         stayTuned.classList.add('hidden');
+
       } else if (now >= meetupStart && now < meetupEnd) {
         countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
+
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
         countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
+
       } else {
         countdownEl.textContent = '';
         meetInfo.classList.add('hidden');
