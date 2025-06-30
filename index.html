@@ -29,15 +29,37 @@
       font-size: 2em;
     }
 
+    .menu-toggle {
+      font-size: 2em;
+      color: #0ff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      cursor: pointer;
+      display: none;
+      border-radius: 8px;
+      margin: 10px auto;
+      width: fit-content;
+    }
+
     nav {
       margin: 20px 0;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+    }
+
+    nav.show {
+      max-height: 500px;
+      opacity: 1;
     }
 
     nav a {
       color: #0ff;
-      margin: 0 15px;
+      margin: 10px;
       text-decoration: none;
       font-weight: bold;
+      display: inline-block;
     }
 
     nav a:hover {
@@ -95,7 +117,6 @@
       display: none;
     }
 
-    /* Στυλ για το κουμπί του χάρτη και υπολογιστών */
     .btn-link {
       display: inline-block;
       margin-top: 15px;
@@ -115,7 +136,6 @@
       color: #000;
     }
 
-    /* Κουμπί Download */
     .download-btn {
       display: inline-block;
       margin-top: 10px;
@@ -133,6 +153,17 @@
     .download-btn:hover {
       background: #0cc;
     }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -141,7 +172,9 @@
     <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
   </header>
 
-  <nav>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="main-menu">
     <a href="news.html">Νέα</a>
     <a href="#meetups">Meetups</a>
     <a href="gallery.html">Φωτογραφίες</a>
@@ -158,7 +191,7 @@
       <p class="info-line"><strong>Πότε:</strong> Παρασκευή 12 Ιουλίου – Ώρα 20:30</p>
       <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
       <p class="info-line">
-        <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/@37.8814357,23.9237461,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14a1910ffe83d19b:0x27ac47ea5539eb1f!8m2!3d37.8814315!4d23.926321!16s%2Fg%2F11f15gzpck?entry=ttu&g_ep=EgoyMDI1MDYxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-link">
+        <a href="https://www.google.com/maps/place/Apollonion+Bakery+-+Markopoulo+Branch/@37.8814357,23.9237461,890m/data=!3m2!1e3!4b1!4m6!3m5!1s0x14a1910ffe83d19b:0x27ac47ea5539eb1f!8m2!3d37.8814315!4d23.926321!16s%2Fg%2F11f15gzpck?entry=ttu" target="_blank" rel="noopener noreferrer" class="btn-link">
           📍 Δες την τοποθεσία στο Google Maps
         </a>
       </p>
@@ -176,9 +209,10 @@
     <br>
     <a href="1.png" download="speed_wizardz_banner.png" class="download-btn">⬇ Κατέβασε το banner</a>
 
-  <section id="calculators" style="margin-top: 25px;">
-  <a href="ypologistes.html" class="btn-link">
-    ▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ </a>
+    <section id="calculators" style="margin-top: 25px;">
+      <a href="ypologistes.html" class="btn-link">
+        ▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ
+      </a>
     </section>
   </section>
 
@@ -189,43 +223,40 @@
   </footer>
 
   <script>
+    function toggleMenu() {
+      const menu = document.getElementById("main-menu");
+      menu.classList.toggle("show");
+    }
+
     const countdownEl = document.getElementById('countdown');
     const meetInfo = document.getElementById('meet-info');
     const stayTuned = document.getElementById('stay-tuned');
 
     const meetupStart = new Date('2025-07-12T20:30:00');
-    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000); // +5 ώρες
-    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000); // +5 μέρες
+    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000);
+    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000);
 
     function updateCountdown() {
       const now = new Date();
 
       if (now < meetupStart) {
-        // Πριν το meetup: αντίστροφη μέτρηση
         const diff = meetupStart - now;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
-
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
         meetInfo.classList.remove('hidden');
         stayTuned.classList.add('hidden');
-
       } else if (now >= meetupStart && now < meetupEnd) {
-        // Το meetup γίνεται τώρα (+5 ώρες)
         countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
-        meetInfo.classList.add('hidden'); // Κρύβουμε τις πληροφορίες και το χάρτη
+        meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
-
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
-        // Meetup ολοκληρώθηκε (+5 μέρες)
         countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
         meetInfo.classList.add('hidden');
         stayTuned.classList.add('hidden');
-
       } else {
-        // Μετά τις 5 μέρες: μείνετε συντονισμένοι
         countdownEl.textContent = '';
         meetInfo.classList.add('hidden');
         stayTuned.classList.remove('hidden');
