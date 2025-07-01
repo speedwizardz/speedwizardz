@@ -210,6 +210,47 @@
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+
+    /* ====== Coming Soon Animation ====== */
+    .coming-soon-message {
+      font-size: 1.5em;
+      color: #0ff;
+      text-align: center;
+      padding: 40px 0;
+      font-weight: bold;
+    }
+
+    .coming-soon-message .dots {
+      display: inline-block;
+      margin-left: 5px;
+    }
+
+    .coming-soon-message .dots span {
+      animation: wave 1.2s infinite ease-in-out;
+      display: inline-block;
+      font-size: 1.5em;
+      line-height: 1;
+    }
+
+    .coming-soon-message .dots span:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .coming-soon-message .dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .coming-soon-message .dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes wave {
+      0%, 60%, 100% {
+        transform: translateY(0);
+      }
+      30% {
+        transform: translateY(-10px);
+      }
+    }
   </style>
 </head>
 <body>
@@ -264,6 +305,18 @@
           <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
           <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 3" />
           <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4" style="width:100%; border-radius:10px; box-shadow: 0 0 8px #0ff;"></video>
+        </div>
+      </div>
+    </div>
+       
+    <div class="accordion-item">
+      <div class="accordion-header">
+        Ιούλιος 2025
+        <span class="accordion-arrow">&#9654;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="coming-soon-message">
+          Έρχεται σύντομα<span class="dots"><span>.</span><span>.</span><span>.</span></span>
         </div>
       </div>
     </div>
