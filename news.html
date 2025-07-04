@@ -31,7 +31,6 @@
       color: #0ff;
     }
 
-    /* ΝΕΟ: Hamburger menu */
     .menu-toggle {
       font-size: 2em;
       color: #0ff;
@@ -156,7 +155,7 @@
   
   <div class="news-container">
 
-    <div class="news-item">
+    <div class="news-item" data-date="2025-07-04">
       <div class="news-title">📅 Προσεχές Meet στο Μαρκόπουλο</div>
       <div class="news-date">Ανακοινώθηκε στις 4 Ιουλίου 2025</div>
       <div class="news-text">
@@ -165,7 +164,7 @@
       </div>
     </div>
 
-    <div class="news-item">
+    <div class="news-item" data-date="2025-06-30">
       <div class="news-title">🔧 Απεργίες Συνεργείων από 1η Ιουλίου</div>
       <div class="news-date">Ανακοινώθηκε στις 30 Ιουνίου 2025</div>
       <div class="news-text">
@@ -174,7 +173,7 @@
       </div>
     </div>
 
-    <div class="news-item">
+    <div class="news-item" data-date="2025-06-18">
       <div class="news-title">📜 Υπενθύμιση Κ.Ο.Κ.</div>
       <div class="news-date">Ανακοινώθηκε στις 18 Ιουνίου 2025</div>
       <div class="news-text">
@@ -182,7 +181,7 @@
       </div>
     </div>
 
-    <div class="news-item">
+    <div class="news-item" data-date="2025-06-16">
       <div class="news-title">🛠 Βελτιώσεις στο Site</div>
       <div class="news-date">Ανακοινώθηκε στις 16 Ιουνίου 2025</div>
       <div class="news-text">
@@ -197,6 +196,20 @@
     function toggleMenu() {
       document.getElementById('menu').classList.toggle('show');
     }
+
+    // Ταξινόμηση ειδήσεων κατά ημερομηνία (νεότερες πρώτα)
+    window.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.news-container');
+      const items = Array.from(container.querySelectorAll('.news-item'));
+
+      items.sort((a, b) => {
+        const dateA = new Date(a.getAttribute('data-date'));
+        const dateB = new Date(b.getAttribute('data-date'));
+        return dateB - dateA;
+      });
+
+      items.forEach(item => container.appendChild(item));
+    });
   </script>
 </body>
 </html>
