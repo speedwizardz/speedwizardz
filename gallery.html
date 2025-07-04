@@ -25,7 +25,6 @@
       font-size: 2em;
       color: #0ff;
     }
-
     .accordion {
       max-width: 900px;
       margin: 20px auto;
@@ -34,11 +33,9 @@
       overflow: hidden;
       text-align: left;
     }
-
     .accordion-item {
       border-bottom: 1px solid #444;
     }
-
     .accordion-header {
       background: rgba(0,0,0,0.7);
       padding: 15px 20px;
@@ -50,22 +47,18 @@
       justify-content: space-between;
       align-items: center;
     }
-
     .accordion-header:hover {
       background: rgba(0,255,255,0.3);
     }
-
     .accordion-content {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.4s ease;
       padding: 0 20px;
     }
-
     .accordion-content.open {
       padding: 20px;
     }
-
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
@@ -81,7 +74,6 @@
     .gallery-grid img:hover {
       transform: scale(1.05);
     }
-
     .accordion-arrow {
       transition: transform 0.3s ease;
       font-size: 1.2em;
@@ -89,8 +81,6 @@
     .accordion-arrow.open {
       transform: rotate(90deg);
     }
-
-    /* Lightbox styles */
     #lightboxOverlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -130,7 +120,6 @@
     #lightboxClose:hover {
       color: #0cc;
     }
-
     #lightboxPrev, #lightboxNext {
       position: fixed;
       top: 50%;
@@ -155,14 +144,11 @@
     }
     #lightboxPrev { left: 20px; }
     #lightboxNext { right: 20px; }
-
     @media (max-width: 600px) {
       .gallery-grid {
         grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
       }
     }
-
-    /* ======= Hamburger Menu Styles ======= */
     .menu-toggle {
       font-size: 2em;
       color: #0ff;
@@ -179,7 +165,6 @@
     .menu-toggle:hover {
       background: rgba(0, 255, 255, 0.3);
     }
-
     nav {
       background: rgba(0, 0, 0, 0.85);
       padding: 15px;
@@ -205,222 +190,111 @@
     nav a:hover {
       text-decoration: underline;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-
-    /* ====== Coming Soon Animation ====== */
-    .coming-soon-message {
-      font-size: 1.5em;
-      color: #0ff;
-      text-align: center;
-      padding: 40px 0;
-      font-weight: bold;
-    }
-
-    .coming-soon-message .dots {
-      display: inline-block;
-      margin-left: 5px;
-    }
-
-    .coming-soon-message .dots span {
-      animation: wave 1.2s infinite ease-in-out;
-      display: inline-block;
-      font-size: 1.5em;
-      line-height: 1;
-    }
-
-    .coming-soon-message .dots span:nth-child(1) {
-      animation-delay: 0s;
-    }
-    .coming-soon-message .dots span:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-    .coming-soon-message .dots span:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes wave {
-      0%, 60%, 100% {
-        transform: translateY(0);
-      }
-      30% {
-        transform: translateY(-10px);
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hamburger menu button -->
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<nav id="menu">
+  <a href="index.html">Αρχική</a>
+  <a href="news.html">Νέα</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="join.html">Γίνε Μέλος</a>
+  <a href="faq.html">Συχνές Ερωτήσεις</a>
+  <a href="articles.html">Άρθρα</a>
+  <a href="terms.html">📜 Κανόνες Ομάδας</a>
+</nav>
 
-  <!-- Navigation menu -->
-  <nav id="menu">
-    <a href="index.html">Αρχική</a>
-    <a href="news.html">Νέα</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="join.html">Γίνε Μέλος</a>
-    <a href="faq.html">Συχνές Ερωτήσεις</a>
-    <a href="articles.html">Άρθρα</a>
-    <a href="terms.html">📜 Κανόνες Ομάδας</a>
-  </nav>
+<header>
+  <h1>📸 Gallery</h1>
+  <p>Πάτησε τον μήνα για να δεις τα meetups</p>
+</header>
 
-  <header>
-    <h1>📸 Gallery</h1>
-    <p>Πάτησε τον μήνα για να δεις τα meetups</p>
-  </header>
+<div class="accordion">
 
-  <div class="accordion">
-
-    <div class="accordion-item">
-      <div class="accordion-header">
-        Μάιος 2025
-        <span class="accordion-arrow">&#9654;</span>
-      </div>
-      <div class="accordion-content">
-        <div class="gallery-grid">
-          <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
-          <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
-          <img src="meet3.jpeg" alt="Meetup Μάιος 2025 - Φωτο 3" />
-          <img src="meet4.jpeg" alt="Meetup Μάιος 2025 - Φωτο 4" />
-          <img src="IMG_5028.jpeg" alt="Meetup Μάιος 2025 - Φωτο 5" />
-          <img src="IMG_5078.jpeg" alt="Meetup Μάιος 2025 - Φωτο 6" />
-          <img src="IMG_5085.jpeg" alt="Meetup Μάιος 2025 - Φωτο 7" />
-        </div>
+  <div class="accordion-item">
+    <div class="accordion-header">Ιούλιος 2025 <span class="accordion-arrow">&#9654;</span></div>
+    <div class="accordion-content">
+      <div class="coming-soon-message">
+        Έρχεται σύντομα<span class="dots"><span>.</span><span>.</span><span>.</span></span>
       </div>
     </div>
+  </div>
 
-    <div class="accordion-item">
-      <div class="accordion-header">
-        Ιανουάριος 2025
-        <span class="accordion-arrow">&#9654;</span>
-      </div>
-      <div class="accordion-content">
-        <div class="gallery-grid">
-          <img src="IMG_4232.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 1" />
-          <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
-          <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 3" />
-          <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4" style="width:100%; border-radius:10px; box-shadow: 0 0 8px #0ff;"></video>
-        </div>
+  <div class="accordion-item">
+    <div class="accordion-header">Μάιος 2025 <span class="accordion-arrow">&#9654;</span></div>
+    <div class="accordion-content">
+      <div class="gallery-grid">
+        <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
+        <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
+        <img src="meet3.jpeg" alt="Meetup Μάιος 2025 - Φωτο 3" />
+        <img src="meet4.jpeg" alt="Meetup Μάιος 2025 - Φωτο 4" />
+        <img src="IMG_5028.jpeg" alt="Meetup Μάιος 2025 - Φωτο 5" />
+        <img src="IMG_5078.jpeg" alt="Meetup Μάιος 2025 - Φωτο 6" />
+        <img src="IMG_5085.jpeg" alt="Meetup Μάιος 2025 - Φωτο 7" />
       </div>
     </div>
-       
-    <div class="accordion-item">
-      <div class="accordion-header">
-        Ιούλιος 2025
-        <span class="accordion-arrow">&#9654;</span>
-      </div>
-      <div class="accordion-content">
-        <div class="coming-soon-message">
-          Έρχεται σύντομα<span class="dots"><span>.</span><span>.</span><span>.</span></span>
-        </div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header">Ιανουάριος 2025 <span class="accordion-arrow">&#9654;</span></div>
+    <div class="accordion-content">
+      <div class="gallery-grid">
+        <img src="IMG_4232.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 1" />
+        <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
+        <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 3" />
+        <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4" style="width:100%; border-radius:10px; box-shadow: 0 0 8px #0ff;"></video>
       </div>
     </div>
-
   </div>
 
-  <!-- Μήνυμα προτροπής -->
-  <div style="margin: 40px auto; padding: 20px; background: rgba(0,0,0,0.6); border-radius: 10px; max-width: 700px; font-size: 1.3em; font-weight: bold; color: #0ff; box-shadow: 0 0 10px #0ff;">
-    🚗 Θες να δεις το αμάξι σου εδώ; <br> Έλα στο επόμενο meet!
-  </div>
+</div>
 
-  <a href="index.html" class="back-link" style="color:#0af; font-weight:bold; display:block; max-width:900px; margin: 10px auto;">⬅ Επιστροφή</a>
+<a href="index.html" class="back-link" style="color:#0af; font-weight:bold; display:block; max-width:900px; margin: 10px auto;">⬅ Επιστροφή</a>
 
-  <!-- Lightbox overlay -->
-  <div id="lightboxOverlay" tabindex="0" aria-modal="true" role="dialog" aria-label="Μεγαλύτερη εικόνα gallery">
-    <span id="lightboxClose" title="Κλείσιμο">&#10005;</span>
-    <span id="lightboxPrev" title="Προηγούμενη">&#8249;</span>
-    <img src="" alt="Μεγαλύτερη εικόνα" />
-    <span id="lightboxNext" title="Επόμενη">&#8250;</span>
-  </div>
+<div id="lightboxOverlay" tabindex="0" aria-modal="true" role="dialog" aria-label="Μεγαλύτερη εικόνα gallery">
+  <span id="lightboxClose" title="Κλείσιμο">&#10005;</span>
+  <span id="lightboxPrev" title="Προηγούμενη">&#8249;</span>
+  <img src="" alt="Μεγαλύτερη εικόνα" />
+  <span id="lightboxNext" title="Επόμενη">&#8250;</span>
+</div>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById('menu').classList.toggle('show');
+<script>
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('show');
+}
+const accordionHeaders = document.querySelectorAll('.accordion-header');
+accordionHeaders.forEach(header => {
+  header.addEventListener('click', () => {
+    const openItem = document.querySelector('.accordion-content.open');
+    const arrowOpen = document.querySelector('.accordion-arrow.open');
+    const content = header.nextElementSibling;
+    const arrow = header.querySelector('.accordion-arrow');
+
+    if(openItem && openItem !== content){
+      openItem.style.maxHeight = null;
+      openItem.classList.remove('open');
+    }
+    if(arrowOpen && arrowOpen !== arrow){
+      arrowOpen.classList.remove('open');
     }
 
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    accordionHeaders.forEach(header => {
-      header.addEventListener('click', () => {
-        const openItem = document.querySelector('.accordion-content.open');
-        const arrowOpen = document.querySelector('.accordion-arrow.open');
-        const content = header.nextElementSibling;
-        const arrow = header.querySelector('.accordion-arrow');
-
-        if(openItem && openItem !== content){
-          openItem.style.maxHeight = null;
-          openItem.classList.remove('open');
-        }
-        if(arrowOpen && arrowOpen !== arrow){
-          arrowOpen.classList.remove('open');
-        }
-
-        if(content.classList.contains('open')){
-          content.style.maxHeight = null;
-          content.classList.remove('open');
-          arrow.classList.remove('open');
-        } else {
-          content.style.maxHeight = content.scrollHeight + "px";
-          content.classList.add('open');
-          arrow.classList.add('open');
-        }
-      });
-    });
-
-    // Lightbox
-    const lightboxOverlay = document.getElementById('lightboxOverlay');
-    const lightboxImg = lightboxOverlay.querySelector('img');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const lightboxPrev = document.getElementById('lightboxPrev');
-    const lightboxNext = document.getElementById('lightboxNext');
-    const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
-    let currentIndex = 0;
-
-    galleryImages.forEach((img, i) => {
-      img.addEventListener('click', () => {
-        currentIndex = i;
-        showImage(currentIndex);
-      });
-    });
-
-    function showImage(index) {
-      const img = galleryImages[index];
-      if (!img) return;
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
-      lightboxOverlay.classList.add('show');
-      document.body.style.overflow = 'hidden';
-      lightboxOverlay.focus();
+    if(content.classList.contains('open')){
+      content.style.maxHeight = null;
+      content.classList.remove('open');
+      arrow.classList.remove('open');
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.classList.add('open');
+      arrow.classList.add('open');
     }
+  });
+});
+</script>
 
-    function hideLightbox() {
-      lightboxOverlay.classList.remove('show');
-      document.body.style.overflow = '';
-      setTimeout(() => lightboxImg.src = '', 400);
-    }
-
-    lightboxClose.addEventListener('click', hideLightbox);
-    lightboxNext.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % galleryImages.length;
-      showImage(currentIndex);
-    });
-    lightboxPrev.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-      showImage(currentIndex);
-    });
-    lightboxOverlay.addEventListener('click', (e) => {
-      if (e.target === lightboxOverlay) hideLightbox();
-    });
-    lightboxOverlay.addEventListener('keydown', (e) => {
-      if (!lightboxOverlay.classList.contains('show')) return;
-      if (e.key === "Escape") hideLightbox();
-      else if (e.key === "ArrowLeft") lightboxPrev.click();
-      else if (e.key === "ArrowRight") lightboxNext.click();
-    });
-  </script>
 </body>
 </html>
