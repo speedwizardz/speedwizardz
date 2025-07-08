@@ -181,7 +181,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-
     /* === Loading video screen styles === */
     #video-loading {
       position: fixed;
@@ -204,14 +203,27 @@
     }
 
     #video-loading video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
+      max-width: 80vw;
+      max-height: 80vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    }
+
+    /* Mobile: full screen video */
+    @media (max-width: 768px) {
+      #video-loading video {
+        max-width: 100vw;
+        max-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+      }
     }
   </style>
 </head>
 <body>
-
   <!-- Loading Screen with Video -->
   <div id="video-loading">
     <video autoplay muted playsinline id="loadingVideo">
@@ -261,7 +273,6 @@
     <h2>📸 Banner</h2>
     <img src="speed_wizardz_banner.png" alt="Speed Wizardz Meet Poster" />
     <br />
-    <a href="1.png" download="speed_wizardz_banner.png" class="download-btn">⬇ Κατέβασε το banner</a>
 
     <section id="calculators" style="margin-top: 25px;">
       <a href="ypologistes.html" class="btn-link">▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ</a>
@@ -269,8 +280,7 @@
   </section>
 
   <footer>
-    <p>
-      © 2025 Speed Wizardz | Επικοινωνία στο
+    <p>© 2025 Speed Wizardz | Επικοινωνία στο
       <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
     </p>
   </footer>
@@ -309,7 +319,8 @@
         meetInfo.classList.remove("hidden");
         stayTuned.classList.add("hidden");
       } else if (now >= meetupStart && now < meetupEnd) {
-        countdownEl.textContent = "Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.";
+        countdownEl.textContent =
+          "Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.";
         meetInfo.classList.add("hidden");
         stayTuned.classList.add("hidden");
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
@@ -326,13 +337,12 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Loading video fade out
+    // Hide loading video after 3.5 seconds with fade out
     window.addEventListener("DOMContentLoaded", () => {
       const loadingDiv = document.getElementById("video-loading");
-
       setTimeout(() => {
         loadingDiv.classList.add("hide");
-      }, 3500); // 3.5 sec fade out
+      }, 3500);
     });
   </script>
 </body>
