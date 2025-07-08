@@ -185,13 +185,13 @@
       background: black;
       z-index: 9999;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       overflow: hidden;
       opacity: 1;
       transition: opacity 0.7s ease;
       gap: 20px;
+      flex-direction: column;
     }
 
     #video-loading.hide {
@@ -200,34 +200,37 @@
     }
 
     #video-loading video {
-      max-width: 80vw;
-      max-height: 80vh;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.7);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
     }
 
     /* Το κείμενο πάνω από το βίντεο */
     .loading-text {
-      font-size: 2.5rem;
-      font-weight: bold;
+      position: relative;
+      z-index: 10;
       color: #0ff;
-      text-shadow: 1px 1px 5px black;
+      font-weight: bold;
+      font-size: 3rem;
+      text-align: center;
       user-select: none;
+      /* Pixelate style */
+      -webkit-font-smoothing: none;
+      text-shadow:
+        1px 1px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000;
     }
 
     /* Mobile: βίντεο full screen, κείμενο λίγο μικρότερο */
     @media (max-width: 768px) {
-      #video-loading video {
-        max-width: 100vw;
-        max-height: 100vh;
-        border-radius: 0;
-        box-shadow: none;
-      }
       .loading-text {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
     }
 
@@ -239,11 +242,8 @@
 </head>
 <body>
   <div id="video-loading">
+    <video autoplay muted playsinline id="loadingVideo" src="vidu-video-2852898574887133.mp4"></video>
     <div class="loading-text">Speed Wizardz — The Magic Behind the Wheel</div>
-    <video autoplay muted playsinline id="loadingVideo">
-      <source src="vidu-video-2852898574887133.mp4" type="video/mp4" />
-      Ο browser σου δεν υποστηρίζει βίντεο.
-    </video>
   </div>
 
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
