@@ -58,6 +58,7 @@
       text-decoration: underline;
     }
 
+    /* Κόκκινο link για Κανόνες */
     .rules-link {
       color: #ff4444;
       font-weight: bold;
@@ -175,115 +176,6 @@
       background: #0cc;
     }
 
-    /* Loading video container */
-    #video-loading {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: black;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      opacity: 1;
-      transition: opacity 0.7s ease;
-      gap: 20px;
-      flex-direction: column;
-    }
-
-    #video-loading.hide {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    #video-loading video {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      transform: translate(-50%, -50%);
-    }
-
-    /* Το κείμενο πάνω από το βίντεο */
-    .loading-text {
-      position: relative;
-      z-index: 10;
-      color: #0ff;
-      font-weight: bold;
-      font-size: 3rem;
-      text-align: center;
-      user-select: none;
-      -webkit-font-smoothing: none;
-      text-shadow:
-        1px 1px 0 #000,
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000;
-    }
-
-    /* Κάθε γράμμα ξεχωριστό για animation */
-    .loading-text span {
-      display: inline-block;
-      opacity: 0;
-      animation-name: fadeInOut;
-      animation-duration: 2s;
-      animation-iteration-count: infinite;
-      animation-timing-function: ease-in-out;
-    }
-
-    /* Διαφορά καθυστέρησης για wave effect */
-    .loading-text span:nth-child(1) { animation-delay: 0s; }
-    .loading-text span:nth-child(2) { animation-delay: 0.1s; }
-    .loading-text span:nth-child(3) { animation-delay: 0.2s; }
-    .loading-text span:nth-child(4) { animation-delay: 0.3s; }
-    .loading-text span:nth-child(5) { animation-delay: 0.4s; }
-    .loading-text span:nth-child(6) { animation-delay: 0.5s; }
-    .loading-text span:nth-child(7) { animation-delay: 0.6s; }
-    .loading-text span:nth-child(8) { animation-delay: 0.7s; }
-    .loading-text span:nth-child(9) { animation-delay: 0.8s; }
-    .loading-text span:nth-child(10) { animation-delay: 0.9s; }
-    .loading-text span:nth-child(11) { animation-delay: 1.0s; }
-    .loading-text span:nth-child(12) { animation-delay: 1.1s; }
-    .loading-text span:nth-child(13) { animation-delay: 1.2s; }
-    .loading-text span:nth-child(14) { animation-delay: 1.3s; }
-    .loading-text span:nth-child(15) { animation-delay: 1.4s; }
-    .loading-text span:nth-child(16) { animation-delay: 1.5s; }
-    .loading-text span:nth-child(17) { animation-delay: 1.6s; }
-    .loading-text span:nth-child(18) { animation-delay: 1.7s; }
-    .loading-text span:nth-child(19) { animation-delay: 1.8s; }
-    .loading-text span:nth-child(20) { animation-delay: 1.9s; }
-    .loading-text span:nth-child(21) { animation-delay: 2.0s; }
-    .loading-text span:nth-child(22) { animation-delay: 2.1s; }
-    .loading-text span:nth-child(23) { animation-delay: 2.2s; }
-    .loading-text span:nth-child(24) { animation-delay: 2.3s; }
-    .loading-text span:nth-child(25) { animation-delay: 2.4s; }
-    .loading-text span:nth-child(26) { animation-delay: 2.5s; }
-    .loading-text span:nth-child(27) { animation-delay: 2.6s; }
-    .loading-text span:nth-child(28) { animation-delay: 2.7s; }
-    .loading-text span:nth-child(29) { animation-delay: 2.8s; }
-    .loading-text span:nth-child(30) { animation-delay: 2.9s; }
-    .loading-text span:nth-child(31) { animation-delay: 3.0s; }
-    .loading-text span:nth-child(32) { animation-delay: 3.1s; }
-    .loading-text span:nth-child(33) { animation-delay: 3.2s; }
-    .loading-text span:nth-child(34) { animation-delay: 3.3s; }
-    .loading-text span:nth-child(35) { animation-delay: 3.4s; }
-    .loading-text span:nth-child(36) { animation-delay: 3.5s; }
-
-    @keyframes fadeInOut {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-
-    @media (max-width: 768px) {
-      .loading-text {
-        font-size: 2rem;
-      }
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -291,20 +183,6 @@
   </style>
 </head>
 <body>
-  <div id="video-loading">
-    <video autoplay muted playsinline id="loadingVideo" src="vidu-video-2852898574887133.mp4"></video>
-    <div class="loading-text">
-      <span>S</span><span>p</span><span>e</span><span>e</span><span>d</span> 
-      <span>W</span><span>i</span><span>z</span><span>a</span><span>r</span><span>d</span><span>z</span> 
-      <span>—</span> 
-      <span>T</span><span>h</span><span>e</span> 
-      <span>M</span><span>a</span><span>g</span><span>i</span><span>c</span> 
-      <span>B</span><span>e</span><span>h</span><span>i</span><span>n</span><span>d</span> 
-      <span>t</span><span>h</span><span>e</span> 
-      <span>W</span><span>h</span><span>e</span><span>e</span><span>l</span>
-    </div>
-  </div>
-
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
   <nav id="menu">
@@ -344,8 +222,8 @@
 
   <section id="gallery">
     <h2>📸 Banner</h2>
-    <img src="speed_wizardz_banner.png" alt="Speed Wizardz Meet Poster" />
-    <br />
+    <img src="speed_wizardz_banner.png" alt="Speed Wizardz Meet Poster">
+    <br>
 
     <section id="calculators" style="margin-top: 25px;">
       <a href="ypologistes.html" class="btn-link">
@@ -355,29 +233,28 @@
   </section>
 
   <footer>
-    <p>
-      © 2025 Speed Wizardz | Επικοινωνία στο
+    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
       <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
     </p>
   </footer>
 
   <script>
     function toggleMenu() {
-      document.getElementById("menu").classList.toggle("show");
+      document.getElementById('menu').classList.toggle('show');
     }
 
     // Κλείνουμε το μενού όταν πατιέται κάποιο link μέσα στο nav
-    document.querySelectorAll("#menu a").forEach((link) => {
-      link.addEventListener("click", () => {
-        document.getElementById("menu").classList.remove("show");
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('show');
       });
     });
 
-    const countdownEl = document.getElementById("countdown");
-    const meetInfo = document.getElementById("meet-info");
-    const stayTuned = document.getElementById("stay-tuned");
+    const countdownEl = document.getElementById('countdown');
+    const meetInfo = document.getElementById('meet-info');
+    const stayTuned = document.getElementById('stay-tuned');
 
-    const meetupStart = new Date("2025-07-12T20:30:00");
+    const meetupStart = new Date('2025-07-12T20:30:00');
     const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000);
     const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000);
 
@@ -392,36 +269,28 @@
         const seconds = Math.floor((diff / 1000) % 60);
 
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
-        meetInfo.classList.remove("hidden");
-        stayTuned.classList.add("hidden");
+        meetInfo.classList.remove('hidden');
+        stayTuned.classList.add('hidden');
+
       } else if (now >= meetupStart && now < meetupEnd) {
-        countdownEl.textContent =
-          "Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.";
-        meetInfo.classList.add("hidden");
-        stayTuned.classList.add("hidden");
+        countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
+        meetInfo.classList.add('hidden');
+        stayTuned.classList.add('hidden');
+
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
-        countdownEl.textContent = "Το meetup ολοκληρώθηκε!";
-        meetInfo.classList.add("hidden");
-        stayTuned.classList.add("hidden");
+        countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
+        meetInfo.classList.add('hidden');
+        stayTuned.classList.add('hidden');
+
       } else {
-        countdownEl.textContent = "";
-        meetInfo.classList.add("hidden");
-        stayTuned.classList.remove("hidden");
+        countdownEl.textContent = '';
+        meetInfo.classList.add('hidden');
+        stayTuned.classList.remove('hidden');
       }
     }
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
-    // Loading video fade out στα 3.5 δευτ.
-    const loadingVideo = document.getElementById("loadingVideo");
-    const videoLoading = document.getElementById("video-loading");
-
-    loadingVideo.addEventListener("timeupdate", () => {
-      if (loadingVideo.currentTime >= 3.5) {
-        videoLoading.classList.add("hide");
-      }
-    });
   </script>
 </body>
 </html>
