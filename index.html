@@ -180,9 +180,46 @@
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+
+    /* === Loading video screen styles === */
+    #video-loading {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.7s ease;
+    }
+
+    #video-loading.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #video-loading video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Loading Screen with Video -->
+  <div id="video-loading">
+    <video autoplay muted playsinline id="loadingVideo">
+      <source src="vidu-video-2852898574887133.mp4" type="video/mp4" />
+      Ο browser σου δεν υποστηρίζει βίντεο.
+    </video>
+  </div>
+
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
   <nav id="menu">
@@ -222,40 +259,39 @@
 
   <section id="gallery">
     <h2>📸 Banner</h2>
-    <img src="speed_wizardz_banner.png" alt="Speed Wizardz Meet Poster">
-    <br>
+    <img src="speed_wizardz_banner.png" alt="Speed Wizardz Meet Poster" />
+    <br />
     <a href="1.png" download="speed_wizardz_banner.png" class="download-btn">⬇ Κατέβασε το banner</a>
 
     <section id="calculators" style="margin-top: 25px;">
-      <a href="ypologistes.html" class="btn-link">
-        ▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ
-      </a>
+      <a href="ypologistes.html" class="btn-link">▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ</a>
     </section>
   </section>
 
   <footer>
-    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
+    <p>
+      © 2025 Speed Wizardz | Επικοινωνία στο
       <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
     </p>
   </footer>
 
   <script>
     function toggleMenu() {
-      document.getElementById('menu').classList.toggle('show');
+      document.getElementById("menu").classList.toggle("show");
     }
 
     // Κλείνουμε το μενού όταν πατιέται κάποιο link μέσα στο nav
-    document.querySelectorAll('#menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('menu').classList.remove('show');
+    document.querySelectorAll("#menu a").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.getElementById("menu").classList.remove("show");
       });
     });
 
-    const countdownEl = document.getElementById('countdown');
-    const meetInfo = document.getElementById('meet-info');
-    const stayTuned = document.getElementById('stay-tuned');
+    const countdownEl = document.getElementById("countdown");
+    const meetInfo = document.getElementById("meet-info");
+    const stayTuned = document.getElementById("stay-tuned");
 
-    const meetupStart = new Date('2025-07-12T20:30:00');
+    const meetupStart = new Date("2025-07-12T20:30:00");
     const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000);
     const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000);
 
@@ -270,28 +306,34 @@
         const seconds = Math.floor((diff / 1000) % 60);
 
         countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
-        meetInfo.classList.remove('hidden');
-        stayTuned.classList.add('hidden');
-
+        meetInfo.classList.remove("hidden");
+        stayTuned.classList.add("hidden");
       } else if (now >= meetupStart && now < meetupEnd) {
-        countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
-        meetInfo.classList.add('hidden');
-        stayTuned.classList.add('hidden');
-
+        countdownEl.textContent = "Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.";
+        meetInfo.classList.add("hidden");
+        stayTuned.classList.add("hidden");
       } else if (now >= meetupEnd && now < meetupCompleteEnd) {
-        countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
-        meetInfo.classList.add('hidden');
-        stayTuned.classList.add('hidden');
-
+        countdownEl.textContent = "Το meetup ολοκληρώθηκε!";
+        meetInfo.classList.add("hidden");
+        stayTuned.classList.add("hidden");
       } else {
-        countdownEl.textContent = '';
-        meetInfo.classList.add('hidden');
-        stayTuned.classList.remove('hidden');
+        countdownEl.textContent = "";
+        meetInfo.classList.add("hidden");
+        stayTuned.classList.remove("hidden");
       }
     }
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // Loading video fade out
+    window.addEventListener("DOMContentLoaded", () => {
+      const loadingDiv = document.getElementById("video-loading");
+
+      setTimeout(() => {
+        loadingDiv.classList.add("hide");
+      }, 3500); // 3.5 sec fade out
+    });
   </script>
 </body>
 </html>
