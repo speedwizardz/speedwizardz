@@ -66,7 +66,6 @@
       text-decoration: underline;
     }
 
-    /* Προσθήκη για Κανόνες */
     nav#menu a.terms-link {
       color: #ff4444;
       font-weight: bold;
@@ -103,6 +102,7 @@
     .carousel-track {
       display: flex;
       transition: transform 0.4s ease-in-out;
+      white-space: nowrap; /* Prevent line breaks */
     }
 
     .member-card {
@@ -110,15 +110,13 @@
       border: 2px solid #0ff;
       border-radius: 12px;
       padding: 20px;
-      width: 90%;
-      min-width: 90%;
-      max-width: 300px;
-      box-sizing: border-box;
+      width: 300px; /* Fixed width */
+      flex-shrink: 0;
       margin: 0 10px;
       color: #eee;
       text-align: center;
       box-shadow: 0 0 10px #0ff4;
-      flex-shrink: 0;
+      box-sizing: border-box;
     }
 
     .member-photo {
@@ -168,9 +166,9 @@
     }
 
     @media (min-width: 768px) {
+      /* Keep fixed width for consistent sliding */
       .member-card {
-        width: 45%;
-        min-width: 45%;
+        width: 300px;
       }
     }
   </style>
@@ -199,17 +197,17 @@
     <div class="carousel-track" id="carouselTrack">
 
       <div class="member-card">
-        <img src="alfrento.png" alt="Alfrento" class="member-photo">
+        <img src="alfrento.png" alt="Alfrento" class="member-photo" />
         <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
         <p><strong>Όχημα:</strong> Opel Astra</p>
         <p><strong>Τελική Ταχύτητα:</strong> 250 km/h</p>
-        <p><strong>Skill:</strong> high speed </p>
+        <p><strong>Skill:</strong> high speed</p>
         <p><strong>Καταζητούμενος:</strong> 🚨⚠️ ΕΠΙΚΙΝΔΥΝΟΣ ΣΤΟ ΔΡΟΜΟ ⚠️🚨</p>
         <p><strong>Bounty:</strong> €15.600</p>
       </div>
 
       <div class="member-card">
-        <img src="IMG_4669.jpeg" alt="Polo" class="member-photo">
+        <img src="IMG_4669.jpeg" alt="Polo" class="member-photo" />
         <h3 class="member-name">THE WIZARD</h3>
         <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
         <p><strong>Τελική Ταχύτητα:</strong> 220 km/h</p>
@@ -219,17 +217,17 @@
       </div>
 
       <div class="member-card">
-        <img src="alex.jpeg" alt="Alex" class="member-photo">
+        <img src="alex.jpeg" alt="Alex" class="member-photo" />
         <h3 class="member-name">A-LexRacer</h3>
         <p><strong>Όχημα:</strong> Opel Astra</p>
         <p><strong>Τελική Ταχύτητα:</strong> 230 km/h</p>
         <p><strong>Skill:</strong> Photoshots</p>
         <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐</p>
         <p><strong>Bounty:</strong> €15.300</p>
-      </div
+      </div>
 
-         <div class="member-card">
-        <img src="E182BE33-26D0-44D2-A0F4-9E74DC4C2E8E.jpeg" alt="Zenx" class="member-photo">
+      <div class="member-card">
+        <img src="E182BE33-26D0-44D2-A0F4-9E74DC4C2E8E.jpeg" alt="Zenx" class="member-photo" />
         <h3 class="member-name">Zenx</h3>
         <p><strong>Όχημα:</strong> Peugeot 407</p>
         <p><strong>Τελική Ταχύτητα:</strong> 200 km/h</p>
@@ -237,7 +235,6 @@
         <p><strong>Καταζητούμενος:</strong> ⭐⭐</p>
         <p><strong>Bounty:</strong> €6.300</p>
       </div>
-
 
       <div class="member-card" style="border: 2px dashed #0ff;">
         <h3 class="member-name">🚗 ΤΟ ΑΜΑΞΙ ΣΟΥ 🚗</h3>
@@ -265,7 +262,7 @@
     let index = 0;
 
     function updateSlide() {
-      const cardWidth = track.children[0].offsetWidth + 20;
+      const cardWidth = track.children[0].offsetWidth + 20; // περιλαμβάνει margin
       track.style.transform = `translateX(-${index * cardWidth}px)`;
     }
 
