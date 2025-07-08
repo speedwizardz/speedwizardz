@@ -176,12 +176,7 @@
       background: #0cc;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* === Loading video screen styles === */
+    /* Loading video container */
     #video-loading {
       position: fixed;
       top: 0; left: 0;
@@ -190,11 +185,13 @@
       background: black;
       z-index: 9999;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       overflow: hidden;
       opacity: 1;
       transition: opacity 0.7s ease;
+      gap: 20px;
     }
 
     #video-loading.hide {
@@ -212,7 +209,16 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.7);
     }
 
-    /* Mobile: full screen video */
+    /* Το κείμενο πάνω από το βίντεο */
+    .loading-text {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #0ff;
+      text-shadow: 1px 1px 5px black;
+      user-select: none;
+    }
+
+    /* Mobile: βίντεο full screen, κείμενο λίγο μικρότερο */
     @media (max-width: 768px) {
       #video-loading video {
         max-width: 100vw;
@@ -220,12 +226,20 @@
         border-radius: 0;
         box-shadow: none;
       }
+      .loading-text {
+        font-size: 1.8rem;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <!-- Loading Screen with Video -->
   <div id="video-loading">
+    <div class="loading-text">Speed Wizardz — The Magic Behind the Wheel</div>
     <video autoplay muted playsinline id="loadingVideo">
       <source src="vidu-video-2852898574887133.mp4" type="video/mp4" />
       Ο browser σου δεν υποστηρίζει βίντεο.
@@ -273,14 +287,18 @@
     <h2>📸 Banner</h2>
     <img src="speed_wizardz_banner.png" alt="Speed Wizardz Meet Poster" />
     <br />
+    <a href="1.png" download="speed_wizardz_banner.png" class="download-btn">⬇ Κατέβασε το banner</a>
 
     <section id="calculators" style="margin-top: 25px;">
-      <a href="ypologistes.html" class="btn-link">▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ</a>
+      <a href="ypologistes.html" class="btn-link">
+        ▶️ Θες να μάθεις τι τέλη θα πληρώσεις; Πάτα εδώ
+      </a>
     </section>
   </section>
 
   <footer>
-    <p>© 2025 Speed Wizardz | Επικοινωνία στο
+    <p>
+      © 2025 Speed Wizardz | Επικοινωνία στο
       <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
     </p>
   </footer>
@@ -337,12 +355,14 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Hide loading video after 3.5 seconds with fade out
-    window.addEventListener("DOMContentLoaded", () => {
-      const loadingDiv = document.getElementById("video-loading");
-      setTimeout(() => {
-        loadingDiv.classList.add("hide");
-      }, 3500);
+    // Loading video fade out στα 3.5 δευτ.
+    const loadingVideo = document.getElementById("loadingVideo");
+    const videoLoading = document.getElementById("video-loading");
+
+    loadingVideo.addEventListener("timeupdate", () => {
+      if (loadingVideo.currentTime >= 3.5) {
+        videoLoading.classList.add("hide");
+      }
     });
   </script>
 </body>
