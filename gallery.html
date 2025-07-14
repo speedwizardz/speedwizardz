@@ -64,14 +64,14 @@
       grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
       gap: 10px;
     }
-    .gallery-grid img {
+    .gallery-grid img, .gallery-grid video {
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 0 8px #0ff;
       cursor: pointer;
       transition: transform 0.3s;
     }
-    .gallery-grid img:hover {
+    .gallery-grid img:hover, .gallery-grid video:hover {
       transform: scale(1.05);
     }
     .accordion-arrow {
@@ -80,74 +80,6 @@
     }
     .accordion-arrow.open {
       transform: rotate(90deg);
-    }
-    #lightboxOverlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-      z-index: 10000;
-    }
-    #lightboxOverlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #lightboxOverlay img {
-      max-width: 90vw;
-      max-height: 80vh;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #0ff;
-      user-select: none;
-      pointer-events: auto;
-    }
-    #lightboxClose {
-      position: fixed;
-      top: 20px;
-      right: 30px;
-      font-size: 2.5em;
-      color: #0ff;
-      cursor: pointer;
-      user-select: none;
-      font-weight: bold;
-      transition: color 0.3s ease;
-      z-index: 10001;
-    }
-    #lightboxClose:hover {
-      color: #0cc;
-    }
-    #lightboxPrev, #lightboxNext {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
-      border-radius: 50%;
-      color: #0ff;
-      font-size: 2.5em;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.3s ease;
-      box-shadow: 0 0 8px #0ff;
-      z-index: 10001;
-    }
-    #lightboxPrev:hover, #lightboxNext:hover {
-      background: rgba(0,255,255,0.9);
-      color: #000;
-    }
-    #lightboxPrev { left: 20px; }
-    #lightboxNext { right: 20px; }
-    @media (max-width: 600px) {
-      .gallery-grid {
-        grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-      }
     }
     .menu-toggle {
       font-size: 2em;
@@ -215,37 +147,6 @@
 </header>
 
 <div class="accordion">
-
-  <div class="accordion-item">
-    <div class="accordion-header">
-      Ιούλιος 2025
-      <span class="accordion-arrow">&#9654;</span>
-    </div>
-    <div class="accordion-content">
-      <div style="font-size: 1.5em; color: #0ff; text-align: center; padding: 40px 0; font-weight: bold;">
-        Έρχεται σύντομα<span class="dots"><span>.</span><span>.</span><span>.</span></span>
-      </div>
-    </div>
-  </div>
-
-  <div class="accordion-item">
-    <div class="accordion-header">
-      Μάιος 2025
-      <span class="accordion-arrow">&#9654;</span>
-    </div>
-    <div class="accordion-content">
-      <div class="gallery-grid">
-        <img src="meet1.png" alt="Meetup Μάιος 2025 - Φωτο 1" />
-        <img src="meet2.jpeg" alt="Meetup Μάιος 2025 - Φωτο 2" />
-        <img src="meet3.jpeg" alt="Meetup Μάιος 2025 - Φωτο 3" />
-        <img src="meet4.jpeg" alt="Meetup Μάιος 2025 - Φωτο 4" />
-        <img src="IMG_5028.jpeg" alt="Meetup Μάιος 2025 - Φωτο 5" />
-        <img src="IMG_5078.jpeg" alt="Meetup Μάιος 2025 - Φωτο 6" />
-        <img src="IMG_5085.jpeg" alt="Meetup Μάιος 2025 - Φωτο 7" />
-      </div>
-    </div>
-  </div>
-
   <div class="accordion-item">
     <div class="accordion-header">
       Ιανουάριος 2025
@@ -253,14 +154,25 @@
     </div>
     <div class="accordion-content">
       <div class="gallery-grid">
-        <img src="IMG_4232.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 1" />
-        <img src="IMG_4235.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 2" />
-        <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Meetup Ιανουάριος 2025 - Φωτο 3" />
-        <video controls src="4d343b726b304b66864a8e9b8e707d15.mp4" style="width:100%; border-radius:10px; box-shadow: 0 0 8px #0ff;"></video>
+        <video controls src="07f86e704d584e74be49d6b8314c41a6.mp4"></video>
+        <img src="IMG_5643.jpeg" />
+        <img src="IMG_5642 (1).jpeg" />
+        <img src="435561A5-AF71-446A-98BA-C56EACA21E55.jpeg" />
+        <img src="9CEBE9D6-6421-4456-9C82-E5E9B2D6AE4F.jpeg" />
+        <img src="F46F15AF-D252-4A58-8D63-6A721B7811C2.jpeg" />
+        <img src="IMG_5642.jpeg" />
+        <video controls src="1000269455 (2).mp4"></video>
+        <video controls src="1000269455 (1).mp4"></video>
+        <img src="1000269414 (1).jpg" />
+        <img src="1000269422.jpg" />
+        <img src="1000269434.jpg" />
+        <img src="1000269433.jpg" />
+        <video controls src="1000269455.mp4"></video>
+        <img src="1000269405.jpg" />
+        <img src="1000269414.jpg" />
       </div>
     </div>
   </div>
-
 </div>
 
 <script>
