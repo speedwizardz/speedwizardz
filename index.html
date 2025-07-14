@@ -58,7 +58,6 @@
       text-decoration: underline;
     }
 
-    /* Κόκκινο link για Κανόνες */
     .rules-link {
       color: #ff4444;
       font-weight: bold;
@@ -105,13 +104,6 @@
       margin: 10px 0;
     }
 
-    #countdown {
-      font-size: 1.4em;
-      font-weight: bold;
-      color: #0ff;
-      margin-bottom: 15px;
-    }
-
     img {
       max-width: 100%;
       border-radius: 10px;
@@ -135,13 +127,8 @@
       text-decoration: underline;
     }
 
-    .hidden {
-      display: none;
-    }
-
     .btn-link {
       display: inline-block;
-      margin-top: 15px;
       background: transparent;
       color: #0ff;
       padding: 10px 20px;
@@ -156,24 +143,6 @@
     .btn-link:hover {
       background: #0cc;
       color: #000;
-    }
-
-    .download-btn {
-      display: inline-block;
-      margin-top: 10px;
-      background: #0ff;
-      color: #000;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .download-btn:hover {
-      background: #0cc;
     }
 
     @keyframes fadeIn {
@@ -192,7 +161,7 @@
     <a href="join.html">Γίνε Μέλος</a>
     <a href="faq.html">Συχνές Ερωτήσεις</a>
     <a href="articles.html">Άρθρα</a>
-    <a href="terms.html">📜 Κανόνες Ομάδας</a>
+    <a href="terms.html" class="rules-link">📜 Κανόνες Ομάδας</a>
   </nav>
 
   <header>
@@ -201,29 +170,22 @@
   </header>
 
   <section id="meetups">
-    <h2>📅 Επόμενο Meet</h2>
-    <div id="countdown">Φόρτωση αντίστροφης μέτρησης...</div>
+    <h2>📅 Το τελευταίο Meet έγινε!</h2>
+    <p class="info-line"><strong>Τα λέμε στο επόμενο στις:</strong> <span style="color:#0ff;">Σάββατο 10 Αυγούστου</span></p>
+    <p class="info-line">Μείνετε συντονισμένοι – και μέχρι τότε δείτε τι άλλο παίζει στην ομάδα:</p>
 
-    <div id="meet-info">
-      <p class="info-line"><strong>Πότε:</strong> Σάββατο 12 Ιουλίου – Ώρα 20:30</p>
-      <p class="info-line"><strong>Πού:</strong> Απολλώνιον Μαρκόπουλου – Ώρα Αναχώρησης 21:30</p>
-      <p class="info-line">
-        <a href="https://maps.app.goo.gl/RR2Zt9vEUYQPfETE8" target="_blank" rel="noopener noreferrer" class="btn-link">
-          📍 Δες την τοποθεσία του meet στο Google Maps
-        </a>
-      </p>
-      <p class="info-line"><strong>Info:</strong> Φέρτε καλή διάθεση, καθαρά αμάξια και τη φάση σας! Όλα σύμφωνα με τον Κ.Ο.Κ. Τα μηχανάκια με κράνη! Να είστε όλοι εκεί!!!</p>
-    </div>
-
-    <div id="stay-tuned" class="hidden">
-      <p>🧭 <strong>Μείνετε συντονισμένοι για το επόμενο meet!</strong></p>
+    <div style="margin-top: 25px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+      <a href="articles.html" class="btn-link">📘 Άρθρα</a>
+      <a href="membersgallery.html" class="btn-link">🧙‍♂️ Members Gallery</a>
+      <a href="news.html" class="btn-link">📰 Νέα</a>
+      <a href="gallery.html" class="btn-link">📸 Gallery</a>
+      <a href="join.html" class="btn-link">➕ Γίνε Μέλος</a>
     </div>
   </section>
 
   <section id="gallery">
     <h2>📸 Banner</h2>
     <img src="speed_wizardz_banner.png" alt="Speed Wizardz Meet Poster">
-    <br>
 
     <section id="calculators" style="margin-top: 25px;">
       <a href="ypologistes.html" class="btn-link">
@@ -243,54 +205,12 @@
       document.getElementById('menu').classList.toggle('show');
     }
 
-    // Κλείνουμε το μενού όταν πατιέται κάποιο link μέσα στο nav
+    // Κλείσιμο μενού όταν πατιέται κάποιο link
     document.querySelectorAll('#menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.getElementById('menu').classList.remove('show');
       });
     });
-
-    const countdownEl = document.getElementById('countdown');
-    const meetInfo = document.getElementById('meet-info');
-    const stayTuned = document.getElementById('stay-tuned');
-
-    const meetupStart = new Date('2025-07-12T20:30:00');
-    const meetupEnd = new Date(meetupStart.getTime() + 5 * 60 * 60 * 1000);
-    const meetupCompleteEnd = new Date(meetupEnd.getTime() + 5 * 24 * 60 * 60 * 1000);
-
-    function updateCountdown() {
-      const now = new Date();
-
-      if (now < meetupStart) {
-        const diff = meetupStart - now;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        countdownEl.textContent = `Μέχρι το meetup: ${days} μέρες, ${hours} ώρες, ${minutes} λεπτά, ${seconds} δευτ.`;
-        meetInfo.classList.remove('hidden');
-        stayTuned.classList.add('hidden');
-
-      } else if (now >= meetupStart && now < meetupEnd) {
-        countdownEl.textContent = 'Το meetup γίνεται τώρα! Αν θες να μας βρεις, στείλε μας μήνυμα στο Instagram.';
-        meetInfo.classList.add('hidden');
-        stayTuned.classList.add('hidden');
-
-      } else if (now >= meetupEnd && now < meetupCompleteEnd) {
-        countdownEl.textContent = 'Το meetup ολοκληρώθηκε!';
-        meetInfo.classList.add('hidden');
-        stayTuned.classList.add('hidden');
-
-      } else {
-        countdownEl.textContent = '';
-        meetInfo.classList.add('hidden');
-        stayTuned.classList.remove('hidden');
-      }
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
