@@ -5,203 +5,242 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gallery | Speed Wizardz</title>
 <style>
-body {
-background-image: url("2.png");
-font-family: Arial, sans-serif;
-background-size: cover;
-background-attachment: fixed;
-color: #eee;
-margin: 0;
-padding: 0;
-text-align: center;
-text-shadow: 1px 1px 2px black;
-}
-header {
-background: rgba(0,0,0,0.7);
-padding: 20px;
-}
-header h1 {
-margin: 0;
-font-size: 2em;
-color: #0ff;
-}
-.accordion {
-max-width: 900px;
-margin: 20px auto;
-background: rgba(0,0,0,0.6);
-border-radius: 10px;
-overflow: hidden;
-text-align: left;
-}
-.accordion-item {
-border-bottom: 1px solid #444;
-}
-.accordion-header {
-background: rgba(0,0,0,0.7);
-padding: 15px 20px;
-cursor: pointer;
-font-weight: bold;
-color: #0ff;
-user-select: none;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.accordion-header:hover {
-background: rgba(0,255,255,0.3);
-}
-.accordion-content {
-max-height: 0;
-overflow: hidden;
-transition: max-height 0.4s ease;
-padding: 0 20px;
-}
-.accordion-content.open {
-padding: 20px;
-}
-.gallery-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-gap: 10px;
-}
-.gallery-grid img, .gallery-grid video {
-width: 100%;
-border-radius: 10px;
-box-shadow: 0 0 8px #0ff;
-cursor: pointer;
-transition: transform 0.3s;
-}
-.gallery-grid img:hover, .gallery-grid video:hover {
-transform: scale(1.05);
-}
-.accordion-arrow {
-transition: transform 0.3s ease;
-font-size: 1.2em;
-}
-.accordion-arrow.open {
-transform: rotate(90deg);
-}
-.menu-toggle {
-font-size: 2em;
-color: #0ff;
-background: rgba(0, 0, 0, 0.6);
-padding: 10px 15px;
-cursor: pointer;
-border-radius: 8px;
-position: fixed;
-top: 15px;
-right: 15px;
-z-index: 999;
-transition: background-color 0.3s ease;
-}
-.menu-toggle:hover {
-background: rgba(0, 255, 255, 0.3);
-}
-nav {
-background: rgba(0, 0, 0, 0.85);
-padding: 15px;
-border-radius: 10px;
-display: none;
-flex-direction: column;
-align-items: flex-end;
-gap: 10px;
-position: fixed;
-top: 65px;
-right: 15px;
-z-index: 998;
-animation: fadeIn 0.3s ease;
-}
-nav.show {
-display: flex;
-}
-nav a {
-color: #0ff;
-text-decoration: none;
-font-weight: bold;
-}
-nav a:hover {
-text-decoration: underline;
-}
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(-10px); }
-to { opacity: 1; transform: translateY(0); }
-}
+  body {
+    background-image: url("2.png");
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-shadow: 1px 1px 2px black;
+  }
+  header {
+    background: rgba(0,0,0,0.7);
+    padding: 20px 10px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.8em;
+    color: #0ff;
+  }
+  .accordion {
+    max-width: 900px;
+    margin: 20px auto;
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    padding: 0 10px;
+  }
+  .accordion-item {
+    border-bottom: 1px solid #444;
+  }
+  .accordion-header {
+    background: rgba(0,0,0,0.7);
+    padding: 12px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #0ff;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .accordion-header:hover {
+    background: rgba(0,255,255,0.3);
+  }
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 10px;
+  }
+  .accordion-content.open {
+    padding: 15px 10px 20px;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+  }
+  .gallery-grid img, .gallery-grid video {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #0ff;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .gallery-grid img:hover, .gallery-grid video:hover {
+    transform: scale(1.05);
+  }
+  .accordion-arrow {
+    transition: transform 0.3s ease;
+    font-size: 1.2em;
+  }
+  .accordion-arrow.open {
+    transform: rotate(90deg);
+  }
+  .menu-toggle {
+    font-size: 2em;
+    color: #0ff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 999;
+    transition: background-color 0.3s ease;
+  }
+  .menu-toggle:hover {
+    background: rgba(0, 255, 255, 0.3);
+  }
+  nav {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    position: fixed;
+    top: 65px;
+    right: 15px;
+    z-index: 998;
+    animation: fadeIn 0.3s ease;
+    max-width: 90vw;
+  }
+  nav.show {
+    display: flex;
+  }
+  nav a {
+    color: #0ff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    word-break: break-word;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-/* Lightbox styles */
-#lightboxOverlay {
-position: fixed;
-top: 0; left: 0; right: 0; bottom: 0;
-background: rgba(0,0,0,0.85);
-display: flex;
-justify-content: center;
-align-items: center;
-opacity: 0;
-pointer-events: none;
-transition: opacity 0.4s ease;
-z-index: 10000;
-}
-#lightboxOverlay.show {
-opacity: 1;
-pointer-events: auto;
-}
-#lightboxOverlay img, #lightboxOverlay video {
-max-width: 90vw;
-max-height: 80vh;
-border-radius: 10px;
-box-shadow: 0 0 20px #0ff;
-user-select: none;
-pointer-events: auto;
-}
-#lightboxClose {
-position: fixed;
-top: 20px;
-right: 30px;
-font-size: 2.5em;
-color: #0ff;
-cursor: pointer;
-user-select: none;
-font-weight: bold;
-transition: color 0.3s ease;
-z-index: 10001;
-}
-#lightboxClose:hover {
-color: #0cc;
-}
-#lightboxPrev, #lightboxNext {
-position: fixed;
-top: 50%;
-transform: translateY(-50%);
-background: rgba(0,0,0,0.6);
-border-radius: 50%;
-color: #0ff;
-font-size: 2.5em;
-width: 40px;
-height: 40px;
-line-height: 40px;
-text-align: center;
-cursor: pointer;
-user-select: none;
-transition: background 0.3s ease;
-box-shadow: 0 0 8px #0ff;
-z-index: 10001;
-}
-#lightboxPrev:hover, #lightboxNext:hover {
-background: rgba(0,255,255,0.9);
-color: #000;
-}
-#lightboxPrev { left: 20px; }
-#lightboxNext { right: 20px; }
+  /* Lightbox styles */
+  #lightboxOverlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 10000;
+  }
+  #lightboxOverlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #lightboxOverlay img, #lightboxOverlay video {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #0ff;
+    user-select: none;
+    pointer-events: auto;
+  }
+  #lightboxClose {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-size: 2.5em;
+    color: #0ff;
+    cursor: pointer;
+    user-select: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    z-index: 10001;
+  }
+  #lightboxClose:hover {
+    color: #0cc;
+  }
+  #lightboxPrev, #lightboxNext {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    color: #0ff;
+    font-size: 2.5em;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+    box-shadow: 0 0 8px #0ff;
+    z-index: 10001;
+  }
+  #lightboxPrev:hover, #lightboxNext:hover {
+    background: rgba(0,255,255,0.9);
+    color: #000;
+  }
+  #lightboxPrev { left: 20px; }
+  #lightboxNext { right: 20px; }
 
-/* Filter button */
-#filterBtn {
-background:#0ff;
-border:none;
-padding:8px 15px;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
-margin-bottom: 10px;
-}
+  /* Filter button */
+  #filterBtn {
+    background:#0ff;
+    border:none;
+    padding:8px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    margin-bottom: 10px;
+    font-size: 1em;
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.5em;
+    }
+    .accordion-header {
+      padding: 10px 12px;
+      font-size: 1em;
+    }
+    .accordion-content.open {
+      padding: 15px 8px 20px;
+    }
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 6px;
+    }
+    .menu-toggle {
+      font-size: 1.8em;
+      padding: 8px 12px;
+      top: 10px;
+      right: 10px;
+    }
+    nav {
+      top: 50px;
+      right: 10px;
+      padding: 10px;
+      max-width: 95vw;
+    }
+    #filterBtn {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
 </style>
 </head>
 <body>
@@ -240,9 +279,8 @@ margin-bottom: 10px;
 <img src="435561A5-AF71-446A-98BA-C56EACA21E55.jpeg" alt="Ιούλιος 2025" />
 <img src="9CEBE9D6-6421-4456-9C82-E5E9B2D6AE4F.jpeg" alt="Ιούλιος 2025" />
 <img src="F46F15AF-D252-4A58-8D63-6A721B7811C2.jpeg" alt="Ιούλιος 2025" />
-<img src="IMG_5642.jpeg" alt="Ιούλιος 2025" />
-<video controls src="1000269455 (2).mp4"></video>
-<video controls src="1000269455 (1).mp4"></video>
+<img src="IMG_5642.jpeg" alt="Ιούλιος 2025" /> 
+<video controls src="07f86e704d584e74be49d6b8314c41a6.mp4"></video>
 <img src="1000269414 (1).jpg" alt="Ιούλιος 2025" />
 <img src="1000269422.jpg" alt="Ιούλιος 2025" />
 <img src="1000269434.jpg" alt="Ιούλιος 2025" />
@@ -279,7 +317,6 @@ margin-bottom: 10px;
 </div>
 <div class="accordion-content">
 <div class="gallery-grid">
-<video controls src="07f86e704d584e74be49d6b8314c41a6.mp4"></video>
 <img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Ιανουάριος 2025" />
 <img src="IMG_4235.jpeg" alt="Ιανουάριος 2025" />
 <img src="IMG_4232.jpeg" alt="Ιανουάριος 2025" />
@@ -301,36 +338,36 @@ margin-bottom: 10px;
 <script>
 // Μενού toggle
 function toggleMenu() {
-document.getElementById('menu').classList.toggle('show');
+  document.getElementById('menu').classList.toggle('show');
 }
 
 // Accordion
 const accordionHeaders = document.querySelectorAll('.accordion-header');
 accordionHeaders.forEach(header => {
-header.addEventListener('click', () => {
-const openItem = document.querySelector('.accordion-content.open');
-const arrowOpen = document.querySelector('.accordion-arrow.open');
-const content = header.nextElementSibling;
-const arrow = header.querySelector('.accordion-arrow');
+  header.addEventListener('click', () => {
+    const openItem = document.querySelector('.accordion-content.open');
+    const arrowOpen = document.querySelector('.accordion-arrow.open');
+    const content = header.nextElementSibling;
+    const arrow = header.querySelector('.accordion-arrow');
 
-if(openItem && openItem !== content){
-openItem.style.maxHeight = null;
-openItem.classList.remove('open');
-}
-if(arrowOpen && arrowOpen !== arrow){
-arrowOpen.classList.remove('open');
-}
+    if(openItem && openItem !== content){
+      openItem.style.maxHeight = null;
+      openItem.classList.remove('open');
+    }
+    if(arrowOpen && arrowOpen !== arrow){
+      arrowOpen.classList.remove('open');
+    }
 
-if(content.classList.contains('open')){
-content.style.maxHeight = null;
-content.classList.remove('open');
-arrow.classList.remove('open');
-} else {
-content.style.maxHeight = content.scrollHeight + "px";
-content.classList.add('open');
-arrow.classList.add('open');
-}
-});
+    if(content.classList.contains('open')){
+      content.style.maxHeight = null;
+      content.classList.remove('open');
+      arrow.classList.remove('open');
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.classList.add('open');
+      arrow.classList.add('open');
+    }
+  });
 });
 
 // Lightbox λειτουργικότητα
@@ -344,58 +381,58 @@ let currentMediaIndex = -1;
 let mediaElements = [];
 
 function openLightbox(index) {
-currentMediaIndex = index;
-const media = mediaElements[index];
-lightboxContent.innerHTML = '';
+  currentMediaIndex = index;
+  const media = mediaElements[index];
+  lightboxContent.innerHTML = '';
 
-if(media.tagName === 'IMG') {
-const img = document.createElement('img');
-img.src = media.src;
-lightboxContent.appendChild(img);
-} else if(media.tagName === 'VIDEO') {
-const video = document.createElement('video');
-video.src = media.src;
-video.controls = true;
-video.autoplay = true;
-lightboxContent.appendChild(video);
-}
-lightboxOverlay.classList.add('show');
+  if(media.tagName === 'IMG') {
+    const img = document.createElement('img');
+    img.src = media.src;
+    lightboxContent.appendChild(img);
+  } else if(media.tagName === 'VIDEO') {
+    const video = document.createElement('video');
+    video.src = media.src;
+    video.controls = true;
+    video.autoplay = true;
+    lightboxContent.appendChild(video);
+  }
+  lightboxOverlay.classList.add('show');
 }
 
 function closeLightbox() {
-lightboxOverlay.classList.remove('show');
-lightboxContent.innerHTML = '';
+  lightboxOverlay.classList.remove('show');
+  lightboxContent.innerHTML = '';
 }
 
 function showPrev() {
-if(currentMediaIndex > 0) {
-openLightbox(currentMediaIndex - 1);
-}
+  if(currentMediaIndex > 0) {
+    openLightbox(currentMediaIndex - 1);
+  }
 }
 
 function showNext() {
-if(currentMediaIndex < mediaElements.length - 1) {
-openLightbox(currentMediaIndex + 1);
-}
+  if(currentMediaIndex < mediaElements.length - 1) {
+    openLightbox(currentMediaIndex + 1);
+  }
 }
 
 // Συλλογή όλων των εικόνων και βίντεο για lightbox
 function updateMediaElements() {
-mediaElements = [];
-document.querySelectorAll('.gallery-grid img, .gallery-grid video').forEach(el => {
-mediaElements.push(el);
-});
+  mediaElements = [];
+  document.querySelectorAll('.gallery-grid img, .gallery-grid video').forEach(el => {
+    mediaElements.push(el);
+  });
 }
 
 // Άνοιγμα lightbox με κλικ σε εικόνα ή βίντεο
 document.body.addEventListener('click', e => {
-if(e.target.matches('.gallery-grid img, .gallery-grid video')) {
-updateMediaElements();
-const index = mediaElements.indexOf(e.target);
-if(index !== -1) {
-openLightbox(index);
-}
-}
+  if(e.target.matches('.gallery-grid img, .gallery-grid video')) {
+    updateMediaElements();
+    const index = mediaElements.indexOf(e.target);
+    if(index !== -1) {
+      openLightbox(index);
+    }
+  }
 });
 
 lightboxClose.addEventListener('click', closeLightbox);
@@ -408,14 +445,14 @@ const accordionContainer = document.getElementById('accordionContainer');
 let recentFirst = true; // ξεκινάμε με πρόσφατο πρώτο
 
 filterBtn.addEventListener('click', () => {
-const items = Array.from(accordionContainer.children);
-items.reverse();
-accordionContainer.innerHTML = '';
-items.forEach(item => accordionContainer.appendChild(item));
-recentFirst = !recentFirst;
-filterBtn.textContent = recentFirst
-? 'Φίλτρα: Πιο Πρόσφατος Πρώτος'
-: 'Φίλτρα: Πιο Παλιός Πρώτος';
+  const items = Array.from(accordionContainer.children);
+  items.reverse();
+  accordionContainer.innerHTML = '';
+  items.forEach(item => accordionContainer.appendChild(item));
+  recentFirst = !recentFirst;
+  filterBtn.textContent = recentFirst
+    ? 'Φίλτρα: Πιο Πρόσφατος Πρώτος'
+    : 'Φίλτρα: Πιο Παλιός Πρώτος';
 });
 </script>
 
