@@ -1,161 +1,423 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gallery | Speed Wizardz</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-  <style>
-    body {
-      background-image: url("2.png");
-      font-family: Arial, sans-serif;
-      background-size: cover;
-      background-attachment: fixed;
-      color: #eee;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      text-shadow: 1px 1px 2px black;
-    }
-    header {
-      background: rgba(0,0,0,0.7);
-      padding: 20px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-      color: #0ff;
-    }
-    .accordion {
-      max-width: 900px;
-      margin: 20px auto;
-      background: rgba(0,0,0,0.6);
-      border-radius: 10px;
-      overflow: hidden;
-      text-align: left;
-    }
-    .accordion-item {
-      border-bottom: 1px solid #444;
-    }
-    .accordion-header {
-      background: rgba(0,0,0,0.7);
-      padding: 15px 20px;
-      cursor: pointer;
-      font-weight: bold;
-      color: #0ff;
-      user-select: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .accordion-header:hover {
-      background: rgba(0,255,255,0.3);
-    }
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-      padding: 0 20px;
-    }
-    .accordion-content.open {
-      padding: 20px;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-      gap: 10px;
-    }
-    .gallery-grid img, .gallery-grid video {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 0 8px #0ff;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .gallery-grid img:hover, .gallery-grid video:hover {
-      transform: scale(1.05);
-    }
-    .accordion-arrow {
-      transition: transform 0.3s ease;
-      font-size: 1.2em;
-    }
-    .accordion-arrow.open {
-      transform: rotate(90deg);
-    }
-    .menu-toggle {
-      font-size: 2em;
-      color: #0ff;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 8px;
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 999;
-      transition: background-color 0.3s ease;
-    }
-    .menu-toggle:hover {
-      background: rgba(0, 255, 255, 0.3);
-    }
-    nav {
-      background: rgba(0, 0, 0, 0.85);
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-      position: fixed;
-      top: 65px;
-      right: 15px;
-      z-index: 998;
-      animation: fadeIn 0.3s ease;
-    }
-    nav.show {
-      display: flex;
-    }
-    nav a {
-      color: #0ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gallery | Speed Wizardz</title>
+<style>
+body {
+background-image: url("2.png");
+font-family: Arial, sans-serif;
+background-size: cover;
+background-attachment: fixed;
+color: #eee;
+margin: 0;
+padding: 0;
+text-align: center;
+text-shadow: 1px 1px 2px black;
+}
+header {
+background: rgba(0,0,0,0.7);
+padding: 20px;
+}
+header h1 {
+margin: 0;
+font-size: 2em;
+color: #0ff;
+}
+.accordion {
+max-width: 900px;
+margin: 20px auto;
+background: rgba(0,0,0,0.6);
+border-radius: 10px;
+overflow: hidden;
+text-align: left;
+}
+.accordion-item {
+border-bottom: 1px solid #444;
+}
+.accordion-header {
+background: rgba(0,0,0,0.7);
+padding: 15px 20px;
+cursor: pointer;
+font-weight: bold;
+color: #0ff;
+user-select: none;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.accordion-header:hover {
+background: rgba(0,255,255,0.3);
+}
+.accordion-content {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.4s ease;
+padding: 0 20px;
+}
+.accordion-content.open {
+padding: 20px;
+}
+.gallery-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+gap: 10px;
+}
+.gallery-grid img, .gallery-grid video {
+width: 100%;
+border-radius: 10px;
+box-shadow: 0 0 8px #0ff;
+cursor: pointer;
+transition: transform 0.3s;
+}
+.gallery-grid img:hover, .gallery-grid video:hover {
+transform: scale(1.05);
+}
+.accordion-arrow {
+transition: transform 0.3s ease;
+font-size: 1.2em;
+}
+.accordion-arrow.open {
+transform: rotate(90deg);
+}
+.menu-toggle {
+font-size: 2em;
+color: #0ff;
+background: rgba(0, 0, 0, 0.6);
+padding: 10px 15px;
+cursor: pointer;
+border-radius: 8px;
+position: fixed;
+top: 15px;
+right: 15px;
+z-index: 999;
+transition: background-color 0.3s ease;
+}
+.menu-toggle:hover {
+background: rgba(0, 255, 255, 0.3);
+}
+nav {
+background: rgba(0, 0, 0, 0.85);
+padding: 15px;
+border-radius: 10px;
+display: none;
+flex-direction: column;
+align-items: flex-end;
+gap: 10px;
+position: fixed;
+top: 65px;
+right: 15px;
+z-index: 998;
+animation: fadeIn 0.3s ease;
+}
+nav.show {
+display: flex;
+}
+nav a {
+color: #0ff;
+text-decoration: none;
+font-weight: bold;
+}
+nav a:hover {
+text-decoration: underline;
+}
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(-10px); }
+to { opacity: 1; transform: translateY(0); }
+}
 
-    /* Mobile Carousel */
-    @media (max-width: 768px) {
-      .gallery-grid {
-        display: none;
-      }
-      .swiper {
-        display: block;
-        width: 90vw;
-        padding-bottom: 40px;
-      }
-      .swiper-slide img, .swiper-slide video {
-        width: 100%;
-        border-radius: 10px;
-        box-shadow: 0 0 8px #0ff;
-      }
-    }
-  </style>
+/* Lightbox styles */
+#lightboxOverlay {
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background: rgba(0,0,0,0.85);
+display: flex;
+justify-content: center;
+align-items: center;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.4s ease;
+z-index: 10000;
+}
+#lightboxOverlay.show {
+opacity: 1;
+pointer-events: auto;
+}
+#lightboxOverlay img, #lightboxOverlay video {
+max-width: 90vw;
+max-height: 80vh;
+border-radius: 10px;
+box-shadow: 0 0 20px #0ff;
+user-select: none;
+pointer-events: auto;
+}
+#lightboxClose {
+position: fixed;
+top: 20px;
+right: 30px;
+font-size: 2.5em;
+color: #0ff;
+cursor: pointer;
+user-select: none;
+font-weight: bold;
+transition: color 0.3s ease;
+z-index: 10001;
+}
+#lightboxClose:hover {
+color: #0cc;
+}
+#lightboxPrev, #lightboxNext {
+position: fixed;
+top: 50%;
+transform: translateY(-50%);
+background: rgba(0,0,0,0.6);
+border-radius: 50%;
+color: #0ff;
+font-size: 2.5em;
+width: 40px;
+height: 40px;
+line-height: 40px;
+text-align: center;
+cursor: pointer;
+user-select: none;
+transition: background 0.3s ease;
+box-shadow: 0 0 8px #0ff;
+z-index: 10001;
+}
+#lightboxPrev:hover, #lightboxNext:hover {
+background: rgba(0,255,255,0.9);
+color: #000;
+}
+#lightboxPrev { left: 20px; }
+#lightboxNext { right: 20px; }
+
+/* Filter button */
+#filterBtn {
+background:#0ff;
+border:none;
+padding:8px 15px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+margin-bottom: 10px;
+}
+</style>
 </head>
 <body>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script>
-  function toggleMenu() {
-    document.getElementById('menu').classList.toggle('show');
-  }
-</script>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<nav id="menu">
+<a href="index.html">Αρχική</a>
+<a href="news.html">Νέα</a>
+<a href="gallery.html">Gallery</a>
+<a href="join.html">Γίνε Μέλος</a>
+<a href="faq.html">Συχνές Ερωτήσεις</a>
+<a href="articles.html">Άρθρα</a>
+<a href="terms.html">📜 Κανόνες Ομάδας</a>
+</nav>
 
-<!-- Continue your body content and accordion setup here -->
+<header>
+<h1>📸 Gallery</h1>
+<p>Πάτησε τον μήνα για να δεις τα meetups</p>
+</header>
+
+<div style="max-width:900px; margin: 20px auto; text-align:right;">
+<button id="filterBtn">Φίλτρα: Πιο Πρόσφατος Πρώτος</button>
+</div>
+
+<div class="accordion" id="accordionContainer">
+
+<div class="accordion-item">
+<div class="accordion-header">
+Ιούλιος 2025
+<span class="accordion-arrow">&#9654;</span>
+</div>
+<div class="accordion-content">
+<div class="gallery-grid">
+<img src="IMG_5643.jpeg" alt="Ιούλιος 2025" />
+<img src="IMG_5642 (1).jpeg" alt="Ιούλιος 2025" />
+<img src="435561A5-AF71-446A-98BA-C56EACA21E55.jpeg" alt="Ιούλιος 2025" />
+<img src="9CEBE9D6-6421-4456-9C82-E5E9B2D6AE4F.jpeg" alt="Ιούλιος 2025" />
+<img src="F46F15AF-D252-4A58-8D63-6A721B7811C2.jpeg" alt="Ιούλιος 2025" />
+<img src="IMG_5642.jpeg" alt="Ιούλιος 2025" />
+<video controls src="1000269455 (2).mp4"></video>
+<video controls src="1000269455 (1).mp4"></video>
+<img src="1000269414 (1).jpg" alt="Ιούλιος 2025" />
+<img src="1000269422.jpg" alt="Ιούλιος 2025" />
+<img src="1000269434.jpg" alt="Ιούλιος 2025" />
+<img src="1000269433.jpg" alt="Ιούλιος 2025" />
+<video controls src="1000269455.mp4"></video>
+<img src="1000269405.jpg" alt="Ιούλιος 2025" />
+<img src="1000269414.jpg" alt="Ιούλιος 2025" />
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<div class="accordion-header">
+Μάιος 2025
+<span class="accordion-arrow">&#9654;</span>
+</div>
+<div class="accordion-content">
+<div class="gallery-grid">
+<img src="meet1.png" alt="Μάιος 2025" />
+<img src="meet2.jpeg" alt="Μάιος 2025" />
+<img src="meet3.jpeg" alt="Μάιος 2025" />
+<img src="meet4.jpeg" alt="Μάιος 2025" />
+<img src="IMG_5028.jpeg" alt="Μάιος 2025" />
+<img src="IMG_5078.jpeg" alt="Μάιος 2025" />
+<img src="IMG_5085.jpeg" alt="Μάιος 2025" />
+</div>
+</div>
+</div>
+
+<div class="accordion-item">
+<div class="accordion-header">
+Ιανουάριος 2025
+<span class="accordion-arrow">&#9654;</span>
+</div>
+<div class="accordion-content">
+<div class="gallery-grid">
+<video controls src="07f86e704d584e74be49d6b8314c41a6.mp4"></video>
+<img src="2B6012A2-8071-4336-B774-477F6F9B01AE.jpeg" alt="Ιανουάριος 2025" />
+<img src="IMG_4235.jpeg" alt="Ιανουάριος 2025" />
+<img src="IMG_4232.jpeg" alt="Ιανουάριος 2025" />
+<video controls src="4d343b726b304b66864a8e9b8e707d15.mp4"></video>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- Lightbox -->
+<div id="lightboxOverlay">
+<span id="lightboxClose">×</span>
+<span id="lightboxPrev">&#9664;</span>
+<span id="lightboxNext">&#9654;</span>
+<div id="lightboxContent"></div>
+</div>
+
+<script>
+// Μενού toggle
+function toggleMenu() {
+document.getElementById('menu').classList.toggle('show');
+}
+
+// Accordion
+const accordionHeaders = document.querySelectorAll('.accordion-header');
+accordionHeaders.forEach(header => {
+header.addEventListener('click', () => {
+const openItem = document.querySelector('.accordion-content.open');
+const arrowOpen = document.querySelector('.accordion-arrow.open');
+const content = header.nextElementSibling;
+const arrow = header.querySelector('.accordion-arrow');
+
+if(openItem && openItem !== content){
+openItem.style.maxHeight = null;
+openItem.classList.remove('open');
+}
+if(arrowOpen && arrowOpen !== arrow){
+arrowOpen.classList.remove('open');
+}
+
+if(content.classList.contains('open')){
+content.style.maxHeight = null;
+content.classList.remove('open');
+arrow.classList.remove('open');
+} else {
+content.style.maxHeight = content.scrollHeight + "px";
+content.classList.add('open');
+arrow.classList.add('open');
+}
+});
+});
+
+// Lightbox λειτουργικότητα
+const lightboxOverlay = document.getElementById('lightboxOverlay');
+const lightboxContent = document.getElementById('lightboxContent');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+
+let currentMediaIndex = -1;
+let mediaElements = [];
+
+function openLightbox(index) {
+currentMediaIndex = index;
+const media = mediaElements[index];
+lightboxContent.innerHTML = '';
+
+if(media.tagName === 'IMG') {
+const img = document.createElement('img');
+img.src = media.src;
+lightboxContent.appendChild(img);
+} else if(media.tagName === 'VIDEO') {
+const video = document.createElement('video');
+video.src = media.src;
+video.controls = true;
+video.autoplay = true;
+lightboxContent.appendChild(video);
+}
+lightboxOverlay.classList.add('show');
+}
+
+function closeLightbox() {
+lightboxOverlay.classList.remove('show');
+lightboxContent.innerHTML = '';
+}
+
+function showPrev() {
+if(currentMediaIndex > 0) {
+openLightbox(currentMediaIndex - 1);
+}
+}
+
+function showNext() {
+if(currentMediaIndex < mediaElements.length - 1) {
+openLightbox(currentMediaIndex + 1);
+}
+}
+
+// Συλλογή όλων των εικόνων και βίντεο για lightbox
+function updateMediaElements() {
+mediaElements = [];
+document.querySelectorAll('.gallery-grid img, .gallery-grid video').forEach(el => {
+mediaElements.push(el);
+});
+}
+
+// Άνοιγμα lightbox με κλικ σε εικόνα ή βίντεο
+document.body.addEventListener('click', e => {
+if(e.target.matches('.gallery-grid img, .gallery-grid video')) {
+updateMediaElements();
+const index = mediaElements.indexOf(e.target);
+if(index !== -1) {
+openLightbox(index);
+}
+}
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxPrev.addEventListener('click', showPrev);
+lightboxNext.addEventListener('click', showNext);
+
+// Κουμπί φίλτρων για αλλαγή σειράς μηνών
+const filterBtn = document.getElementById('filterBtn');
+const accordionContainer = document.getElementById('accordionContainer');
+let recentFirst = true; // ξεκινάμε με πρόσφατο πρώτο
+
+filterBtn.addEventListener('click', () => {
+const items = Array.from(accordionContainer.children);
+items.reverse();
+accordionContainer.innerHTML = '';
+items.forEach(item => accordionContainer.appendChild(item));
+recentFirst = !recentFirst;
+filterBtn.textContent = recentFirst
+? 'Φίλτρα: Πιο Πρόσφατος Πρώτος'
+: 'Φίλτρα: Πιο Παλιός Πρώτος';
+});
+</script>
 
 </body>
 </html>
