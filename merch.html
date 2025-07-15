@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Speed Wizardz | Merchandise</title>
+  <style>
+    body {
+      background-image: url("2.png");
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 10px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      position: fixed;
+      top: 65px;
+      right: 15px;
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
+    }
+
+    nav.show {
+      display: flex;
+    }
+
+    nav a {
+      color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .menu-toggle {
+      font-size: 2em;
+      color: #0ff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 999;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(0, 255, 255, 0.3);
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: #0ff;
+      margin-top: 0;
+    }
+
+    .btn-link {
+      display: inline-block;
+      background: transparent;
+      color: #0ff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 2px solid #0ff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .btn-link:hover {
+      background: #0cc;
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    .product-card {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 10px;
+      width: 230px;
+      box-shadow: 0 0 12px #0ff;
+      text-align: center;
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="menu">
+    <a href="index.html">🏠 Αρχική</a>
+    <a href="news.html">Νέα</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="join.html">Γίνε Μέλος</a>
+    <a href="faq.html">Συχνές Ερωτήσεις</a>
+    <a href="articles.html">Άρθρα</a>
+    <a href="terms.html">📜 Κανόνες</a>
+  </nav>
+
+  <header>
+    <h1>Speed Wizardz</h1>
+    <p>🔥 Επίσημα Merchandise της ομάδας 🔥</p>
+  </header>
+
+  <section>
+    <h2>🎁 Speed Wizardz Merchandise</h2>
+    <p>Τα αποκλειστικά είδη της ομάδας μας είναι διαθέσιμα μόνο με συμμετοχή και παρουσία!</p>
+
+    <div class="product-container">
+
+      <!-- Βραχιόλι -->
+      <div class="product-card">
+        <img src="bracelet.png" alt="Βραχιόλι Speed Wizardz" />
+        <h3 style="color: #0ff;">Βραχιόλι Ομάδας</h3>
+        <p>Διαθέσιμο <strong>μόνο για ενεργά μέλη</strong> της Speed Wizardz.</p>
+      </div>
+
+      <!-- Αυτοκόλλητο -->
+      <div class="product-card">
+        <img src="sticker.png" alt="Αυτοκόλλητο Speed Wizardz" />
+        <h3 style="color: #0ff;">Αυτοκόλλητο</h3>
+        <p>Διαθέσιμο <strong>μόνο με φυσική παρουσία</strong> σε κάποιο meetup.</p>
+      </div>
+
+    </div>
+
+    <a href="https://www.instagram.com/speed_wizardz/" target="_blank" class="btn-link">📩 Επικοινωνία μέσω Instagram</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
+      <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
+    </p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>
