@@ -200,7 +200,7 @@
         <option value="all">Όλα τα Meetups</option>
         <option value="current">Τρέχον Meet</option>
         <option value="others">Άλλες Ομάδες</option>
-        <option value="others">Παλαιότερα meet</option>
+        <option value="old">Παλαιότερα meet</option>
       </select>
     </div>
   </section>
@@ -229,14 +229,9 @@
     let markers = [];
 
     const locations = [
-      { position: { lat:37.88138391840514, lng:23.92641568415319 }, title: 'Speed Wizardz - Τελευταίο Meet Μαρκόπουλο', type: 'current', date: '2025-07-12' },
-      { position: { lat: 38.0, lng: 23.7 }, title: 'Meet Άλλης Ομάδας - Περιοχή Αττικής', type: 'others', date: '2025-07-15' },
-      { position: { lat: 38.2, lng: 23.9 }, title: 'Παλαιότερο Meet Speed Wizardz - Πειραιάς', type: 'old', date: '2025-06-10' },
-      { position: { lat: 37.9838, lng: 23.7275 }, title: 'Meet Speed Wizardz - Αθήνα Κέντρο', type: 'current', date: '2025-07-20' },
-      { position: { lat: 38.2466, lng: 21.7346 }, title: 'Meet Άλλης Ομάδας - Πάτρα', type: 'others', date: '2025-08-01' },
-      { position: { lat: 40.6401, lng: 22.9444 }, title: 'Speed Wizardz - Θεσσαλονίκη', type: 'current', date: '2025-07-25' },
-      { position: { lat: 35.3387, lng: 25.1442 }, title: 'Meet Άλλης Ομάδας - Ηράκλειο', type: 'others', date: '2025-08-05' },
-      { position: { lat: 40.9396, lng: 24.4018 }, title: 'Παλαιότερο Meet Speed Wizardz - Καβάλα', type: 'old', date: '2025-06-20' }
+      { position: { lat:37.88138391840514, lng:23.92641568415319 }, title: 'Speed Wizardz - Τελευταίο Meet Μαρκόπουλο', type: 'old', date: '2025-07-12' },
+      { position: { lat:37.98624622886764, lng:23.907747770344447 }, title: 'Παλαιότερο Meet Speed Wizardz - Σπάτα', type: 'old', date: '2025-05-10' },
+      { position: { lat: 37.99009894451882, lng:24.02065833804186 }, title: 'Meet Speed Wizardz - Λούτσα', type: 'old', date: '2025-01-25' },
     ];
 
     function initMap() {
