@@ -159,14 +159,6 @@
       box-shadow: 0 0 15px rgba(0,255,255,0.4);
     }
   </style>
-
-  <!-- Leaflet CSS για χάρτη -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-sA+skRTPq0BtDaSFnCJC3jyk7PAtwLd5z5sNei5o7+k="
-    crossorigin=""
-  />
 </head>
 <body>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -222,13 +214,6 @@
     </p>
   </footer>
 
-  <!-- Leaflet JS για χάρτη -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-o9N1jA+vqh7gOXu9poLf7KtznmKa5g5x5f0wK+8y5Gk="
-    crossorigin=""
-  ></script>
-
   <script>
     function toggleMenu() {
       document.getElementById('menu').classList.toggle('show');
@@ -239,57 +224,78 @@
         document.getElementById('menu').classList.remove('show');
       });
     });
+  </script>
 
-    // Αρχικοποίηση χάρτη Leaflet
-    var map = L.map('map').setView([37.9408, 23.9125], 10); // πχ Μαρκόπουλο περιοχή
+  <!-- Google Maps API -->
+  <script>
+    let map;
+    let markers = [];
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Δείγμα markers για meetups
-    var markers = [
+    const locations = [
       {
-        coords: [37.9408, 23.9125],
-        popup: 'Speed Wizardz - Τελευταίο Meet Μαρκόπουλο',
+        position: { lat: 37.9408, lng: 23.9125 },
+        title: 'Speed Wizardz - Τελευταίο Meet Μαρκόπουλο',
         type: 'current',
         date: '2025-07-12'
       },
       {
-        coords: [38.0, 23.7],
-        popup: 'Meet Άλλης Ομάδας - Περιοχή Αττικής',
+        position: { lat: 38.0, lng: 23.7 },
+        title: 'Meet Άλλης Ομάδας - Περιοχή Αττικής',
         type: 'others',
         date: '2025-07-15'
       },
       {
-        coords: [38.2, 23.9],
-        popup: 'Παλαιότερο Meet Speed Wizardz - Πειραιάς',
+        position: { lat: 38.2, lng: 23.9 },
+        title: 'Παλαιότερο Meet Speed Wizardz - Πειραιάς',
         type: 'old',
         date: '2025-06-10'
       }
     ];
 
-    var leafletMarkers = [];
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 37.9408, lng: 23.9125 },
+        zoom: 10,
+      });
 
-    function addMarkers(filter) {
-      // Καθαρισμός προηγούμενων markers
-      leafletMarkers.forEach(m => map.removeLayer(m));
-      leafletMarkers = [];
+      addMarkers('all');
 
-      markers.forEach(m => {
-        if(filter === 'all' || (filter === 'current' && m.type === 'current') || (filter === 'others' && m.type === 'others')){
-          var marker = L.marker(m.coords).addTo(map).bindPopup(m.popup + '<br><small>Ημερομηνία: ' + m.date + '</small>');
-          leafletMarkers.push(marker);
-        }
+      document.getElementById('filter').addEventListener('change', function() {
+        addMarkers(this.value);
       });
     }
 
-    // Αρχικά δείχνουμε όλα
-    addMarkers('all');
+    function addMarkers(filter) {
+      // Καθαρίζουμε τους παλιούς markers
+      markers.forEach(marker => marker.setMap(null));
+      markers = [];
 
-    document.getElementById('filter').addEventListener('change', function() {
-      addMarkers(this.value);
-    });
+      locations.forEach(loc => {
+        if (
+          filter === 'all' ||
+          (filter === 'current' && loc.type === 'current') ||
+          (filter === 'others' && loc.type === 'others')
+        ) {
+          const marker = new google.maps.Marker({
+            position: loc.position,
+            map: map,
+            title: loc.title,
+          });
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: `<strong>${loc.title}</strong><br><small>Ημερομηνία: ${loc.date}</small>`
+          });
+
+          marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+          });
+
+          markers.push(marker);
+        }
+      });
+    }
   </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw8cB1OvnqXFK1KFWBJ2ooOmG9-dePagc&callback=initMap" async defer></script>
 </body>
 </html>
