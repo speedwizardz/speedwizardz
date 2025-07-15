@@ -150,7 +150,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Χάρτης */
     #map {
       height: 400px;
       max-width: 900px;
@@ -192,13 +191,10 @@
     </div>
   </section>
 
-  <!-- Χάρτης Live Meet -->
   <section id="live-map" style="max-width: 900px; margin: 0 auto 30px auto; background: rgba(0,0,0,0.6); border-radius:10px; padding:20px;">
     <h2>🗺️ Live Χάρτης Meetups</h2>
-    
     <div id="map"></div>
 
-    <!-- Φίλτρα -->
     <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
       <select id="filter" style="padding: 8px; border-radius: 6px; font-size: 1em;">
         <option value="all">Όλα τα Meetups</option>
@@ -232,30 +228,20 @@
     let markers = [];
 
     const locations = [
-      {
-        position: { lat: 37.9408, lng: 23.9125 },
-        title: 'Speed Wizardz - Τελευταίο Meet Μαρκόπουλο',
-        type: 'current',
-        date: '2025-07-12'
-      },
-      {
-        position: { lat: 38.0, lng: 23.7 },
-        title: 'Meet Άλλης Ομάδας - Περιοχή Αττικής',
-        type: 'others',
-        date: '2025-07-15'
-      },
-      {
-        position: { lat: 38.2, lng: 23.9 },
-        title: 'Παλαιότερο Meet Speed Wizardz - Πειραιάς',
-        type: 'old',
-        date: '2025-06-10'
-      }
+      { position: { lat: 37.9408, lng: 23.9125 }, title: 'Speed Wizardz - Τελευταίο Meet Μαρκόπουλο', type: 'current', date: '2025-07-12' },
+      { position: { lat: 38.0, lng: 23.7 }, title: 'Meet Άλλης Ομάδας - Περιοχή Αττικής', type: 'others', date: '2025-07-15' },
+      { position: { lat: 38.2, lng: 23.9 }, title: 'Παλαιότερο Meet Speed Wizardz - Πειραιάς', type: 'old', date: '2025-06-10' },
+      { position: { lat: 37.9838, lng: 23.7275 }, title: 'Meet Speed Wizardz - Αθήνα Κέντρο', type: 'current', date: '2025-07-20' },
+      { position: { lat: 38.2466, lng: 21.7346 }, title: 'Meet Άλλης Ομάδας - Πάτρα', type: 'others', date: '2025-08-01' },
+      { position: { lat: 40.6401, lng: 22.9444 }, title: 'Speed Wizardz - Θεσσαλονίκη', type: 'current', date: '2025-07-25' },
+      { position: { lat: 35.3387, lng: 25.1442 }, title: 'Meet Άλλης Ομάδας - Ηράκλειο', type: 'others', date: '2025-08-05' },
+      { position: { lat: 40.9396, lng: 24.4018 }, title: 'Παλαιότερο Meet Speed Wizardz - Καβάλα', type: 'old', date: '2025-06-20' }
     ];
 
     function initMap() {
       map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 37.9408, lng: 23.9125 },
-        zoom: 10,
+        center: { lat: 38.0, lng: 23.8 },
+        zoom: 7,
       });
 
       addMarkers('all');
@@ -266,7 +252,6 @@
     }
 
     function addMarkers(filter) {
-      // Καθαρίζουμε τους παλιούς markers
       markers.forEach(marker => marker.setMap(null));
       markers = [];
 
@@ -296,6 +281,6 @@
     }
   </script>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw8cB1OvnqXFK1KFWBJ2ooOmG9-dePagc&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&callback=initMap" async defer></script>
 </body>
 </html>
