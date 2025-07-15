@@ -284,8 +284,14 @@
             title: loc.title,
           });
 
+          const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${loc.position.lat},${loc.position.lng}`;
+
           const infoWindow = new google.maps.InfoWindow({
-            content: `<strong>${loc.title}</strong><br><small>Ημερομηνία: ${loc.date}</small>`
+            content: `
+              <strong>${loc.title}</strong><br>
+              <small>Ημερομηνία: ${loc.date}</small><br>
+              <a href="${directionsUrl}" target="_blank" style="color:#00f; text-decoration:underline;">Οδηγίες στο Google Maps</a>
+            `
           });
 
           marker.addListener('click', () => {
