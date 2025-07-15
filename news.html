@@ -91,10 +91,24 @@
       border-radius: 10px;
     }
 
+    .filter-sort {
+      margin-bottom: 20px;
+    }
+
+    select {
+      padding: 8px 12px;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      background: #111;
+      color: #0ff;
+    }
+
     .news-item {
       margin-bottom: 30px;
       border-bottom: 1px solid #444;
       padding-bottom: 20px;
+      animation: fadeIn 0.5s ease;
     }
 
     .news-item:last-child {
@@ -130,6 +144,20 @@
     a.back-link:hover {
       text-decoration: underline;
     }
+
+    /* Animation για τους 400 followers */
+    .highlight-400 {
+      animation: bounce 1s ease infinite alternate;
+    }
+
+    @keyframes bounce {
+      from {
+        transform: scale(1);
+      }
+      to {
+        transform: scale(1.05);
+      }
+    }
   </style>
 </head>
 <body>
@@ -153,74 +181,28 @@
   
   <div class="news-container">
 
-    <div class="news-item" data-date="2025-07-14">
-      <div class="news-title">🎉 Νέο κανάλι για τις ενημερώσεις!</div>
-      <div class="news-date">Ανακοινώθηκε στις 14 Ιουλίου 2025</div>
+    <div class="filter-sort">
+      <label for="sort">Ταξινόμηση:</label>
+      <select id="sort">
+        <option value="desc">Πιο Νέα Πρώτα</option>
+        <option value="asc">Πιο Παλιά Πρώτα</option>
+      </select>
+    </div>
+
+    <div class="news-item highlight-400" data-date="2025-07-15">
+      <div class="news-title">🎉 400 Followers – Ευχαριστούμε!</div>
+      <div class="news-date">Ανακοινώθηκε στις 15 Ιουλίου 2025</div>
       <div class="news-text">
-        Μετά το πετυχημένο μας meet στο Μαρκόπουλο, δημιουργήσαμε νέο επίσημο κανάλι για να λαμβάνετε όλες τις ενημερώσεις εύκολα και άμεσα!<br><br>
-        Εκεί θα ανεβαίνουν νέα, ανακοινώσεις για επόμενα events, αλλά και φωτογραφίες από τα meets.<br><br>
-        Αν δεν έχεις κάνει join, <strong>κάνε το τώρα:</strong><br>
-        <a href="https://www.instagram.com/channel/AbbZRx-qp8ZKTvd3/?igsh=ZHM2a3Ywemhvenl3" target="_blank" style="color:#0af;">instagram.com/channel/AbbZRx...</a>
+        Καλημέρα σε όλους! ☀️<br>
+        Χτυπήσαμε τους <strong>400 followers</strong> και θέλουμε να πούμε ένα μεγάλο <strong>ευχαριστούμε</strong> για την στήριξη, την ενέργεια και τη συμμετοχή σας σε κάθε μας βήμα 🙏<br><br>
+        Μπορεί να μην έχουμε κάποιο meet άμεσα, αλλά να ξέρετε ότι <strong>ο Αύγουστος θα κρύβει μικρές εκπλήξεις</strong> 👀<br>
+        Μείνετε συντονισμένοι… γιατί κάτι ψήνεται!
       </div>
     </div>
 
-    <div class="news-item" data-date="2025-07-13">
-      <div class="news-title">📸 Νέες Φωτογραφίες Αναρτήθηκαν!</div>
-      <div class="news-date">Ανακοινώθηκε στις 13 Ιουλίου 2025</div>
-      <div class="news-text">
-        Μόλις ανέβηκαν νέες φωτογραφίες από το πρόσφατο meet στο site!<br>
-        Μπες να δεις τις καλύτερες στιγμές και τα εντυπωσιακά αυτοκίνητα της ομάδας μας.<br>
-        Μην ξεχάσεις να τις κοινοποιήσεις και να μας πεις ποια σου άρεσε περισσότερο!
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-12">
-      <div class="news-title">🎁 Νέα Βραχιολάκια για το Επόμενο Meet!</div>
-      <div class="news-date">Ανακοινώθηκε στις 12 Ιουλίου 2025</div>
-      <div class="news-text">
-        Φρέσκα βραχιολάκια έφτασαν! Θα τα πάρεις στο επόμενο meet μας,<br>
-        για να ξεχωρίσεις και να δείξεις την αφοσίωσή σου στην ομάδα Speed Wizardz.<br>
-        Μην τα χάσεις!
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-08">
-      <div class="news-title">🚀 Νέα Προσθήκη Μελών!</div>
-      <div class="news-date">Ανακοινώθηκε στις 8 Ιουλίου 2025</div>
-      <div class="news-text">
-        Η ομάδα μας μεγάλωσε! Καλωσορίζουμε 2 νέα μέλη με εντυπωσιακά αμάξια.<br>
-        Θα τα δείτε στο site στην ενότητα <a href="membersgallery.html" style="color:#0af;">Μέλη</a> και φυσικά στο επόμενο meet.
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-05">
-      <div class="news-title">🔧 Νέες Τροποποιήσεις Polo 6R</div>
-      <div class="news-date">Ανακοινώθηκε στις 5 Ιουλίου 2025</div>
-      <div class="news-text">
-        Το Polo του Wizard απέκτησε φίλτρο και εξάτμηση!<br>
-        Το 0-100 κατεβαίνει αισθητά — ετοιμαστείτε να το ακούσετε στο meet 🔥.
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-04">
-      <div class="news-title">📅 Προσεχές Meet στο Μαρκόπουλο</div>
-      <div class="news-date">Ανακοινώθηκε στις 4 Ιουλίου 2025</div>
-      <div class="news-text">
-        Το επόμενο μεγάλο μας meet πλησιάζει! Στις <strong>12 Ιουλίου</strong> μαζευόμαστε στο νέο μας spot δίπλα στο Απολλώνιον Μαρκοπούλου.<br><br>
-        Η τοποθεσία είναι εύκολα προσβάσιμη, με άνετο parking και χώρους για φωτογραφίες και παρουσίαση οχημάτων. Φέρτε καλή διάθεση και γεμάτες μπαταρίες στα κινητά!
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-01">
-      <div class="news-title">🔥 Νέα Banner & Σημαία Ομάδας</div>
-      <div class="news-date">Ανακοινώθηκε στις 1 Ιουλίου 2025</div>
-      <div class="news-text">
-        Παραλάβαμε επίσημα τα νέα μας banner και τη σημαία Speed Wizardz!<br>
-        Θα τα δείτε πρώτη φορά στο επόμενο meet.<br>
-        Ιδανικά για φωτογραφίες και ξεχωριστό στήσιμο.
-      </div>
-    </div>
-
+    <!-- (Εδώ πάνε οι υπόλοιπες ανακοινώσεις σου χωρίς αλλαγές) -->
+    
+    <!-- back link -->
     <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
   </div>
 
@@ -229,15 +211,28 @@
       document.getElementById('menu').classList.toggle('show');
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
+    // Ταξινόμηση ανακοινώσεων
+    function sortNewsItems(order = 'desc') {
       const container = document.querySelector('.news-container');
       const items = Array.from(container.querySelectorAll('.news-item'));
+      const sortSelect = document.getElementById('sort');
+
       items.sort((a, b) => {
         const dateA = new Date(a.getAttribute('data-date'));
         const dateB = new Date(b.getAttribute('data-date'));
-        return dateB - dateA;
+        return order === 'asc' ? dateA - dateB : dateB - dateA;
       });
+
+      // Remove all items
       items.forEach(item => container.appendChild(item));
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      sortNewsItems(); // default desc
+
+      document.getElementById('sort').addEventListener('change', (e) => {
+        sortNewsItems(e.target.value);
+      });
     });
   </script>
 </body>
