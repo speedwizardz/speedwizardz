@@ -149,7 +149,24 @@
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Χάρτης */
+    #map {
+      height: 400px;
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.4);
+    }
   </style>
+
+  <!-- Leaflet CSS για χάρτη -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+skRTPq0BtDaSFnCJC3jyk7PAtwLd5z5sNei5o7+k="
+    crossorigin=""
+  />
 </head>
 <body>
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -183,22 +200,95 @@
     </div>
   </section>
 
+  <!-- Χάρτης Live Meet -->
+  <section id="live-map" style="max-width: 900px; margin: 0 auto 30px auto; background: rgba(0,0,0,0.6); border-radius:10px; padding:20px;">
+    <h2>🗺️ Live Χάρτης Meetups</h2>
+    
+    <div id="map"></div>
+
+    <!-- Φίλτρα -->
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+      <select id="filter" style="padding: 8px; border-radius: 6px; font-size: 1em;">
+        <option value="all">Όλα τα Meetups</option>
+        <option value="current">Τρέχον Meet</option>
+        <option value="others">Άλλες Ομάδες</option>
+      </select>
+    </div>
+  </section>
+
   <footer>
     <p>© 2025 Speed Wizardz | Επικοινωνία στο 
       <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
     </p>
   </footer>
 
+  <!-- Leaflet JS για χάρτη -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-o9N1jA+vqh7gOXu9poLf7KtznmKa5g5x5f0wK+8y5Gk="
+    crossorigin=""
+  ></script>
+
   <script>
     function toggleMenu() {
       document.getElementById('menu').classList.toggle('show');
     }
 
-    // Κλείσιμο μενού όταν πατιέται κάποιο link
     document.querySelectorAll('#menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.getElementById('menu').classList.remove('show');
       });
+    });
+
+    // Αρχικοποίηση χάρτη Leaflet
+    var map = L.map('map').setView([37.9408, 23.9125], 10); // πχ Μαρκόπουλο περιοχή
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Δείγμα markers για meetups
+    var markers = [
+      {
+        coords: [37.9408, 23.9125],
+        popup: 'Speed Wizardz - Τελευταίο Meet Μαρκόπουλο',
+        type: 'current',
+        date: '2025-07-12'
+      },
+      {
+        coords: [38.0, 23.7],
+        popup: 'Meet Άλλης Ομάδας - Περιοχή Αττικής',
+        type: 'others',
+        date: '2025-07-15'
+      },
+      {
+        coords: [38.2, 23.9],
+        popup: 'Παλαιότερο Meet Speed Wizardz - Πειραιάς',
+        type: 'old',
+        date: '2025-06-10'
+      }
+    ];
+
+    var leafletMarkers = [];
+
+    function addMarkers(filter) {
+      // Καθαρισμός προηγούμενων markers
+      leafletMarkers.forEach(m => map.removeLayer(m));
+      leafletMarkers = [];
+
+      markers.forEach(m => {
+        if(filter === 'all' || (filter === 'current' && m.type === 'current') || (filter === 'others' && m.type === 'others')){
+          var marker = L.marker(m.coords).addTo(map).bindPopup(m.popup + '<br><small>Ημερομηνία: ' + m.date + '</small>');
+          leafletMarkers.push(marker);
+        }
+      });
+    }
+
+    // Αρχικά δείχνουμε όλα
+    addMarkers('all');
+
+    document.getElementById('filter').addEventListener('change', function() {
+      addMarkers(this.value);
     });
   </script>
 </body>
