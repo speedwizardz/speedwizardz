@@ -39,14 +39,16 @@
 
     .faq-item {
       border-bottom: 1px solid #555;
-      padding: 10px 0;
+      padding: 12px 0;
     }
 
     .question {
       cursor: pointer;
       font-weight: bold;
-      font-size: 1.1em;
+      font-size: 1.15em;
       position: relative;
+      color: #0ff;
+      text-shadow: 0 0 5px #0ff;
     }
 
     .question::after {
@@ -63,7 +65,7 @@
     .answer {
       max-height: 0;
       overflow: hidden;
-      color: #0ff;
+      color: #ccf;
       transition: max-height 0.4s ease, opacity 0.4s ease;
       opacity: 0;
       padding-left: 10px;
@@ -88,7 +90,6 @@
       text-decoration: underline;
     }
 
-    /* ======= Hamburger Menu Styles ======= */
     .menu-toggle {
       font-size: 2em;
       color: #0ff;
@@ -102,6 +103,7 @@
       z-index: 999;
       transition: background-color 0.3s ease;
     }
+
     .menu-toggle:hover {
       background: rgba(0, 255, 255, 0.3);
     }
@@ -121,14 +123,17 @@
       animation: fadeIn 0.3s ease;
       min-width: 160px;
     }
+
     nav.show {
       display: flex;
     }
+
     nav a {
       color: #0ff;
       text-decoration: none;
       font-weight: bold;
     }
+
     nav a:hover {
       text-decoration: underline;
     }
@@ -141,210 +146,17 @@
 </head>
 <body>
 
-  <!-- Hamburger menu button -->
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <!-- Navigation menu -->
   <nav id="menu">
     <a href="index.html">Αρχική</a>
     <a href="news.html">Νέα</a>
     <a href="gallery.html">Gallery</a>
     <a href="join.html">Γίνε Μέλος</a>
     <a href="faq.html">Συχνές Ερωτήσεις</a>
-    <a href="articles.html">Άρθρα</a>  
-    <a href="merch.html">merchandise</a>
-<html lang="el">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Μέλη | Speed Wizardz</title>
-  <style>
-    body {
-      background-image: url("2.png");
-      font-family: Arial, sans-serif;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: #eee;
-      margin: 0;
-      padding: 0;
-      text-shadow: 1px 1px 2px black;
-    }
-
-    /* Hamburger Menu Styles */
-    .menu-toggle {
-      font-size: 2em;
-      color: #0ff;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 10px 15px;
-      cursor: pointer;
-      border-radius: 8px;
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 999;
-      transition: background-color 0.3s ease;
-    }
-
-    .menu-toggle:hover {
-      background: rgba(0, 255, 255, 0.3);
-    }
-
-    nav#menu {
-      background: rgba(0, 0, 0, 0.9);
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 10px;
-      position: fixed;
-      top: 70px;
-      right: 15px;
-      z-index: 998;
-      animation: fadeIn 0.3s ease;
-    }
-
-    nav#menu.show {
-      display: flex;
-    }
-
-    nav#menu a {
-      color: #0ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav#menu a:hover {
-      text-decoration: underline;
-    }
-
-    /* Προσθήκη για Κανόνες */
-    nav#menu a.terms-link {
-      color: #ff4444;
-      font-weight: bold;
-    }
-    nav#menu a.terms-link:hover {
-      color: #ff2222;
-      text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    header {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-
-    .carousel-container {
-      max-width: 800px;
-      margin: 0 auto;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.4s ease-in-out;
-    }
-
-    .member-card {
-      background: rgba(0, 0, 0, 0.65);
-      border: 2px solid #0ff;
-      border-radius: 12px;
-      padding: 20px;
-      width: 90%;
-      min-width: 90%;
-      max-width: 300px;
-      box-sizing: border-box;
-      margin: 0 10px;
-      color: #eee;
-      text-align: center;
-      box-shadow: 0 0 10px #0ff4;
-      flex-shrink: 0;
-    }
-
-    .member-photo {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
-
-    .member-name {
-      color: #0ff;
-      font-size: 1.3em;
-      margin-bottom: 10px;
-    }
-
-    .carousel-buttons {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .carousel-buttons button {
-      background-color: #0ff;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      padding: 10px 16px;
-      margin: 0 5px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .carousel-buttons button:hover {
-      background-color: #0cc;
-    }
-
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 40px;
-      color: #0af;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .back-link:hover {
-      text-decoration: underline;
-    }
-
-    @media (min-width: 768px) {
-      .member-card {
-        width: 45%;
-        min-width: 45%;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ☰ Hamburger Menu -->
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
-  <nav id="menu">
-    <a href="index.html">Αρχική</a>
-    <a href="news.html">Νέα</a>
-    <a href="gallery.html">Φωτογραφίες</a>
-    <a href="faq.html">Συχνές Ερωτήσεις</a>
     <a href="articles.html">Άρθρα</a>
-    <a href="join.html">Γίνε Μέλος</a>
-    <a href="terms.html">📜 Κανόνες Ομάδας</a>
-  </nav>
-
-    <!-- Μπορούμε να προσθέσουμε εδώ και άλλα links -->
+    <a href="merch.html">Merchandise</a>
+    <a href="terms.html" class="terms-link">📜 Κανόνες</a>
   </nav>
 
   <header>
@@ -355,93 +167,53 @@
   <div class="container">
 
     <div class="faq-item">
-      <div class="question">Πρέπει να έχω κάποιο συγκεκριμένο αυτοκίνητο;</div>
-      <div class="answer">Όχι, αλλά εκτιμάμε τα βελτιωμένα ή ξεχωριστά οχήματα. Αρκεί να έχεις πάθος για την αυτοκίνηση!</div>
+      <div class="question">Μπορώ να έρθω σε meetup χωρίς να είμαι μέλος;</div>
+      <div class="answer"><strong>Ναι, φυσικά! Όλα τα παιδιά που αγαπάνε τα αμάξια και τον σεβασμό είναι ευπρόσδεκτα.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Πόσο κοστίζει να γίνω μέλος;</div>
-      <div class="answer">Η ένταξη στην ομάδα είναι δωρεάν.</div>
+      <div class="question">Πρέπει να έχω “τούμπανο” αμάξι;</div>
+      <div class="answer"><strong>Όχι. Μας νοιάζει περισσότερο η αγάπη σου για την αυτοκίνηση, όχι το budget του project σου.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Είναι νόμιμα τα meetups;</div>
-      <div class="answer">Ναι! Όσο τηρούνται οι κανόνες – σεβασμός στον χώρο, χωρίς φασαρία ή επικίνδυνη οδήγηση.</div>
+      <div class="question">Δέχεστε και μηχανές;</div>
+      <div class="answer"><strong>Ναι! Όποιος οδηγεί με σεβασμό είναι καλοδεχούμενος. Αρκεί να φοράει κράνος και να τηρεί τον Κ.Ο.Κ.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Πώς θα παραλάβω αυτοκόλλητα;</div>
-      <div class="answer">Τα διανέμουμε στα meetups.</div>
+      <div class="question">Γίνονται “κόντρες” ή επικίνδυνα πράγματα στα meetups;</div>
+      <div class="answer"><strong>Όχι. Είμαστε αυστηρά κατά τέτοιων συμπεριφορών. Τα meet είναι φάση, όχι ρίσκο.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Πού μπορώ να ενημερώνομαι για τα επόμενα events;</div>
-      <div class="answer">Στο Instagram και στην αρχική σελίδα του site με την αντίστροφη μέτρηση!</div>
+      <div class="question">Πώς ενημερώνομαι για τα επόμενα meetups;</div>
+      <div class="answer"><strong>Ακολουθώντας μας στο Instagram ή μπαίνοντας συχνά στην αρχική σελίδα του site.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Επιτρέπονται οι μηχανές στα meetups;</div>
-      <div class="answer">Ναι, φυσικά! Όλα τα οχήματα είναι ευπρόσδεκτα, αρκεί να τηρούν τον Κ.Ο.Κ. και οι αναβάτες να φορούν κράνος.</div>
-    </div>
-
-    <!-- Επιπλέον ερωτήσεις -->
-
-    <div class="faq-item">
-      <div class="question">Πώς διοργανώνετε τα meetups και πού γίνονται;</div>
-      <div class="answer">
-        Τα meetups οργανώνονται με σεβασμό στους νόμους και χωρίς φασαρίες. Γίνονται σε ασφαλείς χώρους στάθμευσης ή ανοιχτούς δρόμους στην Αττική, πάντα με ενημέρωση μέσω των social media μας.
-      </div>
+      <div class="question">Δίνετε αυτοκόλλητα;</div>
+      <div class="answer"><strong>Ναι! Τα δίνουμε δωρεάν σε κάθε meetup – πρώτα έρχεσαι, πρώτα κολλάς!</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Τι πρέπει να προσέχω όταν έρχομαι σε ένα meetup;</div>
-      <div class="answer">
-        Να φέρεις καθαρό και ασφαλές αυτοκίνητο, να ακολουθείς τον Κώδικα Οδικής Κυκλοφορίας (<strong>Κ.Ο.Κ.</strong>), και να έχεις πάντα καλή διάθεση. <strong>Η ομάδα δεν υποστηρίζει φασαρίες ή επικίνδυνη οδήγηση.</strong>
-      </div>
+      <div class="question">Μπορώ να φέρω φίλους μαζί μου;</div>
+      <div class="answer"><strong>Σίγουρα. Αρκεί να σέβονται τους άλλους και να μη φέρνουν κακή ενέργεια.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Μπορώ να φέρω φίλους ή άλλα άτομα στα meetups;</div>
-      <div class="answer">
-        Φυσικά! Τα meetups είναι ανοιχτά για όλους που σέβονται τους κανόνες της ομάδας.
-      </div>
+      <div class="question">Τι γίνεται αν κάποιος κάνει χαζομάρες;</div>
+      <div class="answer"><strong>Τον απομακρύνουμε άμεσα από το meetup. Η φάση δεν χαλάει για κανέναν.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Τι κάνετε για να εξασφαλίσετε την ασφάλεια στα meetups;</div>
-      <div class="answer">
-        Έχουμε κανόνες αυστηρού σεβασμού στον Κ.Ο.Κ., επιτηρούμε την ομαλή ροή και αποτρέπουμε επικίνδυνες συμπεριφορές. Οποιαδήποτε παραβίαση μπορεί να οδηγήσει σε αποκλεισμό από την ομάδα.
-      </div>
+      <div class="question">Μπορώ να προτείνω τοποθεσία για meetup;</div>
+      <div class="answer"><strong>Ναι! Στείλε μας μήνυμα στο Instagram με ιδέα – εξετάζουμε πάντα καινούριες τοποθεσίες.</strong></div>
     </div>
 
     <div class="faq-item">
-      <div class="question">Πώς μπορώ να επικοινωνήσω μαζί σας για προτάσεις ή ερωτήσεις;</div>
-      <div class="answer">
-        Μπορείς να μας βρεις στο Instagram <a href="https://www.instagram.com/speed_wizardz/" target="_blank" rel="noopener">@speed_wizardz</a> ή μέσω της φόρμας επικοινωνίας στην ιστοσελίδα μας.
-      </div>
-    </div>
-
-    <!-- Νέες προτεινόμενες ερωτήσεις -->
-
-    <div class="faq-item">
-      <div class="question">Υπάρχει κάποιος κώδικας δεοντολογίας για τα μέλη;</div>
-      <div class="answer">
-        Ναι, τα μέλη οφείλουν να σέβονται τον χώρο, τους άλλους συμμετέχοντες και να ακολουθούν τους κανόνες οδικής ασφάλειας και πολιτισμένης συμπεριφοράς.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Μπορώ να προτείνω τοποθεσίες για μελλοντικά meetups;</div>
-      <div class="answer">
-        Φυσικά! Στείλε μας ιδέες μέσω Instagram ή της φόρμας επικοινωνίας και θα τις εξετάσουμε.
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="question">Τι μπορώ να κάνω αν δω παράνομη ή επικίνδυνη συμπεριφορά;</div>
-      <div class="answer">
-        Ενημέρωσε αμέσως τον οργανωτή ή κάποιον από την ομάδα και αποφύγετε εμπλοκή σε συγκρούσεις.
-      </div>
+      <div class="question">Τι είναι πραγματικά οι Speed Wizardz;</div>
+      <div class="answer"><strong>Μια παρέα που αγαπάει το δρόμο, την αυτοκίνηση και τον σεβασμό. Όχι λέσχη, όχι σύλλογος – απλά φάση.</strong></div>
     </div>
 
     <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
