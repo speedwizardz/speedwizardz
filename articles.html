@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Άρθρα | Speed Wizardz</title>
+  <meta name="description" content="Δες όλα τα άρθρα των Speed Wizardz για βελτιώσεις, τεχνικές drift και car culture." />
+  <meta property="og:title" content="Άρθρα Speed Wizardz" />
+  <meta property="og:image" content="https://yourdomain.com/banner.png" />
+  <meta property="og:description" content="Οδηγοί για tuning, οδήγηση και events από τους Speed Wizardz." />
   <style>
     body {
       background-image: url("2.png");
@@ -130,12 +134,52 @@
         transform: translateY(0);
       }
     }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    ul li small {
+      display: block;
+      font-size: 0.9em;
+      color: #ccc;
+      margin-top: 3px;
+    }
+
+    .quicknav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .quicknav a {
+      margin: 0 10px;
+      font-size: 1em;
+      color: #0ff;
+    }
+
+    /* Mobile-friendly */
+    @media (max-width: 600px) {
+      body {
+        margin: 10px;
+        padding: 10px;
+      }
+      .menu-toggle {
+        font-size: 1.5em;
+        top: 10px;
+        right: 10px;
+      }
+      .back-button {
+        top: 10px;
+        left: 10px;
+        padding: 8px 12px;
+        font-size: 0.9em;
+      }
+    }
   </style>
 </head>
 <body>
 
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-
   <nav id="menu">
     <a href="index.html">Αρχική</a>
     <a href="news.html">Νέα</a>
@@ -143,7 +187,7 @@
     <a href="gallery.html">Φωτογραφίες</a>
     <a href="faq.html">Συχνές Ερωτήσεις</a>
     <a href="articles.html">Άρθρα</a>
-    <a href="merch.html">merchandise</a>
+    <a href="merch.html">Merchandise</a>
     <a href="terms.html">📜 Κανόνες Ομάδας</a>
   </nav>
 
@@ -151,37 +195,64 @@
 
   <h1>Άρθρα Speed Wizardz</h1>
 
-  <section>
-    <h2>Βελτίωση Αυτοκινήτου</h2>
+  <div class="quicknav">
+    <a href="#veltiwsi">🔧 Βελτίωση</a> | 
+    <a href="#drift">🌀 Drift</a> | 
+    <a href="#koinotita">🎉 Κοινότητα</a> | 
+    <a href="#symvoules">🛠️ Συμβουλές</a>
+  </div>
+
+  <section id="veltiwsi">
+    <h2>🔧 Βελτίωση Αυτοκινήτου</h2>
     <ul>
-      <li><a href="articles/ti-einai-1o-stadio.html">Τι είναι τα Στάδια Βελτίωσης Αυτοκινήτου;</a></li>
-      <li><a href="articles/pos-na-vlepsete-kinisi.html">Πώς να βελτιώσετε την κινητικότητα του αυτοκινήτου σας</a></li>
-      <li><a href="articles/eksatastasi-frenon.html">Αναβάθμιση Φρένων: Τι πρέπει να ξέρετε</a></li>
+      <li><a href="articles/ti-einai-1o-stadio.html">⭐ Τι είναι τα Στάδια Βελτίωσης Αυτοκινήτου;</a><br>
+        <small>Τι είναι το Stage 1/2/3 και ποιο είναι κατάλληλο για σένα.</small>
+      </li>
+      <li><a href="articles/pos-na-vlepsete-kinisi.html">Πώς να βελτιώσετε την κινητικότητα του αυτοκινήτου σας</a><br>
+        <small>Ανάρτηση, στήσιμο και συμβουλές για δυναμική οδήγηση.</small>
+      </li>
+      <li><a href="articles/eksatastasi-frenon.html">🆕 Αναβάθμιση Φρένων: Τι πρέπει να ξέρετε</a><br>
+        <small>Όλα όσα χρειάζεται να ξέρεις για πιο ασφαλές φρενάρισμα.</small>
+      </li>
     </ul>
   </section>
 
-  <section>
-    <h2>Τεχνικές Drift & Οδήγησης</h2>
+  <section id="drift">
+    <h2>🌀 Τεχνικές Drift & Οδήγησης</h2>
     <ul>
-      <li><a href="articles/vivliothiki-drift.html">Τεχνικές Drift για Αρχάριους</a></li>
-      <li><a href="articles/simetoxh-se-meetups.html">Πώς να συμμετέχετε σε Car Meetups</a></li>
-      <li><a href="articles/pos-na-fygete-apos-stress.html">Οδηγίες για ασφαλή οδήγηση και διαχείριση άγχους</a></li>
+      <li><a href="articles/vivliothiki-drift.html">Τεχνικές Drift για Αρχάριους</a><br>
+        <small>Ξεκίνα με τις βασικές τεχνικές, χωρίς να καταστρέψεις λάστιχα!</small>
+      </li>
+      <li><a href="articles/simetoxh-se-meetups.html">Πώς να συμμετέχετε σε Car Meetups</a><br>
+        <small>Συμβουλές για συμπεριφορά, οργάνωση και καλή εικόνα.</small>
+      </li>
+      <li><a href="articles/pos-na-fygete-apos-stress.html">Οδηγίες για ασφαλή οδήγηση και διαχείριση άγχους</a><br>
+        <small>Κράτα το μυαλό σου καθαρό στην πίεση του δρόμου ή της πίστας.</small>
+      </li>
     </ul>
   </section>
 
-  <section>
-    <h2>Κοινότητα & Εκδηλώσεις</h2>
+  <section id="koinotita">
+    <h2>🎉 Κοινότητα & Εκδηλώσεις</h2>
     <ul>
-      <li><a href="articles/organosi-meetup.html">Πώς να οργανώσεις ένα πετυχημένο Car Meetup</a></li>
-      <li><a href="articles/istoria-symmaxion.html">Η Ιστορία των Speed Wizardz</a></li>
+      <li><a href="articles/organosi-meetup.html">Πώς να οργανώσεις ένα πετυχημένο Car Meetup</a><br>
+        <small>Από την επιλογή χώρου έως την προβολή, όλα τα βήματα.</small>
+      </li>
+      <li><a href="articles/istoria-symmaxion.html">Η Ιστορία των Speed Wizardz</a><br>
+        <small>Πώς ξεκίνησε η παρέα, ποιοι είμαστε και τι έρχεται.</small>
+      </li>
     </ul>
   </section>
 
-  <section>
-    <h2>Αναβαθμίσεις και Τεχνικές Συμβουλές</h2>
+  <section id="symvoules">
+    <h2>🛠️ Αναβαθμίσεις και Τεχνικές Συμβουλές</h2>
     <ul>
-      <li><a href="articles/filtra-aeros.html">Επιλογή φίλτρου αέρα για καλύτερη απόδοση</a></li>
-      <li><a href="articles/apoxeteusi-exatiseis.html">Καθαρισμός και συντήρηση συστήματος εξαγωγής</a></li>
+      <li><a href="articles/filtra-aeros.html">Επιλογή φίλτρου αέρα για καλύτερη απόδοση</a><br>
+        <small>Panel ή cone; Oiled ή dry; Τι ταιριάζει στο αμάξι σου.</small>
+      </li>
+      <li><a href="articles/apoxeteusi-exatiseis.html">Καθαρισμός και συντήρηση συστήματος εξαγωγής</a><br>
+        <small>Πώς να κρατάς το σύστημα καθαρό και αποδοτικό.</small>
+      </li>
     </ul>
   </section>
 
