@@ -17,6 +17,12 @@
       padding: 0;
       text-shadow: 1px 1px 2px black;
     }
+    header {
+      text-align: center;
+      padding: 30px 10px 10px;
+      color: #0ff;
+      text-shadow: 0 0 8px #0ff;
+    }
     .filters-container {
       max-width: 800px;
       margin: 20px auto;
@@ -53,11 +59,11 @@
     }
     .gallery-container {
       max-width: 800px;
-      margin: 0 auto;
+      margin: 0 auto 40px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      padding: 0 10px 40px;
+      padding: 0 10px;
       box-sizing: border-box;
     }
     .member-card {
@@ -71,6 +77,8 @@
       box-sizing: border-box;
       transition: transform 0.3s ease, opacity 0.3s ease;
       opacity: 1;
+      cursor: default;
+      user-select: none;
     }
     .member-card.dimmed {
       opacity: 0.3;
@@ -87,6 +95,30 @@
       color: #0ff;
       font-size: 1.3em;
       margin-bottom: 10px;
+    }
+    /* Κάρτα για "Γίνε μέλος" */
+    .join-card {
+      background: linear-gradient(135deg, #00ffff, #006666);
+      border: 3px dashed #0ff;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+    .join-card:hover {
+      background: linear-gradient(135deg, #33ffff, #009999);
+      box-shadow: 0 0 15px #0ff;
+    }
+    .join-card p {
+      margin: 10px 0 0 0;
+      font-size: 1em;
+      color: #cfc;
     }
     @media (max-width: 600px) {
       .gallery-container {
@@ -183,12 +215,19 @@
       <p><strong>Bounty:</strong> €7.500</p>
     </div>
 
+    <!-- Κάρτα για να γίνεις μέλος -->
+    <div class="member-card join-card" id="joinCard" tabindex="0" role="button" aria-label="Γίνε μέλος στην ομάδα">
+      <div>Και εσύ θέλεις να γίνεις μέλος;</div>
+      <p>Κάνε κλικ για να γραφτείς!</p>
+    </div>
+
   </div>
 
   <script>
     const bountyFilter = document.getElementById("bountyFilter");
     const wantedFilter = document.getElementById("wantedFilter");
     const gallery = document.getElementById("gallery");
+    const joinCard = document.getElementById("joinCard");
 
     function applyFiltersAndSorting() {
       const bountyVal = bountyFilter.value;
@@ -198,6 +237,9 @@
 
       // Φιλτράρισμα βάση bounty
       function bountyPasses(card) {
+        // Μη φιλτράρεις την κάρτα "join"
+        if(card === joinCard) return true;
+
         const bounty = parseInt(card.getAttribute("data-bounty"));
         if (bountyVal === "all") return true;
         if (bountyVal.startsWith("gte-")) {
@@ -214,6 +256,8 @@
 
       // Φιλτράρισμα βάση wanted
       function wantedPasses(card) {
+        if(card === joinCard) return true;
+
         const wanted = parseInt(card.getAttribute("data-wanted"));
         if (wantedVal === "all") return true;
         if (wantedVal.startsWith("gte-")) {
@@ -232,37 +276,63 @@
       const filtered = members.filter(card => bountyPasses(card) && wantedPasses(card));
 
       // Ταξινόμηση (ξεχωριστά για bounty και wanted, εφαρμόζουμε την bounty ταξινόμηση πρώτα, μετά wanted)
-      // Αν επιλεγεί sorting bounty
       if (bountyVal === "sort-asc") {
-        filtered.sort((a,b) => parseInt(a.getAttribute("data-bounty")) - parseInt(b.getAttribute("data-bounty")));
+        filtered.sort((a,b) => {
+          if(a === joinCard) return 1;
+          if(b === joinCard) return -1;
+          return parseInt(a.getAttribute("data-bounty")) - parseInt(b.getAttribute("data-bounty"));
+        });
       } else if (bountyVal === "sort-desc") {
-        filtered.sort((a,b) => parseInt(b.getAttribute("data-bounty")) - parseInt(a.getAttribute("data-bounty")));
+        filtered.sort((a,b) => {
+          if(a === joinCard) return 1;
+          if(b === joinCard) return -1;
+          return parseInt(b.getAttribute("data-bounty")) - parseInt(a.getAttribute("data-bounty"));
+        });
       }
 
-      // Αν επιλεγεί sorting wanted
       if (wantedVal === "sort-asc") {
-        filtered.sort((a,b) => parseInt(a.getAttribute("data-wanted")) - parseInt(b.getAttribute("data-wanted")));
+        filtered.sort((a,b) => {
+          if(a === joinCard) return 1;
+          if(b === joinCard) return -1;
+          return parseInt(a.getAttribute("data-wanted")) - parseInt(b.getAttribute("data-wanted"));
+        });
       } else if (wantedVal === "sort-desc") {
-        filtered.sort((a,b) => parseInt(b.getAttribute("data-wanted")) - parseInt(a.getAttribute("data-wanted")));
+        filtered.sort((a,b) => {
+          if(a === joinCard) return 1;
+          if(b === joinCard) return -1;
+          return parseInt(b.getAttribute("data-wanted")) - parseInt(a.getAttribute("data-wanted"));
+        });
       }
 
-      // Προσθέτουμε στα μέλη opacity ανάλογα αν περνάνε ή όχι
+      // Αλλαγή opacity ανάλογα αν περνάνε ή όχι (η κάρτα join πάντα φαίνεται)
       members.forEach(card => {
-        if (filtered.includes(card)) {
+        if (card === joinCard || filtered.includes(card)) {
           card.classList.remove("dimmed");
         } else {
           card.classList.add("dimmed");
         }
       });
 
-      // Τοποθετούμε πρώτα τα μέλη που περνάνε το φίλτρο και ταξινομήθηκαν
-      filtered.forEach(card => gallery.appendChild(card));
+      // Βάζουμε στην κορυφή τα φιλτραρισμένα, εκτός η κάρτα join πάει πάντα στο τέλος
+      filtered.filter(c => c !== joinCard).forEach(card => gallery.appendChild(card));
+      // Τελευταία η κάρτα join
+      gallery.appendChild(joinCard);
       // Και μετά τα υπόλοιπα
-      members.filter(card => !filtered.includes(card)).forEach(card => gallery.appendChild(card));
+      members.filter(card => !filtered.includes(card) && card !== joinCard).forEach(card => gallery.appendChild(card));
     }
 
     bountyFilter.addEventListener("change", applyFiltersAndSorting);
     wantedFilter.addEventListener("change", applyFiltersAndSorting);
+
+    joinCard.addEventListener("click", () => {
+      window.location.href = "join.html";
+    });
+    joinCard.addEventListener("keypress", (e) => {
+      if(e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        joinCard.click();
+      }
+    });
 
     applyFiltersAndSorting();
   </script>
