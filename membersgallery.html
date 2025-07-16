@@ -79,6 +79,9 @@
       opacity: 1;
       cursor: default;
       user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .member-card.dimmed {
       opacity: 0.3;
@@ -94,9 +97,21 @@
     .member-name {
       color: #0ff;
       font-size: 1.3em;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
-    /* Κάρτα για "Γίνε μέλος" */
+    .member-info {
+      margin-bottom: 6px;
+    }
+    .member-skill {
+      margin-top: 10px;
+      font-style: italic;
+      color: #afa;
+      font-size: 0.95em;
+      border-top: 1px solid #0ff4;
+      padding-top: 8px;
+      max-width: 100%;
+    }
+    /* Κάρτα για "Γίνε μέλος" και "Αρχική" */
     .join-card {
       background: linear-gradient(135deg, #00ffff, #006666);
       border: 3px dashed #0ff;
@@ -110,6 +125,7 @@
       cursor: pointer;
       user-select: none;
       transition: background 0.3s ease;
+      height: 180px;
     }
     .join-card:hover {
       background: linear-gradient(135deg, #33ffff, #009999);
@@ -170,49 +186,55 @@
     <div class="member-card" data-bounty="15600" data-wanted="6">
       <img src="alfrento.png" alt="Alfrento" class="member-photo" />
       <h3 class="member-name">Αλ-ΦΡΕΝΤΟ ΕΣΠΡΕΣΣΟ</h3>
-      <p><strong>Όχημα:</strong> Opel Astra</p>
-      <p><strong>Καταζητούμενος:</strong>⭐⭐⭐⭐⭐⭐</p>
-      <p><strong>Bounty:</strong> €15.600</p>
+      <p class="member-info"><strong>Όχημα:</strong> Opel Astra</p>
+      <p class="member-info"><strong>Καταζητούμενος:</strong>⭐⭐⭐⭐⭐⭐</p>
+      <p class="member-info"><strong>Bounty:</strong> €15.600</p>
+      <p class="member-skill">Skill: Αρχιμάγος του turbo και βασιλιάς του καφέ!</p>
     </div>
 
     <div class="member-card" data-bounty="8700" data-wanted="5">
       <img src="IMG_4669.jpeg" alt="Polo" class="member-photo" />
       <h3 class="member-name">THE WIZARD</h3>
-      <p><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
-      <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐</p>
-      <p><strong>Bounty:</strong> €8.700</p>
+      <p class="member-info"><strong>Όχημα:</strong> VW POLO 6R R LINE</p>
+      <p class="member-info"><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐⭐</p>
+      <p class="member-info"><strong>Bounty:</strong> €8.700</p>
+      <p class="member-skill">Skill: Μάγος των στάσεων στο φανάρι, κάνει pop και bang με μάεστρια!</p>
     </div>
 
     <div class="member-card" data-bounty="15300" data-wanted="4">
       <img src="alex.jpeg" alt="Alex" class="member-photo" />
       <h3 class="member-name">A-LexRacer</h3>
-      <p><strong>Όχημα:</strong> Opel Astra</p>
-      <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐</p>
-      <p><strong>Bounty:</strong> €15.300</p>
+      <p class="member-info"><strong>Όχημα:</strong> Opel Astra</p>
+      <p class="member-info"><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐</p>
+      <p class="member-info"><strong>Bounty:</strong> €15.300</p>
+      <p class="member-skill">Skill: Έχει το πιο γρήγορο χέρι στο γκάζι... και στις selfie!</p>
     </div>
 
     <div class="member-card" data-bounty="6300" data-wanted="2">
       <img src="E182BE33-26D0-44D2-A0F4-9E74DC4C2E8E.jpeg" alt="Zenx" class="member-photo" />
       <h3 class="member-name">Zenx</h3>
-      <p><strong>Όχημα:</strong> Peugeot 407</p>
-      <p><strong>Καταζητούμενος:</strong> ⭐⭐</p>
-      <p><strong>Bounty:</strong> €6.300</p>
+      <p class="member-info"><strong>Όχημα:</strong> Peugeot 407</p>
+      <p class="member-info"><strong>Καταζητούμενος:</strong> ⭐⭐</p>
+      <p class="member-info"><strong>Bounty:</strong> €6.300</p>
+      <p class="member-skill">Skill: Ο zen master του drift και των αστείων memes.</p>
     </div>
 
     <div class="member-card" data-bounty="1500" data-wanted="1">
       <img src="IMG_5661.jpeg" alt="The Witch" class="member-photo" />
       <h3 class="member-name">The Witch</h3>
-      <p><strong>Όχημα:</strong> Renault Twigo</p>
-      <p><strong>Καταζητούμενη:</strong> ⭐⭐</p>
-      <p><strong>Bounty:</strong> €1.500</p>
+      <p class="member-info"><strong>Όχημα:</strong> Renault Twigo</p>
+      <p class="member-info"><strong>Καταζητούμενη:</strong> ⭐⭐</p>
+      <p class="member-info"><strong>Bounty:</strong> €1.500</p>
+      <p class="member-skill">Skill: Μαγειρεύει το καλύτερο καφέ στο γκαράζ!</p>
     </div>
 
     <div class="member-card" data-bounty="7500" data-wanted="4">
       <img src="golf.jpeg" alt="Ο Πυργιώτης" class="member-photo" />
       <h3 class="member-name">Ο Πυργιώτης</h3>
-      <p><strong>Όχημα:</strong> VW Golf Mk5</p>
-      <p><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐</p>
-      <p><strong>Bounty:</strong> €7.500</p>
+      <p class="member-info"><strong>Όχημα:</strong> VW Golf Mk5</p>
+      <p class="member-info"><strong>Καταζητούμενος:</strong> ⭐⭐⭐⭐</p>
+      <p class="member-info"><strong>Bounty:</strong> €7.500</p>
+      <p class="member-skill">Skill: Γρατζουνάει τα δισκόφρενα πιο γρήγορα κι από τον ήχο του turbo!</p>
     </div>
 
     <!-- Κάρτα για να γίνεις μέλος -->
@@ -221,13 +243,11 @@
       <p>Κάνε κλικ για να γραφτείς!</p>
     </div>
     
+    <!-- Κάρτα επιστροφής αρχικής -->
     <div class="member-card join-card" id="homeCard" tabindex="0" role="button" aria-label="Επιστροφή στην αρχική σελίδα">
       <div>Επιστροφή στην Αρχική</div>
       <p>Κάνε κλικ για να επιστρέψεις</p>
     </div>
-
-  </div>
-
 
   </div>
 
@@ -236,6 +256,7 @@
     const wantedFilter = document.getElementById("wantedFilter");
     const gallery = document.getElementById("gallery");
     const joinCard = document.getElementById("joinCard");
+    const homeCard = document.getElementById("homeCard");
 
     function applyFiltersAndSorting() {
       const bountyVal = bountyFilter.value;
@@ -243,11 +264,8 @@
 
       let members = Array.from(gallery.children);
 
-      // Φιλτράρισμα βάση bounty
       function bountyPasses(card) {
-        // Μη φιλτράρεις την κάρτα "join"
-        if(card === joinCard) return true;
-
+        if(card === joinCard || card === homeCard) return true;
         const bounty = parseInt(card.getAttribute("data-bounty"));
         if (bountyVal === "all") return true;
         if (bountyVal.startsWith("gte-")) {
@@ -258,14 +276,11 @@
           const threshold = parseInt(bountyVal.split("-")[1]);
           return bounty <= threshold;
         }
-        // Για sorting επιλογές δε φιλτράρουμε
         return true;
       }
 
-      // Φιλτράρισμα βάση wanted
       function wantedPasses(card) {
-        if(card === joinCard) return true;
-
+        if(card === joinCard || card === homeCard) return true;
         const wanted = parseInt(card.getAttribute("data-wanted"));
         if (wantedVal === "all") return true;
         if (wantedVal.startsWith("gte-")) {
@@ -276,57 +291,51 @@
           const threshold = parseInt(wantedVal.split("-")[1]);
           return wanted <= threshold;
         }
-        // Για sorting επιλογές δε φιλτράρουμε
         return true;
       }
 
-      // Φιλτράρισμα
       const filtered = members.filter(card => bountyPasses(card) && wantedPasses(card));
 
-      // Ταξινόμηση (ξεχωριστά για bounty και wanted, εφαρμόζουμε την bounty ταξινόμηση πρώτα, μετά wanted)
       if (bountyVal === "sort-asc") {
         filtered.sort((a,b) => {
-          if(a === joinCard) return 1;
-          if(b === joinCard) return -1;
+          if(a === joinCard || a === homeCard) return 1;
+          if(b === joinCard || b === homeCard) return -1;
           return parseInt(a.getAttribute("data-bounty")) - parseInt(b.getAttribute("data-bounty"));
         });
       } else if (bountyVal === "sort-desc") {
         filtered.sort((a,b) => {
-          if(a === joinCard) return 1;
-          if(b === joinCard) return -1;
+          if(a === joinCard || a === homeCard) return 1;
+          if(b === joinCard || b === homeCard) return -1;
           return parseInt(b.getAttribute("data-bounty")) - parseInt(a.getAttribute("data-bounty"));
         });
       }
 
       if (wantedVal === "sort-asc") {
         filtered.sort((a,b) => {
-          if(a === joinCard) return 1;
-          if(b === joinCard) return -1;
+          if(a === joinCard || a === homeCard) return 1;
+          if(b === joinCard || b === homeCard) return -1;
           return parseInt(a.getAttribute("data-wanted")) - parseInt(b.getAttribute("data-wanted"));
         });
       } else if (wantedVal === "sort-desc") {
         filtered.sort((a,b) => {
-          if(a === joinCard) return 1;
-          if(b === joinCard) return -1;
+          if(a === joinCard || a === homeCard) return 1;
+          if(b === joinCard || b === homeCard) return -1;
           return parseInt(b.getAttribute("data-wanted")) - parseInt(a.getAttribute("data-wanted"));
         });
       }
 
-      // Αλλαγή opacity ανάλογα αν περνάνε ή όχι (η κάρτα join πάντα φαίνεται)
       members.forEach(card => {
-        if (card === joinCard || filtered.includes(card)) {
+        if (card === joinCard || card === homeCard || filtered.includes(card)) {
           card.classList.remove("dimmed");
         } else {
           card.classList.add("dimmed");
         }
       });
 
-      // Βάζουμε στην κορυφή τα φιλτραρισμένα, εκτός η κάρτα join πάει πάντα στο τέλος
-      filtered.filter(c => c !== joinCard).forEach(card => gallery.appendChild(card));
-      // Τελευταία η κάρτα join
+      filtered.filter(c => c !== joinCard && c !== homeCard).forEach(card => gallery.appendChild(card));
       gallery.appendChild(joinCard);
-      // Και μετά τα υπόλοιπα
-      members.filter(card => !filtered.includes(card) && card !== joinCard).forEach(card => gallery.appendChild(card));
+      gallery.appendChild(homeCard);
+      members.filter(card => !filtered.includes(card) && card !== joinCard && card !== homeCard).forEach(card => gallery.appendChild(card));
     }
 
     bountyFilter.addEventListener("change", applyFiltersAndSorting);
@@ -339,6 +348,16 @@
       if(e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         joinCard.click();
+      }
+    });
+
+    homeCard.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+    homeCard.addEventListener("keypress", (e) => {
+      if(e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        homeCard.click();
       }
     });
 
