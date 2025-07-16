@@ -108,6 +108,10 @@
       max-width: 100%;
       border-radius: 10px;
       margin-top: 10px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     footer {
@@ -175,6 +179,54 @@
       user-select: none;
       text-align: center;
     }
+
+    /* Banner container, ίδιο στυλ με section */
+    #banner-container {
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: rgba(0,0,0,0.6);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 15px #0ff;
+      text-align: center;
+    }
+
+    #banner-container h3 {
+      color: #0ff;
+      text-shadow: 1px 1px 4px #000;
+      margin-bottom: 8px;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.1em;
+      margin-top: 0;
+    }
+
+    /* Responsive design */
+
+    @media (max-width: 600px) {
+      section, #banner-container, #map-note {
+        max-width: 95%;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      header h1 {
+        font-size: 1.5em;
+      }
+
+      .btn-link {
+        padding: 8px 12px;
+        font-size: 0.9em;
+      }
+
+      #map {
+        height: 300px;
+      }
+
+      .menu-toggle {
+        font-size: 1.8em;
+        padding: 8px 12px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -210,16 +262,13 @@
     </div>
   </section>
 
-</section> <!-- κλείνει το #meetups -->
+  <!-- Banner 1.png -->
+  <div id="banner-container">
+    <h3>BANNER</h3>
+    <img src="1.png" alt="Speed Wizardz Banner">
+  </div>
 
-div style="max-width:900px; margin: 0 auto 30px auto; text-align:center;">
-  <h3 style="color:#0ff; text-shadow: 1px 1px 4px #000; margin-bottom: 8px; font-family: Arial, sans-serif; letter-spacing: 0.1em;">
-    BANNER
-  </h3>
-  <img src="1.png" alt="Speed Wizardz Banner" style="width: 100%; border-radius: 10px; box-shadow: 0 0 15px #0ff;">
-</div>
-
-  <section id="live-map" style="max-width: 900px; margin: 0 auto 30px auto; background: rgba(0,0,0,0.6); border-radius:10px; padding:20px;">
+  <section id="live-map">
     <h2>🗺️ Live Χάρτης Meetups</h2>
     <div id="map"></div>
 
