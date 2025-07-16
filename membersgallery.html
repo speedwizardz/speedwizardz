@@ -24,7 +24,7 @@
       text-shadow: 0 0 8px #0ff;
     }
     .filters-container {
-      max-width: 800px;
+      max-width: 300px;
       margin: 20px auto;
       background: rgba(0,0,0,0.65);
       border-radius: 12px;
@@ -32,20 +32,19 @@
       color: #0ff;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 15px;
       align-items: center;
       font-weight: bold;
     }
     .filters-container label {
       display: flex;
       flex-direction: column;
-      font-size: 0.95em;
+      font-size: 1em;
       color: #0ff;
       width: 100%;
-      max-width: 300px;
     }
     .filters-container select {
-      margin-top: 5px;
+      margin-top: 8px;
       padding: 8px 10px;
       border-radius: 6px;
       border: none;
@@ -54,6 +53,7 @@
       color: #0ff;
       cursor: pointer;
       text-align: center;
+      width: 100%;
     }
 
     .gallery-container {
@@ -152,6 +152,9 @@
       .member-photo {
         height: 150px;
       }
+      .filters-container {
+        max-width: 90%;
+      }
     }
   </style>
 </head>
@@ -164,19 +167,13 @@
 
   <div class="filters-container">
     <label>
-      Φίλτρο & Ταξινόμηση Bounty
-      <select id="bountyFilter">
+      Φίλτρο & Ταξινόμηση
+      <select id="sortFilter">
         <option value="all">Όλα</option>
-        <option value="sort-asc">Ταξινόμηση Bounty ↑</option>
-        <option value="sort-desc">Ταξινόμηση Bounty ↓</option>
-      </select>
-    </label>
-    <label>
-      Φίλτρο & Ταξινόμηση Καταζητούμενου (Wanted)
-      <select id="wantedFilter">
-        <option value="all">Όλα</option>
-        <option value="sort-asc">Ταξινόμηση Wanted ↑</option>
-        <option value="sort-desc">Ταξινόμηση Wanted ↓</option>
+        <option value="bounty-asc">Ταξινόμηση Bounty ↑</option>
+        <option value="bounty-desc">Ταξινόμηση Bounty ↓</option>
+        <option value="wanted-asc">Ταξινόμηση Wanted ↑</option>
+        <option value="wanted-desc">Ταξινόμηση Wanted ↓</option>
       </select>
     </label>
   </div>
@@ -250,59 +247,32 @@
   </div>
 
   <script>
-    const bountyFilter = document.getElementById("bountyFilter");
-    const wantedFilter = document.getElementById("wantedFilter");
+    const sortFilter = document.getElementById("sortFilter");
     const gallery = document.getElementById("gallery");
     const joinCard = document.getElementById("joinCard");
     const homeCard = document.getElementById("homeCard");
 
-    function applyFiltersAndSorting() {
-      const bountyVal = bountyFilter.value;
-      const wantedVal = wantedFilter.value;
+    function applySort() {
+      const val = sortFilter.value;
+      let members = Array.from(gallery.children).filter(el => el !== joinCard && el !== homeCard);
 
-      let members = Array.from(gallery.children);
-
-      function bountyPasses(card) {
-        if(card === joinCard || card === homeCard) return true;
-        const bounty = parseInt(card.getAttribute("data-bounty"));
-        return bountyVal === "all" || true;
+      if (val === "bounty-asc") {
+        members.sort((a, b) => +a.dataset.bounty - +b.dataset.bounty);
+      } else if (val === "bounty-desc") {
+        members.sort((a, b) => +b.dataset.bounty - +a.dataset.bounty);
+      } else if (val === "wanted-asc") {
+        members.sort((a, b) => +a.dataset.wanted - +b.dataset.wanted);
+      } else if (val === "wanted-desc") {
+        members.sort((a, b) => +b.dataset.wanted - +a.dataset.wanted);
       }
 
-      function wantedPasses(card) {
-        if(card === joinCard || card === homeCard) return true;
-        const wanted = parseInt(card.getAttribute("data-wanted"));
-        return wantedVal === "all" || true;
-      }
-
-      const filtered = members.filter(card => bountyPasses(card) && wantedPasses(card));
-
-      if (bountyVal === "sort-asc") {
-        filtered.sort((a,b) => parseInt(a.getAttribute("data-bounty")) - parseInt(b.getAttribute("data-bounty")));
-      } else if (bountyVal === "sort-desc") {
-        filtered.sort((a,b) => parseInt(b.getAttribute("data-bounty")) - parseInt(a.getAttribute("data-bounty")));
-      }
-
-      if (wantedVal === "sort-asc") {
-        filtered.sort((a,b) => parseInt(a.getAttribute("data-wanted")) - parseInt(b.getAttribute("data-wanted")));
-      } else if (wantedVal === "sort-desc") {
-        filtered.sort((a,b) => parseInt(b.getAttribute("data-wanted")) - parseInt(a.getAttribute("data-wanted")));
-      }
-
-      members.forEach(card => {
-        if (filtered.includes(card)) {
-          card.classList.remove("dimmed");
-        } else {
-          card.classList.add("dimmed");
-        }
-      });
-
-      filtered.forEach(card => gallery.appendChild(card));
+      members.forEach(card => gallery.appendChild(card));
       gallery.appendChild(joinCard);
       gallery.appendChild(homeCard);
     }
 
-    bountyFilter.addEventListener("change", applyFiltersAndSorting);
-    wantedFilter.addEventListener("change", applyFiltersAndSorting);
+    sortFilter.addEventListener("change", applySort);
+    applySort();
 
     joinCard.addEventListener("click", () => {
       window.location.href = "join.html";
@@ -323,8 +293,6 @@
         homeCard.click();
       }
     });
-
-    applyFiltersAndSorting();
   </script>
 
 </body>
