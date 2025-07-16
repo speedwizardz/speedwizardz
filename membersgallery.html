@@ -17,7 +17,6 @@
       padding: 0;
       text-shadow: 1px 1px 2px black;
     }
-    /* styles για menu, header κλπ ... (όπως έχεις ήδη) */
     .filters-container {
       max-width: 800px;
       margin: 20px auto;
@@ -37,9 +36,9 @@
       flex-direction: column;
       font-size: 0.9em;
       color: #0ff;
+      min-width: 200px;
     }
-    .filters-container select, 
-    .filters-container input[type="number"] {
+    .filters-container select {
       margin-top: 5px;
       padding: 5px 8px;
       border-radius: 6px;
@@ -49,7 +48,7 @@
       background: #000c;
       color: #0ff;
       cursor: pointer;
-      width: 140px;
+      width: 100%;
       text-align: center;
     }
     .gallery-container {
@@ -71,6 +70,11 @@
       box-shadow: 0 0 10px #0ff4;
       box-sizing: border-box;
       transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    .member-card.dimmed {
+      opacity: 0.3;
+      pointer-events: none;
     }
     .member-photo {
       width: 100%;
@@ -112,23 +116,24 @@
 
   <div class="filters-container">
     <label>
-      Ελάχιστο Bounty (€)
-      <input type="number" id="minBounty" min="0" step="100" placeholder="0" />
+      Φίλτρο & Ταξινόμηση Bounty
+      <select id="bountyFilter">
+        <option value="all">Όλα</option>
+        <option value="gte-5000">Bounty ≥ 5.000€</option>
+        <option value="gte-10000">Bounty ≥ 10.000€</option>
+        <option value="lte-8000">Bounty ≤ 8.000€</option>
+        <option value="sort-asc">Ταξινόμηση Bounty ↑</option>
+        <option value="sort-desc">Ταξινόμηση Bounty ↓</option>
+      </select>
     </label>
     <label>
-      Μέγιστο Bounty (€)
-      <input type="number" id="maxBounty" min="0" step="100" placeholder="20000" />
-    </label>
-    <label>
-      Καταζητούμενος (Wanted Level)
-      <select id="wantedLevel">
-        <option value="any" selected>Όλα</option>
-        <option value="1">⭐</option>
-        <option value="2">⭐⭐</option>
-        <option value="3">⭐⭐⭐</option>
-        <option value="4">⭐⭐⭐⭐</option>
-        <option value="5">⭐⭐⭐⭐⭐</option>
-        <option value="6">⭐⭐⭐⭐⭐⭐</option>
+      Φίλτρο & Ταξινόμηση Καταζητούμενου (Wanted)
+      <select id="wantedFilter">
+        <option value="all">Όλα</option>
+        <option value="gte-4">Wanted ≥ 4 ⭐</option>
+        <option value="lte-3">Wanted ≤ 3 ⭐</option>
+        <option value="sort-asc">Ταξινόμηση Wanted ↑</option>
+        <option value="sort-desc">Ταξινόμηση Wanted ↓</option>
       </select>
     </label>
   </div>
@@ -175,46 +180,96 @@
       <p><strong>Bounty:</strong> €1.500</p>
     </div>
 
+    <div class="member-card" data-bounty="7500" data-wanted="4">
+      <img src="golf.jpeg" alt="Ο Πυργιώτης" class="member-photo" />
+      <h3 class="member-name">Ο Πυργιώτης</h3>
+      <p><strong>Όχημα:</strong> VW Golf Mk5</p>
+      <p><strong>Καταζητούμενη:</strong> ⭐⭐⭐⭐</p>
+      <p><strong>Bounty:</strong> €7.500</p>
+    </div>
+
   </div>
 
   <script>
-    const minBountyInput = document.getElementById("minBounty");
-    const maxBountyInput = document.getElementById("maxBounty");
-    const wantedLevelSelect = document.getElementById("wantedLevel");
+    const bountyFilter = document.getElementById("bountyFilter");
+    const wantedFilter = document.getElementById("wantedFilter");
     const gallery = document.getElementById("gallery");
 
-    function filterMembers() {
-      const minBounty = parseInt(minBountyInput.value) || 0;
-      const maxBounty = parseInt(maxBountyInput.value) || Infinity;
-      const wantedLevel = wantedLevelSelect.value;
+    function applyFiltersAndSorting() {
+      const bountyVal = bountyFilter.value;
+      const wantedVal = wantedFilter.value;
 
-      const members = Array.from(gallery.children);
+      let members = Array.from(gallery.children);
 
-      members.forEach(card => {
+      // Φιλτράρισμα βάση bounty
+      function bountyPasses(card) {
         const bounty = parseInt(card.getAttribute("data-bounty"));
+        if (bountyVal === "all") return true;
+        if (bountyVal.startsWith("gte-")) {
+          const threshold = parseInt(bountyVal.split("-")[1]);
+          return bounty >= threshold;
+        }
+        if (bountyVal.startsWith("lte-")) {
+          const threshold = parseInt(bountyVal.split("-")[1]);
+          return bounty <= threshold;
+        }
+        // Για sorting επιλογές δε φιλτράρουμε
+        return true;
+      }
+
+      // Φιλτράρισμα βάση wanted
+      function wantedPasses(card) {
         const wanted = parseInt(card.getAttribute("data-wanted"));
-        let show = true;
-
-        // Φιλτράρισμα bounty
-        if (bounty < minBounty || bounty > maxBounty) {
-          show = false;
+        if (wantedVal === "all") return true;
+        if (wantedVal.startsWith("gte-")) {
+          const threshold = parseInt(wantedVal.split("-")[1]);
+          return wanted >= threshold;
         }
-
-        // Φιλτράρισμα wanted level
-        if (wantedLevel !== "any" && wanted < parseInt(wantedLevel)) {
-          show = false;
+        if (wantedVal.startsWith("lte-")) {
+          const threshold = parseInt(wantedVal.split("-")[1]);
+          return wanted <= threshold;
         }
+        // Για sorting επιλογές δε φιλτράρουμε
+        return true;
+      }
 
-        card.style.display = show ? "block" : "none";
+      // Φιλτράρισμα
+      const filtered = members.filter(card => bountyPasses(card) && wantedPasses(card));
+
+      // Ταξινόμηση (ξεχωριστά για bounty και wanted, εφαρμόζουμε την bounty ταξινόμηση πρώτα, μετά wanted)
+      // Αν επιλεγεί sorting bounty
+      if (bountyVal === "sort-asc") {
+        filtered.sort((a,b) => parseInt(a.getAttribute("data-bounty")) - parseInt(b.getAttribute("data-bounty")));
+      } else if (bountyVal === "sort-desc") {
+        filtered.sort((a,b) => parseInt(b.getAttribute("data-bounty")) - parseInt(a.getAttribute("data-bounty")));
+      }
+
+      // Αν επιλεγεί sorting wanted
+      if (wantedVal === "sort-asc") {
+        filtered.sort((a,b) => parseInt(a.getAttribute("data-wanted")) - parseInt(b.getAttribute("data-wanted")));
+      } else if (wantedVal === "sort-desc") {
+        filtered.sort((a,b) => parseInt(b.getAttribute("data-wanted")) - parseInt(a.getAttribute("data-wanted")));
+      }
+
+      // Προσθέτουμε στα μέλη opacity ανάλογα αν περνάνε ή όχι
+      members.forEach(card => {
+        if (filtered.includes(card)) {
+          card.classList.remove("dimmed");
+        } else {
+          card.classList.add("dimmed");
+        }
       });
+
+      // Τοποθετούμε πρώτα τα μέλη που περνάνε το φίλτρο και ταξινομήθηκαν
+      filtered.forEach(card => gallery.appendChild(card));
+      // Και μετά τα υπόλοιπα
+      members.filter(card => !filtered.includes(card)).forEach(card => gallery.appendChild(card));
     }
 
-    minBountyInput.addEventListener("input", filterMembers);
-    maxBountyInput.addEventListener("input", filterMembers);
-    wantedLevelSelect.addEventListener("change", filterMembers);
+    bountyFilter.addEventListener("change", applyFiltersAndSorting);
+    wantedFilter.addEventListener("change", applyFiltersAndSorting);
 
-    // Φιλτράρισμα αρχικά
-    filterMembers();
+    applyFiltersAndSorting();
   </script>
 
 </body>
