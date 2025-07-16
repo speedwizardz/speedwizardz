@@ -31,6 +31,54 @@
 
     h1, h2 {
       color: #0ff;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #0ff;
+      padding-bottom: 5px;
+      font-weight: bold;
+    }
+
+    h2 span.arrow {
+      transition: transform 0.3s ease;
+      display: inline-block;
+      font-size: 1.2em;
+      line-height: 1;
+    }
+
+    /* Περιοχή με τα άρθρα κρυφή */
+    .articles-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+      padding-left: 15px;
+      margin-bottom: 30px;
+    }
+
+    /* Όταν ανοίγει */
+    .articles-list.open {
+      max-height: 1000px; /* αρκετά μεγάλο για να χωράει όλη τη λίστα */
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    ul li small {
+      display: block;
+      font-size: 0.9em;
+      color: #ccc;
+      margin-top: 3px;
     }
 
     a {
@@ -114,49 +162,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    section {
-      margin-bottom: 30px;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 15px 20px;
-      border-radius: 10px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeSlideIn 1s ease-out forwards;
-    }
-
-    section:nth-of-type(2) { animation-delay: 0.2s; }
-    section:nth-of-type(3) { animation-delay: 0.4s; }
-    section:nth-of-type(4) { animation-delay: 0.6s; }
-
-    @keyframes fadeSlideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    ul li {
-      margin-bottom: 10px;
-    }
-
-    ul li small {
-      display: block;
-      font-size: 0.9em;
-      color: #ccc;
-      margin-top: 3px;
-    }
-
-    .quicknav {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .quicknav a {
-      margin: 0 10px;
-      font-size: 1em;
-      color: #0ff;
-    }
-
     /* Mobile-friendly */
     @media (max-width: 600px) {
       body {
@@ -173,6 +178,9 @@
         left: 10px;
         padding: 8px 12px;
         font-size: 0.9em;
+      }
+      h2 {
+        font-size: 1.2em;
       }
     }
   </style>
@@ -195,74 +203,97 @@
 
   <h1>Άρθρα Speed Wizardz</h1>
 
-  <div class="quicknav">
-    <a href="#veltiwsi">🔧 Βελτίωση</a> | 
-    <a href="#drift">🌀 Drift</a> | 
-    <a href="#koinotita">🎉 Κοινότητα</a> | 
-    <a href="#symvoules">🛠️ Συμβουλές</a>
-  </div>
-
-  <section id="veltiwsi">
-    <h2>🔧 Βελτίωση Αυτοκινήτου</h2>
-    <ul>
-      <li><a href="articles/ti-einai-1o-stadio.html">⭐ Τι είναι τα Στάδια Βελτίωσης Αυτοκινήτου;</a><br>
-        <small>Τι είναι το Stage 1/2/3 και ποιο είναι κατάλληλο για σένα.</small>
-      </li>
-      <li><a href="articles/pos-na-vlepsete-kinisi.html">Πώς να βελτιώσετε την κινητικότητα του αυτοκινήτου σας</a><br>
-        <small>Ανάρτηση, στήσιμο και συμβουλές για δυναμική οδήγηση.</small>
-      </li>
-      <li><a href="articles/eksatastasi-frenon.html">🆕 Αναβάθμιση Φρένων: Τι πρέπει να ξέρετε</a><br>
-        <small>Όλα όσα χρειάζεται να ξέρεις για πιο ασφαλές φρενάρισμα.</small>
-      </li>
-    </ul>
+  <section>
+    <h2 class="toggle-header">🔧 Βελτίωση <span class="arrow">▶</span></h2>
+    <div class="articles-list">
+      <ul>
+        <li><a href="articles/ti-einai-1o-stadio.html">⭐ Τι είναι τα Στάδια Βελτίωσης Αυτοκινήτου;</a><br>
+          <small>Τι είναι το Stage 1/2/3 και ποιο είναι κατάλληλο για σένα.</small>
+        </li>
+        <li><a href="articles/pos-na-vlepsete-kinisi.html">Πώς να βελτιώσετε την κινητικότητα του αυτοκινήτου σας</a><br>
+          <small>Ανάρτηση, στήσιμο και συμβουλές για δυναμική οδήγηση.</small>
+        </li>
+        <li><a href="articles/eksatastasi-frenon.html">🆕 Αναβάθμιση Φρένων: Τι πρέπει να ξέρετε</a><br>
+          <small>Όλα όσα χρειάζεται να ξέρεις για πιο ασφαλές φρενάρισμα.</small>
+        </li>
+      </ul>
+    </div>
   </section>
 
-  <section id="drift">
-    <h2>🌀 Τεχνικές Drift & Οδήγησης</h2>
-    <ul>
-      <li><a href="articles/vivliothiki-drift.html">Τεχνικές Drift για Αρχάριους</a><br>
-        <small>Ξεκίνα με τις βασικές τεχνικές, χωρίς να καταστρέψεις λάστιχα!</small>
-      </li>
-      <li><a href="articles/simetoxh-se-meetups.html">Πώς να συμμετέχετε σε Car Meetups</a><br>
-        <small>Συμβουλές για συμπεριφορά, οργάνωση και καλή εικόνα.</small>
-      </li>
-      <li><a href="articles/pos-na-fygete-apos-stress.html">Οδηγίες για ασφαλή οδήγηση και διαχείριση άγχους</a><br>
-        <small>Κράτα το μυαλό σου καθαρό στην πίεση του δρόμου ή της πίστας.</small>
-      </li>
-    </ul>
+  <section>
+    <h2 class="toggle-header">🌀 Τεχνικές Drift & Οδήγησης <span class="arrow">▶</span></h2>
+    <div class="articles-list">
+      <ul>
+        <li><a href="articles/vivliothiki-drift.html">Τεχνικές Drift για Αρχάριους</a><br>
+          <small>Ξεκίνα με τις βασικές τεχνικές, χωρίς να καταστρέψεις λάστιχα!</small>
+        </li>
+        <li><a href="articles/simetoxh-se-meetups.html">Πώς να συμμετέχετε σε Car Meetups</a><br>
+          <small>Συμβουλές για συμπεριφορά, οργάνωση και καλή εικόνα.</small>
+        </li>
+        <li><a href="articles/pos-na-fygete-apos-stress.html">Οδηγίες για ασφαλή οδήγηση και διαχείριση άγχους</a><br>
+          <small>Κράτα το μυαλό σου καθαρό στην πίεση του δρόμου ή της πίστας.</small>
+        </li>
+      </ul>
+    </div>
   </section>
 
-  <section id="koinotita">
-    <h2>🎉 Κοινότητα & Εκδηλώσεις</h2>
-    <ul>
-      <li><a href="articles/organosi-meetup.html">Πώς να οργανώσεις ένα πετυχημένο Car Meetup</a><br>
-        <small>Από την επιλογή χώρου έως την προβολή, όλα τα βήματα.</small>
-      </li>
-      <li><a href="articles/istoria-symmaxion.html">Η Ιστορία των Speed Wizardz</a><br>
-        <small>Πώς ξεκίνησε η παρέα, ποιοι είμαστε και τι έρχεται.</small>
-      </li>
-    </ul>
+  <section>
+    <h2 class="toggle-header">🎉 Κοινότητα & Εκδηλώσεις <span class="arrow">▶</span></h2>
+    <div class="articles-list">
+      <ul>
+        <li><a href="articles/organosi-meetup.html">Πώς να οργανώσεις ένα πετυχημένο Car Meetup</a><br>
+          <small>Από την επιλογή χώρου έως την προβολή, όλα τα βήματα.</small>
+        </li>
+        <li><a href="articles/istoria-symmaxion.html">Η Ιστορία των Speed Wizardz</a><br>
+          <small>Πώς ξεκίνησε η παρέα, ποιοι είμαστε και τι έρχεται.</small>
+        </li>
+      </ul>
+    </div>
   </section>
 
-  <section id="symvoules">
-    <h2>🛠️ Αναβαθμίσεις και Τεχνικές Συμβουλές</h2>
-    <ul>
-      <li><a href="articles/filtra-aeros.html">Επιλογή φίλτρου αέρα για καλύτερη απόδοση</a><br>
-        <small>Panel ή cone; Oiled ή dry; Τι ταιριάζει στο αμάξι σου.</small>
-      </li>
-      <li><a href="articles/apoxeteusi-exatiseis.html">Καθαρισμός και συντήρηση συστήματος εξαγωγής</a><br>
-        <small>Πώς να κρατάς το σύστημα καθαρό και αποδοτικό.</small>
-      </li>
-      <li><a href="articles/elastika-malaki-skliro.html">Μαλακά ή Σκληρά Ελαστικά: Τι να επιλέξεις;</a><br>
-        <small>Πλεονεκτήματα και μειονεκτήματα κάθε τύπου, τι να προσέχεις σε καθημερινή ή σπορ οδήγηση.</small>
-      </li>
-    </ul>
+  <section>
+    <h2 class="toggle-header">🛠️ Αναβαθμίσεις και Τεχνικές Συμβουλές <span class="arrow">▶</span></h2>
+    <div class="articles-list">
+      <ul>
+        <li><a href="articles/filtra-aeros.html">Επιλογή φίλτρου αέρα για καλύτερη απόδοση</a><br>
+          <small>Panel ή cone; Oiled ή dry; Τι ταιριάζει στο αμάξι σου.</small>
+        </li>
+        <li><a href="articles/apoxeteusi-exatiseis.html">Καθαρισμός και συντήρηση συστήματος εξαγωγής</a><br>
+          <small>Πώς να κρατάς το σύστημα καθαρό και αποδοτικό.</small>
+        </li>
+        <li><a href="articles/elastika-malaki-skliro.html">Μαλακά ή Σκληρά Ελαστικά: Τι να επιλέξεις;</a><br>
+          <small>Πλεονεκτήματα και μειονεκτήματα κάθε τύπου, τι να προσέχεις σε καθημερινή ή σπορ οδήγηση.</small>
+        </li>
+      </ul>
+    </div>
   </section>
 
   <script>
     function toggleMenu() {
       document.getElementById('menu').classList.toggle('show');
     }
+
+    document.querySelectorAll('.toggle-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const articlesList = header.nextElementSibling;
+        const arrow = header.querySelector('.arrow');
+        if (articlesList.classList.contains('open')) {
+          articlesList.classList.remove('open');
+          arrow.style.transform = 'rotate(0deg)';
+        } else {
+          // Προαιρετικά: Κλείνουμε όλα τα ανοιχτά για να είναι μόνο ένα ανοιχτό
+          document.querySelectorAll('.articles-list.open').forEach(openList => {
+            openList.classList.remove('open');
+            const openArrow = openList.previousElementSibling.querySelector('.arrow');
+            if (openArrow) openArrow.style.transform = 'rotate(0deg)';
+          });
+          // Ανοίγουμε το τωρινό
+          articlesList.classList.add('open');
+          arrow.style.transform = 'rotate(90deg)';
+        }
+      });
+    });
   </script>
+
 </body>
 </html>
