@@ -28,35 +28,34 @@
       margin: 20px auto;
       background: rgba(0,0,0,0.65);
       border-radius: 12px;
-      padding: 15px 20px;
+      padding: 20px;
       color: #0ff;
       display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      justify-content: center;
-      box-sizing: border-box;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
       font-weight: bold;
     }
     .filters-container label {
       display: flex;
       flex-direction: column;
-      font-size: 0.9em;
+      font-size: 0.95em;
       color: #0ff;
-      min-width: 200px;
+      width: 100%;
+      max-width: 300px;
     }
     .filters-container select {
       margin-top: 5px;
-      padding: 5px 8px;
+      padding: 8px 10px;
       border-radius: 6px;
       border: none;
-      font-weight: normal;
       font-size: 1em;
       background: #000c;
       color: #0ff;
       cursor: pointer;
-      width: 100%;
       text-align: center;
     }
+
     .gallery-container {
       max-width: 800px;
       margin: 0 auto 40px;
@@ -66,6 +65,7 @@
       padding: 0 10px;
       box-sizing: border-box;
     }
+
     .member-card {
       background: rgba(0, 0, 0, 0.65);
       border: 2px solid #0ff;
@@ -83,10 +83,12 @@
       flex-direction: column;
       align-items: center;
     }
+
     .member-card.dimmed {
       opacity: 0.3;
       pointer-events: none;
     }
+
     .member-photo {
       width: 100%;
       border-radius: 10px;
@@ -94,14 +96,17 @@
       object-fit: cover;
       height: 180px;
     }
+
     .member-name {
       color: #0ff;
       font-size: 1.3em;
       margin-bottom: 5px;
     }
+
     .member-info {
       margin-bottom: 6px;
     }
+
     .member-skill {
       margin-top: 10px;
       font-style: italic;
@@ -111,7 +116,7 @@
       padding-top: 8px;
       max-width: 100%;
     }
-    /* Κάρτα για "Γίνε μέλος" και "Αρχική" */
+
     .join-card {
       background: linear-gradient(135deg, #00ffff, #006666);
       border: 3px dashed #0ff;
@@ -127,15 +132,18 @@
       transition: background 0.3s ease;
       height: 180px;
     }
+
     .join-card:hover {
       background: linear-gradient(135deg, #33ffff, #009999);
       box-shadow: 0 0 15px #0ff;
     }
+
     .join-card p {
       margin: 10px 0 0 0;
       font-size: 1em;
       color: #cfc;
     }
+
     @media (max-width: 600px) {
       .gallery-container {
         grid-template-columns: 1fr;
@@ -143,14 +151,6 @@
       }
       .member-photo {
         height: 150px;
-      }
-      .filters-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .filters-container label {
-        width: 100%;
-        max-width: 300px;
       }
     }
   </style>
@@ -237,13 +237,11 @@
       <p class="member-skill">Skill: Γρατζουνάει τα δισκόφρενα πιο γρήγορα κι από τον ήχο του turbo!</p>
     </div>
 
-    <!-- Κάρτα για να γίνεις μέλος -->
     <div class="member-card join-card" id="joinCard" tabindex="0" role="button" aria-label="Γίνε μέλος στην ομάδα">
       <div>Και εσύ θέλεις να γίνεις μέλος;</div>
       <p>Κάνε κλικ για να γραφτείς!</p>
     </div>
-    
-    <!-- Κάρτα επιστροφής αρχικής -->
+
     <div class="member-card join-card" id="homeCard" tabindex="0" role="button" aria-label="Επιστροφή στην αρχική σελίδα">
       <div>Επιστροφή στην Αρχική</div>
       <p>Κάνε κλικ για να επιστρέψεις</p>
@@ -267,75 +265,40 @@
       function bountyPasses(card) {
         if(card === joinCard || card === homeCard) return true;
         const bounty = parseInt(card.getAttribute("data-bounty"));
-        if (bountyVal === "all") return true;
-        if (bountyVal.startsWith("gte-")) {
-          const threshold = parseInt(bountyVal.split("-")[1]);
-          return bounty >= threshold;
-        }
-        if (bountyVal.startsWith("lte-")) {
-          const threshold = parseInt(bountyVal.split("-")[1]);
-          return bounty <= threshold;
-        }
-        return true;
+        return bountyVal === "all" || true;
       }
 
       function wantedPasses(card) {
         if(card === joinCard || card === homeCard) return true;
         const wanted = parseInt(card.getAttribute("data-wanted"));
-        if (wantedVal === "all") return true;
-        if (wantedVal.startsWith("gte-")) {
-          const threshold = parseInt(wantedVal.split("-")[1]);
-          return wanted >= threshold;
-        }
-        if (wantedVal.startsWith("lte-")) {
-          const threshold = parseInt(wantedVal.split("-")[1]);
-          return wanted <= threshold;
-        }
-        return true;
+        return wantedVal === "all" || true;
       }
 
       const filtered = members.filter(card => bountyPasses(card) && wantedPasses(card));
 
       if (bountyVal === "sort-asc") {
-        filtered.sort((a,b) => {
-          if(a === joinCard || a === homeCard) return 1;
-          if(b === joinCard || b === homeCard) return -1;
-          return parseInt(a.getAttribute("data-bounty")) - parseInt(b.getAttribute("data-bounty"));
-        });
+        filtered.sort((a,b) => parseInt(a.getAttribute("data-bounty")) - parseInt(b.getAttribute("data-bounty")));
       } else if (bountyVal === "sort-desc") {
-        filtered.sort((a,b) => {
-          if(a === joinCard || a === homeCard) return 1;
-          if(b === joinCard || b === homeCard) return -1;
-          return parseInt(b.getAttribute("data-bounty")) - parseInt(a.getAttribute("data-bounty"));
-        });
+        filtered.sort((a,b) => parseInt(b.getAttribute("data-bounty")) - parseInt(a.getAttribute("data-bounty")));
       }
 
       if (wantedVal === "sort-asc") {
-        filtered.sort((a,b) => {
-          if(a === joinCard || a === homeCard) return 1;
-          if(b === joinCard || b === homeCard) return -1;
-          return parseInt(a.getAttribute("data-wanted")) - parseInt(b.getAttribute("data-wanted"));
-        });
+        filtered.sort((a,b) => parseInt(a.getAttribute("data-wanted")) - parseInt(b.getAttribute("data-wanted")));
       } else if (wantedVal === "sort-desc") {
-        filtered.sort((a,b) => {
-          if(a === joinCard || a === homeCard) return 1;
-          if(b === joinCard || b === homeCard) return -1;
-          return parseInt(b.getAttribute("data-wanted")) - parseInt(a.getAttribute("data-wanted"));
-        });
+        filtered.sort((a,b) => parseInt(b.getAttribute("data-wanted")) - parseInt(a.getAttribute("data-wanted")));
       }
 
       members.forEach(card => {
-        if (card === joinCard || card === homeCard || filtered.includes(card)) {
+        if (filtered.includes(card)) {
           card.classList.remove("dimmed");
         } else {
           card.classList.add("dimmed");
         }
       });
 
-      filtered.filter(c => c !== joinCard && c !== homeCard).forEach(card => gallery.appendChild(card));
+      filtered.forEach(card => gallery.appendChild(card));
       gallery.appendChild(joinCard);
       gallery.appendChild(homeCard);
-      members.filter(card => !filtered.includes(card) && card !== joinCard && card !== homeCard).forEach(card => gallery.appendChild(card));
     }
 
     bountyFilter.addEventListener("change", applyFiltersAndSorting);
