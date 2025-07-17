@@ -3,204 +3,353 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Speed Wizardz | Merch</title>
+  <title>Speed Wizardz | Merchandise</title>
   <style>
     body {
-      background-color: #0d0d0d;
-      color: #fff;
-      font-family: "Arial", sans-serif;
+      background-image: url("2.png");
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #eee;
       margin: 0;
       padding: 0;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
     }
 
     header {
-      background-color: #111;
+      background: rgba(0, 0, 0, 0.7);
       padding: 20px;
-      text-align: center;
-      border-bottom: 2px solid #0ff;
     }
 
     header h1 {
       margin: 0;
       font-size: 2em;
-      color: #0ff;
     }
 
-    .merch-section {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .merch-section h2 {
-      color: #0ff;
-      margin-bottom: 30px;
-    }
-
-    .product-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    .product-card {
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid #0ff;
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
       border-radius: 10px;
-      padding: 20px;
-      width: 250px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      text-decoration: none;
-      color: white;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      position: fixed;
+      top: 65px;
+      right: 15px;
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
     }
 
-    .product-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #0ff;
+    nav.show {
+      display: flex;
     }
 
-    .product-card img {
-      max-width: 100%;
-      border-radius: 5px;
-      margin-bottom: 15px;
-    }
-
-    .product-card h3 {
-      margin: 0;
-      font-size: 1.2em;
+    nav a {
       color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    .product-card p {
-      font-size: 0.95em;
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .menu-toggle {
+      font-size: 2em;
+      color: #0ff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 999;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(0, 255, 255, 0.3);
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: #0ff;
+      margin-top: 0;
+    }
+
+    .btn-link {
+      display: inline-block;
+      background: transparent;
+      color: #0ff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 2px solid #0ff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .btn-link:hover {
+      background: #0cc;
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      font-size: 0.9em;
       color: #ccc;
     }
 
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    .product-card {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 10px;
+      width: 230px;
+      box-shadow: 0 0 12px #0ff;
+      text-align: center;
+      text-decoration: none;
+      color: #eee;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* Modal styles */
     .modal {
-      display: none;
+      display: none; /* κρυφό αρχικά */
       position: fixed;
-      z-index: 1000;
+      z-index: 2000;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0,0,0,0.9);
+      background-color: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
     }
 
     .modal-content {
+      background: rgba(0,0,0,0.85);
       margin: 10% auto;
       padding: 20px;
-      width: 80%;
-      max-width: 500px;
+      border-radius: 12px;
+      max-width: 400px;
+      color: #0ff;
+      box-shadow: 0 0 30px #00ffff;
       text-align: center;
-      background: #111;
-      border: 2px solid #0ff;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #0ff;
+      position: relative;
     }
 
     .modal-content img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      max-width: 80%;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #00ffff;
     }
 
-    .modal-content h3 {
-      color: #0ff;
-      margin-top: 0;
-    }
-
-    .close-modal {
-      color: #0ff;
-      float: right;
-      font-size: 28px;
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #0ff;
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 20px;
       font-weight: bold;
       cursor: pointer;
+      line-height: 26px;
+      text-align: center;
+      box-shadow: 0 0 10px #0ff;
+      transition: background-color 0.3s ease;
     }
 
-    .close-modal:hover {
-      color: #fff;
+    .close-btn:hover {
+      background: #00cccc;
     }
 
-    @media (max-width: 600px) {
-      .product-card {
-        width: 90%;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="menu">
+    <a href="index.html">🏠 Αρχική</a>
+    <a href="news.html">Νέα</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="join.html">Γίνε Μέλος</a>
+    <a href="faq.html">Συχνές Ερωτήσεις</a>
+    <a href="articles.html">Άρθρα</a>
+    <a href="terms.html">📜 Κανόνες</a>
+  </nav>
 
   <header>
-    <h1>Speed Wizardz Merch</h1>
+    <h1>Speed Wizardz</h1>
+    <p>🔥 Επίσημα Merchandise της ομάδας 🔥</p>
   </header>
 
-  <section class="merch-section">
-    <h2>🧢 Διάλεξε το στυλ σου</h2>
+  <section>
+    <h2>🎁 Speed Wizardz Merchandise</h2>
+    <p>Τα αποκλειστικά είδη της ομάδας μας είναι διαθέσιμα μόνο με συμμετοχή και παρουσία!</p>
 
-    <div class="product-grid">
-      <!-- Κλασικό προϊόν -->
-      <a href="#" class="product-card" data-title="Αυτοκόλλητο Speed Wizardz" data-desc="Αυτοκόλλητο υψηλής αντοχής για κάθε επιφάνεια." data-img="sticker1.png">
-        <img src="sticker1.png" alt="Αυτοκόλλητο Speed Wizardz" />
-        <h3>Αυτοκόλλητο Speed Wizardz</h3>
-        <p>Αδιάβροχο και κοφτερό. Μάγοι παντού.</p>
+    <p style="max-width: 700px; margin: 0 auto 25px auto; font-style: italic; color: #99ffff; text-shadow: 0 0 5px #00ffff;">
+  Όλα μας τα προϊόντα έχουν δοκιμαστεί σχολαστικά και εγγυώνται κορυφαία ποιότητα και αντοχή, ώστε να σας συνοδεύουν με στυλ σε κάθε σας meetup.
+</p>
+
+
+    <div class="product-container">
+
+      <!-- Βραχιόλι -->
+      <a href="#" class="product-card" data-title="Βραχιόλι Ομάδας" data-desc="Διαθέσιμο πλεον μόνο για ενεργά μέλη της Speed Wizardz." data-img="bracelet.png">
+        <img src="bracelet.png" alt="Βραχιόλι Speed Wizardz" />
+        <h3 style="color: #0ff;">Βραχιόλι Ομάδας</h3>
+        <p>Διαθέσιμο <strong>μόνο για ενεργά μέλη</strong> της Speed Wizardz.</p>
       </a>
 
-      <!-- Μπλούζα με εμπρός και πίσω -->
-      <a href="#" class="product-card" data-title="Μπλούζα Speed Wizardz" data-desc="Μπλούζα υψηλής ποιότητας, διαθέσιμη για τα πιο ενεργά μέλη της ομάδας." data-img="shirt-back.png">
-        <img src="shirt-front.png" alt="Μπλούζα Speed Wizardz" />
-        <h3 style="color: #0ff;">Μπλούζα Speed Wizardz</h3>
-        <p>Για πληροφοριες σχετικα με τα μεγεθη και τιμη επικοινωνήστε μαζί μας.</p>
-      </a>
+      <!-- Αυτοκόλλητο -->
+<a href="#" class="product-card" data-title="Αυτοκόλλητο Speed Wizardz" data-desc="Διαθέσιμο μόνο με φυσική παρουσία σε κάποιο meetup." data-img="sticker.jpeg" data-details="Ιδανικό για ανοιχτόχρωμες επιφάνειες και τζάμι. Διαστάσεις: 6,5 εκ.">
+  <img src="sticker.jpeg" alt="Αυτοκόλλητο Speed Wizardz" />
+  <h3 style="color: #0ff;">Αυτοκόλλητο ημι-διαφανές</h3>
+  <p>Διαθέσιμο <strong>μόνο με φυσική παρουσία</strong> σε κάποιο meetup.</p>
+  <small style="display:block; margin-top:8px; font-style: italic; color: #99ffff;">
+    Ιδανικό για ανοιχτόχρωμες επιφάνειες και τζάμι.<br>
+    Διαστάσεις: 6,5 εκ.
+  </small>
+</a>
+<!-- Μπλούζα με αυτόματη εναλλαγή front/back -->
+<a href="#" class="product-card">
+  <img id="shirtImage" src="shirt-front.png" alt="Μπλούζα Speed Wizardz">
+  <h3 style="color: #0ff;">Μπλούζα Speed Wizardz</h3>
+  <p>Περιορισμένης κυκλοφορίας μόνο για μέλη.</p>
+  <small style="display:block; margin-top:8px; font-style: italic; color: #99ffff;">
+    Unisex, 100% βαμβάκι<br>
+    Διαθέσιμα μεγέθη: M, L, XL
+  </small>
+</a>
 
-    
-  <!-- Modal για προβολή πίσω όψης -->
-  <div id="productModal" class="modal">
+<script>
+  const shirtImg = document.getElementById("shirtImage");
+  const frontSrc = "shirt-front.png";
+  const backSrc = "shirt-back.png";
+  let showingFront = true;
+
+  setInterval(() => {
+    shirtImg.src = showingFront ? backSrc : frontSrc;
+    showingFront = !showingFront;
+  }, 3000); // εναλλαγή κάθε 3 δευτερόλεπτα
+</script>
+
+    </div>
+
+    <a href="https://www.instagram.com/speed_wizardz/" target="_blank" class="btn-link">📩 Επικοινωνία μέσω Instagram</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
+      <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
+    </p>
+  </footer>
+
+  <!-- Modal structure -->
+  <div id="productModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
     <div class="modal-content">
-      <span class="close-modal" id="closeModal">&times;</span>
-      <img id="modalImg" src="" alt="Προβολή" />
-      <h3 id="modalTitle"></h3>
+      <button class="close-btn" aria-label="Κλείσιμο">&times;</button>
+      <h2 id="modalTitle"></h2>
+      <img id="modalImg" src="" alt="" />
       <p id="modalDesc"></p>
     </div>
   </div>
 
   <script>
-    const productCards = document.querySelectorAll('.product-card');
-    const modal = document.getElementById('productModal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const closeModal = document.getElementById('closeModal');
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
 
-    productCards.forEach(card => {
-      card.addEventListener('click', (e) => {
-        e.preventDefault();
-        const title = card.getAttribute('data-title');
-        const desc = card.getAttribute('data-desc');
-        const img = card.getAttribute('data-img');
-
-        modalTitle.textContent = title;
-        modalDesc.textContent = desc;
-        modalImg.src = img;
-
-        modal.style.display = 'block';
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('show');
       });
     });
 
-    closeModal.onclick = function() {
+    // Modal λειτουργία
+    const modal = document.getElementById('productModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalImg = document.getElementById('modalImg');
+    const closeBtn = modal.querySelector('.close-btn');
+
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', e => {
+        e.preventDefault();
+        modalTitle.textContent = card.getAttribute('data-title');
+        modalDesc.textContent = card.getAttribute('data-desc');
+        modalImg.src = card.getAttribute('data-img');
+        modalImg.alt = card.getAttribute('data-title');
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Απαγόρευση scroll όταν ανοίγει modal
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
       modal.style.display = 'none';
-    }
+      document.body.style.overflow = 'auto';
+    });
 
-    window.onclick = function(event) {
-      if (event.target == modal) {
+    window.addEventListener('click', e => {
+      if (e.target === modal) {
         modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
       }
-    }
-  </script>
+    });
 
+    // Προαιρετικό: κλείσιμο με Esc
+    window.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  </script>
 </body>
 </html>
