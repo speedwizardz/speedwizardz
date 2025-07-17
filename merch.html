@@ -257,14 +257,19 @@
     Διαστάσεις: 6,5 εκ.
   </small>
 </a>
-<!-- Μπλούζα με αυτόματη εναλλαγή front/back -->
-<a href="#" class="product-card">
+
+<a href="#" 
+   class="product-card" 
+   data-title="Μπλούζα Speed Wizardz" 
+   data-desc="Unisex μπλούζα περιορισμένης κυκλοφορίας, διαθέσιμη μόνο για μέλη." 
+   data-img="shirt-front.png">
+
   <img id="shirtImage" src="shirt-front.png" alt="Μπλούζα Speed Wizardz">
   <h3 style="color: #0ff;">Μπλούζα Speed Wizardz</h3>
   <p>Περιορισμένης κυκλοφορίας!!</p>
   <small style="display:block; margin-top:8px; font-style: italic; color: #99ffff;">
     Unisex, 100% βαμβάκι<br>
-    Για μεγέθη ή αλλα χρωματα επικοινωνήστε μαζι μας
+    Για μεγέθη ή άλλα χρώματα επικοινωνήστε μαζί μας
   </small>
 </a>
 
@@ -277,9 +282,8 @@
   setInterval(() => {
     shirtImg.src = showingFront ? backSrc : frontSrc;
     showingFront = !showingFront;
-  }, 3000); // εναλλαγή κάθε 3 δευτερόλεπτα
+  }, 3000);
 </script>
-
     </div>
 
     <a href="https://www.instagram.com/speed_wizardz/" target="_blank" class="btn-link">📩 Επικοινωνία μέσω Instagram</a>
