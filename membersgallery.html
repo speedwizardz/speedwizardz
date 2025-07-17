@@ -57,7 +57,7 @@
     }
 
     .gallery-container {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto 40px;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -82,6 +82,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      max-width: 400px; /* Όριο για μεγάλες οθόνες */
+      margin: 0 auto;
     }
 
     .member-card.dimmed {
@@ -91,10 +93,12 @@
 
     .member-photo {
       width: 100%;
+      max-width: 100%;
+      height: auto;
       border-radius: 10px;
       margin-bottom: 10px;
       object-fit: cover;
-      height: 450px;
+      max-height: 400px; /* περιορισμός ύψους για μεγάλες οθόνες */
     }
 
     .member-name {
@@ -131,6 +135,8 @@
       user-select: none;
       transition: background 0.3s ease;
       height: 180px;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     .join-card:hover {
@@ -144,16 +150,29 @@
       color: #cfc;
     }
 
+    /* Responsive για κινητά */
     @media (max-width: 600px) {
       .gallery-container {
         grid-template-columns: 1fr;
         gap: 15px;
+        padding: 0 15px;
+      }
+      .member-card {
+        max-width: 100%;
+        padding: 15px;
       }
       .member-photo {
-        height: 150px;
+        max-height: 250px;
+        height: auto;
       }
       .filters-container {
-        max-width: 90%;
+        max-width: 95%;
+        padding: 15px 20px;
+      }
+      .join-card {
+        max-width: 100%;
+        height: 150px;
+        font-size: 1.1em;
       }
     }
   </style>
