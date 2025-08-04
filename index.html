@@ -2,143 +2,375 @@
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Speed Wizardz | Αρχική</title>
   <style>
     body {
+      background-image: url("2.png");
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #eee;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0a0a0a;
-      color: #e0f7ff;
+      padding: 0;
+      text-align: center;
+      text-shadow: 1px 1px 2px black;
     }
 
     header {
-      background-color: #000;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
     }
 
     header h1 {
-      color: #00ffff;
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 2em;
     }
 
     nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 10px;
       display: none;
       flex-direction: column;
-      background-color: #111;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      width: 180px;
-      border-radius: 10px;
-      overflow: hidden;
+      align-items: center;
+      gap: 10px;
+      position: fixed;
+      top: 65px;
+      right: 15px;
+      z-index: 998;
+      animation: fadeIn 0.3s ease;
+    }
+
+    nav.show {
+      display: flex;
     }
 
     nav a {
-      padding: 12px 15px;
+      color: #0ff;
       text-decoration: none;
-      color: #e0f7ff;
-      border-bottom: 1px solid #222;
+      font-weight: bold;
     }
 
     nav a:hover {
-      background-color: #00ffff;
-      color: #000;
+      text-decoration: underline;
     }
 
-    .hamburger {
-      display: flex;
-      flex-direction: column;
+    .rules-link {
+      color: #ff4444;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px #aa0000;
+    }
+
+    .rules-link:hover {
+      color: #ff0000;
+      text-decoration: underline;
+    }
+
+    .menu-toggle {
+      font-size: 2em;
+      color: #0ff;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 8px;
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 999;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(0, 255, 255, 0.3);
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+    }
+
+    h2 {
+      color: #0ff;
+      margin-top: 0;
+    }
+
+    .info-line {
+      margin: 10px 0;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    a {
+      color: #0af;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-link {
+      display: inline-block;
+      background: transparent;
+      color: #0ff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 2px solid #0ff;
+      transition: background-color 0.3s ease, color 0.3s ease;
       cursor: pointer;
     }
 
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: #00ffff;
-      margin: 4px 0;
+    .btn-link:hover {
+      background: #0cc;
+      color: #000;
     }
 
-    #transition-message {
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #map {
+      height: 400px;
       max-width: 900px;
-      margin: 40px auto;
-      background: rgba(0, 0, 0, 0.75);
-      padding: 30px;
+      margin: 0 auto 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,255,255,0.4);
+    }
+
+    /* Όμορφη σημείωση κάτω από τον χάρτη */
+    #map-note {
+      max-width: 900px;
+      margin: 20px auto 30px auto;
+      background: linear-gradient(90deg, #0ff, #004466);
       border-radius: 12px;
-      box-shadow: 0 0 20px #00ffff;
+      padding: 15px 20px;
+      color: #ccf9ff;
+      font-style: italic;
+      font-weight: 700;
+      text-shadow: 0 0 8px #00ffff, 0 0 15px #00aaff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: 0 0 20px #00ffffaa;
+      letter-spacing: 0.04em;
+      user-select: none;
       text-align: center;
     }
 
-    #transition-message h2 {
-      color: #00ffff;
-      margin-bottom: 15px;
+    /* Banner container, ίδιο στυλ με section */
+    #banner-container {
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: rgba(0,0,0,0.6);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 15px #0ff;
+      text-align: center;
     }
 
-    #transition-message p {
-      font-size: 1.1em;
-      line-height: 1.6;
+    #banner-container h3 {
+      color: #0ff;
+      text-shadow: 1px 1px 4px #000;
+      margin-bottom: 8px;
+      font-family: Arial, sans-serif;
+      letter-spacing: 0.1em;
+      margin-top: 0;
     }
 
-    @media (min-width: 768px) {
-      nav {
-        display: flex !important;
-        position: static;
-        flex-direction: row;
-        background: none;
-        width: auto;
+    /* Responsive design */
+
+    @media (max-width: 600px) {
+      section, #banner-container, #map-note {
+        max-width: 95%;
+        padding: 15px;
+        margin-bottom: 20px;
       }
 
-      .hamburger {
-        display: none;
+      header h1 {
+        font-size: 1.5em;
       }
 
-      nav a {
-        border-bottom: none;
-        margin-left: 20px;
+      .btn-link {
+        padding: 8px 12px;
+        font-size: 0.9em;
+      }
+
+      #map {
+        height: 300px;
+      }
+
+      .menu-toggle {
+        font-size: 1.8em;
+        padding: 8px 12px;
       }
     }
   </style>
 </head>
 <body>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <nav id="menu">
+    <a href="news.html">Νέα</a>
+    <a href="#meetups">Meetups</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="join.html">Γίνε Μέλος</a>
+    <a href="faq.html">Συχνές Ερωτήσεις</a>
+    <a href="articles.html">Άρθρα</a>
+    <a href="merch.html">merchandise</a>
+    <a href="terms.html" class="rules-link">📜 Κανόνες Ομάδας</a>
+  </nav>
+
   <header>
     <h1>Speed Wizardz</h1>
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <nav id="navMenu">
-      <a href="#">Αρχική</a>
-      <a href="#">Μέλη</a>
-      <a href="#">Meetups</a>
-      <a href="#">Merch</a>
-    </nav>
+    <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
   </header>
 
-  <section id="transition-message">
-    <h2>⚡ Η Ομάδα αλλάζει σελίδα ⚡</h2>
-    <p>
-      Από εδώ και στο εξής, τη συνέχεια και την εξέλιξη του project αναλαμβάνει νέα διαχείριση.<br><br>
-      Ευχαριστώ προσωπικά όλους όσους στήριξαν την ιδέα των Speed Wizardz αυτά τα χρόνια — για την παρουσία, την ενέργεια, την πίστη και το πάθος.<br><br>
-      Το site θα παραμείνει ενεργό για την ώρα, ώστε να μπορείτε να περιηγηθείτε στο παρελθόν μας και να δείτε όλα όσα πετύχαμε μαζί. Σύντομα θα περάσουμε σε ένα νέο κεφάλαιο — πιο δυνατό και πιο ξεκάθαρο από ποτέ.
-    </p>
-    <p style="font-weight: bold; margin-top: 20px;">
-      🚀 Μείνετε συντονισμένοι — η ιστορία δεν τελειώνει εδώ.
-    </p>
+<section id="meetups">
+  <h2>🌙 9 Αυγούστου – Last Summer Meet</h2>
+  <p class="info-line" style="max-width: 600px; margin: 0 auto; background: rgba(0,0,0,0.5); padding: 15px; border-radius: 10px; box-shadow: 0 0 15px #0ff; color: #acf;">
+    <strong>
+      Το τελευταίο meet του καλοκαιριού πλησιάζει.<br>
+      Χωρίς φασαρία, χωρίς εντυπωσιασμούς.<br>
+      Μόνο chill vibes, καθαρό αράγμα και τα σωστά αμάξια. 🛣️☕<br><br>
+      Λεπτομέρειες πιο κοντά στην ημέρα.
+    </strong>
+  </p>
+
+  <p style="text-align:center; margin-top: 20px; font-weight: bold; color: #0ff;">
+    📅 Κράτησε τη μέρα. 9 Αυγούστου.  
+  </p>
+
+  <div style="margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+    <a href="articles.html" class="btn-link">📘 Άρθρα</a>
+    <a href="membersgallery.html" class="btn-link">🧙‍♂️ Δες τα μέλη</a>
+    <a href="news.html" class="btn-link">📰 Νέα</a>
+    <a href="gallery.html" class="btn-link">📸 Gallery</a>
+    <a href="join.html" class="btn-link">➕ Γίνε Μέλος</a>
+  </div>
+</section>
+
+  <!-- Banner 1.png -->
+  <div id="banner-container">
+    <h3>BANNER</h3>
+    <img src="1.png" alt="Speed Wizardz Banner">
+  </div>
+
+  <section id="live-map">
+    <h2>🗺️ Live Χάρτης Meetups</h2>
+    <div id="map"></div>
+
+    <div id="map-note">
+      🧙‍♂️ Οι πινέζες στο χάρτη δείχνουν το <strong>σημείο συνάντησης</strong> και <strong>όχι τον προορισμό</strong> (αν υπάρχει), για ευνόητους λόγους.
+    </div>
+
+    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+      <select id="filter" style="padding: 8px; border-radius: 6px; font-size: 1em;">
+        <option value="all">Όλα τα Meetups</option>
+        <option value="old">Meet ομάδων </option>
+        <option value="others">Εισερχόμενα event</option>
+      </select>
+    </div>
   </section>
+
+  <footer>
+    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
+      <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
+    </p>
+  </footer>
 
   <script>
     function toggleMenu() {
-      const nav = document.getElementById('navMenu');
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+      document.getElementById('menu').classList.toggle('show');
+    }
+
+    document.querySelectorAll('#menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu').classList.remove('show');
+      });
+    });
+  </script>
+
+  <!-- Google Maps API -->
+  <script>
+    let map;
+    let markers = [];
+
+    const locations = [
+      { position: { lat: 37.95039091335467, lng: 23.919705766192408 }, title: 'Εισερχόμενο event speed wizardz', type: 'others', date: '2025-08-??' },
+    ];
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 38.0, lng: 23.8 },
+        zoom: 9,
+      });
+
+      addMarkers('all');
+
+      document.getElementById('filter').addEventListener('change', function() {
+        addMarkers(this.value);
+      });
+    }
+
+    function addMarkers(filter) {
+      markers.forEach(marker => marker.setMap(null));
+      markers = [];
+
+      locations.forEach(loc => {
+        if (
+          filter === 'all' ||
+          (filter === 'old' && loc.type === 'old') ||
+          (filter === 'others' && loc.type === 'others')
+        ) {
+          const marker = new google.maps.Marker({
+            position: loc.position,
+            map: map,
+            title: loc.title,
+          });
+
+          const directionsUrl = https://www.google.com/maps/dir/?api=1&destination=${loc.position.lat},${loc.position.lng};
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: 
+              <strong>${loc.title}</strong><br>
+              <small>Ημερομηνία: ${loc.date}</small><br>
+              <a href="${directionsUrl}" target="_blank" style="color:#00f; text-decoration:underline;">Οδηγίες στο Google Maps</a>
+            
+          });
+
+          marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+          });
+
+          markers.push(marker);
+        }
+      });
     }
   </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw8cB1OvnqXFK1KFWBJ2ooOmG9-dePagc&callback=initMap" async defer></script>
 </body>
 </html>
