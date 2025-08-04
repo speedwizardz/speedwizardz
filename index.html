@@ -100,15 +100,10 @@
       margin-top: 0;
     }
 
-    .info-line {
-      margin: 10px 0;
-    }
-
     img {
       max-width: 100%;
       border-radius: 10px;
       margin-top: 10px;
-      height: auto;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -162,7 +157,6 @@
       box-shadow: 0 0 15px rgba(0,255,255,0.4);
     }
 
-    /* Όμορφη σημείωση κάτω από τον χάρτη */
     #map-note {
       max-width: 900px;
       margin: 20px auto 30px auto;
@@ -173,14 +167,12 @@
       font-style: italic;
       font-weight: 700;
       text-shadow: 0 0 8px #00ffff, 0 0 15px #00aaff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       box-shadow: 0 0 20px #00ffffaa;
       letter-spacing: 0.04em;
       user-select: none;
       text-align: center;
     }
 
-    /* Banner container, ίδιο στυλ με section */
     #banner-container {
       max-width: 900px;
       margin: 0 auto 30px auto;
@@ -195,12 +187,8 @@
       color: #0ff;
       text-shadow: 1px 1px 4px #000;
       margin-bottom: 8px;
-      font-family: Arial, sans-serif;
       letter-spacing: 0.1em;
-      margin-top: 0;
     }
-
-    /* Responsive design */
 
     @media (max-width: 600px) {
       section, #banner-container, #map-note {
@@ -239,7 +227,7 @@
     <a href="join.html">Γίνε Μέλος</a>
     <a href="faq.html">Συχνές Ερωτήσεις</a>
     <a href="articles.html">Άρθρα</a>
-    <a href="merch.html">merchandise</a>
+    <a href="merch.html">Merchandise</a>
     <a href="terms.html" class="rules-link">📜 Κανόνες Ομάδας</a>
   </nav>
 
@@ -248,18 +236,16 @@
     <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
   </header>
 
-<section id="meetups">
-  
-  <div style="margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-    <a href="articles.html" class="btn-link">📘 Άρθρα</a>
-    <a href="membersgallery.html" class="btn-link">🧙‍♂️ Δες τα μέλη</a>
-    <a href="news.html" class="btn-link">📰 Νέα</a>
-    <a href="gallery.html" class="btn-link">📸 Gallery</a>
-    <a href="join.html" class="btn-link">➕ Γίνε Μέλος</a>
-  </div>
-</section>
+  <section id="meetups">
+    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+      <a href="articles.html" class="btn-link">📘 Άρθρα</a>
+      <a href="membersgallery.html" class="btn-link">🧙‍♂️ Δες τα μέλη</a>
+      <a href="news.html" class="btn-link">📰 Νέα</a>
+      <a href="gallery.html" class="btn-link">📸 Gallery</a>
+      <a href="join.html" class="btn-link">➕ Γίνε Μέλος</a>
+    </div>
+  </section>
 
-  <!-- Banner 1.png -->
   <div id="banner-container">
     <h3>BANNER</h3>
     <img src="1.png" alt="Speed Wizardz Banner">
@@ -271,14 +257,6 @@
 
     <div id="map-note">
       🧙‍♂️ Οι πινέζες στο χάρτη δείχνουν το <strong>σημείο συνάντησης</strong> και <strong>όχι τον προορισμό</strong> (αν υπάρχει), για ευνόητους λόγους.
-    </div>
-
-    <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-      <select id="filter" style="padding: 8px; border-radius: 6px; font-size: 1em;">
-        <option value="all">Όλα τα Meetups</option>
-        <option value="old">Meet ομάδων </option>
-        <option value="others">Εισερχόμενα event</option>
-      </select>
     </div>
   </section>
 
@@ -306,7 +284,7 @@
     let markers = [];
 
     const locations = [
-      { position: { lat: 37.95039091335467, lng: 23.919705766192408 }, title: 'Εισερχόμενο event speed wizardz', type: 'others', date: '2025-08-??' },
+      { position: { lat: 37.9504, lng: 23.9197 }, title: 'Εισερχόμενο event Speed Wizardz', type: 'others', date: '2025-08-??' },
     ];
 
     function initMap() {
@@ -315,37 +293,27 @@
         zoom: 9,
       });
 
-      addMarkers('all');
-
-      document.getElementById('filter').addEventListener('change', function() {
-        addMarkers(this.value);
-      });
+      addMarkers();
     }
 
-    function addMarkers(filter) {
+    function addMarkers() {
       markers.forEach(marker => marker.setMap(null));
       markers = [];
 
       locations.forEach(loc => {
-        if (
-          filter === 'all' ||
-          (filter === 'old' && loc.type === 'old') ||
-          (filter === 'others' && loc.type === 'others')
-        ) {
+        if (loc.type === 'others') {
           const marker = new google.maps.Marker({
             position: loc.position,
             map: map,
             title: loc.title,
           });
 
-          const directionsUrl = https://www.google.com/maps/dir/?api=1&destination=${loc.position.lat},${loc.position.lng};
-
           const infoWindow = new google.maps.InfoWindow({
-            content: 
+            content: `
               <strong>${loc.title}</strong><br>
               <small>Ημερομηνία: ${loc.date}</small><br>
-              <a href="${directionsUrl}" target="_blank" style="color:#00f; text-decoration:underline;">Οδηγίες στο Google Maps</a>
-            
+              <a href="https://www.google.com/maps/dir/?api=1&destination=${loc.position.lat},${loc.position.lng}" target="_blank" style="color:#00f; text-decoration:underline;">Οδηγίες στο Google Maps</a>
+            `
           });
 
           marker.addListener('click', () => {
@@ -357,8 +325,6 @@
       });
     }
   </script>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw8cB1OvnqXFK1KFWBJ2ooOmG9-dePagc&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
 </body>
 </html>
-
