@@ -4,37 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Νέα | Speed Wizardz</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       background-image: url("2.png");
       font-family: Arial, sans-serif;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
       background-attachment: fixed;
       color: #eee;
       margin: 0;
-      padding: 0;
       text-align: center;
       text-shadow: 1px 1px 2px black;
     }
 
     header {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
-      position: relative;
+      background: rgba(0,0,0,0.75);
+      padding: 25px 15px;
+      box-shadow: 0 0 20px #0ff;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2em;
       color: #0ff;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.1em;
     }
+
+    header p { color: #ccc; }
 
     .menu-toggle {
       font-size: 2em;
       color: #0ff;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.6);
       padding: 10px 15px;
       cursor: pointer;
       border-radius: 8px;
@@ -42,298 +46,218 @@
       top: 15px;
       right: 15px;
       z-index: 999;
-      transition: background-color 0.3s ease;
-    }
-
-    .menu-toggle:hover {
-      background: rgba(0, 255, 255, 0.3);
     }
 
     nav {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.75);
       padding: 15px;
       border-radius: 10px;
       display: none;
       flex-direction: column;
-      align-items: center;
       gap: 10px;
       position: fixed;
       top: 65px;
       right: 15px;
       z-index: 998;
-      animation: fadeIn 0.3s ease;
     }
 
-    nav.show {
-      display: flex;
-    }
+    nav.show { display: flex; }
 
     nav a {
       color: #0ff;
-      text-decoration: none;
       font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
+      text-decoration: none;
     }
 
     .news-container {
-      max-width: 800px;
-      margin: 90px auto 30px auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 25px;
+      background: rgba(0,0,0,0.65);
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0ff;
     }
 
-    .filter-sort {
-      margin-bottom: 20px;
-    }
+    .filter-sort { margin-bottom: 25px; }
 
     select {
       padding: 8px 12px;
-      font-size: 1em;
-      border-radius: 5px;
-      border: none;
-      background: #111;
+      background: #000;
       color: #0ff;
+      border-radius: 6px;
+      border: 1px solid #0ff;
     }
 
     .news-item {
-      margin-bottom: 30px;
-      border-bottom: 1px solid #444;
-      padding-bottom: 20px;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .news-item:last-child {
-      border-bottom: none;
+      margin-bottom: 35px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #333;
+      animation: fadeIn 0.4s ease;
     }
 
     .news-title {
+      font-size: 1.35em;
       color: #0ff;
-      font-size: 1.4em;
       margin-bottom: 5px;
     }
 
     .news-date {
-      color: #aaa;
       font-size: 0.9em;
+      color: #aaa;
       margin-bottom: 10px;
     }
 
     .news-text {
-      font-size: 1.1em;
-      line-height: 1.6;
+      font-size: 1.05em;
+      line-height: 1.7;
       color: #ddd;
+      text-align: left;
     }
 
-    a.back-link {
-      display: inline-block;
-      margin-top: 20px;
-      color: #0af;
-      text-decoration: none;
+    .alert {
+      color: #ff5555;
       font-weight: bold;
     }
 
-    a.back-link:hover {
-      text-decoration: underline;
+    .highlight {
+      animation: pulse 1.2s infinite alternate;
     }
 
-    /* Animation για τους 400 followers */
-    .highlight-400 {
-      animation: bounce 1s ease infinite alternate;
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.04); }
     }
 
-    @keyframes bounce {
-      from {
-        transform: scale(1);
-      }
-      to {
-        transform: scale(1.05);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      color: #0ff;
+      font-weight: bold;
+      text-decoration: none;
     }
   </style>
 </head>
+
 <body>
 
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <nav id="menu">
-    <a href="index.html">Αρχική</a>
-    <a href="news.html">Νέα</a>
-    <a href="join.html">Γίνε Μέλος</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="faq.html">Συχνές Ερωτήσεις</a>
-    <a href="articles.html">Άρθρα</a>
-    <a href="merch.html">merchandise</a>
-    <a href="terms.html">📜 Κανόνες Ομάδας</a>
-  </nav>
+<nav id="menu">
+  <a href="index.html">Αρχική</a>
+  <a href="news.html">Νέα</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="join.html">Γίνε Μέλος</a>
+  <a href="articles.html">Άρθρα</a>
+  <a href="merch.html">Merch</a>
+  <a href="terms.html">📜 Κανόνες</a>
+</nav>
 
-  <header>
-    <h1>🗞 Νέα & Ανακοινώσεις</h1>
-    <p>Τα τελευταία νέα γύρω από την ομάδα Speed Wizardz και την αυτοκίνηση</p>
-  </header>
-  
-  <div class="news-container">
+<header>
+  <h1>🗞 Νέα & Ανακοινώσεις</h1>
+  <p>Ενημέρωση για την κοινότητα της αυτοκίνησης & Speed Wizardz</p>
+</header>
 
-    <div class="filter-sort">
-      <label for="sort">Ταξινόμηση:</label>
-      <select id="sort">
-        <option value="desc">Πιο Νέα Πρώτα</option>
-        <option value="asc">Πιο Παλιά Πρώτα</option>
-      </select>
-    </div>
-   
-    <div class="news-item" data-date="2025-07-17">
-  <div class="news-title">👕 Νέες Μπλούζες Speed Wizardz!</div>
-  <div class="news-date">Ανακοινώθηκε στις 17 Ιουλίου 2025</div>
-  <div class="news-text">
-    Οι <strong>επίσημες μπλούζες της ομάδας</strong> είναι έτοιμες!<br>
-    Σχεδιασμένες με στυλ, άνετες και ιδανικές για τα meets και όχι μόνο.<br><br>
-    ✅ Μαύρο με κυανό logo<br>
-    ✅ Διαθέσιμα μεγέθη: S έως XXL<br>
-    ✅ Τιμή:Στείλε μας Dm <br><br>
-    <a href="merch.html" style="display:inline-block; background:#0ff; color:#000; padding:10px 15px; border-radius:8px; font-weight:bold; text-decoration:none;">
-      👉 merchandise
-    </a>
+<div class="news-container">
+
+  <div class="filter-sort">
+    <label>Ταξινόμηση:</label>
+    <select id="sort">
+      <option value="desc">Πιο Νέα Πρώτα</option>
+      <option value="asc">Πιο Παλιά Πρώτα</option>
+    </select>
   </div>
+
+  <!-- ΝΕΟ ΡΕΑΛΙΣΤΙΚΟ -->
+  <div class="news-item highlight" data-date="2025-08-05">
+    <div class="news-title">📷 Νέος ΚΟΚ & AI Κάμερες – Τι αλλάζει;</div>
+    <div class="news-date">Ανακοινώθηκε 5 Αυγούστου 2025</div>
+    <div class="news-text">
+      Με τον νέο Κώδικα Οδικής Κυκλοφορίας ξεκινά η σταδιακή χρήση <strong>AI καμερών</strong> σε δρόμους και αστικά σημεία.<br><br>
+      Οι κάμερες μπορούν να εντοπίζουν:
+      <ul>
+        <li>📌 Υπερβολική ταχύτητα</li>
+        <li>📌 Παραβίαση σηματοδότη</li>
+        <li>📌 Ζώνη & κινητό</li>
+      </ul>
+      Για την κοινότητα της αυτοκίνησης αυτό σημαίνει:
+      <br>• Περισσότερη προσοχή στην καθημερινή οδήγηση  
+      <br>• Λιγότερα “γκρίζα σημεία” σε ελέγχους  
+      <br>• Τα meets πρέπει να γίνονται <strong>οργανωμένα και υπεύθυνα</strong><br><br>
+      Speed Wizardz = σεβασμός στον δρόμο & αγάπη για το αυτοκίνητο.
+    </div>
+  </div>
+
+  <!-- SCAM -->
+  <div class="news-item" data-date="2025-08-03">
+    <div class="news-title">⚠️ Προσοχή σε SCAM Μηνύματα για Τέλη Κυκλοφορίας</div>
+    <div class="news-date">Ανακοινώθηκε 3 Αυγούστου 2025</div>
+    <div class="news-text">
+      Κυκλοφορούν <span class="alert">ψεύτικα SMS & emails</span> που αναφέρουν δήθεν απλήρωτα τέλη κυκλοφορίας.<br><br>
+      ❌ ΜΗΝ πατάτε links  
+      ❌ ΜΗΝ δίνετε στοιχεία κάρτας  
+      ✅ Τα τέλη πληρώνονται <strong>ΜΟΝΟ</strong> μέσω gov.gr ή τραπεζών<br><br>
+      Αν λάβεις τέτοιο μήνυμα, αγνόησέ το και ενημέρωσε τους γύρω σου.
+    </div>
+  </div>
+
+  <!-- ΠΑΛΙΑ ΝΕΑ (ΟΛΑ) -->
+  <div class="news-item" data-date="2025-07-17">
+    <div class="news-title">👕 Νέες Μπλούζες Speed Wizardz</div>
+    <div class="news-date">17 Ιουλίου 2025</div>
+    <div class="news-text">
+      Οι επίσημες μπλούζες της ομάδας είναι έτοιμες. Διαθέσιμες σε μαύρο με κυανό logo.
+    </div>
+  </div>
+
+  <div class="news-item" data-date="2025-07-16">
+    <div class="news-title">🚗 Νέα Μέλη στην Παρέα</div>
+    <div class="news-date">16 Ιουλίου 2025</div>
+    <div class="news-text">
+      Η ομάδα μεγαλώνει – καλωσορίζουμε νέα μέλη με Renault Twingo, BMW E90 και Golf MK5.
+    </div>
+  </div>
+
+  <div class="news-item" data-date="2025-07-15">
+    <div class="news-title">🎉 400 Followers</div>
+    <div class="news-date">15 Ιουλίου 2025</div>
+    <div class="news-text">
+      Ευχαριστούμε για τη στήριξη – συνεχίζουμε δυνατά.
+    </div>
+  </div>
+
+  <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+
 </div>
 
-<div class="news-item" data-date="2025-07-16">
-  <div class="news-title">🚗 Νέα Μέλη στην Παρέα!</div>
-  <div class="news-date">Ανακοινώθηκε στις 16 Ιουλίου 2025</div>
-  <div class="news-text">
-    Η ομάδα συνεχίζει να μεγαλώνει δυναμικά!<br><br>
-    Καλωσορίζουμε:
-    <ul style="text-align:left; margin:10px auto; max-width:500px;">
-      <li>🔥 Ζοζεφίνα – Renault Twigo </li>
-      <li>🦅 Πάνος – Bmw E90</li>
-      <li>⚡ Χρήστος – Golf mk5</li>
-      <li>🐍 Παναγιώτης – Golf mk5</li>
-    </ul>
-    Θα τους δείτε από κοντά στα επόμενα meets και φυσικά στη gallery μελών!
-  </div>
-</div>
+<script>
+  function toggleMenu() {
+    document.getElementById('menu').classList.toggle('show');
+  }
 
+  function sortNews(order = 'desc') {
+    const container = document.querySelector('.news-container');
+    const items = Array.from(container.querySelectorAll('.news-item'));
 
-    <div class="news-item highlight-400" data-date="2025-07-15">
-      <div class="news-title">🎉 400 Followers – Ευχαριστούμε!</div>
-      <div class="news-date">Ανακοινώθηκε στις 15 Ιουλίου 2025</div>
-      <div class="news-text">
-       <br>
-        Χτυπήσαμε τους <strong>400 followers</strong> και θέλουμε να πούμε ένα μεγάλο <strong>ευχαριστώ</strong> για την στήριξη, την ενέργεια και τη συμμετοχή σας σε κάθε μας βήμα 🙏<br><br>
-        Μπορεί να μην έχουμε κάποιο meet άμεσα, αλλά να ξέρετε ότι <strong>ο Αύγουστος θα κρύβει μικρές εκπλήξεις</strong> 👀<br>
-        Μείνετε συντονισμένοι… γιατί κάτι ψήνεται!
-      </div>
-    </div>
-
-    <!-- (Εδώ πάνε οι υπόλοιπες ανακοινώσεις σου χωρίς αλλαγές) -->
-    <div class="news-item" data-date="2025-07-14">
-      <div class="news-title">🎉 Νέο κανάλι για τις ενημερώσεις!</div>
-      <div class="news-date">Ανακοινώθηκε στις 14 Ιουλίου 2025</div>
-      <div class="news-text">
-        Μετά το πετυχημένο μας meet στο Μαρκόπουλο, δημιουργήσαμε νέο επίσημο κανάλι για να λαμβάνετε όλες τις ενημερώσεις εύκολα και άμεσα!<br><br>
-        Εκεί θα ανεβαίνουν νέα, ανακοινώσεις για επόμενα events, αλλά και φωτογραφίες από τα meets.<br><br>
-        Αν δεν έχεις κάνει join, <strong>κάνε το τώρα:</strong><br>
-        <a href="https://www.instagram.com/channel/AbbZRx-qp8ZKTvd3/?igsh=ZHM2a3Ywemhvenl3" target="_blank" style="color:#0af;">instagram.com/channel/AbbZRx...</a>
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-13">
-      <div class="news-title">📸 Νέες Φωτογραφίες Αναρτήθηκαν!</div>
-      <div class="news-date">Ανακοινώθηκε στις 13 Ιουλίου 2025</div>
-      <div class="news-text">
-        Μόλις ανέβηκαν νέες φωτογραφίες από το πρόσφατο meet στο site!<br>
-        Μπες να δεις τις καλύτερες στιγμές και τα εντυπωσιακά αυτοκίνητα της ομάδας μας.<br>
-        Μην ξεχάσεις να τις κοινοποιήσεις και να μας πεις ποια σου άρεσε περισσότερο!
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-12">
-      <div class="news-title">🎁 Νέα Βραχιολάκια για το Επόμενο Meet!</div>
-      <div class="news-date">Ανακοινώθηκε στις 12 Ιουλίου 2025</div>
-      <div class="news-text">
-        Φρέσκα βραχιολάκια έφτασαν! Θα τα πάρεις στο επόμενο meet μας,<br>
-        για να ξεχωρίσεις και να δείξεις την αφοσίωσή σου στην ομάδα Speed Wizardz.<br>
-        Μην τα χάσεις!
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-08">
-      <div class="news-title">🚀 Νέα Προσθήκη Μελών!</div>
-      <div class="news-date">Ανακοινώθηκε στις 8 Ιουλίου 2025</div>
-      <div class="news-text">
-        Η ομάδα μας μεγάλωσε! Καλωσορίζουμε 2 νέα μέλη με εντυπωσιακά αμάξια.<br>
-        Θα τα δείτε στο site στην ενότητα <a href="membersgallery.html" style="color:#0af;">Μέλη</a> και φυσικά στο επόμενο meet.
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-05">
-      <div class="news-title">🔧 Νέες Τροποποιήσεις Polo 6R</div>
-      <div class="news-date">Ανακοινώθηκε στις 5 Ιουλίου 2025</div>
-      <div class="news-text">
-        Το Polo του Wizard απέκτησε φίλτρο και εξάτμηση!<br>
-        Το 0-100 κατεβαίνει αισθητά — ετοιμαστείτε να το ακούσετε στο meet 🔥.
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-04">
-      <div class="news-title">📅 Προσεχές Meet στο Μαρκόπουλο</div>
-      <div class="news-date">Ανακοινώθηκε στις 4 Ιουλίου 2025</div>
-      <div class="news-text">
-        Το επόμενο μεγάλο μας meet πλησιάζει! Στις <strong>12 Ιουλίου</strong> μαζευόμαστε στο νέο μας spot δίπλα στο Απολλώνιον Μαρκοπούλου.<br><br>
-        Η τοποθεσία είναι εύκολα προσβάσιμη, με άνετο parking και χώρους για φωτογραφίες και παρουσίαση οχημάτων. Φέρτε καλή διάθεση και γεμάτες μπαταρίες στα κινητά!
-      </div>
-    </div>
-
-    <div class="news-item" data-date="2025-07-01">
-      <div class="news-title">🔥 Νέα Banner & Σημαία Ομάδας</div>
-      <div class="news-date">Ανακοινώθηκε στις 1 Ιουλίου 2025</div>
-      <div class="news-text">
-        Παραλάβαμε επίσημα τα νέα μας banner και τη σημαία Speed Wizardz!<br>
-        Θα τα δείτε πρώτη φορά στο επόμενο meet.<br>
-        Ιδανικά για φωτογραφίες και ξεχωριστό στήσιμο.
-      </div>
-    </div>
-    
-    <!-- back link -->
-    <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
-  </div>
-
-  <script>
-    function toggleMenu() {
-      document.getElementById('menu').classList.toggle('show');
-    }
-
-    // Ταξινόμηση ανακοινώσεων
-    function sortNewsItems(order = 'desc') {
-      const container = document.querySelector('.news-container');
-      const items = Array.from(container.querySelectorAll('.news-item'));
-      const sortSelect = document.getElementById('sort');
-
-      items.sort((a, b) => {
-        const dateA = new Date(a.getAttribute('data-date'));
-        const dateB = new Date(b.getAttribute('data-date'));
-        return order === 'asc' ? dateA - dateB : dateB - dateA;
-      });
-
-      // Remove all items
-      items.forEach(item => container.appendChild(item));
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      sortNewsItems(); // default desc
-
-      document.getElementById('sort').addEventListener('change', (e) => {
-        sortNewsItems(e.target.value);
-      });
+    items.sort((a, b) => {
+      const d1 = new Date(a.dataset.date);
+      const d2 = new Date(b.dataset.date);
+      return order === 'asc' ? d1 - d2 : d2 - d1;
     });
-  </script>
+
+    items.forEach(item => container.appendChild(item));
+  }
+
+  document.getElementById('sort').addEventListener('change', e => {
+    sortNews(e.target.value);
+  });
+
+  sortNews();
+</script>
+
 </body>
 </html>
