@@ -5,40 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Νέα | Speed Wizardz</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
   <style>
     body {
       background-image: url("2.png");
       font-family: Arial, sans-serif;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       background-attachment: fixed;
       color: #eee;
       margin: 0;
+      padding: 0;
       text-align: center;
       text-shadow: 1px 1px 2px black;
     }
 
     header {
-      background: rgba(0,0,0,0.75);
-      padding: 25px 15px;
-      box-shadow: 0 0 20px #0ff;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
     }
 
     header h1 {
       margin: 0;
+      font-size: 2em;
       color: #0ff;
-      font-family: 'Orbitron', sans-serif;
-      letter-spacing: 0.1em;
     }
-
-    header p { color: #ccc; }
 
     .menu-toggle {
       font-size: 2em;
       color: #0ff;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
       padding: 10px 15px;
       cursor: pointer;
       border-radius: 8px;
@@ -49,69 +45,75 @@
     }
 
     nav {
-      background: rgba(0,0,0,0.75);
+      background: rgba(0, 0, 0, 0.7);
       padding: 15px;
       border-radius: 10px;
       display: none;
       flex-direction: column;
+      align-items: center;
       gap: 10px;
       position: fixed;
       top: 65px;
       right: 15px;
       z-index: 998;
+      animation: fadeIn 0.3s ease;
     }
 
     nav.show { display: flex; }
 
     nav a {
       color: #0ff;
-      font-weight: bold;
       text-decoration: none;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .news-container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 25px;
-      background: rgba(0,0,0,0.65);
-      border-radius: 12px;
-      box-shadow: 0 0 20px #0ff;
+      max-width: 800px;
+      margin: 90px auto 30px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
     }
 
-    .filter-sort { margin-bottom: 25px; }
+    .filter-sort { margin-bottom: 20px; }
 
     select {
       padding: 8px 12px;
-      background: #000;
+      font-size: 1em;
+      border-radius: 5px;
+      border: none;
+      background: #111;
       color: #0ff;
-      border-radius: 6px;
-      border: 1px solid #0ff;
     }
 
     .news-item {
-      margin-bottom: 35px;
-      padding-bottom: 25px;
-      border-bottom: 1px solid #333;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #444;
+      padding-bottom: 20px;
+      animation: fadeIn 0.5s ease;
     }
 
     .news-title {
-      font-size: 1.35em;
       color: #0ff;
+      font-size: 1.4em;
       margin-bottom: 5px;
     }
 
     .news-date {
-      font-size: 0.9em;
       color: #aaa;
+      font-size: 0.9em;
       margin-bottom: 10px;
     }
 
-    /* ΕΠΙΣΤΡΟΦΗ ΣΤΟ ΠΑΛΙΟ LOOK */
     .news-text {
-      font-size: 1.05em;
-      line-height: 1.7;
+      font-size: 1.1em;
+      line-height: 1.6;
       color: #ddd;
-      text-align: center;
     }
 
     .alert {
@@ -120,17 +122,20 @@
     }
 
     .highlight {
-      box-shadow: 0 0 10px rgba(0,255,255,0.4);
-      border-radius: 8px;
-      padding: 15px;
+      animation: bounce 1s ease infinite alternate;
     }
 
-    .back-link {
+    @keyframes bounce {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    a.back-link {
       display: inline-block;
-      margin-top: 30px;
-      color: #0ff;
-      font-weight: bold;
+      margin-top: 20px;
+      color: #0af;
       text-decoration: none;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -142,8 +147,9 @@
 <nav id="menu">
   <a href="index.html">Αρχική</a>
   <a href="news.html">Νέα</a>
-  <a href="gallery.html">Gallery</a>
   <a href="join.html">Γίνε Μέλος</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="faq.html">Συχνές Ερωτήσεις</a>
   <a href="articles.html">Άρθρα</a>
   <a href="merch.html">Merch</a>
   <a href="terms.html">📜 Κανόνες</a>
@@ -151,66 +157,47 @@
 
 <header>
   <h1>🗞 Νέα & Ανακοινώσεις</h1>
-  <p>Speed Wizardz Community</p>
+  <p>Τα τελευταία νέα γύρω από την ομάδα Speed Wizardz και την αυτοκίνηση</p>
 </header>
 
 <div class="news-container">
 
-  <!-- ΝΕΟΣ ΚΟΚ -->
+  <!-- ΡΕΑΛΙΣΤΙΚΟ ΝΕΟ -->
   <div class="news-item highlight" data-date="2026-01-25">
     <div class="news-title">📷 Νέος ΚΟΚ & AI Κάμερες</div>
     <div class="news-date">25 Ιανουαρίου 2026</div>
     <div class="news-text">
-      Με τον νέο ΚΟΚ ξεκινά η χρήση έξυπνων καμερών για ταχύτητα, φανάρια, ζώνη και κινητό.
-      <br><br>
-      Αυτό σημαίνει περισσότερη προσοχή στην καθημερινή οδήγηση και υπεύθυνα meets.
+      Με τον νέο ΚΟΚ ξεκινά η χρήση έξυπνων καμερών για ταχύτητα, φανάρια, ζώνη και κινητό.<br><br>
+      Αυτό σημαίνει περισσότερη προσοχή στην καθημερινή οδήγηση αλλά και υπεύθυνη παρουσία στα meets.
     </div>
   </div>
 
-  <!-- SCAM -->
-  <div class="news-item" data-date="2025-11-03">
+  <div class="news-item" data-date="2025-12-03">
     <div class="news-title">⚠️ SCAM Μηνύματα για Τέλη Κυκλοφορίας</div>
     <div class="news-date">3 Δεκεμβρίου 2025</div>
     <div class="news-text">
-      Κυκλοφορούν ψεύτικα SMS και emails για δήθεν απλήρωτα τέλη.
-      <br>
+      Κυκλοφορούν ψεύτικα SMS & emails για δήθεν απλήρωτα τέλη.<br>
       <span class="alert">Τα τέλη πληρώνονται ΜΟΝΟ μέσω gov.gr ή τραπεζών.</span>
     </div>
   </div>
 
-  <!-- ΠΑΛΙΑ ΝΕΑ (ΑΝΕΠΑΦΑ) -->
-  <div class="news-item" data-date="2025-07-20">
-    <div class="news-title">👕 Νέες Μπλούζες Speed Wizardz</div>
-    <div class="news-date">20 Ιουλίου 2025</div>
-    <div class="news-text">
-      Οι επίσημες μπλούζες της ομάδας είναι έτοιμες.
-    </div>
-  </div>
-
-  <div class="news-item" data-date="2025-07-16">
-    <div class="news-title">🚗 Νέα Μέλη</div>
-    <div class="news-date">16 Ιουλίου 2025</div>
-    <div class="news-text">
-      Καλωσορίζουμε νέα μέλη με την ιδια αγαπη που εχουμε εμεις για τα αμαξια!!
-    </div>
-  </div>
-
+  <!-- ΠΑΛΙΑ ΝΕΑ -->
   <div class="news-item" data-date="2025-07-15">
-    <div class="news-title">🎉 400 Followers</div>
+    <div class="news-title">🎉 400 Followers – Ευχαριστούμε!</div>
     <div class="news-date">15 Ιουλίου 2025</div>
     <div class="news-text">
-      Ευχαριστούμε για τη στήριξη.
+      Χτυπήσαμε τους 400 followers και σας ευχαριστούμε για τη στήριξη!
     </div>
   </div>
 
-  <a class="back-link" href="index.html">⬅ Επιστροφή</a>
+  <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
 
 </div>
 
 <script>
-  function toggleMenu() {
-    document.getElementById('menu').classList.toggle('show');
-  }
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('show');
+}
 </script>
 
 </body>
