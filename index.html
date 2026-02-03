@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Speed Wizardz | Αρχική</title>
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
     body {
       background-image: url("2.png");
@@ -20,22 +24,54 @@
     }
 
     header {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 25px 15px;
+      box-shadow: 0 0 20px #0ff;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2em;
+      font-size: 2.2em;
+      color: #0ff;
     }
 
+    header p {
+      margin-top: 8px;
+      color: #ccc;
+    }
+
+    /* FOLLOWERS COUNTER */
+    .followers {
+      margin-top: 15px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5em;
+      color: #00ffff;
+      letter-spacing: 0.15em;
+      animation: glow 2s infinite alternate, float 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #00ffff, 0 0 15px #00ffff;
+      }
+      to {
+        text-shadow: 0 0 10px #00ffff, 0 0 30px #00aaff, 0 0 50px #0088ff;
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* MENU */
     nav {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       padding: 15px;
       border-radius: 10px;
       display: none;
       flex-direction: column;
-      align-items: center;
       gap: 10px;
       position: fixed;
       top: 65px;
@@ -60,13 +96,7 @@
 
     .rules-link {
       color: #ff4444;
-      font-weight: bold;
-      text-shadow: 1px 1px 3px #aa0000;
-    }
-
-    .rules-link:hover {
-      color: #ff0000;
-      text-decoration: underline;
+      text-shadow: 0 0 8px #aa0000;
     }
 
     .menu-toggle {
@@ -80,19 +110,15 @@
       top: 15px;
       right: 15px;
       z-index: 999;
-      transition: background-color 0.3s ease;
-    }
-
-    .menu-toggle:hover {
-      background: rgba(0, 255, 255, 0.3);
     }
 
     section {
-      padding: 20px;
+      padding: 25px;
       max-width: 900px;
-      margin: 0 auto 30px auto;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
+      margin: 30px auto;
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 12px;
+      box-shadow: 0 0 15px #0ff;
     }
 
     h2 {
@@ -102,46 +128,30 @@
 
     img {
       max-width: 100%;
-      border-radius: 10px;
-      margin-top: 10px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.7);
-      font-size: 0.9em;
-      color: #ccc;
-    }
-
-    a {
-      color: #0af;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+      border-radius: 12px;
+      margin-top: 20px;
     }
 
     .btn-link {
       display: inline-block;
-      background: transparent;
       color: #0ff;
       padding: 10px 20px;
       border-radius: 8px;
       font-weight: bold;
-      text-decoration: none;
       border: 2px solid #0ff;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      cursor: pointer;
+      transition: 0.3s;
     }
 
     .btn-link:hover {
-      background: #0cc;
+      background: #0ff;
       color: #000;
+    }
+
+    footer {
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.75);
+      color: #ccc;
+      font-size: 0.9em;
     }
 
     @keyframes fadeIn {
@@ -149,131 +159,83 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    #map {
-      height: 400px;
-      max-width: 900px;
-      margin: 0 auto 30px auto;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,255,255,0.4);
-    }
-
-    #map-note {
-      max-width: 900px;
-      margin: 20px auto 30px auto;
-      background: linear-gradient(90deg, #0ff, #004466);
-      border-radius: 12px;
-      padding: 15px 20px;
-      color: #ccf9ff;
-      font-style: italic;
-      font-weight: 700;
-      text-shadow: 0 0 8px #00ffff, 0 0 15px #00aaff;
-      box-shadow: 0 0 20px #00ffffaa;
-      letter-spacing: 0.04em;
-      user-select: none;
-      text-align: center;
-    }
-
-    #banner-container {
-      max-width: 900px;
-      margin: 0 auto 30px auto;
-      background: rgba(0,0,0,0.6);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 15px #0ff;
-      text-align: center;
-    }
-
-    #banner-container h3 {
-      color: #0ff;
-      text-shadow: 1px 1px 4px #000;
-      margin-bottom: 8px;
-      letter-spacing: 0.1em;
-    }
-
     @media (max-width: 600px) {
-      section, #banner-container, #map-note {
-        max-width: 95%;
-        padding: 15px;
-        margin-bottom: 20px;
-      }
-
-      header h1 {
-        font-size: 1.5em;
-      }
-
-      .btn-link {
-        padding: 8px 12px;
-        font-size: 0.9em;
-      }
-
-      #map {
-        height: 300px;
-      }
-
-      .menu-toggle {
-        font-size: 1.8em;
-        padding: 8px 12px;
-      }
+      header h1 { font-size: 1.6em; }
+      .followers { font-size: 1.1em; }
     }
   </style>
 </head>
+
 <body>
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <nav id="menu">
-    <a href="news.html">Νέα</a>
-    <a href="#meetups">Meetups</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="join.html">Γίνε Μέλος</a>
-    <a href="faq.html">Συχνές Ερωτήσεις</a>
-    <a href="articles.html">Άρθρα</a>
-    <a href="merch.html">Merchandise</a>
-    <a href="terms.html" class="rules-link">📜 Κανόνες Ομάδας</a>
-  </nav>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-  <header>
-    <h1>Speed Wizardz</h1>
-    <p>Η σελίδα της ομάδας μας • Meetups • Φωτογραφίες</p>
-  </header>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
->
-    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
-      <a href="articles.html" class="btn-link">📘 Άρθρα</a>
-      <a href="membersgallery.html" class="btn-link">🧙‍♂️ Δες τα μέλη</a>
-      <a href="news.html" class="btn-link">📰 Νέα</a>
-      <a href="gallery.html" class="btn-link">📸 Gallery</a>
-      <a href="join.html" class="btn-link">➕ Γίνε Μέλος</a>
-    </div>
-  </section>
+<nav id="menu">
+  <a href="news.html">Νέα</a>
+  <a href="#meetups">Meetups</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="join.html">Γίνε Μέλος</a>
+  <a href="faq.html">Συχνές Ερωτήσεις</a>
+  <a href="articles.html">Άρθρα</a>
+  <a href="merch.html">Merchandise</a>
+  <a href="terms.html" class="rules-link">📜 Κανόνες Ομάδας</a>
+</nav>
 
-  <div id="banner-container">
-    <h3>BANNER</h3>
-   <section id="meetups">
-  <div style="margin-top: 30px; background: rgba(0, 0, 0, 0.6); padding: 25px; border-radius: 12px; box-shadow: 0 0 10px #0ff; font-family: 'Orbitron', sans-serif;">
-    <h2 style="color: #0ff; margin-bottom: 15px;">⚡ Something Powerful is Coming...</h2>
-    <p style="color: #ccc; font-size: 1.1em; line-height: 1.8;">
-      Tο πρώτο Meet up του 2026 ολοκληρώθηκε, για φωτο απο το meetup θα δειτε  συντομα στο site  της speed_wizardz.<br><br>
-        Τοποθεσία: <a href="https://share.google/iBqONRf1FiVijUeCI" target="_blank">https://maps.app.goo.gl/5dDFc9Aj81fn5ExBA</a><br><br>
-      🧙‍♂️ <strong>#SpeedWizardz</strong>
-    </p>
+<header>
+  <h1>Speed Wizardz</h1>
+  <p>Meetups • Φωτογραφίες • Κοινότητα</p>
+  <div class="followers">⚡ <span id="counter">0</span> FOLLOWERS ⚡</div>
+</header>
+
+<section>
+  <div style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;">
+    <a href="articles.html" class="btn-link">📘 Άρθρα</a>
+    <a href="membersgallery.html" class="btn-link">🧙‍♂️ Μέλη</a>
+    <a href="news.html" class="btn-link">📰 Νέα</a>
+    <a href="gallery.html" class="btn-link">📸 Gallery</a>
+    <a href="join.html" class="btn-link">➕ Γίνε Μέλος</a>
   </div>
-   </section> <img src="1.png" alt="Speed Wizardz Banner">
-  </div>
+</section>
 
+<section id="meetups" style="font-family:'Orbitron',sans-serif;">
+  <h2>⚡ Something Powerful is Coming...</h2>
+  <p style="color:#ccc;line-height:1.8;">
+    Το πρώτο Meetup του 2026 ολοκληρώθηκε.<br>
+    Φωτογραφίες σύντομα στο site της <strong>Speed Wizardz</strong>.<br><br>
+    ΣΑΣ ΕΥΧΑΡΙΣΤΟΥΜΕ ΠΟΥ ΜΑΣ ΣΤΗΡΙΖΕΤΕ 🖤<br><br>
+    🧙‍♂️ #SpeedWizardz
+  </p>
+  <img src="1.png" alt="Speed Wizardz Banner">
+</section>
 
-  <footer>
-    <p>© 2025 Speed Wizardz | Επικοινωνία στο 
-      <a href="https://www.instagram.com/speedwizardz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram @speed_wizardz</a>
-    </p>
-  </footer>
+<footer>
+  © 2025 Speed Wizardz |
+  <a href="https://www.instagram.com/speedwizardz" target="_blank">Instagram @speed_wizardz</a>
+</footer>
 
- 
+<script>
+  function toggleMenu() {
+    document.getElementById("menu").classList.toggle("show");
+  }
 
+  // COUNTER SCRIPT
+  const counter = document.getElementById("counter");
+  const target = 1000;
+  let current = 0;
+  const speed = 25;
 
+  function updateCounter() {
+    const increment = Math.ceil(target / 80);
+    if (current < target) {
+      current += increment;
+      if (current > target) current = target;
+      counter.textContent = current;
+      setTimeout(updateCounter, speed);
+    }
+  }
 
+  updateCounter();
+</script>
 
-
-
-
-
-
+</body>
+</html>
