@@ -252,7 +252,7 @@
   <div style="margin-top: 30px; background: rgba(0, 0, 0, 0.6); padding: 25px; border-radius: 12px; box-shadow: 0 0 10px #0ff; font-family: 'Orbitron', sans-serif;">
     <h2 style="color: #0ff; margin-bottom: 15px;">⚡ Something Powerful is Coming...</h2>
     <p style="color: #ccc; font-size: 1.1em; line-height: 1.8;">
-      📅  Σάββατο 31/1 σας περιμένουμε για το πρώτο Meet up του 2026. Η ώρα θα ανακοινωθεί στην ομαδική και σε story της speed_wizardz.<br><br>
+      Tο πρώτο Meet up του 2026 ολοκληρώθηκε, για φωτο απο το meetup θα δειτε  συντομα στο site  της speed_wizardz.<br><br>
         Τοποθεσία: <a href="https://share.google/iBqONRf1FiVijUeCI" target="_blank">https://maps.app.goo.gl/5dDFc9Aj81fn5ExBA</a><br><br>
       🧙‍♂️ <strong>#SpeedWizardz</strong>
     </p>
@@ -260,83 +260,14 @@
    </section> <img src="1.png" alt="Speed Wizardz Banner">
   </div>
 
-  <section id="live-map">
-    <h2>🗺️ Live Χάρτης Meetups και event</h2>
-    <div id="map"></div>
-
-    <div id="map-note">
-      🧙‍♂️ Οι πινέζες στο χάρτη δείχνουν το <strong>σημείο συνάντησης</strong> και <strong>όχι τον προορισμό</strong>, για ευνόητους λόγους.
-    </div>
-  </section>
 
   <footer>
     <p>© 2025 Speed Wizardz | Επικοινωνία στο 
-      <a href="https://www.instagram.com/speed_wizardz/" target="_blank">Instagram @speed_wizardz</a>
+      <a href="https://www.instagram.com/speedwizardz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram @speed_wizardz</a>
     </p>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      document.getElementById('menu').classList.toggle('show');
-    }
-
-    document.querySelectorAll('#menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('menu').classList.remove('show');
-      });
-    });
-  </script>
-
-  <!-- Google Maps API -->
-  <script>
-    let map;
-    let markers = [];
-
-    const locations = [
-      { position: { lat: 38.32142737936371, lng: 23.795592352278348 }, title: 'Last summer meet Speed Wizardz', type: 'others', date: '2025-08-31' },
-    ];
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 38.0, lng: 23.8 },
-        zoom: 9,
-      });
-
-      addMarkers();
-    }
-
-    function addMarkers() {
-      markers.forEach(marker => marker.setMap(null));
-      markers = [];
-
-      locations.forEach(loc => {
-        if (loc.type === 'others') {
-          const marker = new google.maps.Marker({
-            position: loc.position,
-            map: map,
-            title: loc.title,
-          });
-
-          const infoWindow = new google.maps.InfoWindow({
-            content: `
-              <strong>${loc.title}</strong><br>
-              <small>Ημερομηνία: ${loc.date}</small><br>
-              <a href="https://www.google.com/maps/dir/?api=1&destination=${loc.position.lat},${loc.position.lng}" target="_blank" style="color:#00f; text-decoration:underline;">Οδηγίες στο Google Maps</a>
-            `
-          });
-
-          marker.addListener('click', () => {
-            infoWindow.open(map, marker);
-          });
-
-          markers.push(marker);
-        }
-      });
-    }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw8cB1OvnqXFK1KFWBJ2ooOmG9-dePagc&callback=initMap" async defer></script>
-</body>
-</html>
+ 
 
 
 
