@@ -92,7 +92,6 @@
       margin-bottom: 35px;
       padding-bottom: 25px;
       border-bottom: 1px solid #333;
-      animation: fadeIn 0.4s ease;
     }
 
     .news-title {
@@ -107,11 +106,12 @@
       margin-bottom: 10px;
     }
 
+    /* ΕΠΙΣΤΡΟΦΗ ΣΤΟ ΠΑΛΙΟ LOOK */
     .news-text {
       font-size: 1.05em;
       line-height: 1.7;
       color: #ddd;
-      text-align: left;
+      text-align: center;
     }
 
     .alert {
@@ -120,17 +120,9 @@
     }
 
     .highlight {
-      animation: pulse 1.2s infinite alternate;
-    }
-
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.04); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      box-shadow: 0 0 10px rgba(0,255,255,0.4);
+      border-radius: 8px;
+      padding: 15px;
     }
 
     .back-link {
@@ -159,66 +151,47 @@
 
 <header>
   <h1>🗞 Νέα & Ανακοινώσεις</h1>
-  <p>Ενημέρωση για την κοινότητα της αυτοκίνησης & Speed Wizardz</p>
+  <p>Speed Wizardz Community</p>
 </header>
 
 <div class="news-container">
 
-  <div class="filter-sort">
-    <label>Ταξινόμηση:</label>
-    <select id="sort">
-      <option value="desc">Πιο Νέα Πρώτα</option>
-      <option value="asc">Πιο Παλιά Πρώτα</option>
-    </select>
-  </div>
-
-  <!-- ΝΕΟ ΡΕΑΛΙΣΤΙΚΟ -->
-  <div class="news-item highlight" data-date="2025-08-05">
-    <div class="news-title">📷 Νέος ΚΟΚ & AI Κάμερες – Τι αλλάζει;</div>
-    <div class="news-date">Ανακοινώθηκε 5 Αυγούστου 2025</div>
+  <!-- ΝΕΟΣ ΚΟΚ -->
+  <div class="news-item highlight" data-date="2026-01-25">
+    <div class="news-title">📷 Νέος ΚΟΚ & AI Κάμερες</div>
+    <div class="news-date">25 Ιανουαρίου 2026</div>
     <div class="news-text">
-      Με τον νέο Κώδικα Οδικής Κυκλοφορίας ξεκινά η σταδιακή χρήση <strong>AI καμερών</strong> σε δρόμους και αστικά σημεία.<br><br>
-      Οι κάμερες μπορούν να εντοπίζουν:
-      <ul>
-        <li>📌 Υπερβολική ταχύτητα</li>
-        <li>📌 Παραβίαση σηματοδότη</li>
-        <li>📌 Ζώνη & κινητό</li>
-      </ul>
-      Για την κοινότητα της αυτοκίνησης αυτό σημαίνει:
-      <br>• Περισσότερη προσοχή στην καθημερινή οδήγηση  
-      <br>• Λιγότερα “γκρίζα σημεία” σε ελέγχους  
-      <br>• Τα meets πρέπει να γίνονται <strong>οργανωμένα και υπεύθυνα</strong><br><br>
-      Speed Wizardz = σεβασμός στον δρόμο & αγάπη για το αυτοκίνητο.
+      Με τον νέο ΚΟΚ ξεκινά η χρήση έξυπνων καμερών για ταχύτητα, φανάρια, ζώνη και κινητό.
+      <br><br>
+      Αυτό σημαίνει περισσότερη προσοχή στην καθημερινή οδήγηση και υπεύθυνα meets.
     </div>
   </div>
 
   <!-- SCAM -->
-  <div class="news-item" data-date="2025-08-03">
-    <div class="news-title">⚠️ Προσοχή σε SCAM Μηνύματα για Τέλη Κυκλοφορίας</div>
-    <div class="news-date">Ανακοινώθηκε 3 Αυγούστου 2025</div>
+  <div class="news-item" data-date="2025-11-03">
+    <div class="news-title">⚠️ SCAM Μηνύματα για Τέλη Κυκλοφορίας</div>
+    <div class="news-date">3 Δεκεμβρίου 2025</div>
     <div class="news-text">
-      Κυκλοφορούν <span class="alert">ψεύτικα SMS & emails</span> που αναφέρουν δήθεν απλήρωτα τέλη κυκλοφορίας.<br><br>
-      ❌ ΜΗΝ πατάτε links  
-      ❌ ΜΗΝ δίνετε στοιχεία κάρτας  
-      ✅ Τα τέλη πληρώνονται <strong>ΜΟΝΟ</strong> μέσω gov.gr ή τραπεζών<br><br>
-      Αν λάβεις τέτοιο μήνυμα, αγνόησέ το και ενημέρωσε τους γύρω σου.
+      Κυκλοφορούν ψεύτικα SMS και emails για δήθεν απλήρωτα τέλη.
+      <br>
+      <span class="alert">Τα τέλη πληρώνονται ΜΟΝΟ μέσω gov.gr ή τραπεζών.</span>
     </div>
   </div>
 
-  <!-- ΠΑΛΙΑ ΝΕΑ (ΟΛΑ) -->
-  <div class="news-item" data-date="2025-07-17">
+  <!-- ΠΑΛΙΑ ΝΕΑ (ΑΝΕΠΑΦΑ) -->
+  <div class="news-item" data-date="2025-07-20">
     <div class="news-title">👕 Νέες Μπλούζες Speed Wizardz</div>
-    <div class="news-date">17 Ιουλίου 2025</div>
+    <div class="news-date">20 Ιουλίου 2025</div>
     <div class="news-text">
-      Οι επίσημες μπλούζες της ομάδας είναι έτοιμες. Διαθέσιμες σε μαύρο με κυανό logo.
+      Οι επίσημες μπλούζες της ομάδας είναι έτοιμες.
     </div>
   </div>
 
   <div class="news-item" data-date="2025-07-16">
-    <div class="news-title">🚗 Νέα Μέλη στην Παρέα</div>
+    <div class="news-title">🚗 Νέα Μέλη</div>
     <div class="news-date">16 Ιουλίου 2025</div>
     <div class="news-text">
-      Η ομάδα μεγαλώνει – καλωσορίζουμε νέα μέλη με Renault Twingo, BMW E90 και Golf MK5.
+      Καλωσορίζουμε νέα μέλη με την ιδια αγαπη που εχουμε εμεις για τα αμαξια!!
     </div>
   </div>
 
@@ -226,11 +199,11 @@
     <div class="news-title">🎉 400 Followers</div>
     <div class="news-date">15 Ιουλίου 2025</div>
     <div class="news-text">
-      Ευχαριστούμε για τη στήριξη – συνεχίζουμε δυνατά.
+      Ευχαριστούμε για τη στήριξη.
     </div>
   </div>
 
-  <a class="back-link" href="index.html">⬅ Επιστροφή στην αρχική</a>
+  <a class="back-link" href="index.html">⬅ Επιστροφή</a>
 
 </div>
 
@@ -238,25 +211,6 @@
   function toggleMenu() {
     document.getElementById('menu').classList.toggle('show');
   }
-
-  function sortNews(order = 'desc') {
-    const container = document.querySelector('.news-container');
-    const items = Array.from(container.querySelectorAll('.news-item'));
-
-    items.sort((a, b) => {
-      const d1 = new Date(a.dataset.date);
-      const d2 = new Date(b.dataset.date);
-      return order === 'asc' ? d1 - d2 : d2 - d1;
-    });
-
-    items.forEach(item => container.appendChild(item));
-  }
-
-  document.getElementById('sort').addEventListener('change', e => {
-    sortNews(e.target.value);
-  });
-
-  sortNews();
 </script>
 
 </body>
