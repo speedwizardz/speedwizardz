@@ -11,7 +11,6 @@
       font-family: Arial, sans-serif;
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
       background-attachment: fixed;
       color: #eee;
       margin: 0;
@@ -122,12 +121,9 @@
     }
 
     .highlight {
-      animation: bounce 1s ease infinite alternate;
-    }
-
-    @keyframes bounce {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
+      box-shadow: 0 0 10px rgba(0,255,255,0.4);
+      border-radius: 8px;
+      padding: 15px;
     }
 
     a.back-link {
@@ -161,8 +157,16 @@
 </header>
 
 <div class="news-container">
+  <div class="filter-sort">
+    <label for="sort">Ταξινόμηση:</label>
+    <select id="sort">
+      <option value="newest">Πιο Νέα Πρώτα</option>
+      <option value="oldest">Πιο Παλιά Πρώτα</option>
+      <option value="hot">Hot Πρώτα</option>
+    </select>
+  </div>
 
-  <!-- Νέα ρεαλιστικά -->
+  <!-- Νέα -->
   <div class="news-item highlight" data-date="2026-01-25">
     <div class="news-title">📷 Νέος ΚΟΚ & AI Κάμερες</div>
     <div class="news-date">25 Ιανουαρίου 2026</div>
@@ -181,7 +185,6 @@
     </div>
   </div>
 
-  <!-- 5 Νέα με τυχαίες ημερομηνίες -->
   <div class="news-item" data-date="2025-09-10">
     <div class="news-title">🚗 Νέα Μέλη στην Παρέα</div>
     <div class="news-date">10 Σεπτεμβρίου 2025</div>
@@ -222,7 +225,6 @@
     </div>
   </div>
 
-  <!-- Παλαιά βασικά νέα -->
   <div class="news-item" data-date="2025-07-15">
     <div class="news-title">🎉 400 Followers – Ευχαριστούμε!</div>
     <div class="news-date">15 Ιουλίου 2025</div>
@@ -239,6 +241,33 @@
   function toggleMenu() {
     document.getElementById('menu').classList.toggle('show');
   }
+
+  function sortNewsItems(order) {
+    const container = document.querySelector('.news-container');
+    const items = Array.from(container.querySelectorAll('.news-item'));
+
+    items.sort((a,b) => {
+      if(order === 'newest') {
+        return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
+      } else if(order === 'oldest') {
+        return new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date'));
+      } else if(order === 'hot') {
+        // Hot = highlight πρώτα
+        if(a.classList.contains('highlight') && !b.classList.contains('highlight')) return -1;
+        if(!a.classList.contains('highlight') && b.classList.contains('highlight')) return 1;
+        return new Date(b.getAttribute('data-date')) - new Date(a.getAttribute('data-date'));
+      }
+    });
+
+    items.forEach(item => container.appendChild(item));
+  }
+
+  document.getElementById('sort').addEventListener('change', function() {
+    sortNewsItems(this.value);
+  });
+
+  // Default sort
+  sortNewsItems('newest');
 </script>
 
 </body>
